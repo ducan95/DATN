@@ -26,15 +26,4 @@ class HomeController extends Controller
         return view('home');
     }
 
-    // Show login page
-    public function showLogin()
-    {
-        // show the form
-        return View::make('login');
-    }
-    
-    public function doLogin()
-    {
-    // process the form
-    }
 }

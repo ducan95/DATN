@@ -15,9 +15,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('admincp', function () {
+    return view('admin.index');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['namespace' =>'Auth'],function(){
+	Route::get('login',[
+        'uses' => 'AuthController@getLogin',
+        'as'   => 'getLogin'
+    ]);
+	Route::post('login',[
+        'uses' => 'AuthController@postLogin',
+        'as'   => 'postLogin'
+    ]);
+	Route::get('logout',[
+        'uses' => 'AuthController@getgout',
+        'as' => 'getLogout'
+    ]);
+});
+
+
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
 
 // route to process the form
-Route::post('login', array('uses' => 'HomeController@doLogin'));
+//Route::post('login', array('uses' => 'Auth\AuthController@showLogin'));
+
