@@ -33,21 +33,22 @@
   <div class="login-box-body">
     <h2 class="login-box-msg">総合ジャーナル</h2>
      
-     @if (count($errors) >0)
+    @if (count($errors) >0)
         <div class="box-body">
-           <div class="callout callout-danger">
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               {{--   <h4><i class="icon fa fa-ban"></i> Alert!</h4>  --}}
           @foreach($errors->all() as $error)
-              <p>- {{ $error }}</p>
+              <p>{{ $error }}</p>
           @endforeach
           </div>
-        </div>  
      @endif
     
      @if (session('status'))
-          <div class="box-body">
-           <div class="callout callout-danger">
-             <p>- {{ session('status') }}</p>
-         </div>
+          <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{--  <h4><i class="icon fa fa-ban"></i> Alert!</h4>  --}}
+             <p>{{ session('status') }}</p>
         </div> 
      @endif
 
