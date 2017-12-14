@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// Use loginRequest
 use App\Http\Controllers\Requests\LoginRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class AuthController extends Controller
@@ -15,12 +14,11 @@ class AuthController extends Controller
      public function getLogin()
      {
          if (Auth::check()) {
-             // nếu đăng nhập thàng công thì 
-             return redirect('/');
+             return redirect('admincp');
          } else {
              return view('auth.login');
          }
- 
+         
      }
  
      /**
@@ -29,16 +27,15 @@ class AuthController extends Controller
       */
      public function postLogin(LoginRequest $request)
      {
-         $login = [
-             'email'    => $request->txtEmail,
-             'password' => $request->txtPassword,
-             'id_role'  => 1,
-             'status'   => 1
-         ];
-         if (Auth::attempt($login)) {
-             return redirect('admincp');
-         } else {
-             return redirect()->back()->with('status', 'Email hoặc Password không chính xác');
+        $email    = trim($request->txtEmail);
+        $password = trim($request->txtPassword);
+        
+		if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->route('getIndex');
+
+        } else {
+             return redirect()->back()->with('status', 'メールアドレスまたはパスワードが間違っています。');
          }
      }
  
@@ -52,3 +49,16 @@ class AuthController extends Controller
          return redirect()->route('getLogin');
      }
 }
+
+
+
+ /* $login = [
+    'email'    => $request->txtEmail,
+    'password' => $request->txtPassword,
+    'id_role'  => 1,
+    'status'   => 1
+];
+//dd($login);
+if (Auth::attempt($login)) {
+    return redirect('admincp');
+}  */
