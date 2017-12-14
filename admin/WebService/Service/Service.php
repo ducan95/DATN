@@ -6,4 +6,4 @@ namespace WebService\Service;
  * Date: 13/12/2017
  * Time: 19:36
  */
-abstract class Service extends \App\Extention\Singleton implements IService{}
+abstract class Service extends \Extention\Singleton implements IService{}

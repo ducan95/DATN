@@ -24,12 +24,15 @@
         ],
         "psr-4": {
             "App\\": "app/",
+            "Extention\\": "Extention/",
             "WebService\\": "WebService/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Extention\\": "Extention/",
+            "WebService\\": "WebService/"
         }
     },
     "extra": {
