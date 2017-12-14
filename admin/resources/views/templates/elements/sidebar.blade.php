@@ -6,10 +6,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="assets/base/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{ asset('assets/base/dist/img/download.jpeg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Administrator</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -28,64 +28,65 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview menu-open">
+        <li class="active menu-open">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Số phát hành</span>
+            <i class="fa fa-barcode"></i> <span>Số phát hành</span>
             {{--  <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>  --}}
           </a>
-          {{--  <ul class="treeview-menu">
+          {{--  <ul class="-menu">
             <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>  --}}
         </li>
-        <li class="treeview">
+        <li class="">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-pencil"></i>
             <span>Bài viết</span>
             {{--  <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>  --}}
           </a>
         </li>
-        <li class="treeview">
+        <li class="">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-newspaper-o"></i>
             <span>Danh mục</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-picture-o"></i>
             <span>Hình ảnh</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-bars"></i>
             <span>Sidebar</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-eye"></i>
             <span>TOP preview</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-users"></i>
             <span>Hội viên</span>
           </a>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
+        <li class="">
+          <a href="/admincp/users">
+            <i class="fa fa-user-o"></i>
             <span>Users</span>
           </a>
         </li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        <li class="header">MORE</li>
+        <li><a href="/logout"><i class="fa fa-circle-o text-red"></i> <span>Logout</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

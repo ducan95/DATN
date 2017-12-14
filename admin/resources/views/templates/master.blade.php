@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="rikkeiApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/Ionicons/css/ionicons.min.css') }}">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="{{ asset('assets/base/bower_components/jvectormap/jquery-jvectormap.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -32,7 +30,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
 <div class="wrapper">
 
 {{--  ###### Layout #######  --}}
@@ -61,22 +59,22 @@
 <script src="{{ asset('assets/base/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('assets/base/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- Angular JS and resource -->
+<script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
+<!-- Validate JS -->
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 <!-- FastClick -->
 <script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
-<!-- Sparkline -->
-<script src="{{ asset('assets/base/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
-<!-- jvectormap  -->
-<script src="{{ asset('assets/base/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-<script src="{{ asset('assets/base/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+
 <!-- SlimScroll -->
 <script src="{{ asset('assets/base/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-<!-- ChartJS -->
-<script src="{{ asset('assets/base/bower_components/chart.js/Chart.js') }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('assets/base/dist/js/pages/dashboard2.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/base/dist/js/demo.js') }}"></script>
+
+@yield('bottom-js')
+
 </body>
 </html>

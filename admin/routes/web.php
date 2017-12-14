@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Kiểu này thì vào bình th tuy nhiên k xài đc bên midđleware
 
 Route::get('/', [
     'as' => 'getLogin', 
@@ -26,13 +25,26 @@ Route::get('logout', [
 ]);
 
 Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
-   /*  Route::get('admincp', function() {
-        return view('admin.index');
-    }); */
     Route::get('admincp', [
         'as' => 'getIndex', 
         'uses' => 'HomeController@index'
     ]);
+});
+
+// Admin users route
+Route::group([ 
+    'middleware' => 'checkAdminLogin',
+    'prefix'     => 'admincp'
+], function() {
+    Route::get('users', function() {
+        return view('templates.admin.users.index');
+    });
+    Route::get('users/add', function() {
+        return view('templates.admin.users.add');
+    });
+     Route::get('users/edit', function() {
+        return view('templates.admin.users.edit');
+    });
 });
 
 // API
