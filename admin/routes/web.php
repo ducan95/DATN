@@ -35,6 +35,14 @@ Route::group(['namespace' =>'Auth'],function(){
 });
 
 
+Route::group(['namespace' =>'Api'],function(){
+  Route::get('/web_api/release_number',[
+    'uses' => 'ReleaseNumberController@actionList',
+    'as'   => 'getLogin'
+  ]);
+
+});
+
 //Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
