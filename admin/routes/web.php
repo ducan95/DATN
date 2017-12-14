@@ -10,43 +10,36 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Kiểu này thì vào bình th tuy nhiên k xài đc bên midđleware
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [
+    'as' => 'getLogin', 
+    'uses' => 'Auth\AuthController@getLogin'
+]);
+Route::post('/', [
+    'as' => 'postLogin', 
+    'uses' => 'Auth\AuthController@postLogin'
+]);
+Route::get('logout', [
+    'as' => 'getLogout', 
+    'uses' => 'Auth\AuthController@getLogout'
+]);
+
+Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
+   /*  Route::get('admincp', function() {
+        return view('admin.index');
+    }); */
+    Route::get('admincp', [
+        'as' => 'getIndex', 
+        'uses' => 'HomeController@index'
+    ]);
 });
 
-Route::get('admincp', function () {
-    return view('admin.index');
-});
-
-Route::group(['namespace' =>'Auth'],function(){
-	Route::get('login',[
-        'uses' => 'AuthController@getLogin',
-        'as'   => 'getLogin'
-    ]);
-	Route::post('login',[
-        'uses' => 'AuthController@postLogin',
-        'as'   => 'postLogin'
-    ]);
-	Route::get('logout',[
-        'uses' => 'AuthController@getgout',
-        'as' => 'getLogout'
-    ]);
-});
-
-
+// API
 Route::group(['namespace' =>'Api'],function(){
   Route::get('/web_api/release_number',[
     'uses' => 'ReleaseNumberController@actionList',
     'as'   => 'getLogin'
   ]);
-
 });
-
-//Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
-
-// route to process the form
-//Route::post('login', array('uses' => 'Auth\AuthController@showLogin'));
 

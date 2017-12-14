@@ -3,7 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class checkAdminLogin
 {
@@ -16,13 +17,11 @@ class checkAdminLogin
      */
     public function handle($request, Closure $next)
     {
-        //return $next($request);
-        // nếu user đã đăng nhập
-        if (Auth::check())
+        if (Auth::check()) 
         {
-            $user = Auth::user();
-            // nếu level =1 (admin), status = 1 (actived) thì cho qua.
-            if ($user->id_role == 1 && $user->status == 1 )
+            $user = Auth::user(); 
+
+            if ( $user->status == 1 )
             {
                 return $next($request);
             }
@@ -32,7 +31,8 @@ class checkAdminLogin
                 return redirect()->route('getLogin');
             }
         } else {
-            return redirect('login');
-        }    
+            return redirect('/');
+        } 
+
     }
 }
