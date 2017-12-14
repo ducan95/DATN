@@ -28,4 +28,8 @@ class CategoryController extends \App\Http\Controllers\WebApiController
   {
     // TODO: Implement actionDelete() method.
   }
+
+  public function index(){
+  	return view('templates.admin.category.category');
+  }
 }

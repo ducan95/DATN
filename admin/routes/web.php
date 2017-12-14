@@ -45,5 +45,9 @@ Route::group(['namespace' =>'Api'],function(){
     'uses' => 'CategoryController@actionList',
     'as' => 'getCategory',
   ]);
+  Route::get('category',[
+    'uses'  =>'CategoryController@index',
+    'as'    =>'category.index'
+  ]);
 });
 
