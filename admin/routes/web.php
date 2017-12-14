@@ -39,7 +39,11 @@ Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
 Route::group(['namespace' =>'Api'],function(){
   Route::get('/web_api/release_number',[
     'uses' => 'ReleaseNumberController@actionList',
-    'as'   => 'getLogin'
+    'as'   => 'getReleaseAPI'
+  ]);
+  Route::get('/web_api/category',[
+    'uses' => 'CategoryController@actionList',
+    'as' => 'getCategory',
   ]);
 });
 
