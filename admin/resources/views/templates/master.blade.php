@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="rikkeiApp">
+<html ng-app="sougou_zyanaru">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -73,6 +73,9 @@
 <script src="{{ asset('assets/base/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/base/dist/js/demo.js') }}"></script>
+
+{{--angular app--}}
+<script src="{{ asset('assets/frontend/config/config.js') }}"></script>
 
 @yield('bottom-js')
 
