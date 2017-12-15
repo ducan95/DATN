@@ -3,9 +3,9 @@ namespace WebService\Service;
 
 interface IService
 {
-  public function save();
-  public function update();
-  public function delete();
-  public function find();
+  public function save($request);
+  public function update($request, $id);
+  public function delete($id);
+  public function find($id);
   public function findOne();
 }

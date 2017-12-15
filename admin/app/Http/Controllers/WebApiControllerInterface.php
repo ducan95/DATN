@@ -7,10 +7,12 @@
  */
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 interface WebApiControllerInterface{
   public function actionList();
-  public function actionSave();
-  public function actionUpdate();
-  public function actionDelete();
+  public function actionSave(Request $request);
+  public function actionUpdate(Request $request, $id);
+  public function actionDelete($id);
+  public function actionFind($id);
 }

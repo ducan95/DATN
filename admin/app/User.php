@@ -41,4 +41,9 @@ class User extends Authenticatable
     public function getRememberTokenName() { 
         return null; 
     }
+
+    protected function role()
+    {
+        return $this->belongsTo(Roles::class, 'id_role');
+    }
 }

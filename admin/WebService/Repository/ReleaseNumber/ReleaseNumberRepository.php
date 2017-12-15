@@ -28,7 +28,8 @@ class ReleaseNumberRepository extends Repository
 
   public function find()
   {
-    return "List";
+
+    return "list";
   }
 
   public function findOne()
