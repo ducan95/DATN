@@ -34,7 +34,8 @@ Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
 // Admin users route
 Route::group([ 
     'middleware' => 'checkAdminLogin',
-    'prefix'     => 'admincp'
+    'prefix'     => 'admincp',
+    'namespace'  => 'web'
 ], function() {
     Route::get('users', function() {
         return view('templates.admin.users.index');
@@ -47,12 +48,14 @@ Route::group([
     });
 });
 
-// API
-
+/**
+ * Sougou Zyanaru Group API
+ * Author: Rikkei Intern Pro Team
+ */
 Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
     Route::get('/web_api/release_number',[
         'uses' => 'ReleaseNumberController@actionList',
-        'as'   => 'getLogin'
+        'as'   => 'getReleaseAPI'
     ]);
 
     Route::group(['prefix' => '/roles'], function(){
@@ -83,12 +86,14 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
         ]);
 
     });
-    Route::group(['prefix' => '/user'], function(){
 
+    Route::group(['prefix' => '/user'], function(){
+        // Get list users
         Route::get('/', [
             'uses' => 'UserController@actionList',
             'as' => 'apiUserList'
         ]);
+        // Get user
         Route::get('/{id}', [
             'uses' => 'UserController@actionFind',
             'as' => 'apiUserShow'
@@ -107,8 +112,7 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
         ]);
 
     });
-
-
+});
 
 Route::group(['namespace' =>'Api'],function(){
   Route::get('/web_api/release_number',[

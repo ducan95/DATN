@@ -66,7 +66,7 @@ class UserRepository extends Repository
                 return Api::response();
     		}
     	} else {
-            return Api::response('is_success'=> 'false', 'status_code' => 404);
+            return Api::response(['is_success'=> 'false', 'status_code' => 404]);
     	}
 
     }
