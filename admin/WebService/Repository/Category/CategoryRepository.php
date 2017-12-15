@@ -1,5 +1,6 @@
 <?php
-namespace WebService\Repository\ReleaseNumber;
+namespace WebService\Repository\Category;
+use App\Category;
 use WebService\Repository\Repository;
 
 /**
@@ -8,7 +9,7 @@ use WebService\Repository\Repository;
  * Date: 13/12/2017
  * Time: 19:37
  */
-class ReleaseNumberRepository extends Repository
+class CategoryRepository extends Repository
 {
 
   public function save()
@@ -28,9 +29,8 @@ class ReleaseNumberRepository extends Repository
 
   public function find()
   {
-
-    return "list";
-
+    $category=Category::all();
+    return $category;
   }
 
   public function findOne()

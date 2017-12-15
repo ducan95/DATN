@@ -1,6 +1,7 @@
 <?php
-namespace WebService\Repository\ReleaseNumber;
-use WebService\Repository\Repository;
+namespace WebService\Service\Category;
+use WebService\Repository\Category\CategoryRepository;
+use WebService\Service\Service;
 
 /**
  * Created by PhpStorm.
@@ -8,7 +9,7 @@ use WebService\Repository\Repository;
  * Date: 13/12/2017
  * Time: 19:37
  */
-class ReleaseNumberRepository extends Repository
+class CategoryService extends Service
 {
 
   public function save()
@@ -28,9 +29,7 @@ class ReleaseNumberRepository extends Repository
 
   public function find()
   {
-
-    return "list";
-
+    return CategoryRepository::getInstance()->find();
   }
 
   public function findOne()
