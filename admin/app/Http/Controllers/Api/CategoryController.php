@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Api;
 use WebService\Service\Category\CategoryService;
+use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 /**
  * Created by PhpStorm.
@@ -11,7 +13,7 @@ use WebService\Service\Category\CategoryService;
 class CategoryController extends \App\Http\Controllers\WebApiController
 {
   public function actionList(){
-    return CategoryService::getInstance()->find();
+    return CategoryService::getInstance()->list();
   }
 
   public function actionSave()
@@ -27,9 +29,5 @@ class CategoryController extends \App\Http\Controllers\WebApiController
   public function actionDelete()
   {
     // TODO: Implement actionDelete() method.
-  }
-
-  public function index(){
-  	return view('templates.admin.category.category');
   }
 }

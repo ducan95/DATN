@@ -47,6 +47,26 @@ Route::group([
         return view('templates.admin.users.edit');
     });
 });
+Route::group([ 
+    'middleware' => 'checkAdminLogin',
+    'prefix'     => 'admincp',
+], function() {
+    Route::get('category', function() {
+        return view('templates.admin.category.category');
+    });
+    Route::get('category/add', function() {
+        return view('templates.admin.category.addcategory');
+    });
+     Route::get('category/addchildren', function() {
+        return view('templates.admin.category.addcategorychildern');
+    });
+     Route::get('category/setdisplay',function(){
+        return view('templates.admin.category.setdisplay');
+     });
+     Route::get('category/edit',function(){
+        return view('templates.admin.category.editcategorychildren');
+      });
+});
 
 /**
  * Sougou Zyanaru Group API
@@ -112,21 +132,32 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
         ]);
 
     });
+    Route::group(['prefix' => '/category'], function(){
+        // Get list users
+        Route::get('/', [
+            'uses' => 'CategoryController@actionList',
+            'as' => 'apiCategoryList'
+        ]);
+        // Get user
+        Route::get('/{id}', [
+            'uses' => 'CategoryController@actionFind',
+            'as' => 'apiCategoryShow'
+        ]);
+        Route::post('/', [
+            'uses' => 'CategoryController@actionSave',
+            'as' => 'apiCategorySave'
+        ]);
+        Route::put('/{id}', [
+            'uses' => 'CategoryController@actionUpdate',
+            'as' => 'apiCategoryUpdate'
+        ]);
+        Route::delete('/{id}', [
+            'user' => 'CategoryController@actionDelete',
+            'as' => 'apiCategoryDelete'
+        ]);
+
+    });
 });
 
-Route::group(['namespace' =>'Api'],function(){
-  Route::get('/web_api/release_number',[
-    'uses' => 'ReleaseNumberController@actionList',
-    'as'   => 'getReleaseAPI'
-  ]);
-  Route::get('/web_api/category',[
-    'uses' => 'CategoryController@actionList',
-    'as' => 'getCategory',
-  ]);
-  Route::get('category',[
-    'uses'  =>'CategoryController@index',
-    'as'    =>'category.index'
-  ]);
 
-});
 
