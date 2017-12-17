@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Api;
 use WebService\Service\User\UserService;
-use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
+use Extention\ApiRequest;
+use Extention\Api;
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -11,43 +12,53 @@ use Illuminate\Http\Request;
  */
 class UserController extends \App\Http\Controllers\WebApiController
 {   
-    public function actionList()
-    {
-        return UserService::getInstance()->list();
+    public function actionFind(Request $request)
+    { 
+      return UserService::getInstance()->find($request);
     }
 
-    public function actionFind($id)
+    public function actionFindOne($id)
     {   
-        return UserService::getInstance()->find($id);
+      $result = UserService::getInstance()->findOne($id);
+      return Api::response([
+          'is_success' => $result['is_success'] ,
+          'status_code' => $result['status_code'],
+          'data' => $result['data'],
+          'errors' => $result['errors'],    
+      ]);  
     }
 
     public function actionSave(Request $request)
-    {   
-        $this->validate($request,[
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required | email  ',
-            'id_role' => 'required',
-
-        ]);
-
-        return UserService::getInstance()->save($request);
+    {  
+      $result = UserService::getInstance()->save($request);
+      return Api::response([
+          'is_success' => $result['is_success'] ,
+          'status_code' => $result['status_code'],
+          'data' => $result['data'],
+          'errors' => $result['errors'],    
+      ]); 
     }
 
     public function actionUpdate(Request $request, $id)
     {   
-        $this->validate($request,[
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required | email  ',
-            'id_role' => 'required',
-
-        ]);
-        return UserService::getInstance()->update($request, $id);
+      $result =  UserService::getInstance()->update($request, $id); 
+      return Api::response([
+        'is_success' => $result['is_success'] ,
+        'status_code' => $result['status_code'],
+        'data' => $result['data'],
+        'errors' => $result['errors'],    
+      ]);
     }
+
     public function actionDelete($id)
     {   
-        return RolesService::getInstance()->delete($id);
+        $result =  UserService::getInstance()->delete($id);
+        return Api::response([
+        'is_success' => $result['is_success'] ,
+        'status_code' => $result['status_code'],
+        'data' => $result['data'],
+        'errors' => $result['errors'],    
+      ]);
 
     }
 }

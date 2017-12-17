@@ -1,7 +1,6 @@
 <?php
 
 namespace Extention;
-
 class Api
 {
 
@@ -9,14 +8,18 @@ class Api
     {
     }
 
-    static function response($data = [], $status_code = 200, $errors = [], $is_success = true)
+    private static $body;
+    public static function response($data = [])
     {	
-        return response()->json([
-        	'is_success' => $is_success,
-        	'status_code' => $status_code,
-        	'errors' => $errors,
-        	'data' => $data,
-        ]);
+        Api::$body = [
+            'is_success' => true,
+            'status_code' => 200,
+            'data' => [],
+            'errors' => []
+        ] ;
+        Api::$body = array_merge(Api::$body, $data);
+        return response()->json(Api::$body);
+
     }
 
 }

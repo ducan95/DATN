@@ -80,7 +80,7 @@
           </a>
         </li>
         <li class="">
-          <a href="/admincp/users">
+          <a href="{{ route('webUserIndex') }}">
             <i class="fa fa-user-o"></i>
             <span>Users</span>
           </a>

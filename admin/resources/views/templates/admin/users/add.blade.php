@@ -82,6 +82,16 @@
       <!-- /.row -->
       
     </section>
+
+
+    <form action="{{route('apiUserList')}}" method="post">
+      {{csrf_field()}}
+        <input type="text" name="username">
+        <input type="text" name="password">
+        <input type="text" name="email">
+        <input type="int" name="id_role">
+        <input type="submit" name="">
+    </form>
     <!-- /.content -->
 
 @endsection    

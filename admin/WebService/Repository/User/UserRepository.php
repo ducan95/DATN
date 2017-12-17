@@ -2,7 +2,7 @@
 namespace WebService\Repository\User;
 use WebService\Repository\Repository;
 use App\User;
-use Extention\Api;
+
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -11,70 +11,134 @@ use Extention\Api;
  */
 class UserRepository extends Repository
 {
-
-	public function list() 
-	{
-		$users = User::all();
-        return Api::response([ 'data' => $users]);
+	public function find($request , $paginate = true) 
+	{ 
+    $keywords = $request->all(); 
+    $data = ['username','email','status','id_role']; 
+    $query = User::where('id_user', '>', 0);
+    if(!empty($keywords)) {
+      foreach ($data as $value) {  
+        if($request->has($value) && !empty($keywords[$value])) {       
+          if(is_string($keywords[$value])) {
+            return $value;
+            $keywork = '%'.$keywords[$value].'%';
+            $query->where($value, 'like', $keywork);
+          } else { 
+            $query->where($value, '=', $keywords[$value]);
+          }
+        }
+      }
+    }
+    if ($paginate) {
+        $number = $request->query('number', 50);
+        $data = $query->paginate($number);
+        return $data;
+    } else {
+        return $query->all();
+    }
 	}
 
-	public function find($id)
-    {	
-    	$user = User::find($id);
-    	if(!empty($user)) {
-            return Api::response([ 'data' => $user]);
-    	} else {
-            return Api::response([ 'is_success' => 'false', 'status_code' => 404]);
-    	}
+	public function findOne($id)
+  {	
+    try{
+  	  $user = User::find($id);
+      if(!empty($user)) {
+        return $result = [
+          'is_success' => true,
+          'error' => "",
+          'data'=> $user,
+        ];
+      } else {
+        throw new \Exception("notting asdsads");
+      }
+    }catch(\Exception  $e){ 
+        return $result = [
+          'is_success' => false,
+          'error' => $e->getMessage(),
+          'data'=> [],
+        ];
     }
+  }
 
-    public function save($request)
-    {	
+  public function save($request)
+  {	
+    try{
     	$data = $request->all();
     	$user = new User();
     	$user->fill([
     		'username' => $data['username'],
     		'email' => $data['email'],
     		'password' => bcrypt($data['password']),
-    		'status' => 0,
+    		'status' => "0",
     		'id_role' => $data['id_role'],
     	]);
-    	$user->save();
-        return Api::response([ 'is_success' => 'true', 'status_code' => 201]);
+      $user->save() ;
+      return $result = [
+        'is_success' => true,
+        'error' => "",
+        'data'=> $user,
+      ]; 
+    } catch(\Exception  $e){ 
+      return $result = [
+        'is_success' => false,
+        'error' => $e->errorInfo[2],
+        'data'=> $user,
+      ];
     }
+  }
 
 	public function update($request, $id)
 	{	
-	    $data = $request->all();
-    	$user = User::find($id); 
-    	$user->fill([
-    		'username' => $data['username'],
-    		'email' => $data['email'],
-    		'password' => bcrypt($data['password']),
-    		'status' => 0,
-    		'id_role' => $data['id_role'],
-    	]);
-    	$user->save();
-       return Api::response(); 
+    try{
+      $data = $request->all();
+      $user = User::find($id);
+      if(!empty($user)) {
+        $user->fill([
+          'username' => $data['username'],
+          'email' => $data['email'],
+          'password' => bcrypt($data['password']),
+          'status' => 0,
+          'id_role' => $data['id_role'],
+        ]);  
+        $user->save();  
+      } 
+      return $result = [
+        'is_success' => true,
+        'error' => "",
+        'data'=> $user
+      ];
+    } catch(\Exception  $e){
+      return $result = [
+        'is_success' => false,
+        'error' => $e->errorInfo[2],
+        'data'=> $user,
+      ];
+      
+    }	       
 	}
 
-    public function delete($id)
-    {	
-    	$user = User::findOrFail($id);
-    	if(!empty($user)) {
-    		if($user->delete()) {
-                return Api::response();
-    		}
-    	} else {
-            return Api::response('is_success'=> 'false', 'status_code' => 404);
-    	}
-
+  public function delete($id)
+  {	
+  	try{
+      $user = User::find($id);
+      if(!empty($user)) {
+        if($user->delete() == false) {
+          return $result = [
+            'is_success' => true,
+            'error' => "",
+          ];
+        } else {
+          throw new \Exception("500");
+        }
+      } else {
+        throw new \Exception("404");
+      }
+    }catch(\Exception  $e){ 
+        return $result = [
+          'is_success' => false,
+          'error' => $e->getMessage(),
+        ];
     }
-
-    
-
-  public function findOne()
-  {
-    // TODO: Implement findOne() method.
   }
+
 }

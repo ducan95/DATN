@@ -34,17 +34,29 @@ Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
 // Admin users route
 Route::group([ 
     'middleware' => 'checkAdminLogin',
-    'prefix'     => 'admincp'
+    'prefix'     => 'admincp',
+    'namespace'  => 'Web'
 ], function() {
-    Route::get('users', function() {
-        return view('templates.admin.users.index');
+
+    Route::group([ 'prefix' => 'user' ],function(){
+
+        Route::get('/',[
+            'uses' => 'UserController@viewIndex' ,
+            'as'  => 'webUserIndex'
+        ]);
+
+        Route::get('/edit',[
+            'uses' => 'UserController@viewEdit' ,
+            'as'  => 'webUserEdit'
+        ]);
+
+        Route::get('/add',[
+            'uses' => 'UserController@viewAdd' ,
+            'as'  => 'webUserAdd'
+        ]);
+
     });
-    Route::get('users/add', function() {
-        return view('templates.admin.users.add');
-    });
-     Route::get('users/edit', function() {
-        return view('templates.admin.users.edit');
-    });
+    
 });
 
 // API
@@ -52,12 +64,12 @@ Route::group([
 Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
     Route::get('/web_api/release_number',[
         'uses' => 'ReleaseNumberController@actionList',
-        'as'   => 'getLogin'
+        'as'   => 'getReleaseNumber'
     ]);
 
     Route::group(['prefix' => '/roles'], function(){
         /** Get List Roles **/
-        Route::get('/', [
+        Route::post('/', [
             'uses' => 'RolesController@actionList',
             'as'   => 'apiListRole'
         ]);
@@ -81,34 +93,32 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
             'uses' => 'RolesController@actionDelete',
             'as'   => 'postDeleteRole'
         ]);
-
     });
     Route::group(['prefix' => '/user'], function(){
 
-        Route::get('/', [
-            'uses' => 'UserController@actionList',
+        Route::post('/', [
+            'uses' => 'UserController@actionFind',
             'as' => 'apiUserList'
         ]);
         Route::get('/{id}', [
-            'uses' => 'UserController@actionFind',
+            'uses' => 'UserController@actionFindOne',
             'as' => 'apiUserShow'
         ]);
-        Route::post('/', [
+       /* Route::post('/', [
             'uses' => 'UserController@actionSave',
             'as' => 'apiUserSave'
-        ]);
+        ]);*/
         Route::put('/{id}', [
             'uses' => 'UserController@actionUpdate',
             'as' => 'apiUserUpdate'
         ]);
-        Route::delete('/{id}', [
-            'user' => 'UserController@actionDelete',
+        Route::delete('/dele/{id}', [
+            'uses' => 'UserController@actionDelete',
             'as' => 'apiUserDelete'
         ]);
-
     });
 
-
+});
 
 Route::group(['namespace' =>'Api'],function(){
   Route::get('/web_api/release_number',[
