@@ -19,7 +19,6 @@ class Api
         ] ;
         Api::$body = array_merge(Api::$body, $data);
         return response()->json(Api::$body);
-
     }
 
 }

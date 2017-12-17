@@ -20,7 +20,6 @@ class UserRepository extends Repository
       foreach ($data as $value) {  
         if($request->has($value) && !empty($keywords[$value])) {       
           if(is_string($keywords[$value])) {
-            return $value;
             $keywork = '%'.$keywords[$value].'%';
             $query->where($value, 'like', $keywork);
           } else { 
@@ -30,9 +29,7 @@ class UserRepository extends Repository
       }
     }
     if ($paginate) {
-        $number = $request->query('number', 50);
-        $data = $query->paginate($number);
-        return $data;
+        return $query->paginate(50); 
     } else {
         return $query->all();
     }
@@ -122,7 +119,7 @@ class UserRepository extends Repository
   	try{
       $user = User::find($id);
       if(!empty($user)) {
-        if($user->delete() == false) {
+        if($user->delete()) {
           return $result = [
             'is_success' => true,
             'error' => "",

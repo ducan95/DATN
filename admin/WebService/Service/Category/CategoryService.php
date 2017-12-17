@@ -2,6 +2,7 @@
 namespace WebService\Service\Category;
 use WebService\Repository\Category\CategoryRepository;
 use WebService\Service\Service;
+use Extention\Api;
 
 /**
  * Created by PhpStorm.
@@ -27,9 +28,10 @@ class CategoryService extends Service
     // TODO: Implement delete() method.
   }
 
-  public function find()
+  public function list()
   {
-    return CategoryRepository::getInstance()->find();
+    $category = CategoryRepository::getInstance()->find();
+    return Api::response([ 'category' => $category]);
   }
 
   public function findOne()

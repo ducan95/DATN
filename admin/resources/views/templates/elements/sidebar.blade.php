@@ -50,7 +50,7 @@
           </a>
         </li>
         <li class="">
-          <a href="#">
+          <a href="/admincp/category">
             <i class="fa fa-newspaper-o"></i>
             <span>Danh mục</span>
           </a>

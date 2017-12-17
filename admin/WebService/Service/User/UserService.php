@@ -14,7 +14,22 @@ class UserService extends Service
 
 	public function find($request)
 	{ 
-    return UserRepository::getInstance()->find($request); 
+    $result =  UserRepository::getInstance()->find($request); 
+    if(!empty($result)) {    
+      return $result = [
+        'is_success' => true,
+        'status_code' => 200,
+        'data' =>  $result,
+        'errors' => [],
+      ];
+    } else {
+      return $result = [
+        'is_success' => false,
+        'status_code' => 404,
+        'data' =>  [],
+        'errors' => ""
+      ] ;
+    }
 	}
    	
  	public function findOne($id)
@@ -66,7 +81,7 @@ class UserService extends Service
 
   public function update($request, $id)
   {   
-    $this->validate($request,[
+    $request->validate([
         'username' => 'required',
         'password' => 'required',
         'email' => 'required | email',

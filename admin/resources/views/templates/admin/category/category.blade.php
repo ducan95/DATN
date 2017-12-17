@@ -1,16 +1,13 @@
 @extends('templates.master')
 @section('content')
 
-	<h2 class="alert alert-success">List Category</h2>
-
+	<h2 style="margin-top: 0px;padding-top: 25px;padding-left: 15px">List Category</h2>
+  <a href="/admincp/category/setdisplay"><button class="btn btn-primary" style="margin-left:15px ">Set display category</button></a>
 	 <section class="content">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
 
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Striped Full Width Table</h3>
-            </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <table class="table table-striped">
@@ -24,42 +21,41 @@
                   <td>1.</td>
                   <td>Thời sự</td>
                   <td>
-                    	<button class="btnMize btn btn-primary">Sửa</button>                
+                    	<a href="/admincp/category/edit"><button class="btnMize btn btn-primary">Sửa</button></a>                
                   </td>
-                  <td><button class="btnMize btn btn-danger">Xóa</button></td>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Thời sự</td>
                   <td>
-                      <button class="btnMize btn btn-primary">Sửa</button>                
-                  </td>
-                  <td><button class="btnMize btn btn-danger">Xóa</button></td>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Thời sự</td>
-                  <td>
-                      <button class="btnMize btn btn-primary">Sửa</button>                
-                  </td>
-                  <td><button class="btnMize btn btn-danger">Xóa</button></td>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Thời sự</td>
-                  <td>
-                      <button class="btnMize btn btn-primary">Sửa</button>                
-                  </td>
-                  <td><button class="btnMize btn btn-danger">Xóa</button></td>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                        Delete
+                    </button>
+
+                    <div id="myModal"  class="modal fade" tabindex="-1" role="dialog">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Delete Category Parent?</h4>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-primary">Yes</button>
+                          </div>
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
                 </tr>
               </table>
+
             </div>
             <!-- /.box-body -->
+          </div>
+          <div>
+            <a href="/admincp/category/add"><button type="button" class="btn btn-primary">Add Category Parent</button></a>
+              
           </div>
 
         </div>
         <!-- /.col -->
-        <div class="col-md-7">
+        <div class="col-md-6">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Striped Full Width Table</h3>
@@ -115,7 +111,12 @@
                 </tr>
               </table>
             </div>
+            
             <!-- /.box-body -->
+          </div>
+          <div>
+            <a href="/admincp/category/addchildren"><button type="button" class="btn btn-primary">Add Category Children</button></a>
+              
           </div>
           <!-- /.box -->
         </div>
@@ -125,4 +126,10 @@
     
     </section>
 
-@stop
+@stop  
+
+@section('bottom-js')
+<!-- Edit table -->
+<script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
+@endsection 

@@ -3,6 +3,7 @@ namespace WebService\Repository\Category;
 use App\Category;
 use WebService\Repository\Repository;
 
+
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -29,7 +30,7 @@ class CategoryRepository extends Repository
 
   public function find()
   {
-    $category=Category::all();
+    $category=Category::where('id_category_parent','=',0)->oderBy('id_category','asc');
     return $category;
   }
 
