@@ -120,7 +120,7 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
 
     Route::group(['prefix' => '/user'], function(){
       // Get list users
-      Route::post('/', [
+      Route::post('/find', [
           'uses' => 'UserController@actionFind',
           'as' => 'apiUserFind'
       ]);
@@ -129,15 +129,15 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
           'uses' => 'UserController@actionFindOne',
           'as' => 'apiUserShow'
       ]);
-      /*Route::post('/', [
+      Route::post('/', [
           'uses' => 'UserController@actionSave',
           'as' => 'apiUserSave'
-      ]);*/
-      Route::post('/{id}', [
+      ]);
+      Route::put('/{id}', [
           'uses' => 'UserController@actionUpdate',
           'as' => 'apiUserUpdate'
       ]);
-      Route::get('/dele/{id}', [
+      Route::delete('/dele/{id}', [
           'uses' => 'UserController@actionDelete',
           'as' => 'apiUserDelete'
       ]);

@@ -15,41 +15,26 @@ class UserService extends Service
 	public function find($request)
 	{ 
     $result =  UserRepository::getInstance()->find($request); 
-    if(!empty($result)) {    
-      return $result = [
-        'is_success' => true,
-        'status_code' => 200,
-        'data' =>  $result,
-        'errors' => [],
-      ];
-    } else {
-      return $result = [
-        'is_success' => false,
-        'status_code' => 404,
-        'data' =>  [],
-        'errors' => ""
-      ] ;
+    try{
+      if(!empty($result)){
+        $res['data'] = $result;
+      }else {
+        throw new \Exception("no thing");
+      }
+    }catch(\Exception $e) {
+      $res['errors'] =$e->getMessage();
     }
+    return $res;
 	}
    	
  	public function findOne($id)
   {	
-  	$result =  UserRepository::getInstance()->findOne($id);
-    if($result['is_success']) {    
-      return $result = [
-        'is_success' => true,
-        'status_code' => 200,
-        'data' =>  $result['data'],
-        'errors' => [],
-      ];
-    } else {
-      return $result = [
-        'is_success' => false,
-        'status_code' => 404,
-        'data' =>  [],
-        'errors' => $result['error']
-      ] ;
+  	try{
+      $res['data'] = UserRepository::getInstance()->findOne($id);
+    }catch(\Exception $e) {
+      $res['errors'] = $e->getMessage();
     }
+    return $res;
   }
 
   public function save($request)
@@ -60,23 +45,13 @@ class UserService extends Service
       'email' => 'required | email ',
       'id_role' => 'required',
 
-    ]);
-    $result = UserRepository::getInstance()->save($request); 
-    if($result['is_success']) {  
-      return $result = [
-        'is_success' => true,
-        'status_code' => 201,
-        'data' =>  $result['data'],
-        'errors' => [],
-      ];
-    } else {
-      return $result = [
-        'is_success' => false,
-        'status_code' => 500,
-        'data' =>  $result['data'],
-        'errors' => $result['error'],
-      ] ;
+    ],[]);
+    try{
+      $res['data'] = UserRepository::getInstance()->save($request);
+    }catch(\Exception $e) {
+      $res['errors'] = $e->getMessage();
     }
+    return $res;
 	}
 
   public function update($request, $id)
@@ -87,52 +62,22 @@ class UserService extends Service
         'email' => 'required | email',
         'id_role' => 'required',
     ]);
-		$result = UserRepository::getInstance()->update($request, $id);  
-    if($result['is_success']) {  
-      if($result['data']) {
-        return $result = [
-          'is_success' => true,
-          'status_code' => 200,
-          'data' =>  $result['data'],
-          'errors' => [],
-        ];
-      } else {
-        return $result = [
-          'is_success' => false,
-          'status_code' => 404,
-          'data' =>  $result['data'],
-          'errors' => 'id not exists',
-        ];
-      }
-      
-    } else {
-      return $result = [
-        'is_success' => false,
-        'status_code' => 500,
-        'data' =>  [],
-        'errors' => $result['error']
-      ] ;
+		 try{
+      $res['data'] = UserRepository::getInstance()->update($request, $id);
+    }catch(\Exception $e) {
+      $res['errors'] = $e->getMessage();
     }
+    return $res;
 	}
 
   public function delete($id)
-  {	
-  	$result =  UserRepository::getInstance()->delete($id); 
-    if($result['is_success']) {    
-      return $result = [
-        'is_success' => true,
-        'status_code' => 201,
-        'data' =>  [],
-        'errors' => [],
-      ];
-    } else {
-      return $result = [
-        'is_success' => false,
-        'status_code' => 404,
-        'data' =>  [],
-        'errors' => $result['error']
-      ] ;
+  {
+    try{
+      $res['data'] = UserRepository::getInstance()->delete($id);
+    }catch(\Exception $e) {
+      $res['errors'] = $e->getMessage();
     }
+    return $res;
   }
 
 }

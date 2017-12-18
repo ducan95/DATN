@@ -14,51 +14,72 @@ class UserController extends \App\Http\Controllers\WebApiController
 {   
     public function actionFind(Request $request)
     { 
-      return UserService::getInstance()->find($request);
+      $res = UserService::getInstance()->find($request); 
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 404,
+          'errors' => $res['errors']
+        ]);
+      }
     }
 
     public function actionFindOne($id)
     {   
-      $result = UserService::getInstance()->findOne($id);
-      return Api::response([
-          'is_success' => $result['is_success'] ,
-          'status_code' => $result['status_code'],
-          'data' => $result['data'],
-          'errors' => $result['errors'],    
-      ]);  
+      $res = UserService::getInstance()->findOne($id); 
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 404,
+          'errors' => $res['errors']
+        ]);
+      }
     }
 
     public function actionSave(Request $request)
     {  
-      $result = UserService::getInstance()->save($request);
-      return Api::response([
-          'is_success' => $result['is_success'] ,
-          'status_code' => $result['status_code'],
-          'data' => $result['data'],
-          'errors' => $result['errors'],    
-      ]); 
+      $res = UserService::getInstance()->save($request);
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 500,
+          'errors' => $res['errors']
+        ]);
+      } 
     }
 
     public function actionUpdate(Request $request, $id)
     {   
-      $result =  UserService::getInstance()->update($request, $id); 
-      return Api::response([
-        'is_success' => $result['is_success'] ,
-        'status_code' => $result['status_code'],
-        'data' => $result['data'],
-        'errors' => $result['errors'],    
-      ]);
+      $res =  UserService::getInstance()->update($request, $id); 
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 500,
+          'errors' => $res['errors']
+        ]);
+      } 
     }
 
     public function actionDelete($id)
     {   
-        $result =  UserService::getInstance()->delete($id);
-        return Api::response([
-        'is_success' => $result['is_success'] ,
-        'status_code' => $result['status_code'],
-        'data' => $result['data'],
-        'errors' => $result['errors'],    
-      ]);
+      $res =  UserService::getInstance()->delete($id);
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 404,
+          'errors' => $res['errors']
+        ]);
+      } 
 
     }
 }

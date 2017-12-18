@@ -11,8 +11,8 @@ use App\User;
  */
 class UserRepository extends Repository
 {
-	public function find($request , $paginate = true) 
-	{ 
+  public function find($request , $paginate = true) 
+  { 
     $keywords = $request->all(); 
     $data = ['username','email','status','id_role']; 
     $query = User::where('id_user', '>', 0);
@@ -33,59 +33,43 @@ class UserRepository extends Repository
     } else {
         return $query->all();
     }
-	}
+  }
 
-	public function findOne($id)
-  {	
+  public function findOne($id)
+  { 
     try{
-  	  $user = User::find($id);
+      $user = User::find($id);
       if(!empty($user)) {
-        return $result = [
-          'is_success' => true,
-          'error' => "",
-          'data'=> $user,
-        ];
+        return  $user;
       } else {
-        throw new \Exception("notting asdsads");
+          throw new \Exception("404");
       }
-    }catch(\Exception  $e){ 
-        return $result = [
-          'is_success' => false,
-          'error' => $e->getMessage(),
-          'data'=> [],
-        ];
+    }catch(\Exception $e){ 
+        throw $e;
     }
   }
 
   public function save($request)
-  {	
+  { 
     try{
-    	$data = $request->all();
-    	$user = new User();
-    	$user->fill([
-    		'username' => $data['username'],
-    		'email' => $data['email'],
-    		'password' => bcrypt($data['password']),
-    		'status' => "0",
-    		'id_role' => $data['id_role'],
-    	]);
+      $data = $request->all();
+      $user = new User();
+      $user->fill([
+        'username' => $data['username'],
+        'email' => $data['email'],
+        'password' => bcrypt($data['password']),
+        'status' => "0",
+        'id_role' => $data['id_role'],
+      ]);
       $user->save() ;
-      return $result = [
-        'is_success' => true,
-        'error' => "",
-        'data'=> $user,
-      ]; 
+      return $user;
     } catch(\Exception  $e){ 
-      return $result = [
-        'is_success' => false,
-        'error' => $e->errorInfo[2],
-        'data'=> $user,
-      ];
+      throw  $e;  
     }
   }
 
-	public function update($request, $id)
-	{	
+  public function update($request, $id)
+  { 
     try{
       $data = $request->all();
       $user = User::find($id);
@@ -97,44 +81,28 @@ class UserRepository extends Repository
           'status' => 0,
           'id_role' => $data['id_role'],
         ]);  
-        $user->save();  
-      } 
-      return $result = [
-        'is_success' => true,
-        'error' => "",
-        'data'=> $user
-      ];
+        $user->save();
+        return $user;  
+      } else {
+        throw new \Exception("404: khong tim thay");
+      }
     } catch(\Exception  $e){
-      return $result = [
-        'is_success' => false,
-        'error' => $e->errorInfo[2],
-        'data'=> $user,
-      ];
+      throw $e;
       
-    }	       
-	}
+    }
+  }
 
   public function delete($id)
-  {	
-  	try{
+  { 
+    try{
       $user = User::find($id);
       if(!empty($user)) {
-        if($user->delete()) {
-          return $result = [
-            'is_success' => true,
-            'error' => "",
-          ];
-        } else {
-          throw new \Exception("500");
-        }
+        $user->delete();
       } else {
-        throw new \Exception("404");
+        throw new \Exception("404: Khong tim thay");
       }
     }catch(\Exception  $e){ 
-        return $result = [
-          'is_success' => false,
-          'error' => $e->getMessage(),
-        ];
+        throw $e;
     }
   }
 
