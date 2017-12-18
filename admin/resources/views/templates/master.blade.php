@@ -59,6 +59,12 @@
     {{--  ###### Layout #######  --}}
 
 </div>
+
+<script>
+  var APP_CONFIGURATION={
+    BASE_URL: "{{ url('/') }}"
+  }
+</script>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
