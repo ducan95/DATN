@@ -54,7 +54,7 @@
 							    </div><!-- /.modal-content -->
 							  </div><!-- /.modal-dialog -->
 							</div><!-- /.modal -->
-		                    <a href="/admincp/category/"><button type="button" class="btn btn-primary" style="margin-left:5px;">Cancel</button></a>
+		                    <a href="{{ route('webCategoryIndex') }}"><button type="button" class="btn btn-primary" style="margin-left:5px;">Cancel</button></a>
 				              </div>
 		              	<div class="col-md-4"></div>
 	              	</div>

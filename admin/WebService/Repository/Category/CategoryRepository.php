@@ -13,14 +13,42 @@ use WebService\Repository\Repository;
 class CategoryRepository extends Repository
 {
 
-  public function save()
+  public function save($request)
   {
-    // TODO: Implement save() method.
+     try{
+      $data = $request->all();
+      $category = new Category();
+      $category->fill([
+        'name' => $data['name'],
+        'slug' => $data['slug'],
+        'global_status' => $data['global_status'],
+        'menu_status' => $data['menu_status'],
+        'id_category_parent' => $data['id_category_parent'],
+      ]);
+      $category->save() ;
+      return $category;
+    } catch(\Exception  $e){ 
+      throw  $e;  
+    }
   }
 
-  public function update()
+  public function update($request,$id)
   {
-    // TODO: Implement update() method.
+    try{
+      $data=$request->all();
+      $category=Category::find($id);
+      $category->fill([
+        'name' => $data['name'],
+        'slug' => $data['slug'],
+        'global_status' => $data['global_status'],
+        'menu_status' => $data['menu_status'],
+        'id_category_parent' => $data['id_category_parent'],
+      ]);
+      $category->save();
+      return $category;
+    }catch(\Exception $e){
+      throw $e;
+    }
   }
 
   public function delete()
@@ -28,14 +56,22 @@ class CategoryRepository extends Repository
     // TODO: Implement delete() method.
   }
 
-  public function find()
-  {
-    $category=Category::where('id_category_parent','=',0)->oderBy('id_category','asc');
+  public function list()
+  { 
+    try{
+      $category=Category::where('id_category_parent','=',0)-> oderBy('id_category','asc')->get();
+    }
     return $category;
+    catch(\Exception $e){
+      throw $e;
+    }
   }
 
   public function findOne()
   {
     // TODO: Implement findOne() method.
+  }
+  public function find($request){
+
   }
 }

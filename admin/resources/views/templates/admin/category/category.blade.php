@@ -2,7 +2,7 @@
 @section('content')
 
 	<h2 style="margin-top: 0px;padding-top: 25px;padding-left: 15px">List Category</h2>
-  <a href="/admincp/category/setdisplay"><button class="btn btn-primary" style="margin-left:15px ">Set display category</button></a>
+  <a href="{{ route('webCategorySetdisplay') }}"><button class="btn btn-primary" style="margin-left:15px ">Set display category</button></a>
 	 <section class="content">
       <div class="row">
         <div class="col-md-6">
@@ -21,7 +21,7 @@
                   <td>1.</td>
                   <td>Thời sự</td>
                   <td>
-                    	<a href="/admincp/category/edit"><button class="btnMize btn btn-primary">Sửa</button></a>                
+                    	<a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Sửa</button></a>                
                   </td>
                   <td>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
@@ -49,7 +49,7 @@
             <!-- /.box-body -->
           </div>
           <div>
-            <a href="/admincp/category/add"><button type="button" class="btn btn-primary">Add Category Parent</button></a>
+            <a href="{{ route('webCategoryAdd') }}"><button type="button" class="btn btn-primary">Add Category Parent</button></a>
               
           </div>
 
@@ -115,7 +115,7 @@
             <!-- /.box-body -->
           </div>
           <div>
-            <a href="/admincp/category/addchildren"><button type="button" class="btn btn-primary">Add Category Children</button></a>
+            <a href="{{ route('webCategoryAddChildren') }}"><button type="button" class="btn btn-primary">Add Category Children</button></a>
               
           </div>
           <!-- /.box -->

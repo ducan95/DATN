@@ -2,7 +2,6 @@
 namespace WebService\Service\Category;
 use WebService\Repository\Category\CategoryRepository;
 use WebService\Service\Service;
-use Extention\Api;
 
 /**
  * Created by PhpStorm.
@@ -13,14 +12,32 @@ use Extention\Api;
 class CategoryService extends Service
 {
 
-  public function save()
+  public function save($request)
   {
-    // TODO: Implement save() method.
+    $request->validate([
+      'name' => 'required'
+      'slug' => 'require'
+    ],[]);
+    try{
+      $res['data']= CategoryRepository::getInstance()->save($request);
+    }catch(\Exception $e){
+      $res['errors']= $e ->getMessage();
+    }
+    return $res;
   }
 
-  public function update()
+  public function update($request,$id)
   {
-    // TODO: Implement update() method.
+    $request->validate([
+      'name' => 'required'
+      'slug' => 'require'
+    ],[]);
+    try{
+      $res['data']=CategoryRepository::getInstance()->update($request,$id);
+    }catch(\Exception $e){
+      $res['errors']= $e ->getMessage();
+    }
+    return $res;
   }
 
   public function delete()
@@ -30,8 +47,20 @@ class CategoryService extends Service
 
   public function list()
   {
-    $category = CategoryRepository::getInstance()->find();
-    return Api::response([ 'category' => $category]);
+    $result= CategoryRepository::getInstance()->find();
+    try
+    {
+      if(!empty($result)){
+        $res['data']=$result;
+      }
+      else{
+        throw new \Exception("No Record");
+        
+      }
+    catch(\Exception $e){
+        $res['errors']=$e->getMessage();
+    }
+    return $res;
   }
 
   public function findOne()
