@@ -136,11 +136,12 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
           'uses' => 'UserController@actionSave',
           'as' => 'apiUserSave'
       ]);
-      Route::post('/{id}', [
+
+      Route::put('/{id}', [
           'uses' => 'UserController@actionUpdate',
           'as' => 'apiUserUpdate'
       ]);
-      Route::get('/dele/{id}', [
+      Route::delete('/dele/{id}', [
           'uses' => 'UserController@actionDelete',
           'as' => 'apiUserDelete'
       ]);
