@@ -72,7 +72,6 @@
 {{--  <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>  --}}
 <!-- FastClick -->
 <script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>
-<script src="{{ asset('assets/base/bower_components/fakeloader/fakeloader.js') }}"></script>
 
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
