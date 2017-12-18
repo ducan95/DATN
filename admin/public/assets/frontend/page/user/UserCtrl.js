@@ -5,20 +5,15 @@
 SOUGOU_ZYANARU_MODULE
   .controller('UserCtrl', function ($scope, UserService, $window) {
   //Get list users
-  $scope.id_user = 1;
   UserService.find({}, function (res) {
     if (typeof res != "undefined") {  
-      //$scope.users = res.data;
       $scope.users = res.data;
     }
   })
-  
+  //Redirect edit page
+    //var base_url = 'localhost:8000'; 
   $scope.redirectEdit = function (id_user) { 
-    //$window.location.href = '/admincp/user/edit/'+id_user;
-    $scope.id_user = id_user;
-    console.log($scope.id_user);
-    $window.location.href = '/admincp/user/edit';
-   
+    $window.location.href = '/admincp/user/edit/' + id_user;
   }
 
 })
@@ -49,8 +44,8 @@ SOUGOU_ZYANARU_MODULE
 })
 
 // Edit user
-.controller('UserUpdateCtrl', function ($scope, UserUpdateService, $window) {
-  console.log($scope.id_user);
+  .controller('UserUpdateCtrl', function ($scope, UserUpdateService, $window) {
+  
   $scope.updateUser = function (id_user) { 
     $scope.user.$update(function (id_user) {
       //$window.location.href = '/admincp/user/edit';

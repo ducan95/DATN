@@ -13,7 +13,7 @@ interface IWebController{
   public function viewIndex();
   public function viewPost();
   public function viewAdd();
-  public function viewEdit();
+  public function viewEdit($id);
   public function viewDelete();
   public function viewFind();
 }

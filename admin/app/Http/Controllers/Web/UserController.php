@@ -19,9 +19,9 @@ class UserController extends \App\Http\Controllers\WebController
         
     }
 
-    public function viewEdit()
+    public function viewEdit($id)
     {
-        return view('templates.admin.users.edit');
+        return view('templates.admin.users.edit', compact($id));
     }
 
     public function viewDelete()
