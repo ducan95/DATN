@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    protected $table = 'users';
+    //Redifine primary key
+    protected $primaryKey ='id_user';
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -15,11 +19,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','status', 'id_role',
+        'username', 'email', 'password','status', 'is_deleted', 'id_role',
     ];
 
     // Redifine primary key
-    protected $primaryKey = 'id_user';
+    // protected $primaryKey = 'id_user';
 
     /**
      * The attributes that should be hidden for arrays.

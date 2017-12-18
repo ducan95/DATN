@@ -63,8 +63,7 @@
 <!-- Angular JS and resource -->
 <script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
-<!-- Validate JS -->
-<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
+{{--  <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>  --}}
 <!-- FastClick -->
 <script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>
 <!-- AdminLTE App -->

@@ -31,7 +31,9 @@ Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
     ]);
 });
 
-// Admin users route
+/**
+ * WEB ROUTE
+ */
 Route::group([ 
     'middleware' => 'checkAdminLogin',
     'prefix'     => 'admincp',
@@ -58,6 +60,7 @@ Route::group([
     });
     
 });
+
 Route::group([ 
     'middleware' => 'checkAdminLogin',
     'prefix'     => 'admincp',
@@ -120,7 +123,7 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
 
     Route::group(['prefix' => '/user'], function(){
       // Get list users
-      Route::post('/', [
+      Route::post('/find', [
           'uses' => 'UserController@actionFind',
           'as' => 'apiUserFind'
       ]);
@@ -129,10 +132,10 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
           'uses' => 'UserController@actionFindOne',
           'as' => 'apiUserShow'
       ]);
-      /*Route::post('/', [
+      Route::post('/', [
           'uses' => 'UserController@actionSave',
           'as' => 'apiUserSave'
-      ]);*/
+      ]);
       Route::post('/{id}', [
           'uses' => 'UserController@actionUpdate',
           'as' => 'apiUserUpdate'

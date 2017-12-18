@@ -29,7 +29,7 @@ class UserRepository extends Repository
       }
     }
     if ($paginate) {
-        return $query->paginate(50); 
+        return $query->get();//paginate(50); 
     } else {
         return $query->all();
     }
@@ -59,27 +59,28 @@ class UserRepository extends Repository
 
   public function save($request)
   {	
-    try{
+    try {
     	$data = $request->all();
     	$user = new User();
     	$user->fill([
-    		'username' => $data['username'],
-    		'email' => $data['email'],
-    		'password' => bcrypt($data['password']),
-    		'status' => "0",
-    		'id_role' => $data['id_role'],
+    		'username'   => $data['username'],
+    		'email'      => $data['email'],
+    		'password'   => bcrypt($data['password']),
+    		'status'     => false,
+    		'is_deleted' => false,
+    		'id_role'    => $data['id_role'],
     	]);
       $user->save() ;
       return $result = [
         'is_success' => true,
-        'error' => "",
-        'data'=> $user,
+        'error'      => "",
+        'data'       => $user,
       ]; 
     } catch(\Exception  $e){ 
       return $result = [
         'is_success' => false,
-        'error' => $e->errorInfo[2],
-        'data'=> $user,
+        'error'      => $e->errorInfo[2],
+        'data'       => $user,
       ];
     }
   }
@@ -92,10 +93,10 @@ class UserRepository extends Repository
       if(!empty($user)) {
         $user->fill([
           'username' => $data['username'],
-          'email' => $data['email'],
+          'email'    => $data['email'],
           'password' => bcrypt($data['password']),
-          'status' => 0,
-          'id_role' => $data['id_role'],
+          'status'   => 0,
+          'id_role'  => $data['id_role'],
         ]);  
         $user->save();  
       } 
@@ -107,8 +108,8 @@ class UserRepository extends Repository
     } catch(\Exception  $e){
       return $result = [
         'is_success' => false,
-        'error' => $e->errorInfo[2],
-        'data'=> $user,
+        'error'      => $e->errorInfo[2],
+        'data'       => $user,
       ];
       
     }	       
