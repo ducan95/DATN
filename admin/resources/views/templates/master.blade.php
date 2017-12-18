@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/Ionicons/css/ionicons.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/AdminLTE.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/base/bower_components/fakeloader/fakeloader.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/skins/_all-skins.min.css') }}">
@@ -31,6 +32,11 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+<div></div>
+<div id="spinner_sougouzyanaru">
+    <div id="spinner_sougouzyanaru-opacity"></div>
+    <div class="spinner_sougouzyanaru-spinner"></div>
+</div>
 <div class="wrapper">
 
 {{--  ###### Layout #######  --}}
@@ -66,6 +72,8 @@
 {{--  <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>  --}}
 <!-- FastClick -->
 <script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/fakeloader/fakeloader.js') }}"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
 
