@@ -42,7 +42,7 @@
                   <td>@{{ user.email }}</td>
                   <td>**********</td>
                   <td>
-                    <a href="{{ route('webUserEdit') }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="" ng-click="redirectEdit(user.id_user)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
                     <a ng-controller="UserDeleteCtrl" href="" class="btn btn-sm btn-danger" ng-click="deleteUser(user)"><i class="fa fa-trash-o"></i> Delete</a>
                   </td>  
                 </tr>

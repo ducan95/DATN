@@ -16,7 +16,7 @@ SOUGOU_ZYANARU_MODULE
 .factory('UserAddService', function ($resource) {
   return $resource('/web_api/user/:id', { id: '@_id' }, {
     update: {
-      method: 'PUT'
+      method: 'POST'
     }
   });
 })

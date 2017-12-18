@@ -31,7 +31,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+<body class="hold-transition skin-blue sidebar-mini">
 <div></div>
 <div id="spinner_sougouzyanaru">
     <div id="spinner_sougouzyanaru-opacity"></div>

@@ -56,11 +56,12 @@ class UserRepository extends Repository
       $data = $request->all();
       $user = new User();
       $user->fill([
-        'username' => $data['username'],
-        'email' => $data['email'],
-        'password' => bcrypt($data['password']),
-        'status' => "0",
-        'id_role' => $data['id_role'],
+        'username'   => $data['username'],
+        'email'      => $data['email'],
+        'password'   => bcrypt($data['password']),
+        'is_deleted' => false,
+        'status'     => false,
+        'id_role'    => $data['id_role'],
       ]);
       $user->save() ;
       return $user;
@@ -77,11 +78,12 @@ class UserRepository extends Repository
       $user = User::find($id);
       if(!empty($user)) {
         $user->fill([
-          'username' => $data['username'],
-          'email'    => $data['email'],
-          'password' => bcrypt($data['password']),
-          'status'   => 0,
-          'id_role'  => $data['id_role'],
+          'username'    => $data['username'],
+          'email'       => $data['email'],
+          'password'    => bcrypt($data['password']),
+          'status'      => false,
+          'is_delected' => false,
+          'id_role'     => $data['id_role'],
         ]);  
         $user->save();
         return $user;  
