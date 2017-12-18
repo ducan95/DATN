@@ -2,7 +2,7 @@
 namespace WebService\Service\User;
 use WebService\Repository\User\UserRepository;
 use WebService\Service\Service;
-
+use Validator;
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -39,13 +39,16 @@ class UserService extends Service
 
   public function save($request)
   {	
-    $request->validate([
-      'username' => 'required',
+    $validator = Validator::make($request->all(), [
+      'username' => 'required|max:255',
+      'email' => 'required |email',
       'password' => 'required',
-      'email' => 'required | email ',
-      'id_role' => 'required',
-
+      'id_role' =>  'required'
     ],[]);
+    if($validator ->fails()) {
+      $res['errors'] = $validator->errors();
+      return $res;  
+    }
     try{
       $res['data'] = UserRepository::getInstance()->save($request);
     }catch(\Exception $e) {
@@ -56,13 +59,18 @@ class UserService extends Service
 
   public function update($request, $id)
   {   
-    $request->validate([
-        'username' => 'required',
-        'password' => 'required',
-        'email' => 'required | email',
-        'id_role' => 'required',
-    ]);
-		 try{
+    $validator = Validator::make($request->all(), [
+      'username' => 'required|max:255',
+      'email' => 'required |email',
+      'password' => 'required',
+      'id_role' =>  'required'
+    ],[]);
+    if($validator ->fails()) {
+      $res['errors'] = $validator->errors();
+      return $res;  
+    }
+
+		try{
       $res['data'] = UserRepository::getInstance()->update($request, $id);
     }catch(\Exception $e) {
       $res['errors'] = $e->getMessage();

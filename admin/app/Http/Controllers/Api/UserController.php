@@ -42,7 +42,7 @@ class UserController extends \App\Http\Controllers\WebApiController
 
     public function actionSave(Request $request)
     {  
-      $res = UserService::getInstance()->save($request);
+      $res = UserService::getInstance()->save($request); 
       if(!isset($res['errors'])) {
         return Api::response([ 'data' => $res['data']]);
       }else {
@@ -72,7 +72,7 @@ class UserController extends \App\Http\Controllers\WebApiController
     {   
       $res =  UserService::getInstance()->delete($id);
       if(!isset($res['errors'])) {
-        return Api::response([ 'data' => $res['data']]);
+        return Api::response([ 'data' => $res['data'], 'status_code' => 204]);
       }else {
         return Api::response([ 
           'is_success' => false,

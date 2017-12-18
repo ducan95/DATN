@@ -84,7 +84,7 @@
     </section>
 
 
-    <form action="{{route('apiUserList')}}" method="post">
+    <form action="{{route('apiUserSave')}}" method="post">
       {{csrf_field()}}
         <input type="text" name="username">
         <input type="text" name="password">
