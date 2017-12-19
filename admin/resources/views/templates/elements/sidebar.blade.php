@@ -7,8 +7,8 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="active menu-open">
           <a href="#">
-            <i class="fa fa-barcode"></i> <span>発売号登録
-(Số phát hành)</span>
+            <i class="fa fa-barcode"></i> <span>{{trans('web.sidebar.Registration_releasenumber')}}
+</span>
             {{--  <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>  --}}
