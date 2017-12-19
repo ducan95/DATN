@@ -52,7 +52,6 @@
             <span>{{trans('web.user_management')}}</span>
           </a>
         </li>
-        <li class="header">MORE</li>
         <li><a href="{{ route('getLogout') }}"><i class="fa fa-circle-o text-red"></i> <span>{{trans('web.logout')}}</span></a></li>
 
       </ul>
