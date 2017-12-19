@@ -31,7 +31,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-purple-light sidebar-mini" ng-cloak>
 <div></div>
 <div id="spinner_sougouzyanaru">
     <div id="spinner_sougouzyanaru-opacity"></div>
@@ -59,6 +59,12 @@
     {{--  ###### Layout #######  --}}
 
 </div>
+
+<script>
+  var APP_CONFIGURATION={
+    BASE_URL: "{{ url('/') }}"
+  }
+</script>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
@@ -72,7 +78,6 @@
 {{--  <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>  --}}
 <!-- FastClick -->
 <script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>
-<script src="{{ asset('assets/base/bower_components/fakeloader/fakeloader.js') }}"></script>
 
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
