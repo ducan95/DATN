@@ -36,7 +36,7 @@ Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
  */
 Route::group([ 
     'middleware' => 'checkAdminLogin',
-    'prefix'     => 'admincp',
+    'prefix'     => config('admin.prefix.web'),
     'namespace'  => 'Web'
 ], function() {
 
@@ -56,7 +56,6 @@ Route::group([
             'uses' => 'UserController@viewAdd' ,
             'as'  => 'webUserAdd'
         ]);
-
     });
     
 });
@@ -86,91 +85,115 @@ Route::group([
  * Sougou Zyanaru Group API
  * Author: Rikkei Intern Pro Team
  */
-Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
+Route::group([
+  'namespace' =>'Api', 
+  'prefix' => config('admin.prefix.api')],
+function(){
 
-    Route::get('/web_api/release_number',[
-        'uses' => 'ReleaseNumberController@actionList',
-        'as'   => 'getReleaseAPI'
+  Route::group(['prefix' => '/roles'], function(){
+      /** Get List Roles **/
+      Route::post('/', [
+          'uses' => 'RolesController@actionList',
+          'as'   => 'apiListRole'
+      ]);
+      
+      Route::get('/{id}', [
+          'uses' => 'RolesController@actionFind',
+          'as'   => 'apiFindRole'
+      ]);
+      
+      Route::post('/', [
+          'uses' => 'RolesController@actionSave',
+          'as'   => 'apiSaveRole'
+      ]);
+
+      Route::put('/{id}/huynh', [
+          'uses' => 'RolesController@actionUpdate',
+          'as'   => 'postUpdateRole'
+      ]);
+
+      Route::delete('{id}',[
+          'uses' => 'RolesController@actionDelete',
+          'as'   => 'postDeleteRole'
+      ]);
+  });
+
+  Route::group(['prefix' => '/user'], function(){
+
+    Route::post('/find', [
+        'uses' => 'UserController@actionFind',
+        'as' => 'apiUserFind'
     ]);
 
-    Route::group(['prefix' => '/roles'], function(){
-        /** Get List Roles **/
-        Route::post('/', [
-            'uses' => 'RolesController@actionList',
-            'as'   => 'apiListRole'
-        ]);
-        
-        Route::get('/{id}', [
-            'uses' => 'RolesController@actionFind',
-            'as'   => 'apiFindRole'
-        ]);
-        
-        Route::post('/', [
-            'uses' => 'RolesController@actionSave',
-            'as'   => 'apiSaveRole'
-        ]);
+    Route::get('/{id}', [
+        'uses' => 'UserController@actionFindOne',
+        'as' => 'apiUserShow'
+    ]);
+    Route::post('/', [
+        'uses' => 'UserController@actionSave',
+        'as' => 'apiUserSave'
+    ]);
 
-        Route::put('/{id}/huynh', [
-            'uses' => 'RolesController@actionUpdate',
-            'as'   => 'postUpdateRole'
-        ]);
+    Route::put('/{id}', [
+        'uses' => 'UserController@actionUpdate',
+        'as' => 'apiUserUpdate'
+    ]);
+    Route::delete('/{id}', [
+        'uses' => 'UserController@actionDelete',
+        'as' => 'apiUserDelete'
+    ]);
+  });
 
-        Route::delete('{id}',[
-            'uses' => 'RolesController@actionDelete',
-            'as'   => 'postDeleteRole'
-        ]);
-    });
-
-    Route::group(['prefix' => '/user'], function(){
+  Route::group(['prefix' => '/category'], function(){
       // Get list users
-      Route::post('/find', [
-          'uses' => 'UserController@actionFind',
-          'as' => 'apiUserFind'
+      Route::get('/', [
+          'uses' => 'CategoryController@actionList',
+          'as' => 'apiCategoryList'
       ]);
       // Get user
       Route::get('/{id}', [
-          'uses' => 'UserController@actionFindOne',
-          'as' => 'apiUserShow'
+          'uses' => 'CategoryController@actionFind',
+          'as' => 'apiCategoryShow'
       ]);
       Route::post('/', [
-          'uses' => 'UserController@actionSave',
-          'as' => 'apiUserSave'
+          'uses' => 'CategoryController@actionSave',
+          'as' => 'apiCategorySave'
       ]);
-
       Route::put('/{id}', [
-          'uses' => 'UserController@actionUpdate',
-          'as' => 'apiUserUpdate'
+          'uses' => 'CategoryController@actionUpdate',
+          'as' => 'apiCategoryUpdate'
       ]);
-      Route::delete('/dele/{id}', [
-          'uses' => 'UserController@actionDelete',
-          'as' => 'apiUserDelete'
+      Route::delete('/{id}', [
+          'user' => 'CategoryController@actionDelete',
+          'as' => 'apiCategoryDelete'
       ]);
-    });
+  });
 
-    Route::group(['prefix' => '/category'], function(){
-        // Get list users
-        Route::get('/', [
-            'uses' => 'CategoryController@actionList',
-            'as' => 'apiCategoryList'
-        ]);
-        // Get user
-        Route::get('/{id}', [
-            'uses' => 'CategoryController@actionFind',
-            'as' => 'apiCategoryShow'
-        ]);
-        Route::post('/', [
-            'uses' => 'CategoryController@actionSave',
-            'as' => 'apiCategorySave'
-        ]);
-        Route::put('/{id}', [
-            'uses' => 'CategoryController@actionUpdate',
-            'as' => 'apiCategoryUpdate'
-        ]);
-        Route::delete('/{id}', [
-            'user' => 'CategoryController@actionDelete',
-            'as' => 'apiCategoryDelete'
-        ]);
-    });
+  Route::group(['prefix' => '/image'],function(){
+    // Get list users
+    Route::get('/find', [
+        'uses' => 'ImageController@actionFind',
+        'as' => 'apiImageFind'
+    ]);
+    // Get user
+    Route::get('/{id}', [
+        'uses' => 'ImageController@actionFindOne',
+        'as' => 'apiImageShow'
+    ]);
+    Route::post('/', [
+      'uses' => 'ImageController@actionSave',
+      'as' => 'apiImageSave'
+    ]);
+
+    Route::post('/{id}', [
+        'uses' => 'ImageController@actionUpdate',
+        'as' => 'apiImageUpdate'
+    ]);
+    Route::delete('/dele/{id}', [
+        'uses' => 'ImageController@actionDelete',
+        'as' => 'apiImageDelete'
+    ]);
+  });
 });
 
 

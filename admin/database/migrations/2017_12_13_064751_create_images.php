@@ -15,8 +15,19 @@ class CreateImages extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id_image');
-            $table->string('url_free');
-            $table->string('url_paid');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('path');
+            $table->string('path_paint');
+            $table->boolean('is_deleted');
+            $table->timestamps();
+        });
+
+        Schema::create('post_image', function (Blueprint $table) {
+            $table->increments('id_post_image');
+            $table->integer('id_image');
+            $table->integer('id_post');
+            $table->boolean('is_deleted');
             $table->timestamps();
         });
     }
@@ -29,5 +40,6 @@ class CreateImages extends Migration
     public function down()
     {
         Schema::dropIfExists('images');
+        Schema::dropIfExists('post_image');
     }
 }

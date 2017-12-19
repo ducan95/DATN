@@ -21,7 +21,7 @@ class checkAdminLogin
         {
             $user = Auth::user(); 
 
-            if ( $user->status == 1 )
+            if ( $user->status == true )
             {
                 return $next($request);
             }

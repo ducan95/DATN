@@ -5,7 +5,7 @@ use App\User;
 
 /**
  * Created by PhpStorm.
- * User: rikkei
+ * User: Huynh
  * Date: 13/12/2017
  * Time: 19:37
  */
@@ -50,7 +50,6 @@ class UserRepository extends Repository
   }
 
   public function save($request)
-
   { 
     try{
       $data = $request->all();

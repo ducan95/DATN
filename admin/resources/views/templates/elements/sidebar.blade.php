@@ -45,8 +45,7 @@
           </a>
         </li>
         <li class="header">MORE</li>
-        <li><a href="{{ route('getLogout') }}"><i class="fa fa-circle-o text-red"></i> <span>Logout</span></a></li>
-       
+        <li><a href="{{ route('getLogout') }}"><i class="fa fa-circle-o text-red"></i> <span>ログアウト(Logout)</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

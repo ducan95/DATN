@@ -17,7 +17,8 @@ class RolesService extends Service
     }
 
     public function find($id)
-    {
+    {   
+        
         return RolesRepository::getInstance()->find($id);
     }
 

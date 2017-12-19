@@ -61,8 +61,8 @@
                     </td>
                     <td>
                       <div class="form-group">
-                          <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" placeholder="Type your password">
-                          <label class="error"></label>
+                          <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" value="@{{ user.password }}">
+                          <label class="error">@{{ error.password[0] }}</label>
                       </div>
                     </td>
                   </tr>
