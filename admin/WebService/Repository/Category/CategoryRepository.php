@@ -15,16 +15,18 @@ class CategoryRepository extends Repository
 
   public function save($request)
   {
-     try{
+    try{
       $data = $request->all();
       $category = new Category();
+      $global_status = ((isset($data['global_status']))?1:0);
+      $menu_status = ((isset($data['menu_status']))?1:0);
       $category->fill([
         'name' => $data['name'],
         'slug' => $data['slug'],
-        'global_status' => false,
+        'global_status' => $global_status,
+        'menu_status' => $menu_status,
         'is_deleted' => false,
-        'menu_status' => true,
-        'id_category_parent' => 0,
+        'id_category_parent' => 0
       ]);
       $category->save() ;
       return $category;

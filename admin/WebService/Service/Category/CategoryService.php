@@ -2,7 +2,7 @@
 namespace WebService\Service\Category;
 use WebService\Repository\Category\CategoryRepository;
 use WebService\Service\Service;
-
+use Validator;
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -14,14 +14,28 @@ class CategoryService extends Service
 
   public function save($request)
   {
-     $request->validate([
-      'name' => 'required',
+    //  $request->validate([
+    //   'name' => 'required',
+    //   'slug' => 'required',
+    // ],[]);
+    //  $request->messages([
+    //   'name.required' => 'required',
+    //   'slug.required' => 'required',
+    // ],[]);
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|max:255 ',
       'slug' => 'required',
+      
     ],[]);
-    try{
-      $res['data']= CategoryRepository::getInstance()->save($request);
-    }catch(\Exception $e){
-      $res['errors']= $e ->getMessage();
+    if($validator ->fails()) {
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try{
+        $res['data']= CategoryRepository::getInstance()->save($request);
+      }catch(\Exception $e){
+        $res['errors']= $e ->getMessage();
+      }
     }
     return $res;
   }
@@ -59,10 +73,10 @@ class CategoryService extends Service
         }
     }    
     catch(\Exception $e){
-          $res['errors']= $e->getMessage();
-      }
-      return $res;
+      $res['errors']= $e->getMessage();
     }
+    return $res;
+  }
 
     public function findOne($id)
     {

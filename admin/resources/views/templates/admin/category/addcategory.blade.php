@@ -1,7 +1,7 @@
-@extends('templates.master')
+\@extends('templates.master')
 @section('content')
 
-<div ng-controller="CategoryAddtrl">
+<div ng-controller="CategoryAddCtrl">
 	<section class="content-header">
 		<h2>List Category</h2>
 	</section>
@@ -27,24 +27,24 @@
 	                <div class="form-group">
 	                	<label class="col-sm-3 control-label">Display Global Navi</label>
 	                	<div class="col-sm-9">
-	                		<input type="checkbox" ng-checked="category.global_status=='Y'" ng-checked="category.global_status=='N'" ng-model="category.global_status" name="global_status">
+	                		<input type="checkbox" ng-model="category.global_status" name="global_status" value="1">
 	                	</div>
 	                </div>
 	                <div class="form-group">
 	                	<label class="col-sm-3 control-label">Display Menu Bar</label>
 	                	<div class="col-sm-9">
-	                		<input type="checkbox" ng-checked="category.menu_status=='Y'" ng-checked="category.global_status=='N'" ng-model="category.menu_status" name="menu_status">
+	                		<input type="checkbox" ng-model="category.menu_status" name="menu_status" value="1">
 	                	</div>
 	                </div>
 
 	                <div class="row" style="padding-bottom: 20px">
 		              	<div class="col-md-4"></div>
-				              <div class="col-md-4 text-center">
-		                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+				            	<div class="col-md-4 text-center">
+		                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 												  Add
 												</button>
 
-												<div id="myModal"  class="modal fade" tabindex="-1" role="dialog">
+												<!-- <div id="myModal"  class="modal fade" tabindex="-1" role="dialog">
 												  <div class="modal-dialog" role="document">
 												    <div class="modal-content">
 												      <div class="modal-header">
@@ -55,9 +55,9 @@
 												        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 												        <button type="submit" name="submit" class="btn btn-primary">Yes</button>
 												      </div>
-												    </div><!-- /.modal-content -->
-												  </div><!-- /.modal-dialog -->
-												</div><!-- /.modal -->
+												    </div>
+												  </div>
+												</div> -->
 		                    <a href="{{ route('webCategoryIndex') }}"><button type="button" class="btn btn-primary" style="margin-left:5px;">Cancel</button></a>
 				              </div>
 		              	<div class="col-md-4"></div>
@@ -77,8 +77,6 @@
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
-<script src="{{ asset('assets/theme/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('assets/theme/js/validate.js') }}"></script>
 @endsection 
 
   
