@@ -25,7 +25,7 @@
               <h3 class="box-title">Bordered Table</h3>
             </div>  --}}
             <!-- /.box-header -->
-            <form role="form" ng-submit="updateUser()" id="main">
+            <form role="form" ng-submit="updateUser(user)" id="main">
               {{ csrf_field() }}
               <div class="box-body">
                 <table class="table table-bordered">
@@ -39,7 +39,7 @@
                     <td>
                       <div class="form-group">
                           <input ng-model="user.username" type="text" name="username" class="form-control" id="username" value="@{{ user.data.username }}">
-                          <label class="error">@{{ error.username }}</label>
+                          <label class="error">@{{ error.username[0] }}</label>
                       </div>
                     </td>
                     <td>
@@ -56,7 +56,7 @@
                     <td>
                     <div class="form-group">
                           <input ng-model="user.email" type="email" name="email" class="form-control" id="email" value="@{{ user.email }}">
-                          <label class="error"></label>
+                           <label class="error">@{{ error.email[0] }}</label>
                       </div>
                     </td>
                     <td>

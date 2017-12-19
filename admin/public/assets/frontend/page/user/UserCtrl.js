@@ -52,13 +52,12 @@ SOUGOU_ZYANARU_MODULE
       password: "",
     };
 
-    var url_string = window.location.href;
-    var url        = new URL(url_string); 
+    var url = new URL(window.location.href); 
     var id         = url.hash.match(/\d/g);
     $scope.id      = id.join('');
 
-  $scope.updateUser = function () { 
-    //console.log($scope.user);
+  $scope.updateUser = function (user) { 
+    //Validate for form
     var constraints = {
       email: {
         presence: true,
@@ -89,10 +88,19 @@ SOUGOU_ZYANARU_MODULE
     var form = document.querySelector("form#main");
     $scope.error = validate(form, constraints) || {};
     console.log($scope.error);
+
     //Gửi lên được là sẽ update được
 
-    $scope.user.$update(function () {
+    /* user.$update(function () {
       $window.location.href = '/admincp/user';
+    }); */
+
+    //Let's first get the user and then update it.
+    var update = UserUpdateService.get({ id: $scope.id }, function () {
+      //user.address = "MARS";
+      update.$update(function () {
+        console.log('Đã up được');
+      });
     });
 
   };
