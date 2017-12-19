@@ -1,6 +1,8 @@
 @extends('templates.master')
 @section('content')
 
+  <div ng-controller="UserAddCtrl"> 
+
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -19,11 +21,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="box">
-            {{--  <div class="box-header with-border">
-              <h3 class="box-title">Bordered Table</h3>
-            </div>  --}}
             <!-- /.box-header -->
-            <form role="form">
+            <form role="form" method="post" ng-submit="addUser()">
+            {{ csrf_field() }}
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
@@ -35,29 +35,32 @@
                 <tr>
                   <td>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                        <input required ng-model="user.username" type="text" name="username" class="form-control" id="username" placeholder="Enter name">
+                        <label class="error"></label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
                         {{--  <label>Chọn Q</label>  --}}
-                        <select class="form-control">
-                            <option>Admin</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
+                        <select ng-init="user.id_role=''" ng-model="user.id_role" name="id_role" class="form-control">
+                            <option value="">Chọn quyền</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Mod</option>
+                            <option value="3">User</option>
                         </select>
+                        <label class="error"></label>
                     </div>
                   </td>
                   <td>
                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        <input required ng-model="user.email" type="email" name="email" class="form-control" id="email" placeholder="Enter an email">
+                        <label class="error"></label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter password">
+                        <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" placeholder="Type your password">
+                        <label class="error"></label>
                     </div>
                   </td>
                 </tr>
@@ -66,8 +69,8 @@
               <div class="row" style="margin-top: 30px;">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 text-center">
-                    <button type="button" class="btn btn-primary" style="margin-right:5px;">Add</button>
-                    <button type="button" class="btn btn-primary" style="margin-left:5px;">Cancel</button>
+                    <button type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">Add</button>
+                    <button type="reset" class="btn btn-primary" style="margin-left:5px;">Cancel</button>
                 </div>
                  <div class="col-md-4"></div>
               </row>
@@ -83,15 +86,16 @@
       
     </section>
 
+  </div> <!-- /.ng-controller -->
 
-    <form action="{{route('apiUserList')}}" method="post">
-      {{csrf_field()}}
-        <input type="text" name="username">
-        <input type="text" name="password">
-        <input type="text" name="email">
-        <input type="int" name="id_role">
-        <input type="submit" name="">
-    </form>
     <!-- /.content -->
 
 @endsection    
+
+@section('bottom-js')
+<!-- Edit table -->
+<script src="{{ asset('assets/frontend/page/user/UserCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
+<script src="{{ asset('assets/theme/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/theme/js/validate.js') }}"></script>
+@endsection 

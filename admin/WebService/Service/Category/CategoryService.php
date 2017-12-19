@@ -14,9 +14,9 @@ class CategoryService extends Service
 
   public function save($request)
   {
-    $request->validate([
-      'name' => 'required'
-      'slug' => 'require'
+     $request->validate([
+      'name' => 'required',
+      'slug' => 'required',
     ],[]);
     try{
       $res['data']= CategoryRepository::getInstance()->save($request);
@@ -28,10 +28,6 @@ class CategoryService extends Service
 
   public function update($request,$id)
   {
-    $request->validate([
-      'name' => 'required'
-      'slug' => 'require'
-    ],[]);
     try{
       $res['data']=CategoryRepository::getInstance()->update($request,$id);
     }catch(\Exception $e){
@@ -40,14 +36,19 @@ class CategoryService extends Service
     return $res;
   }
 
-  public function delete()
+  public function delete($id)
   {
-    // TODO: Implement delete() method.
+    try{
+      $res['data']=CategoryRepository::getInstance()->delete($id);
+    }catch(\Exception $e){
+      $res['errors']=$e -> getMessage();
+    }
+    return $res;
   }
 
   public function list()
   {
-    $result= CategoryRepository::getInstance()->find();
+    $result= CategoryRepository::getInstance()->list();
     try
     {
       if(!empty($result)){
@@ -55,16 +56,33 @@ class CategoryService extends Service
       }
       else{
         throw new \Exception("No Record");
-        
-      }
+        }
+    }    
     catch(\Exception $e){
-        $res['errors']=$e->getMessage();
+          $res['errors']= $e->getMessage();
+      }
+      return $res;
     }
-    return $res;
-  }
 
-  public function findOne()
-  {
-    // TODO: Implement findOne() method.
-  }
+    public function findOne($id)
+    {
+      $result=CategoryRepository::getInstance()->findOne($id);
+      try{
+        if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No Record');
+      }
+      }catch(\Exception $e) {
+        $res['errors'] = $e->getMessage();
+      }
+    return $res;
+    }
+    
+    public function find($request)
+    {
+
+    }
+
 }

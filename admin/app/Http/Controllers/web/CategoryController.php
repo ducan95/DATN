@@ -37,10 +37,7 @@ class CategoryController extends \App\Http\Controllers\WebController
     {
     	return view('templates.admin.category.addcategory');    
     }
-    public function viewSetdisplay()
-    {
-        return view('templates.admin.category.setdisplay');
-    }
+    
     public function viewFind()
     {
         

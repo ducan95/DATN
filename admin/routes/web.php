@@ -31,7 +31,9 @@ Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
     ]);
 });
 
-// Admin users route
+/**
+ * WEB ROUTE
+ */
 Route::group([ 
     'middleware' => 'checkAdminLogin',
     'prefix'     => 'admincp',
@@ -74,19 +76,13 @@ Route::group([
             'as' =>'webCategoryAddChildren'
         ]);
 
-        Route::get('/setdisplay',[
-            'uses' => 'CategoryController@viewSetdisplay',
-            'as' =>'webCategorySetdisplay'
-        ]);
 
         Route::get('/edit',[
             'uses' => 'CategoryController@viewEdit',
             'as' =>'webCategorEdit'
         ]);
     });
-
 });
-
 /**
  * Sougou Zyanaru Group API
  * Author: Rikkei Intern Pro Team
@@ -141,6 +137,7 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
           'uses' => 'UserController@actionSave',
           'as' => 'apiUserSave'
       ]);
+
       Route::put('/{id}', [
           'uses' => 'UserController@actionUpdate',
           'as' => 'apiUserUpdate'
@@ -153,13 +150,13 @@ Route::group(['namespace' =>'Api', 'prefix' => '/web_api'],function(){
 
     Route::group(['prefix' => '/category'], function(){
         // Get list users
-        Route::get('/', [
+        Route::get('/list', [
             'uses' => 'CategoryController@actionList',
             'as' => 'apiCategoryList'
         ]);
         // Get user
-        Route::get('/{id}', [
-            'uses' => 'CategoryController@actionFind',
+        Route::get('/find/{id}', [
+            'uses' => 'CategoryController@actionFindOne',
             'as' => 'apiCategoryShow'
         ]);
         Route::post('/', [

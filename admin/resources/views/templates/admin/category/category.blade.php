@@ -1,8 +1,7 @@
 @extends('templates.master')
 @section('content')
-
+<div ng-controller="CategoryCtrl">
 	<h2 style="margin-top: 0px;padding-top: 25px;padding-left: 15px">List Category</h2>
-  <a href="{{ route('webCategorySetdisplay') }}"><button class="btn btn-primary" style="margin-left:15px ">Set display category</button></a>
 	 <section class="content">
       <div class="row">
         <div class="col-md-6">
@@ -17,9 +16,9 @@
                   <th>Chức năng</th>
                   <th style="width: 40px">Label</th>
                 </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Thời sự</td>
+                <tr ng-repeat='category in categories'> 
+                  <td>@{{ category.id_category }}</td>
+                  <td>@{{ category.name }}</td>
                   <td>
                     	<a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Sửa</button></a>                
                   </td>
@@ -27,7 +26,7 @@
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
                         Delete
                     </button>
-
+                  </td>
                     <div id="myModal"  class="modal fade" tabindex="-1" role="dialog">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -125,7 +124,8 @@
       <!-- /.row -->
     
     </section>
-
+    
+</div>
 @stop  
 
 @section('bottom-js')

@@ -18,7 +18,7 @@
     <section class="content">
       <div class="row" style="margin-bottom: 15px;margin-top:15px;">
         <div class="col-md-2">
-            <a href="" class="btn btn-block btn-success">Add new</a>
+            <a href="{{ route('webUserAdd') }}" class="btn btn-block btn-success">Add new</a>
         </div>
       </div>
       <div class="row">
@@ -42,8 +42,8 @@
                   <td>@{{ user.email }}</td>
                   <td>**********</td>
                   <td>
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</button>
-                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+                    <a href="" ng-click="redirectEdit(user.id_user)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                    <a ng-controller="UserDeleteCtrl" href="" class="btn btn-sm btn-danger" ng-click="deleteUser(user)"><i class="fa fa-trash-o"></i> Delete</a>
                   </td>  
                 </tr>
               </table>

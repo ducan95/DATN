@@ -31,7 +31,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+<body class="hold-transition skin-blue sidebar-mini">
 <div></div>
 <div id="spinner_sougouzyanaru">
     <div id="spinner_sougouzyanaru-opacity"></div>
@@ -69,8 +69,7 @@
 <!-- Angular JS and resource -->
 <script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
-<!-- Validate JS -->
-<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
+{{--  <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>  --}}
 <!-- FastClick -->
 <script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/fakeloader/fakeloader.js') }}"></script>

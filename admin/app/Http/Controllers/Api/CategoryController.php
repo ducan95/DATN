@@ -54,15 +54,36 @@ class CategoryController extends \App\Http\Controllers\WebApiController
     }
   }
 
-  public function actionDelete()
+  public function actionDelete($id)
   {
-    // TODO: Implement actionDelete() method.
+    $res =  CategoryService::getInstance()->delete($id);
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 404,
+          'errors' => $res['errors']
+        ]);
+      } 
+
   }
   public function actionFind($request)
   {
     //
   }
+
   public function actionFindOne($id){
-    //
+    $res = CategoryService::getInstance()->findOne($id); 
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 404,
+          'errors' => $res['errors']
+        ]);
+      }
   }
+
 }
