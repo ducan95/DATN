@@ -61,7 +61,7 @@
 </div>
 
 <script>
-  var APP_CONFIGURATION={
+  var APP_CONFIGURATION = {
     BASE_URL: "{{ url('/') }}"
   }
 </script>
@@ -75,6 +75,7 @@
 <!-- Angular JS and resource -->
 <script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
 {{--  <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>  --}}
 <!-- FastClick -->
 <script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>

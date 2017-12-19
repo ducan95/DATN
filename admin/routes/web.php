@@ -47,7 +47,7 @@ Route::group([
             'as'  => 'webUserIndex'
         ]);
 
-        Route::get('/edit/{id}',[
+        Route::get('/edit',[
             'uses' => 'UserController@viewEdit' ,
             'as'  => 'webUserEdit'
         ]);

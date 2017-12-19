@@ -54,14 +54,14 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{ route('getLogout') }}" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="/logout"><i class="fa fa-power-off"></i></a>
+            <a href="{{ route('getLogout') }}"><i class="fa fa-power-off"></i></a>
             {{--  <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>  --}}
           </li>
         </ul>

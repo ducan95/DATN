@@ -25,7 +25,7 @@
               <h3 class="box-title">Bordered Table</h3>
             </div>  --}}
             <!-- /.box-header -->
-            <form role="form" ng-submit="updateUser()">
+            <form role="form" ng-submit="updateUser()" id="main">
               {{ csrf_field() }}
               <div class="box-body">
                 <table class="table table-bordered">
@@ -38,8 +38,8 @@
                   <tr>
                     <td>
                       <div class="form-group">
-                          <input required ng-model="user.username" type="text" name="username" class="form-control" id="username" placeholder="Enter name">
-                          <label class="error"></label>
+                          <input ng-model="user.username" type="text" name="username" class="form-control" id="username" value="@{{ user.data.username }}">
+                          <label class="error">@{{ error.username }}</label>
                       </div>
                     </td>
                     <td>
@@ -55,7 +55,7 @@
                     </td>
                     <td>
                     <div class="form-group">
-                          <input required ng-model="user.email" type="email" name="email" class="form-control" id="email" placeholder="Enter an email">
+                          <input ng-model="user.email" type="email" name="email" class="form-control" id="email" value="@{{ user.email }}">
                           <label class="error"></label>
                       </div>
                     </td>
@@ -71,8 +71,8 @@
                 <div class="row" style="margin-top: 30px;">
                   <div class="col-md-4"></div>
                   <div class="col-md-4 text-center">
-                      <button type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">Update</button>
-                      <button type="reset" class="btn btn-primary" style="margin-left:5px;">Cancel</button>
+                      <a href="" ng-click="updateUser()" name="submit" class="btn btn-primary" style="margin-right:5px;">Update</a>
+                      <a href="" class="btn btn-primary" style="margin-left:5px;">Cancel</a>
                   </div>
                   <div class="col-md-4"></div>
                 </row>

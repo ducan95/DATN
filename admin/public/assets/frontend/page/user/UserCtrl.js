@@ -11,18 +11,17 @@ SOUGOU_ZYANARU_MODULE
     }
   })
   //Redirect edit page
-    //var base_url = 'localhost:8000'; 
   $scope.redirectEdit = function (id_user) { 
-    $window.location.href = '/admincp/user/edit/' + id_user;
+    $window.location.href = APP_CONFIGURATION.BASE_URL +'/admincp/user/edit#id=' + id_user;
   }
 
 })
 
 //Create New User
 .controller('UserAddCtrl', function ($scope, UserAddService, $window) {
-  $scope.user = new UserAddService();  //create new user instance. Properties will be set via ng-model on UI
+  $scope.user = new UserAddService(); 
 
-  $scope.addUser = function () { //create a new user. Issues a POST to /api/users
+  $scope.addUser = function () { 
     $scope.user.$save(function () {
       $window.location.href = '/admincp/user';
       
@@ -31,7 +30,7 @@ SOUGOU_ZYANARU_MODULE
 })
 
 // Delete users
-  .controller('UserDeleteCtrl', function ($scope, UserDeleteService, $rootScope, popupService) {
+.controller('UserDeleteCtrl', function ($scope, UserDeleteService, $rootScope, popupService) {
   ///????
 
   $scope.deleteUser = function () { 
@@ -45,16 +44,65 @@ SOUGOU_ZYANARU_MODULE
 
 // Edit user
   .controller('UserUpdateCtrl', function ($scope, UserUpdateService, $window) {
-  
-  $scope.updateUser = function (id_user) { 
-    $scope.user.$update(function (id_user) {
-      //$window.location.href = '/admincp/user/edit';
+    $scope.user = {
+      mail: "",
+      is_deleted: false,
+      status: false,
+      username: "",
+      password: "",
+    };
+
+    var url_string = window.location.href;
+    var url        = new URL(url_string); 
+    var id         = url.hash.match(/\d/g);
+    $scope.id      = id.join('');
+
+  $scope.updateUser = function () { 
+    //console.log($scope.user);
+    var constraints = {
+      email: {
+        presence: true,
+        email: true
+      },
+      password: {
+        presence: true,
+        length: {
+          minimum: 5
+        }
+      },
+      username: {
+        presence: true,
+        length: {
+          minimum: 3,
+          maximum: 20
+        },
+        format: {
+          // We don't allow anything that a-z and 0-9
+          pattern: "[a-z0-9]+",
+          // but we don't care if the username is uppercase or lowercase
+          flags: "i",
+          message: "can only contain a-z and 0-9"
+        }
+      },
+    };
+
+    var form = document.querySelector("form#main");
+    $scope.error = validate(form, constraints) || {};
+    console.log($scope.error);
+    //Gửi lên được là sẽ update được
+
+    $scope.user.$update(function () {
+      $window.location.href = '/admincp/user';
+    });
+
+  };
+
+  // Show user 
+  $scope.loadUser = function () { 
+    UserUpdateService.get({ id: $scope.id },function(res) {
+      $scope.user = res.data;
     });
   };
 
-  //$scope.loadUser = function () { 
-    //$scope.user = User.get({ id: $stateParams.id });
-  //};
-
-  //$scope.loadUser(); 
+  $scope.loadUser(); 
 });
