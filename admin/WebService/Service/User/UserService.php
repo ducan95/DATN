@@ -19,7 +19,7 @@ class UserService extends Service
       if(!empty($result)){
         $res['data'] = $result;
       }else {
-        throw new \Exception("no thing");
+        throw new \Exception("404");
       }
     }catch(\Exception $e) {
       $res['errors'] =$e->getMessage();

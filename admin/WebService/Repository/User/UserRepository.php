@@ -11,28 +11,36 @@ use App\User;
  */
 class UserRepository extends Repository
 {
-  public function find($request , $paginate = true) 
+  public function find($request = '') 
   { 
-    $keywords = $request->all(); 
-    $data = ['username','email','status','id_role']; 
-    $query = User::where('id_user', '>', 0);
-    if(!empty($keywords)) {
-      foreach ($data as $value) {  
-        if($request->has($value) && !empty($keywords[$value])) {       
-          if(is_string($keywords[$value])) {
-            $keywork = '%'.$keywords[$value].'%';
-            $query->where($value, 'like', $keywork);
-          } else { 
-            $query->where($value, '=', $keywords[$value]);
-          }
+    try {   
+      if(isset($request)){
+        $query = User::where('id_user', '>', 0)->where('is_deleted', '=', false);
+        $username = $request->query('username'); 
+        $email = $request->query('email'); 
+        $status = $request->query('status'); ; 
+        $id_role = $request->query('id_role'); 
+        if(!empty($username)) {
+          $query = $query->where('username', 'LIKE', '%'.$username.'%' );
         }
-      }
-    }
-    if ($paginate) {
-        return $query->get();//paginate(50); 
-    } else {
-        return $query->all();
-    }
+        if(!empty($email)) {
+          $query = $query->where('email', 'LIKE', '%'.$email.'%' );
+        }
+        if(!empty($status)) {
+          $query = $query->where('status', '=', $status );
+        }
+        if(!empty($id_role)) {
+          $query = $query->where('id_role', '=', $id_role);
+        }
+        if(!empty($request->query('paginate'))) {
+          return $query->paginate($request->query('paginate')); 
+        } else {
+          return $query->get();  
+        }
+      }  
+    } catch(\Exception $e) {
+        throw $e;
+    } 
   }
 
   public function findOne($id)

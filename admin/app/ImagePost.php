@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImagePost extends Model
 {
-    protected $table = 'images';
-    protected $fillable = ['name', 'description', 'path', 'path_paint', 'is_deleted'];
-    protected $primaryKey = 'id_image',
+    protected $table = 'post_image';
+    protected $fillable = ['id_image', 'id_post', 'is_deleted'];
+    protected $primaryKey = 'id_post_image',
 
-    /*public function image() {
-    	return $this->hasMany(Images::class, 'id_image_post', 'id_post_image');
-    }*/
+
 }
