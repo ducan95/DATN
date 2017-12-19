@@ -32,7 +32,8 @@ class UserService extends Service
   	try{
       $res['data'] = UserRepository::getInstance()->findOne($id);
     }catch(\Exception $e) {
-      $res['errors'] = $e->getMessage();
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 404;
     }
     return $res;
   }
@@ -46,13 +47,15 @@ class UserService extends Service
       'id_role' =>  'required'
     ],[]);
     if($validator ->fails()) {
-      $res['errors'] = $validator->errors();
-      return $res;  
-    }
-    try{
-      $res['data'] = UserRepository::getInstance()->save($request);
-    }catch(\Exception $e) {
-      $res['errors'] = $e->getMessage();
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try{
+        $res['data'] = UserRepository::getInstance()->save($request);
+      } catch(\Exception $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = $e->getCode();
+      }  
     }
     return $res;
 	}
@@ -66,14 +69,15 @@ class UserService extends Service
       'id_role' =>  'required'
     ],[]);
     if($validator ->fails()) {
-      $res['errors'] = $validator->errors();
-      return $res;  
-    }
-
-		try{
-      $res['data'] = UserRepository::getInstance()->update($request, $id);
-    }catch(\Exception $e) {
-      $res['errors'] = $e->getMessage();
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try {
+        $res['data'] = UserRepository::getInstance()->update($request, $id);
+      } catch(\Exception $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
+      }  
     }
     return $res;
 	}
@@ -83,7 +87,8 @@ class UserService extends Service
     try{
       $res['data'] = UserRepository::getInstance()->delete($id);
     }catch(\Exception $e) {
-      $res['errors'] = $e->getMessage();
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
     }
     return $res;
   }

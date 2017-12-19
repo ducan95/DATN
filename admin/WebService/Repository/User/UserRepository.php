@@ -5,7 +5,7 @@ use App\User;
 
 /**
  * Created by PhpStorm.
- * User: rikkei
+ * User: Huynh
  * Date: 13/12/2017
  * Time: 19:37
  */
@@ -29,7 +29,7 @@ class UserRepository extends Repository
       }
     }
     if ($paginate) {
-        return $query->paginate(50); 
+        return $query->get();//paginate(50); 
     } else {
         return $query->all();
     }
@@ -55,16 +55,18 @@ class UserRepository extends Repository
       $data = $request->all();
       $user = new User();
       $user->fill([
-        'username' => $data['username'],
-        'email' => $data['email'],
-        'password' => bcrypt($data['password']),
-        'status' => "0",
-        'id_role' => $data['id_role'],
+        'username'   => $data['username'],
+        'email'      => $data['email'],
+        'password'   => bcrypt($data['password']),
+        'is_deleted' => false,
+        'status'     => false,
+        'id_role'    => $data['id_role'],
       ]);
       $user->save() ;
       return $user;
     } catch(\Exception  $e){ 
       throw  $e;  
+
     }
   }
 
@@ -75,11 +77,12 @@ class UserRepository extends Repository
       $user = User::find($id);
       if(!empty($user)) {
         $user->fill([
-          'username' => $data['username'],
-          'email' => $data['email'],
-          'password' => bcrypt($data['password']),
-          'status' => 0,
-          'id_role' => $data['id_role'],
+          'username'    => $data['username'],
+          'email'       => $data['email'],
+          'password'    => bcrypt($data['password']),
+          'status'      => false,
+          'is_delected' => false,
+          'id_role'     => $data['id_role'],
         ]);  
         $user->save();
         return $user;  

@@ -34,8 +34,8 @@ class UserController extends \App\Http\Controllers\WebApiController
       }else {
         return Api::response([ 
           'is_success' => false,
-          'status_code' => 404,
-          'errors' => $res['errors']
+          'status_code' => $res['errors']['status_code'],
+          'errors' => $res['errors']['msg']
         ]);
       }
     }
@@ -48,8 +48,8 @@ class UserController extends \App\Http\Controllers\WebApiController
       }else {
         return Api::response([ 
           'is_success' => false,
-          'status_code' => 500,
-          'errors' => $res['errors']
+          'status_code' => $res['errors']['status_code'],
+          'errors' => $res['errors']['msg']
         ]);
       } 
     }
@@ -62,8 +62,8 @@ class UserController extends \App\Http\Controllers\WebApiController
       }else {
         return Api::response([ 
           'is_success' => false,
-          'status_code' => 500,
-          'errors' => $res['errors']
+          'status_code' => $res['errors']['status_code'],
+          'errors' => $res['errors']['msg']
         ]);
       } 
     }
@@ -76,10 +76,9 @@ class UserController extends \App\Http\Controllers\WebApiController
       }else {
         return Api::response([ 
           'is_success' => false,
-          'status_code' => 404,
-          'errors' => $res['errors']
+          'status_code' => $res['errors']['status_code'],
+          'errors' => $res['errors']['msg']
         ]);
       } 
-
     }
 }
