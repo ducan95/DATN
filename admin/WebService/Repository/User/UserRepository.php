@@ -55,13 +55,8 @@ class UserRepository extends Repository
         'email'      => $dataReq['email'],
         'password'   => bcrypt($dataReq['password']),
         'is_deleted' => false,
-<<<<<<< HEAD
-        'status'     => true,
-        'id_role'    => $data['id_role'],
-=======
         'status'     => false,
         'id_role'    => $dataReq['id_role'],
->>>>>>> 9d6e6c4e537ef2b883f0d5cdf447687ecfba68a2
       ]);
       $user->save() ;
       return $user;
@@ -76,17 +71,10 @@ class UserRepository extends Repository
       $user = User::find($id);
       if(!empty($user)) {
         $user->fill([
-<<<<<<< HEAD
-          'username'    => $data['username'],
-          'email'       => $data['email'],
-          'password'    => bcrypt($data['password']),
-          'status'      => true,
-=======
           'username'    => $dataReq['username'],
           'email'       => $dataReq['email'],
           'password'    => bcrypt($dataReq['password']),
-          'status'      => false,
->>>>>>> 9d6e6c4e537ef2b883f0d5cdf447687ecfba68a2
+          'status'      => true,
           'is_delected' => false,
           'id_role'     => $dataReq['id_role'],
         ]);  

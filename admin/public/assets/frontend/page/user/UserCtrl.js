@@ -32,7 +32,7 @@ SOUGOU_ZYANARU_MODULE
 
     /*
     var user = UserService.get({ id: id_user });
-    users.$delete({ id: id_user }, user);
+    user.$delete({ id: id_user }, user);
     */
   }  
 /* 
