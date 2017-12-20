@@ -1,4 +1,4 @@
-@extends('templates.master')
+@extends('admin.templates.master')
 @section('content')
 
   <div ng-controller="UserUpdateCtrl"> 
@@ -38,14 +38,13 @@
                   <tr>
                     <td>
                       <div class="form-group">
-                          <input ng-model="user.username" type="text" name="username" class="form-control" id="username" value="@{{ user.data.username }}">
+                          <input ng-model="user.username" type="text" name="username" class="form-control" id="username" value="@{{ user.username }}">
                           <label class="error">@{{ error.username[0] }}</label>
                       </div>
                     </td>
                     <td>
                       <div class="form-group">
-                          <select ng-init="user.id_role=''" ng-model="user.id_role" name="id_role" class="form-control">
-                              <option value="">Chọn quyền</option>
+                          <select ng-model="user.id_role" name="id_role" class="form-control">
                               <option value="1">Admin</option>
                               <option value="2">Mod</option>
                               <option value="3">User</option>
@@ -61,7 +60,7 @@
                     </td>
                     <td>
                       <div class="form-group">
-                          <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" value="@{{ user.password }}">
+                          <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" value="">
                           <label class="error">@{{ error.password[0] }}</label>
                       </div>
                     </td>
@@ -71,7 +70,7 @@
                 <div class="row" style="margin-top: 30px;">
                   <div class="col-md-4"></div>
                   <div class="col-md-4 text-center">
-                      <a href="" ng-click="updateUser()" name="submit" class="btn btn-primary" style="margin-right:5px;">Update</a>
+                      <a href="" ng-click="updateUser(user)" name="submit" class="btn btn-primary" style="margin-right:5px;">Update</a>
                       <a href="" class="btn btn-primary" style="margin-left:5px;">Cancel</a>
                   </div>
                   <div class="col-md-4"></div>
@@ -97,6 +96,4 @@
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/user/UserCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
-<script src="{{ asset('assets/theme/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('assets/theme/js/validate.js') }}"></script>
 @endsection 

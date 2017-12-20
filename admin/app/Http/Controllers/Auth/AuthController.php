@@ -17,7 +17,7 @@ class AuthController extends Controller
              return redirect()->route('getIndex');
 
          } else {
-            return view('auth.login');           
+            return view('admin.auth.login');           
          }
          
      }

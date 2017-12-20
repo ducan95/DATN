@@ -40,8 +40,8 @@
 <div class="wrapper">
 
 {{--  ###### Layout #######  --}}
- @include("templates.elements.header") 
- @include("templates.elements.sidebar") 
+ @include("admin.templates.header") 
+ @include("admin.templates.sidebar") 
 {{--  ###### Layout #######  --}}
 
   <!-- Content Wrapper. Contains page content -->
@@ -55,7 +55,7 @@
   <!-- /.content-wrapper -->
 
     {{--  ###### Layout #######  --}}
-    @include("templates.elements.footer") 
+    @include("admin.templates.footer") 
     {{--  ###### Layout #######  --}}
 
 </div>

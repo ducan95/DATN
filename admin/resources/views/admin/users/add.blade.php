@@ -1,4 +1,4 @@
-@extends('templates.master')
+@extends('admin.templates.master')
 @section('content')
 
   <div ng-controller="UserAddCtrl"> 
@@ -94,6 +94,4 @@
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/user/UserCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
-<script src="{{ asset('assets/theme/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('assets/theme/js/validate.js') }}"></script>
 @endsection 

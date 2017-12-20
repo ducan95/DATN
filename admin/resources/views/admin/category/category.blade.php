@@ -1,4 +1,4 @@
-@extends('templates.master')
+@extends('admin.templates.master')
 @section('content')
 <div ng-controller="CategoryCtrl">
 	<h2 style="margin-top: 0px;padding-top: 25px;padding-left: 15px">List Category</h2>

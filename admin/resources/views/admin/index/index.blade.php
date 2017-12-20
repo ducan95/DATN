@@ -1,4 +1,4 @@
-@extends('templates.master')
+@extends('admin.templates.master')
 @section('content')
 <!-- Content Header (Page header) -->
     <section class="content-header">

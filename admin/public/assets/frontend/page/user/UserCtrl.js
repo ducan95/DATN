@@ -3,14 +3,14 @@
  */
 
 SOUGOU_ZYANARU_MODULE
-  .controller('UserCtrl', function ($scope, UserService, $window, popupService) {
-  
-    //Get list users
+.controller('UserCtrl', function ($scope, UserService, $window, popupService) {
+  //Get list users
   UserService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.users = res.data;
     }
   })
+
   //Redirect edit page
   $scope.redirectEdit = function (id_user) { 
     $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user/edit#id=' + id_user;
@@ -22,56 +22,21 @@ SOUGOU_ZYANARU_MODULE
       var user = UserService.get({ id: id_user }, function (res) {
         if (typeof res != "undefined") {
           var user = res.data;
-          console.log(user);
-          user.$delete(function () {
+          UserService.delete({ id: user.id_user},function () {
             console.log('Deleting user with id ' + id_user);
+            //Ridirect
+            $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
           });
         }
       });
     }
-
-    /*
-    var user = UserService.get({ id: id_user });
-    user.$delete({ id: id_user }, user);
-    */
   }  
-/* 
-    var user = UserService.get({ id: 25 }, function () {
-      user.$delete(function () {
-        console.log('Deleting user with id 3');
-      });
-    }); */
 })
 
 //Create New User
 .controller('UserAddCtrl', function ($scope, UserService, $window) {
   $scope.user = new UserService(); 
-
   $scope.addUser = function () { 
-    //Validate for form
-    /* var constraints = {
-      email: {
-        presence: true,
-        email: true
-      },
-      password: {
-        // presence: true,
-        length: {
-          minimum: 5
-        }
-      },
-      username: {
-        presence: true,
-        length: {
-          minimum: 3,
-        },
-      },
-    };
-
-    var form = document.querySelector("form#main");
-    $scope.error = validate(form, constraints) || {};
-    console.log($scope.error); */
-
     $scope.user.$save(function () {
       $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user';
     });
@@ -79,21 +44,16 @@ SOUGOU_ZYANARU_MODULE
 })
 
 // Edit user
-  .controller('UserUpdateCtrl', function ($scope, UserService, $window) {
-    $scope.user = {
-      mail: "",
-      is_deleted: false,
-      status: false,
-      username: "",
-      password: "",
-    };
+.controller('UserUpdateCtrl', function ($scope, UserService, $window) {
 
-    var url        = new URL(window.location.href); 
-    var id         = url.hash.match(/\d/g);
-    $scope.id      = id.join('');
-    console.log($scope.id );
+  //Get id from url
+  var url        = new URL(window.location.href); 
+  var id         = url.hash.match(/\d/g);
+  $scope.id      = id.join('');
 
   $scope.updateUser = function (user) { 
+    console.log(user);
+
     //Validate for form
     var constraints = {
       email: {
@@ -101,7 +61,7 @@ SOUGOU_ZYANARU_MODULE
         email: true
       },
       password: {
-        // presence: true,
+        presence: true,
         length: {
           minimum: 5
         }
@@ -112,7 +72,6 @@ SOUGOU_ZYANARU_MODULE
           minimum: 3,
         },
         format: {
-          // We don't allow anything that a-z and 0-9
           pattern: "[a-z0-9]+",
           // but we don't care if the username is uppercase or lowercase
           flags: "i",
@@ -125,23 +84,22 @@ SOUGOU_ZYANARU_MODULE
     $scope.error = validate(form, constraints) || {};
     console.log($scope.error);
 
+    //Get value from ng-model
+    var getUsername = user.username;
+    var getEmail    = user.email;
+    var getPassword = user.password;
+    var getRole     = user.id_role;
+    
     // Update user
     UserService.update({ 
-      id: 20,
-      username: 'Quiền Quiền', 
-      email: 'luqu0501@gmail.com', 
-      password: 'Kxkx113@', 
-      id_role: 1, 
-      status: true, 
+      id:         $scope.id,
+      username:   getUsername,
+      email:      getEmail,
+      password:   getPassword,
+      id_role:    getRole,
+      status:     true,
       is_deleted: false 
     }, {});
-
-    //Let's first get the user and then update it.
-    /* var update = UserService.get({ id: $scope.id }, function () {
-      update.$update(function () {
-        console.log('Success!');
-      });
-    }); */
 
   };
 
@@ -149,6 +107,7 @@ SOUGOU_ZYANARU_MODULE
   $scope.loadUser = function () { 
     UserService.get({ id: $scope.id },function(res) {
       $scope.user = res.data;
+      //console.log($scope.user);
     });
   };
 

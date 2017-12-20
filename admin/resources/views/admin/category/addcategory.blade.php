@@ -1,4 +1,4 @@
-\@extends('templates.master')
+@extends('admin.templates.master')
 @section('content')
 
 <div ng-controller="CategoryAddCtrl">

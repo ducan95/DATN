@@ -23,7 +23,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        return view('templates.admin.index');
+        return view('admin.index.index');
     }
 
 }
