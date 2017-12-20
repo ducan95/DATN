@@ -97,7 +97,7 @@ class CategoryRepository extends Repository
     }
   }
 
-  public function find($request){
+  public function find($dataRes){
 
   }
 

@@ -14,6 +14,6 @@ interface IWebApiController{
   public function actionSave(Request $request);
   public function actionUpdate(Request $request, $id);
   public function actionDelete($id);
-  public function actionFind(Request $request);
+  public function actionFind($search, Request $request);
   public function actionFindOne($id);
 }

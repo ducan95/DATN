@@ -68,7 +68,7 @@ class CategoryController extends \App\Http\Controllers\WebApiController
       } 
 
   }
-  public function actionFind($request)
+  public function actionFind($search,$request)
   {
     //
   }

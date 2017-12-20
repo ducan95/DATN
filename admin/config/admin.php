@@ -4,7 +4,7 @@ return [
 
 	'prefix' => [
 		'api' => 'web_api',
-		'web' => 'admincp'
+		'web' => 'admin'
 	],
 	
 	'images' => [

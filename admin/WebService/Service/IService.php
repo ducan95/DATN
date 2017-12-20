@@ -6,6 +6,6 @@ interface IService
   public function save($request);
   public function update($request, $id);
   public function delete($id);
-  public function find($request);
+  public function find($dataRes);
   public function findOne($id);
 }
