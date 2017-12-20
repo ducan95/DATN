@@ -49,7 +49,7 @@ Route::group([
 ], function() {
   /** home **/
   Route::get('/',[
-    'uses' => 'HomeController@index',
+    'uses' => 'AdminController@index',
     'as' => 'getIndex'
   ]);
   /** router web user **/
