@@ -2,8 +2,7 @@
 namespace WebService\Service\Category;
 use WebService\Repository\Category\CategoryRepository;
 use WebService\Service\Service;
-use Extention\Api;
-
+use Validator;
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -13,29 +12,91 @@ use Extention\Api;
 class CategoryService extends Service
 {
 
-  public function save()
+  public function save($request)
   {
-    // TODO: Implement save() method.
+    //  $request->validate([
+    //   'name' => 'required',
+    //   'slug' => 'required',
+    // ],[]);
+    //  $request->messages([
+    //   'name.required' => 'required',
+    //   'slug.required' => 'required',
+    // ],[]);
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|max:255 ',
+      'slug' => 'required',
+      
+    ],[]);
+    if($validator ->fails()) {
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try{
+        $res['data']= CategoryRepository::getInstance()->save($request);
+      }catch(\Exception $e){
+        $res['errors']= $e ->getMessage();
+      }
+    }
+    return $res;
   }
 
-  public function update()
+  public function update($request,$id)
   {
-    // TODO: Implement update() method.
+    try{
+      $res['data']=CategoryRepository::getInstance()->update($request,$id);
+    }catch(\Exception $e){
+      $res['errors']= $e ->getMessage();
+    }
+    return $res;
   }
 
-  public function delete()
+  public function delete($id)
   {
-    // TODO: Implement delete() method.
+    try{
+      $res['data']=CategoryRepository::getInstance()->delete($id);
+    }catch(\Exception $e){
+      $res['errors']=$e -> getMessage();
+    }
+    return $res;
   }
 
   public function list()
   {
-    $category = CategoryRepository::getInstance()->find();
-    return Api::response([ 'category' => $category]);
+    $result= CategoryRepository::getInstance()->list();
+    try
+    {
+      if(!empty($result)){
+        $res['data']=$result;
+      }
+      else{
+        throw new \Exception("No Record");
+        }
+    }    
+    catch(\Exception $e){
+      $res['errors']= $e->getMessage();
+    }
+    return $res;
   }
 
-  public function findOne()
-  {
-    // TODO: Implement findOne() method.
-  }
+    public function findOne($id)
+    {
+      $result=CategoryRepository::getInstance()->findOne($id);
+      try{
+        if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No Record');
+      }
+      }catch(\Exception $e) {
+        $res['errors'] = $e->getMessage();
+      }
+    return $res;
+    }
+    
+    public function find($request)
+    {
+
+    }
+
 }

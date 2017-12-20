@@ -65,40 +65,37 @@ Route::group([
           'as'  => 'webUserEdit'
       ]);
 
+
       Route::get('/add',[
-          'uses' => 'UserController@viewAdd' ,
-          'as'  => 'webUserAdd'
-      ]);
-  });
-    
+            'uses' => 'UserController@viewAdd' ,
+            'as'  => 'webUserAdd'
+        ]);
+    });
+
+    Route::group([ 'prefix' => 'category' ],function(){
+
+        Route::get('/',[
+            'uses' => 'CategoryController@viewIndex',
+            'as' =>'webCategoryIndex'
+        ]);
+
+        Route::get('/add',[
+            'uses' => 'CategoryController@viewAdd',
+            'as' =>'webCategoryAdd'
+        ]);
+
+        Route::get('/addchildren',[
+            'uses' => 'CategoryController@viewAddChildren',
+            'as' =>'webCategoryAddChildren'
+        ]);
+
+
+        Route::get('/edit',[
+            'uses' => 'CategoryController@viewEdit',
+            'as' =>'webCategorEdit'
+        ]);
+    });
 });
-
-Route::group([ 
-    'middleware' => 'checkAdminLogin',
-    'prefix'     => 'admincp',
-], function() {
-  Route::get('category', function() {
-      return view('templates.admin.category.category');
-  });
-
-  Route::get('category/add', function() {
-      return view('templates.admin.category.addcategory');
-  });
-
-   Route::get('category/addchildren', function() {
-      return view('templates.admin.category.addcategorychildern');
-  });
-
-  Route::get('category/setdisplay',function(){
-      return view('templates.admin.category.setdisplay');
-   });
-
-  Route::get('category/edit',function(){
-      return view('templates.admin.category.editcategorychildren');
-  });
-
-});
-
 /**
  * ROUTE ADMIN API
  */
@@ -160,37 +157,45 @@ Route::group([
         'as' => 'apiUserDelete'
     ]);
   });
-  /** router category api **/
-  Route::group(['prefix' => '/category'], function(){
-      // Get list users
-      Route::get('/', [
-          'uses' => 'CategoryController@actionList',
-          'as' => 'apiCategoryList'
-      ]);
-      // Get user
-      Route::get('/{id}', [
-          'uses' => 'CategoryController@actionFind',
-          'as' => 'apiCategoryShow'
-      ]);
-      Route::post('/', [
-          'uses' => 'CategoryController@actionSave',
-          'as' => 'apiCategorySave'
-      ]);
-      Route::put('/{id}', [
-          'uses' => 'CategoryController@actionUpdate',
-          'as' => 'apiCategoryUpdate'
-      ]);
-      Route::delete('/{id}', [
-          'user' => 'CategoryController@actionDelete',
-          'as' => 'apiCategoryDelete'
-      ]);
-  });
-  /** router iamge api **/
-  Route::group(['prefix' => '/images'],function(){
-    
+
+
+    Route::group(['prefix' => '/category'], function(){
+        // Get list users
+        Route::get('/list', [
+            'uses' => 'CategoryController@actionList',
+            'as' => 'apiCategoryList'
+        ]);
+        // Get user
+        Route::get('/find/{id_category}', [
+            'uses' => 'CategoryController@actionFindOne',
+            'as' => 'apiCategoryShow'
+        ]);
+        Route::post('/add', [
+            'uses' => 'CategoryController@actionSave',
+            'as' => 'apiCategorySave'
+        ]);
+        Route::put('/{id}', [
+            'uses' => 'CategoryController@actionUpdate',
+            'as' => 'apiCategoryUpdate'
+        ]);
+        Route::delete('/{id}', [
+            'user' => 'CategoryController@actionDelete',
+            'as' => 'apiCategoryDelete'
+        ]);
+    });
+
+
+  Route::group(['prefix' => '/image'],function(){
+    // Get list users
+    Route::get('/find', [
+        'uses' => 'ImageController@actionFind',
+        'as' => 'apiImageFind'
+    ]);
+
     Route::get('/{search?}', [
       'uses' => 'ImageController@actionFind',
       'as' => 'apiImageFind'
+
     ]);
 
     Route::get('/{id}', [
@@ -215,6 +220,8 @@ Route::group([
   });
 
 });
+
+    
 
 
 

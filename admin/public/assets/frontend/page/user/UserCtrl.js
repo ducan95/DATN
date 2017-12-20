@@ -29,8 +29,8 @@ SOUGOU_ZYANARU_MODULE
 
   $scope.addUser = function () { //create a new user. Issues a POST to /api/users
     $scope.user.$save(function () {
-      $window.location.href = '/admincp/user';
-      
+      // $window.location.href = '/admincp/user';
+      console.log($scope.user);
     });
   };
 })

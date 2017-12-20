@@ -29,7 +29,7 @@
           </a>
         </li>
         <li class="">
-          <a href="/admincp/category">
+          <a href="{{ route('webCategoryIndex') }}">
             <i class="fa fa-newspaper-o"></i>
             <span>{{trans('web.category')}}</span>
           </a>
@@ -52,7 +52,6 @@
             <span>{{trans('web.user_management')}}</span>
           </a>
         </li>
-        <li class="header">MORE</li>
         <li><a href="{{ route('getLogout') }}"><i class="fa fa-circle-o text-red"></i> <span>{{trans('web.logout')}}</span></a></li>
 
       </ul>
