@@ -152,7 +152,7 @@ Route::group([
         'uses' => 'UserController@actionUpdate',
         'as' => 'apiUserUpdate'
     ]);
-    Route::post('/{id}', [
+    Route::delete('/{id}', [
         'uses' => 'UserController@actionDelete',
         'as' => 'apiUserDelete'
     ]);
