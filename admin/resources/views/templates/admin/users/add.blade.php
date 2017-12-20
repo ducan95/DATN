@@ -87,7 +87,11 @@
     </section>
 
   </div> <!-- /.ng-controller -->
-
+  <form action="{{ route('apiImageSave') }}" method="POST" enctype="multipart/form-data" >
+    {{csrf_field()}}
+    <input type="file" name="file" class="file">
+    <input type="submit" name="">
+  </form>
 @endsection    
 
 @section('bottom-js')

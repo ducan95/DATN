@@ -55,7 +55,8 @@ class ImageService extends Service
 
   public function save($request)
   {	
-
+     $res['data'] = $this->createImageBlur($request->file('file')); return $res;
+    /*
     return $this->createImageBlur($request->file('file'));
     $validator = Validator::make($request->all(), [
       'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -74,7 +75,7 @@ class ImageService extends Service
         $res['errors']['status_code'] =  500; 
       }  
     }
-    return $res;  
+    return $res;  */
 	}
 
   public function update($request, $id)

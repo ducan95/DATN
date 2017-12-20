@@ -6,7 +6,7 @@
  * Time: 09:45
  */
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\WebAdmin;
+use App\Http\Controllers\Controller as Controller;
 
 abstract class WebController extends Controller implements IWebController {}

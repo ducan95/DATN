@@ -6,7 +6,7 @@
  * Time: 09:43
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\WebAdmin;
 use Illuminate\Http\Request;
 
 interface IWebController{

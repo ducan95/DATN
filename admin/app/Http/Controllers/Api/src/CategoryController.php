@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\src;
 use WebService\Service\Category\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
@@ -11,7 +11,7 @@ use Extention\Api;
  * Date: 14/12/2017
  * Time: 10:30
  */
-class CategoryController extends \App\Http\Controllers\WebApiController
+class CategoryController extends WebApiController
 {
   public function actionList(){
     $res=CategoryService::getInstance()->list();

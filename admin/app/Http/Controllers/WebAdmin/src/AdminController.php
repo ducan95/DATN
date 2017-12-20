@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\WebAdmin\src;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Http\Controllers\WebAdmin\WebApiController as WebApiController;
 
 class AdminController extends Controller
 {

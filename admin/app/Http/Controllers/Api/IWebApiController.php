@@ -6,7 +6,7 @@
  * Time: 10:35
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Extention\ApiRequest;
 

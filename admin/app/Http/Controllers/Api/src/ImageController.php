@@ -1,16 +1,17 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\src;
 use WebService\Service\Image\ImageService;
 use Illuminate\Http\Request;
 use Extention\Media;
 use Extention\Api;
+use App\Http\Controllers\Api\WebApiController as WebApiController;
 /**
  * Created by SublimeText.
  * User: Huynh
  * Date: 18/12/2017
  * Time: 15:00
  */
-class ImageController extends \App\Http\Controllers\WebApiController
+class ImageController extends WebApiController
 {  
    /**
    * search image by keyword
@@ -37,7 +38,7 @@ class ImageController extends \App\Http\Controllers\WebApiController
    */
 
   public function actionFindOne($id)
-  {   
+  { 
     $res = ImageService::getInstance()->FindOne($id);
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data'] ]);

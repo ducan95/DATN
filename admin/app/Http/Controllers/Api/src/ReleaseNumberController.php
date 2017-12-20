@@ -1,6 +1,7 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\src;
 use WebService\Service\ReleaseNumber\ReleaseNumberService;
+use App\Http\Controllers\Api\WebApiController as WebApiController;
 
 /**
  * Created by PhpStorm.
@@ -8,7 +9,7 @@ use WebService\Service\ReleaseNumber\ReleaseNumberService;
  * Date: 14/12/2017
  * Time: 10:30
  */
-class ReleaseNumberController extends \App\Http\Controllers\WebApiController
+class ReleaseNumberController extends \App\Http\Controllers\Api\WebApiController
 {
   public function actionList(){
     return ReleaseNumberService::getInstance()->find();

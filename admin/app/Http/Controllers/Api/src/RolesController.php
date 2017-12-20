@@ -1,14 +1,15 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\src;
 use WebService\Service\Roles\RolesService;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\WebApiController as WebApiController;
 /**
  * Created by PhpStorm.
  * User: rikkei
  * Date: 14/12/2017
  * Time: 10:30
  */
-class RolesController extends \App\Http\Controllers\WebApiController
+class RolesController extends WebApiController
 {	
     public function actionList()
     {	
