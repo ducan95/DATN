@@ -88,7 +88,6 @@
 
   </div> <!-- /.ng-controller -->
 
-
 @endsection    
 
 @section('bottom-js')

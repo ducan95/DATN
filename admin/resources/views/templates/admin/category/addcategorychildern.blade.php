@@ -1,6 +1,7 @@
 @extends('templates.master')
 @section('content')
 
+<div>
 	<section class="content-header">
 		<h2>List Category</h2>
 	</section>
@@ -78,8 +79,16 @@
 			</div>
 		</div>
 	</section>
+</div>	
 
-	@endsection  
+@endsection  
+@section('bottom-js')
+<!-- Edit table -->
+<script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
+
+@endsection 
+
 	              
 		
 			

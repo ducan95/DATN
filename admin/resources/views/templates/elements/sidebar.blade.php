@@ -25,7 +25,7 @@
           </a>
         </li>
         <li class="">
-          <a href="/admincp/category">
+          <a href="{{ route('webCategoryIndex') }}">
             <i class="fa fa-newspaper-o"></i>
             <span>{{trans('web.category')}}</span>
           </a>

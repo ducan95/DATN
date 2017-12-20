@@ -8,9 +8,9 @@ namespace WebService\Repository;
  */
 interface IRepository
 {
-  public function save($request);
-  public function update($request, $id);
+  public function save($dataReq);
+  public function update($dataReq, $id);
   public function delete($id);
-  public function find($request);
+  public function find($dataReq);
   public function findOne($id);
 }

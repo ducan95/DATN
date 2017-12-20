@@ -3,6 +3,7 @@ namespace WebService\Repository\User;
 use WebService\Repository\Repository;
 use App\User;
 
+
 /**
  * Created by PhpStorm.
  * User: Huynh
@@ -11,33 +12,26 @@ use App\User;
  */
 class UserRepository extends Repository
 {
-  public function find($request = '') 
+  public function find($dataReq = '') 
   { 
     try {   
-      if(isset($request)){
-        $query = User::where('id_user', '>', 0)->where('is_deleted', '=', false);
-        $username = $request->query('username'); 
-        $email = $request->query('email'); 
-        $status = $request->query('status'); ; 
-        $id_role = $request->query('id_role'); 
-        if(!empty($username)) {
-          $query = $query->where('username', 'LIKE', '%'.$username.'%' );
+      $query = User::where('id_user', '>', 0)->where('is_deleted', '=', false);
+      $dataMol= ['username', 'email', 'status', 'id_role'];
+      if(!empty($dataReq)) {
+        foreach ($dataMol as $value) {
+          if(isset($dataReq[$value])) {
+            if(is_string($dataReq[$value])) {
+              $query = $query->where($value, 'LIKE', '%'.$dataReq[$value].'%' );
+            } else {
+              $query = $query->where($value, '=', $dataReq[$value] );
+            }
+          }    
         }
-        if(!empty($email)) {
-          $query = $query->where('email', 'LIKE', '%'.$email.'%' );
+        if(!empty($dataReq['paginate'])) {
+          return $query->paginate($dataReq['paginate']); 
         }
-        if(!empty($status)) {
-          $query = $query->where('status', '=', $status );
-        }
-        if(!empty($id_role)) {
-          $query = $query->where('id_role', '=', $id_role);
-        }
-        if(!empty($request->query('paginate'))) {
-          return $query->paginate($request->query('paginate')); 
-        } else {
-          return $query->get();  
-        }
-      }  
+      } 
+      return $query->get();    
     } catch(\Exception $e) {
         throw $e;
     } 
@@ -45,57 +39,61 @@ class UserRepository extends Repository
 
   public function findOne($id)
   { 
-    try{
-      $user = User::find($id);
-      if(!empty($user)) {
-        return  $user;
-      } else {
-          throw new \Exception("404");
-      }
-    }catch(\Exception $e){ 
-        throw $e;
+    try {
+      return User::where('id_user', '=',$id)->where('is_deleted', '=', false)->first();
+    } catch(\Exception $e){ 
+      throw $e;
     }
   }
 
-  public function save($request)
+  public function save($dataReq)
   { 
     try{
-      $data = $request->all();
       $user = new User();
       $user->fill([
-        'username'   => $data['username'],
-        'email'      => $data['email'],
-        'password'   => bcrypt($data['password']),
+        'username'   => $dataReq['username'],
+        'email'      => $dataReq['email'],
+        'password'   => bcrypt($dataReq['password']),
         'is_deleted' => false,
+<<<<<<< HEAD
         'status'     => true,
         'id_role'    => $data['id_role'],
+=======
+        'status'     => false,
+        'id_role'    => $dataReq['id_role'],
+>>>>>>> 9d6e6c4e537ef2b883f0d5cdf447687ecfba68a2
       ]);
       $user->save() ;
       return $user;
-    } catch(\Exception  $e){ 
+    } catch(\Exception  $e) { 
       throw  $e;  
-
     }
   }
 
-  public function update($request, $id)
+  public function update($dataReq, $id)
   { 
     try{
-      $data = $request->all();
       $user = User::find($id);
       if(!empty($user)) {
         $user->fill([
+<<<<<<< HEAD
           'username'    => $data['username'],
           'email'       => $data['email'],
           'password'    => bcrypt($data['password']),
           'status'      => true,
+=======
+          'username'    => $dataReq['username'],
+          'email'       => $dataReq['email'],
+          'password'    => bcrypt($dataReq['password']),
+          'status'      => false,
+>>>>>>> 9d6e6c4e537ef2b883f0d5cdf447687ecfba68a2
           'is_delected' => false,
-          'id_role'     => $data['id_role'],
+          'id_role'     => $dataReq['id_role'],
         ]);  
         $user->save();
         return $user;  
       } else {
-        throw new \Exception("404: khong tim thay");
+        return null;
       }
     } catch(\Exception  $e){
       throw $e;
@@ -105,15 +103,16 @@ class UserRepository extends Repository
 
   public function delete($id)
   { 
-    try{
-      $user = User::find($id);
-      if(!empty($user)) {
-        $user->delete();
+    try {
+      if(!empty(User::find($id))) {
+        $user = User::find($id);
+        $user->is_deleted = true;
+        $user->save();
       } else {
-        throw new \Exception("404: Khong tim thay");
+        return ;
       }
-    }catch(\Exception  $e){ 
-        throw $e;
+    } catch(\Exception  $e) { 
+      throw $e;
     }
   }
 
