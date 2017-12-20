@@ -28,7 +28,7 @@
             "WebService\\": "WebService/"
         },
         "files" : [
-            "app/helpers.php"  
+            "Extention/helpers.php"  
         ]
     },
     "autoload-dev": {

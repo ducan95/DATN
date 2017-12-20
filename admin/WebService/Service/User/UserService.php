@@ -3,6 +3,7 @@ namespace WebService\Service\User;
 use WebService\Repository\User\UserRepository;
 use WebService\Service\Service;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -14,26 +15,39 @@ class UserService extends Service
 
 	public function find($request)
 	{ 
-    $result =  UserRepository::getInstance()->find($request); 
-    try{
-      if(!empty($result)){
-        $res['data'] = $result;
-      }else {
-        throw new \Exception("404");
+    try {
+      $dataReq = [];
+      if(!empty($request->query('username')) ) {
+        $dataReq['username'] = $request->query('username');
       }
-    }catch(\Exception $e) {
-      $res['errors'] =$e->getMessage();
+      if(!empty($request->query('email')) ) {
+        $dataReq['email'] = $request->query('email');
+      }
+      if(!empty($request->query('status')) ) {
+        $dataReq['status'] = $request->query('status');
+      }
+      if(!empty($request->query('id_role')) ) {
+        $dataReq['id_role'] = $request->query('id_role');
+      }
+      if(!empty($request->query('paginate')) ) {
+        $dataReq['paginate'] = $request->query('paginate');
+      }
+      $res['data'] = UserRepository::getInstance()->find($dataReq); 
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
     }
+
     return $res;
 	}
    	
  	public function findOne($id)
   {	
-  	try{
+  	try {
       $res['data'] = UserRepository::getInstance()->findOne($id);
-    }catch(\Exception $e) {
+    } catch(\Exception $e) {
       $res['errors']['msg'] = $e->getMessage();
-      $res['errors']['status_code'] = 404;
+      $res['errors']['status_code'] = 500;
     }
     return $res;
   }
@@ -41,20 +55,28 @@ class UserService extends Service
   public function save($request)
   {	
     $validator = Validator::make($request->all(), [
-      'username' => 'required|max:255',
+      'username' => 'required|max:200',
       'email' => 'required |email',
       'password' => 'required',
       'id_role' =>  'required'
-    ],[]);
+    ],[
+      'username.required' => trans('validate.username_required'),
+      'username.max' => trans('validate.username_max_255_characters'),
+      'email.required' => trans('validate.email_required'),
+      'email.email' => trans('validate.email_must_be_valid_email_address'),
+      'password.required' => trans('validate.password_required'),
+      'id_role.required' => trans('validate.id_role_required')
+    ]);
+
     if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
       $res['errors']['status_code'] = 400;
     } else {
       try{
-        $res['data'] = UserRepository::getInstance()->save($request);
+        $res['data'] = UserRepository::getInstance()->save($request->all());
       } catch(\Exception $e) {
         $res['errors']['msg'] = $e->getMessage();
-        $res['errors']['status_code'] = $e->getCode();
+        $res['errors']['status_code'] = 500;
       }  
     }
     return $res;
@@ -67,16 +89,24 @@ class UserService extends Service
       'email' => 'required |email',
       'password' => 'required',
       'id_role' =>  'required'
-    ],[]);
+    ],[
+      'username.required' => trans('validate.username_required'),
+      'username.max' => trans('validate.username_max_255_characters'),
+      'email.required' => trans('validate.email_required'),
+      'email.email' => trans('validate.email_must_be_valid_email_address'),
+      'password.required' => trans('validate.password_required'),
+      'id_role.required' => trans('validate.id_role_required')
+    ]);
+
     if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
       $res['errors']['status_code'] = 400;
     } else {
       try {
-        $res['data'] = UserRepository::getInstance()->update($request, $id);
+        $res['data'] = UserRepository::getInstance()->update($request->all(), $id);
       } catch(\Exception $e) {
         $res['errors']['msg'] = $e->getMessage();
-        $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
+        $res['errors']['status_code'] = 500;
       }  
     }
     return $res;
@@ -88,7 +118,7 @@ class UserService extends Service
       $res['data'] = UserRepository::getInstance()->delete($id);
     }catch(\Exception $e) {
       $res['errors']['msg'] = $e->getMessage();
-      $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
+      $res['errors']['status_code'] = 500;
     }
     return $res;
   }

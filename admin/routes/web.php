@@ -11,6 +11,7 @@
 |
 */
 Route::pattern('id', '[0-9]+');
+Route::pattern('search', '[A-Za-z]+');
 
 
 
@@ -108,7 +109,7 @@ Route::group([
   /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
       /** Get List Roles **/
-      Route::post('/', [
+      Route::get('/', [
           'uses' => 'RolesController@actionList',
           'as'   => 'apiListRole'
       ]);
@@ -154,7 +155,7 @@ Route::group([
         'uses' => 'UserController@actionUpdate',
         'as' => 'apiUserUpdate'
     ]);
-    Route::delete('/dele/{id}', [
+    Route::post('/{id}', [
         'uses' => 'UserController@actionDelete',
         'as' => 'apiUserDelete'
     ]);
