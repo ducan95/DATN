@@ -17,24 +17,24 @@ Route::pattern('search', '[A-Za-z]+');
  * ROUTE LOGIN
  */  
 Route::group([
-  'prefix' => config('admin.prefix.web')
+  'prefix' => config('admin.prefix.web'),
+  'namespace' => 'WebAdmin\Auth'
 ], function(){
 
   Route::get('login', [
-    'uses' => 'Auth\AuthController@getLogin',
+    'uses' => 'AuthController@getLogin',
     'as' => 'getLogin',
   ]);
 
   Route::post('login', [   
-    'uses' => 'Auth\AuthController@postLogin',
+    'uses' => 'AuthController@postLogin',
     'as' => 'postLogin'
   ]);
 
   Route::get('logout', [
       'as' => 'getLogout', 
-      'uses' => 'Auth\AuthController@getLogout'
+      'uses' => 'AuthController@getLogout'
   ]);
-
 });
 
 /**
@@ -43,7 +43,7 @@ Route::group([
 Route::group([ 
   'middleware' => 'checkAdminLogin',
   'prefix'     => config('admin.prefix.web'),
-  'namespace'  => 'Web'
+  'namespace'  => 'WebAdmin\src'
 ], function() {
   /** home **/
   Route::get('/',[
@@ -68,37 +68,37 @@ Route::group([
             'uses' => 'UserController@viewAdd' ,
             'as'  => 'webUserAdd'
         ]);
-    });
+  });
 
-    Route::group([ 'prefix' => 'category' ],function(){
+  Route::group([ 'prefix' => 'category' ],function(){
 
-        Route::get('/',[
-            'uses' => 'CategoryController@viewIndex',
-            'as' =>'webCategoryIndex'
-        ]);
+      Route::get('/',[
+          'uses' => 'CategoryController@viewIndex',
+          'as' =>'webCategoryIndex'
+      ]);
 
-        Route::get('/add',[
-            'uses' => 'CategoryController@viewAdd',
-            'as' =>'webCategoryAdd'
-        ]);
+      Route::get('/add',[
+          'uses' => 'CategoryController@viewAdd',
+          'as' =>'webCategoryAdd'
+      ]);
 
-        Route::get('/addchildren',[
-            'uses' => 'CategoryController@viewAddChildren',
-            'as' =>'webCategoryAddChildren'
-        ]);
+      Route::get('/addchildren',[
+          'uses' => 'CategoryController@viewAddChildren',
+          'as' =>'webCategoryAddChildren'
+      ]);
 
 
-        Route::get('/edit',[
-            'uses' => 'CategoryController@viewEdit',
-            'as' =>'webCategorEdit'
-        ]);
-    });
+      Route::get('/edit',[
+          'uses' => 'CategoryController@viewEdit',
+          'as' =>'webCategorEdit'
+      ]);
+  });
 });
 /**
  * ROUTE ADMIN API
  */
 Route::group([
-  'namespace' =>'Api', 
+  'namespace' =>'Api\src', 
   'prefix' => config('admin.prefix.api')
 ], function(){
   /** router role api **/
@@ -157,39 +157,33 @@ Route::group([
     ]);
   });
 
+  Route::group(['prefix' => '/category'], function(){
+      // Get list users
+      Route::get('/list', [
+          'uses' => 'CategoryController@actionList',
+          'as' => 'apiCategoryList'
+      ]);
+      // Get user
+      Route::get('/find/{id_category}', [
+          'uses' => 'CategoryController@actionFindOne',
+          'as' => 'apiCategoryShow'
+      ]);
+      Route::post('/add', [
+          'uses' => 'CategoryController@actionSave',
+          'as' => 'apiCategorySave'
+      ]);
+      Route::put('/{id}', [
+          'uses' => 'CategoryController@actionUpdate',
+          'as' => 'apiCategoryUpdate'
+      ]);
+      Route::delete('/{id}', [
+          'user' => 'CategoryController@actionDelete',
+          'as' => 'apiCategoryDelete'
+      ]);
+  });
 
-    Route::group(['prefix' => '/category'], function(){
-        // Get list users
-        Route::get('/list', [
-            'uses' => 'CategoryController@actionList',
-            'as' => 'apiCategoryList'
-        ]);
-        // Get user
-        Route::get('/find/{id_category}', [
-            'uses' => 'CategoryController@actionFindOne',
-            'as' => 'apiCategoryShow'
-        ]);
-        Route::post('/add', [
-            'uses' => 'CategoryController@actionSave',
-            'as' => 'apiCategorySave'
-        ]);
-        Route::put('/{id}', [
-            'uses' => 'CategoryController@actionUpdate',
-            'as' => 'apiCategoryUpdate'
-        ]);
-        Route::delete('/{id}', [
-            'user' => 'CategoryController@actionDelete',
-            'as' => 'apiCategoryDelete'
-        ]);
-    });
 
-
-  Route::group(['prefix' => '/image'],function(){
-    // Get list users
-    Route::get('/find', [
-        'uses' => 'ImageController@actionFind',
-        'as' => 'apiImageFind'
-    ]);
+  Route::group(['prefix' => '/images'],function(){
 
     Route::get('/{search?}', [
       'uses' => 'ImageController@actionFind',
@@ -217,7 +211,6 @@ Route::group([
         'as' => 'apiImageDelete'
     ]);
   });
-
 });
 
     

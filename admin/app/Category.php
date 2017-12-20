@@ -17,6 +17,6 @@ class Category extends Model
     public $timestamps = true;
 
     public function post_category(){
-    	return $this->hasMany('App/Post_category','id_category','id_category');
+    	return $this->hasMany(PostCategory::class,'id_category','id_category');
     }
 }

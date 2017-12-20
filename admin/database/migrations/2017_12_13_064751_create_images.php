@@ -15,7 +15,7 @@ class CreateImages extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id_image');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->string('path');
             $table->string('path_paint');

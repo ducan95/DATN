@@ -25,8 +25,6 @@ class CreatePosts extends Migration
             $table->dateTime('time_end');
             $table->string('password');
             $table->integer('status_preview_top')->unsigned();
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at');
             $table->dateTime('deleted_at');
             $table->boolean('is_deleted');
             $table->string('url_image');
