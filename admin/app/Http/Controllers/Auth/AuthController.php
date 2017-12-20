@@ -14,7 +14,7 @@ class AuthController extends Controller
      public function getLogin()
      {
          if (Auth::check()) {
-             return redirect('admincp');
+             return redirect('admin');
          } else {
              return view('auth.login');
          }
@@ -49,16 +49,3 @@ class AuthController extends Controller
          return redirect()->route('getLogin');
      }
 }
-
-
-
- /* $login = [
-    'email'    => $request->txtEmail,
-    'password' => $request->txtPassword,
-    'id_role'  => 1,
-    'status'   => 1
-];
-//dd($login);
-if (Auth::attempt($login)) {
-    return redirect('admincp');
-}  */

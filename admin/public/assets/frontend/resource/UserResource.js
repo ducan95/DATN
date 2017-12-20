@@ -4,17 +4,16 @@
 
 SOUGOU_ZYANARU_MODULE
 .factory('UserService', function ($resource) {
-  var data = $resource('/web_api/user/:id', { user: '@user' }, {
+  return $resource('/web_api/user/:id', { id: '@id' }, {
     find: {
       url: '/web_api/user/',
-      method: 'POST',
+      method: 'GET',
       isArray: false
     },
     update: {
       method: 'PUT'
     }
   });
-  return data;
 })
 .service('popupService',function($window){
     this.showPopup=function(message){

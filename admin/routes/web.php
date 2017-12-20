@@ -10,53 +10,65 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::pattern('id', '[0-9]+');
+Route::pattern('search', '[A-Za-z]+');
 
-Route::get('/', [
-    'as' => 'getLogin', 
-    'uses' => 'Auth\AuthController@getLogin'
-]);
-Route::post('/', [
-    'as' => 'postLogin', 
-    'uses' => 'Auth\AuthController@postLogin'
-]);
-Route::get('logout', [
-    'as' => 'getLogout', 
-    'uses' => 'Auth\AuthController@getLogout'
-]);
 
-Route::group([ 'middleware' => 'checkAdminLogin' ], function() {
-    Route::get('admincp', [
-        'as' => 'getIndex', 
-        'uses' => 'HomeController@index'
-    ]);
+/**
+ * ROUTE LOGIN
+ */  
+Route::group([
+  'prefix' => config('admin.prefix.web')
+], function(){
+
+  Route::get('login', [
+    'uses' => 'Auth\AuthController@getLogin',
+    'as' => 'getLogin',
+  ]);
+
+  Route::post('login', [   
+    'uses' => 'Auth\AuthController@postLogin',
+    'as' => 'postLogin'
+  ]);
+
+  Route::get('logout', [
+      'as' => 'getLogout', 
+      'uses' => 'Auth\AuthController@getLogout'
+  ]);
+
 });
 
 /**
- * WEB ROUTE
+ * ROUTE ADMIN WEB
  */
 Route::group([ 
-    'middleware' => 'checkAdminLogin',
-    'prefix'     => config('admin.prefix.web'),
-    'namespace'  => 'Web'
+  'middleware' => 'checkAdminLogin',
+  'prefix'     => config('admin.prefix.web'),
+  'namespace'  => 'Web'
 ], function() {
+  /** home **/
+  Route::get('/',[
+    'uses' => 'HomeController@index',
+    'as' => 'getIndex'
+  ]);
+  /** router web user **/
+  Route::group([ 'prefix' => 'user' ],function(){
 
-    Route::group([ 'prefix' => 'user' ],function(){
+      Route::get('/',[
+          'uses' => 'UserController@viewIndex' ,
+          'as'  => 'webUserIndex'
+      ]);
 
-        Route::get('/',[
-            'uses' => 'UserController@viewIndex' ,
-            'as'  => 'webUserIndex'
-        ]);
+      Route::get('/edit',[
+          'uses' => 'UserController@viewEdit' ,
+          'as'  => 'webUserEdit'
+      ]);
 
-        Route::get('/edit',[
-            'uses' => 'UserController@viewEdit' ,
-            'as'  => 'webUserEdit'
-        ]);
-
-        Route::get('/add',[
-            'uses' => 'UserController@viewAdd' ,
-            'as'  => 'webUserAdd'
-        ]);
-    });
+      Route::get('/add',[
+          'uses' => 'UserController@viewAdd' ,
+          'as'  => 'webUserAdd'
+      ]);
+  });
     
 });
 
@@ -64,32 +76,36 @@ Route::group([
     'middleware' => 'checkAdminLogin',
     'prefix'     => 'admincp',
 ], function() {
-    Route::get('category', function() {
-        return view('templates.admin.category.category');
-    });
-    Route::get('category/add', function() {
-        return view('templates.admin.category.addcategory');
-    });
-     Route::get('category/addchildren', function() {
-        return view('templates.admin.category.addcategorychildern');
-    });
-     Route::get('category/setdisplay',function(){
-        return view('templates.admin.category.setdisplay');
-     });
-     Route::get('category/edit',function(){
-        return view('templates.admin.category.editcategorychildren');
-      });
+  Route::get('category', function() {
+      return view('templates.admin.category.category');
+  });
+
+  Route::get('category/add', function() {
+      return view('templates.admin.category.addcategory');
+  });
+
+   Route::get('category/addchildren', function() {
+      return view('templates.admin.category.addcategorychildern');
+  });
+
+  Route::get('category/setdisplay',function(){
+      return view('templates.admin.category.setdisplay');
+   });
+
+  Route::get('category/edit',function(){
+      return view('templates.admin.category.editcategorychildren');
+  });
+
 });
 
 /**
- * Sougou Zyanaru Group API
- * Author: Rikkei Intern Pro Team
+ * ROUTE ADMIN API
  */
 Route::group([
   'namespace' =>'Api', 
-  'prefix' => config('admin.prefix.api')],
-function(){
-
+  'prefix' => config('admin.prefix.api')
+], function(){
+  /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
       /** Get List Roles **/
       Route::post('/', [
@@ -117,10 +133,10 @@ function(){
           'as'   => 'postDeleteRole'
       ]);
   });
-
+  /** router user api **/
   Route::group(['prefix' => '/user'], function(){
 
-    Route::post('/find', [
+    Route::get('/{search?}', [
         'uses' => 'UserController@actionFind',
         'as' => 'apiUserFind'
     ]);
@@ -143,7 +159,7 @@ function(){
         'as' => 'apiUserDelete'
     ]);
   });
-
+  /** router category api **/
   Route::group(['prefix' => '/category'], function(){
       // Get list users
       Route::get('/', [
@@ -168,32 +184,35 @@ function(){
           'as' => 'apiCategoryDelete'
       ]);
   });
-
-  Route::group(['prefix' => '/image'],function(){
-    // Get list users
-    Route::get('/find', [
-        'uses' => 'ImageController@actionFind',
-        'as' => 'apiImageFind'
+  /** router iamge api **/
+  Route::group(['prefix' => '/images'],function(){
+    
+    Route::get('/{search?}', [
+      'uses' => 'ImageController@actionFind',
+      'as' => 'apiImageFind'
     ]);
-    // Get user
+
     Route::get('/{id}', [
         'uses' => 'ImageController@actionFindOne',
         'as' => 'apiImageShow'
     ]);
+
     Route::post('/', [
       'uses' => 'ImageController@actionSave',
       'as' => 'apiImageSave'
     ]);
 
-    Route::post('/{id}', [
+    Route::put('/{id}', [
         'uses' => 'ImageController@actionUpdate',
         'as' => 'apiImageUpdate'
     ]);
-    Route::delete('/dele/{id}', [
+
+    Route::delete('/{id}', [
         'uses' => 'ImageController@actionDelete',
         'as' => 'apiImageDelete'
     ]);
   });
+
 });
 
 

@@ -14,12 +14,28 @@ class ImageService extends Service
 
 	public function find($request)
 	{ 
-
+    $result =  ImageRepository::getInstance()->find($request); 
+    try{
+      if(!empty($result)){
+        $res['data'] = $result;
+      }else {
+        throw new \Exception("404");
+      }
+    }catch(\Exception $e) {
+      $res['errors'] =$e->getMessage();
+    }
+    return $res;
 	}
    	
  	public function findOne($id)
   {	
-
+    try {
+      $res['data'] = ImageRepository::getInstance()->findOne($id);
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
+    }
+    return $res;
   }
 
   public function save($request)
@@ -38,8 +54,7 @@ class ImageService extends Service
         $res['errors']['status_code'] = empty($e->getCode()) ? $e->getCode() : 500; 
       }  
     }
-    return $res;
-    
+    return $res;  
 	}
 
   public function update($request, $id)
@@ -49,7 +64,13 @@ class ImageService extends Service
 
   public function delete($id)
   {
-
+    try{
+      $res['data'] = ImageRepository::getInstance()->delete($id);
+    }catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
+    }
+    return $res;
   }
 
 }

@@ -22,7 +22,7 @@
         <div class="col-md-12">
           <div class="box">
             <!-- /.box-header -->
-            <form role="form" method="post" ng-submit="addUser()">
+            <form role="form" method="post" id="main" ng-submit="addUser()">
             {{ csrf_field() }}
             <div class="box-body">
               <table class="table table-bordered">
@@ -35,7 +35,7 @@
                 <tr>
                   <td>
                     <div class="form-group">
-                        <input required ng-model="user.username" type="text" name="username" class="form-control" id="username" placeholder="Enter name">
+                        <input ng-model="user.username" type="text" name="username" class="form-control" id="username" placeholder="Enter name">
                         <label class="error"></label>
                     </div>
                   </td>
@@ -53,13 +53,13 @@
                   </td>
                   <td>
                    <div class="form-group">
-                        <input required ng-model="user.email" type="email" name="email" class="form-control" id="email" placeholder="Enter an email">
+                        <input ng-model="user.email" type="email" name="email" class="form-control" id="email" placeholder="Enter an email">
                         <label class="error"></label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
-                        <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" placeholder="Type your password">
+                        <input ng-model="user.password" type="password" name="password" class="form-control" id="password" placeholder="Type your password">
                         <label class="error"></label>
                     </div>
                   </td>

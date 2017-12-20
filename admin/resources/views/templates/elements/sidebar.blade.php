@@ -7,45 +7,50 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="active menu-open">
           <a href="#">
-            <i class="fa fa-barcode"></i> <span>発売号登録
-(Số phát hành)</span>
+            <i class="fa fa-barcode"></i> <span>{{trans('web.Registration_releasenumber')}}
+</span>
+            {{--  <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>  --}}
           </a>
         </li>
         <li class="">
           <a href="#">
             <i class="fa fa-pencil"></i>
-            <span>記事一覧
-(Bài viết)</span>
+            <span>{{trans('web.list_archive')}}
+</span></span>
+            {{--  <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>  --}}
           </a>
         </li>
         <li class="">
           <a href="/admincp/category">
             <i class="fa fa-newspaper-o"></i>
-            <span>カテゴリー管理(category)</span>
+            <span>{{trans('web.category')}}</span>
           </a>
         </li>
         <li class="">
           <a href="#">
             <i class="fa fa-picture-o"></i>
-            <span>画像管理(images)</span>
+            <span>{{trans('web.images')}}</span>
           </a>
         </li>
         <li class="">
           <a href="#">
             <i class="fa fa-users"></i>
-            <span>サイドバー管理(本番)
-(Hội viên)</span>
+            <span>{{trans('web.sidebar_management')}}</span>
           </a>
         </li>
         <li class="">
           <a href="{{ route('webUserIndex') }}">
             <i class="fa fa-user-o"></i>
-            <span>ユーザー管理(Users)
-</span>
+            <span>{{trans('web.user_management')}}</span>
           </a>
         </li>
-        <li class="header">MORE</li>
-        <li><a href="{{ route('getLogout') }}"><i class="fa fa-circle-o text-red"></i> <span>ログアウト(Logout)</span></a></li>
+
+        <li><a href="{{ route('getLogout') }}"><i class="fa fa-circle-o text-red"></i> <span>{{trans('web.logout')}}</span></a></li>
+
       </ul>
     </section>
     <!-- /.sidebar -->

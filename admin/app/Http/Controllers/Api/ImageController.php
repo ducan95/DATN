@@ -11,17 +11,51 @@ use Extention\Api;
  * Time: 15:00
  */
 class ImageController extends \App\Http\Controllers\WebApiController
-{   
-  public function actionFind(Request $request)
+{  
+   /**
+   * search image by keyword
+   * @param  Request $request
+   * @return Response
+   */ 
+  public function actionFind($search = '', Request $request)
   { 
-    
+    $res = ImageService::getInstance()->find($request); 
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data']]);
+    }else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => 404,
+        'errors' => $res['errors']
+      ]);
+    }
   }
+  /**
+   *  search image by id_image
+   * @param  $id
+   * @return Response
+   */
 
   public function actionFindOne($id)
   {   
-   
+    $res = ImageService::getInstance()->FindOne($id);
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data'] ]);
+    } else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg']
+      ]);
+    }
   }
 
+  /**
+   * save new image 
+   *
+   * @param  Request $request
+   * @return Response
+   */
   public function actionSave(Request $request)
   {  
     $resImage = ImageService::getInstance()->save($request);
@@ -35,15 +69,32 @@ class ImageController extends \App\Http\Controllers\WebApiController
       ])  ;
     }
   }
-
+  /**
+   * update  image 
+   * @param  Request $request
+   * @param  $id
+   * @return Response
+   */
   public function actionUpdate(Request $request, $id)
   {   
     
   }
-
+  /**
+   * delete image 
+   * @param  $id
+   * @return Response
+   */
   public function actionDelete($id)
   {   
-     
-
+    $res =  ImageService::getInstance()->delete($id);
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data'], 'status_code' => 204]);
+    }else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg']
+      ]);
+    }
   }
 }
