@@ -3,6 +3,7 @@ namespace WebService\Service\Image;
 use WebService\Repository\Image\ImageRepository;
 use WebService\Service\Service;
 use Validator;
+use Extention\Media;
 /**
  * Created by SublimeText.
  * User: Huynh
@@ -11,18 +12,32 @@ use Validator;
  */
 class ImageService extends Service
 {
+  use Media; 
+
 
 	public function find($request)
 	{ 
-    $result =  ImageRepository::getInstance()->find($request); 
-    try{
-      if(!empty($result)){
-        $res['data'] = $result;
-      }else {
-        throw new \Exception("404");
+    try {
+      $dataReq = [];
+      if(!empty($request->query('name')) ) {
+        $dataReq['name'] = $request->query('name');
       }
-    }catch(\Exception $e) {
-      $res['errors'] =$e->getMessage();
+      if(!empty($request->query('description')) ) {
+        $dataReq['description'] = $description;
+      }
+      if(!empty($request->query('path')) ) {
+        $dataReq['path'] = $request->query('path');
+      }
+      if(!empty($request->query('path_paint')) ) {
+        $dataReq['path_paint'] = $request->query('path_paint');
+      }
+      if(!empty($request->query('paginate')) ) {
+        $dataReq['paginate'] = $request->query('paginate');
+      }
+      $res['data'] = ImageRepository::getInstance()->find($dataReq); 
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
     }
     return $res;
 	}
@@ -33,42 +48,47 @@ class ImageService extends Service
       $res['data'] = ImageRepository::getInstance()->findOne($id);
     } catch(\Exception $e) {
       $res['errors']['msg'] = $e->getMessage();
-      $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
+      $res['errors']['status_code'] = 500;
     }
     return $res;
   }
 
   public function save($request)
   {	
+     $res['data'] = $this->createImageBlur($request->file('file')); return $res;
+    /*
+    return $this->createImageBlur($request->file('file'));
     $validator = Validator::make($request->all(), [
-      'file' => 'required',
-    ],[/*message ja */]);
+      'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ],[
+      'file.required'=> trans('validate.image_required'),
+    ]);
     if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
       $res['errors']['status_code'] = 400; 
     } else {
       try {
-        $res['data'] = ImageRepository::getInstance()->save($request);
+        $dataReq = $this->saveImage( $request->file('file'), config('admin.images.name.media') );
+        $res['data'] = ImageRepository::getInstance()->save($dataReq);  
       } catch(\Expention $e) {
         $res['errors']['msg'] = $e->getMessage();
-        $res['errors']['status_code'] = empty($e->getCode()) ? $e->getCode() : 500; 
+        $res['errors']['status_code'] =  500; 
       }  
     }
-    return $res;  
+    return $res;  */
 	}
 
   public function update($request, $id)
-  {   
-    
+  {      
 	}
 
   public function delete($id)
   {
-    try{
+    try {
       $res['data'] = ImageRepository::getInstance()->delete($id);
-    }catch(\Exception $e) {
+    } catch(\Exception $e) {
       $res['errors']['msg'] = $e->getMessage();
-      $res['errors']['status_code'] = $e->getCode() != 0 ? $e->getCode() : 404;
+      $res['errors']['status_code'] = 500;
     }
     return $res;
   }

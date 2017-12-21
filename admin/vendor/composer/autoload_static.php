@@ -16,7 +16,6 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -356,16 +355,15 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\IWebApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/IWebApiController.php',
         'App\\Http\\Controllers\\IWebController' => __DIR__ . '/../..' . '/app/Http/Controllers/IWebController.php',
         'App\\Http\\Controllers\\Requests\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Controllers/Requests/LoginRequest.php',
         'App\\Http\\Controllers\\WebApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebApiController.php',
         'App\\Http\\Controllers\\WebController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebController.php',
+        'App\\Http\\Controllers\\Web\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/AdminController.php',
         'App\\Http\\Controllers\\Web\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/web/CategoryController.php',
-        'App\\Http\\Controllers\\Web\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/web/HomeController.php',
-        'App\\Http\\Controllers\\Web\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/web/RolesController.php',
-        'App\\Http\\Controllers\\Web\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/web/UserController.php',
+        'App\\Http\\Controllers\\Web\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/RolesController.php',
+        'App\\Http\\Controllers\\Web\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',

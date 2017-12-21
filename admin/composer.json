@@ -26,10 +26,8 @@
             "App\\": "app/",
             "Extention\\": "Extention/",
             "WebService\\": "WebService/"
-        },
-        "files" : [
-            "app/helpers.php"  
-        ]
+        }
+      
     },
     "autoload-dev": {
         "psr-4": {
