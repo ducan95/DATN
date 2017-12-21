@@ -86,6 +86,10 @@ Route::group([
           'uses' => 'CategoryController@viewAddChildren',
           'as' =>'webCategoryAddChildren'
       ]);
+       Route::get('/editparent',[
+          'uses' => 'CategoryController@viewEditParent',
+          'as' =>'webCategoryEditParent'
+      ]);
 
 
       Route::get('/edit',[

@@ -39,8 +39,8 @@
               <div class="form-group">
               	<label class="col-sm-3 control-label">Parent Name</label>
               	<div class="col-sm-9">
-              		<input type="text" ng-model="category.name"  class="form-control">
-                  <input type="hidden" ng-model="categorychil.id_category" ng-value="@{{ category.id_category}}" name="id_category">
+              		<input type="text" ng-model="category.name"  class="form-control" disabled>
+                  <input type="hidden" ng-model="categorychil.id_category" ng-value="id_category" name="id_category">
               	</div>
               </div>
               <div class="row" style="padding-bottom: 20px">

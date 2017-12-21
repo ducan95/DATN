@@ -32,9 +32,10 @@ class CategoryService extends Service
       $res['errors']['status_code'] = 400;
     } else {
       try{
-        $res['data']= CategoryRepository::getInstance()->save($request);
+        $res['data']= CategoryRepository::getInstance()->save($request->all());
       }catch(\Exception $e){
-        $res['errors']= $e ->getMessage();
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
       }
     }
     return $res;
@@ -79,17 +80,12 @@ class CategoryService extends Service
   }
 
   public function listOne($id){
-    $result=CategoryRepository::getInstance()->listOne($id);
-      try{
-        if(!empty($result)){
-        $res['data'] = $result;
-      }
-      else{
-        throw new \Exception('No Record');
-      }
-      }catch(\Exception $e) {
-        $res['errors'] = $e->getMessage();
-      }
+   try {
+      $res['data'] = CategoryRepository::getInstance()->listOne($id);
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
     return $res;
   }
 
@@ -117,6 +113,7 @@ class CategoryService extends Service
       $validator = Validator::make($request->all(), [
       'name' => 'required|max:255 ',
       'slug' => 'required',
+      
     ],[]);
     if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
@@ -127,7 +124,7 @@ class CategoryService extends Service
       }catch(\Exception $e){
         $res['errors']= $e ->getMessage();
       }
-    }
+     } 
     return $res;
     }
 

@@ -39,6 +39,8 @@ class CategoryRepository extends Repository
   {
     try{
       $data=$dataReq->all();
+      // $global_status = ((isset($data['global_status']))?1:0);
+      // $menu_status = ((isset($data['menu_status']))?1:0);
       $category=Category::find($id);
       $category->fill([
         'name' => $data['name'],
@@ -46,7 +48,7 @@ class CategoryRepository extends Repository
         'is_deleted' => false,
         'global_status' => $data['global_status'],
         'menu_status' => $data['menu_status'],
-        'id_category_parent' => $data['id_category_parent'],
+        'id_category_parent' => 0
       ]);
       $category->save();
       return $category;
@@ -72,7 +74,7 @@ class CategoryRepository extends Repository
   public function list()
   { 
     try{
-      $category=Category::where('id_category_parent','=',0)->get();
+      $category=Category::where('id_category_parent','=',0)->orderBy('id_category', 'asc')->get();
       return $category;
     }
     catch(\Exception $e){
@@ -112,8 +114,8 @@ class CategoryRepository extends Repository
       try{
       $data = $dataReq->all();
       $category = new Category();
-      $global_status = ((isset($dataReq['global_status']))?1:0);
-      $menu_status = ((isset($dataReq['menu_status']))?1:0);
+      $global_status = ((isset($data['global_status']))?1:0);
+      $menu_status = ((isset($data['menu_status']))?1:0);
       $category->fill([
         'name' => $dataReq['name'],
         'slug' => $dataReq['slug'],

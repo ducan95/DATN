@@ -19,7 +19,7 @@
                   <td style="cursor: pointer;" ng-click="changeToCategoryChil(category.id_category)">@{{ category.id_category }}</td>
                   <td style="cursor: pointer;" ng-click="changeToCategoryChil(category.id_category)">@{{ category.name }}</td>
                   <td>
-                    	<a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Update</button></a>                
+                    	<a href="" ng-click="redirecteditparent(category.id_category)"><button class="btnMize btn btn-primary">Update</button></a>                
                   </td>
                   <td>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">

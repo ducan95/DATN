@@ -1,6 +1,6 @@
 @extends('admin.templates.master')
 @section('content')
-
+<div>
 	<section class="content-header">
 		<h2>List Category</h2>
 	</section>
@@ -24,11 +24,22 @@
 	                  </div>
 	                </div>
 	                <div class="form-group">
+		              	<label class="col-sm-3 control-label">Global Status</label>
+		              	<div class="col-sm-9">
+		              		<input type="checkbox" name="global_status" value="1">
+		              	</div>
+		              </div>
+		              <div class="form-group">
+		              	<label class="col-sm-3 control-label">Menu Status</label>
+		              	<div class="col-sm-9">
+		              		<input type="checkbox" name="global_status" value="1">
+		              	</div>
+		              </div>
+	                <div class="form-group">
 	                	<label class="col-sm-3 control-label">Parent Name</label>
 	                	<div class="col-sm-9">
 	                		<select  class="form-control">
 	                			<option>ADM</option>
-	                			<option>Pop</option>
 	                		</select>
 	                	</div>
 	                </div>
@@ -66,6 +77,7 @@
 			</div>
 		</div>
 	</section>
+</div>	
 
 	@endsection  
 	              
