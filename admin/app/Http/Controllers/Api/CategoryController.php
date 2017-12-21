@@ -25,6 +25,18 @@ class CategoryController extends \App\Http\Controllers\WebApiController
         ]);
       }
   }
+  public function actionListOne($id){
+    $res = CategoryService::getInstance()->listOne($id); 
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 404,
+          'errors' => $res['errors']
+        ]);
+      }
+  }
 
   public function actionSave(Request $request)
   {
@@ -84,6 +96,19 @@ class CategoryController extends \App\Http\Controllers\WebApiController
           'errors' => $res['errors']
         ]);
       }
+  }
+  public function actionSaveChil($request){
+    $res=CategoryService::getInstance()->saveChil($request);
+    if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 500,
+          'errors' => $res['errors']
+        ]);
+      } 
+
   }
 
 }

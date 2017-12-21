@@ -10,20 +10,20 @@
             <div class="box-body no-padding">
               <table class="table table-striped">
                 <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Tên danh mục</th>
-                  <th>Sủa</th>
-                  <th style="width: 40px">Xóa</th>
+                  <th style="width: 10px">ID</th>
+                  <th>Name</th>
+                  <th>Update</th>
+                  <th style="width: 40px">Delete</th>
                 </tr>
                 <tr ng-repeat='category in categories'> 
                   <td style="cursor: pointer;" ng-click="changeToCategoryChil(category.id_category)">@{{ category.id_category }}</td>
                   <td style="cursor: pointer;" ng-click="changeToCategoryChil(category.id_category)">@{{ category.name }}</td>
                   <td>
-                    	<a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Sửa</button></a>                
+                    	<a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Update</button></a>                
                   </td>
                   <td>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
-                        Xoa
+                        Delete
                     </button>
                   </td>
                     <div id="myModal"  class="modal fade" tabindex="-1" role="dialog">
@@ -63,11 +63,11 @@
                   <th>Sửa</th>
                   <th style="width: 40px">Xóa</th>
                 </tr>
-                <tr ng-repeat='category in categoryChildren'>
-                  <td>@{{ category.id_category }}</td>
-                  <td>@{{ category.name}}</td>
+                <tr ng-repeat='categoryChil in categoryChildren'>
+                  <td>@{{ categoryChil.id_category }}</td>
+                  <td>@{{ categoryChil.name}}</td>
                   <td>
-                      <a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Sửa</button></a>                
+                      <a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Update</button></a>                
                   </td>
                   <td>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
@@ -81,7 +81,7 @@
             <!-- /.box-body -->
           </div>
           <div>
-            <a href="{{ route('webCategoryAddChildren') }}"><button type="button" class="btn btn-primary">Add Category Children</button></a>
+            <a href="" ng-click="redirectAddChil(categoryParent.id_category_parent)"><button   type="button" class="btn btn-primary">Add Category Children</button></a>
               
           </div>
           <!-- /.box -->

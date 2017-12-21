@@ -11,6 +11,6 @@ interface IRepository
   public function save($request);
   public function update($request, $id);
   public function delete($id);
-  public function find($dataRes);
+  public function find($request);
   public function findOne($id);
 }

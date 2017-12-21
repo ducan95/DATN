@@ -17,7 +17,7 @@ SOUGOU_ZYANARU_MODULE
     //$window.location.href = '/admincp/user/edit/'+id_user;
     $scope.id_user = id_user;
     console.log($scope.id_user);
-    $window.location.href = '/admincp/user/edit';
+    $window.location.href = '/admin/user/edit';
    
   }
 

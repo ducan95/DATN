@@ -159,12 +159,16 @@ Route::group([
 
 
     Route::group(['prefix' => '/category'], function(){
-        // Get list users
+        
         Route::get('/list', [
             'uses' => 'CategoryController@actionList',
             'as' => 'apiCategoryList'
         ]);
-        // Get user
+        Route::get('/listone/{id_category}',[
+          'uses' => 'CategoryController@actionListOne',
+            'as' => 'apiCategoryListOne'
+        ]);
+        
         Route::get('/find/{id_category}', [
             'uses' => 'CategoryController@actionFindOne',
             'as' => 'apiCategoryShow'
@@ -172,6 +176,10 @@ Route::group([
         Route::post('/add', [
             'uses' => 'CategoryController@actionSave',
             'as' => 'apiCategorySave'
+        ]);
+        Route::post('/addChil',[
+            'uses' => 'CategoryController@actionSaveChil',
+            'as'   => 'apiCategorySaveChil'
         ]);
         Route::put('/{id}', [
             'uses' => 'CategoryController@actionUpdate',

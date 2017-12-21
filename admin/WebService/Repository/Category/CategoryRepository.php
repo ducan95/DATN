@@ -81,6 +81,20 @@ class CategoryRepository extends Repository
     }
   }
 
+  public function listOne($id){
+    try{
+      $category = Category::find($id);
+      if(!empty($category)) {
+        return  $category;
+      } else {
+          throw new \Exception("404");
+      }
+    }catch(\Exception $e){ 
+        throw $e;
+    }
+  }
+
+
   public function findOne($id)
   {
     try{
@@ -100,6 +114,27 @@ class CategoryRepository extends Repository
   public function find($dataRes){
 
   }
+  public function saveChil($request){
+      try{
+      $data = $request->all();
+      $category = new Category();
+      $global_status = ((isset($data['global_status']))?1:0);
+      $menu_status = ((isset($data['menu_status']))?1:0);
+      $category->fill([
+        'name' => $data['name'],
+        'slug' => $data['slug'],
+        'global_status' => $global_status,
+        'menu_status' => $menu_status,
+        'is_deleted' => false,
+        'id_category_parent' => $data['id_category_parent']
+      ]);
+      $category->save() ;
+      return $category;
+    }
+    catch(\Exception  $e){ 
+      throw  $e;  
+    }
+    }
 
 }
     
