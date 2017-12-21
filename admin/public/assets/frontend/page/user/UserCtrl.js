@@ -25,7 +25,12 @@ SOUGOU_ZYANARU_MODULE
 
   //Redirect edit page
   $scope.redirectEdit = function (id_user) { 
-    $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user/edit#id=' + id_user;
+    //$window.location.href = '/admincp/user/edit/'+id_user;
+    $scope.id_user = id_user;
+    console.log($scope.id_user);
+    $window.location.href = '/admin/user/edit';
+   
+
   }
 
   // Delete users
