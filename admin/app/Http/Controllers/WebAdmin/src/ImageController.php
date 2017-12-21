@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebAdmin\WebController as WebController;
 
-class UserController extends \App\Http\Controllers\WebAdmin\WebController
+class ImageController extends WebController
 {
     
     public function viewIndex()

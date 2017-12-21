@@ -47,12 +47,12 @@ Route::group([
   'prefix'     => config('admin.prefix.web'),
   'namespace'  => 'WebAdmin\src'
 ], function() {
-  /** home **/
+
   Route::get('/',[
     'uses' => 'AdminController@index',
     'as' => 'getIndex'
   ]);
-  /** router web user **/
+
   Route::group([ 'prefix' => 'user' ],function(){
 
       Route::get('/',[
@@ -95,6 +95,26 @@ Route::group([
           'as' =>'webCategorEdit'
       ]);
   });
+
+  Route::group([ 'prefix' => 'images'], function(){
+    
+    Route::get('/', [
+      'uses' => 'ImageController@viewIndex',
+      'as' => 'webImageIndex'
+    ]);
+
+    Route::get('/', function(){
+      'uses' => 'ImageController@viewAdd',
+      'as' => 'webImageAdd'
+    });
+
+    Route::get('/edit', function(){
+      'uses' => 'ImageController@viewEdit',
+      'as' => 'webImageEdit'
+    });
+
+  })
+
 });
 /**
  * ROUTE ADMIN API
