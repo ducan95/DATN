@@ -69,8 +69,10 @@
 
 	@endsection  
 	              
-		
-			
+@section('bottom-js')
+<!-- Toggle -->		
+<script src="{{ asset('assets/base/bower_components/bootstrap/dist/js/bootstrap-toggle.min.js') }}"></script>
+@endsection 			
 
                 
 

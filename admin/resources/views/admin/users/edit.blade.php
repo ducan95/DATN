@@ -39,29 +39,28 @@
                     <td>
                       <div class="form-group">
                           <input ng-model="user.username" type="text" name="username" class="form-control" id="username" value="@{{ user.username }}">
-                          <label class="error">@{{ error.username[0] }}</label>
+                          <label class="error" ng-if="error.username[0] != null">@{{ error.username[0] }}</label>
                       </div>
                     </td>
                     <td>
                       <div class="form-group">
-                          <select ng-model="user.id_role" name="id_role" class="form-control">
-                              <option value="1">Admin</option>
-                              <option value="2">Mod</option>
-                              <option value="3">User</option>
+                          <select ng-init="user.role_code=''" name="role_code" class="form-control" ng-model="user.role_code">
+                            <option value="">Chọn quyền</option>
+                            <option ng-repeat="role in roles" value="@{{ role.role_code }}">@{{ role.name }}</option>
                           </select>
-                          <label class="error"></label>
+                          <label class="error" ng-if="error.role_code[0] != null"></label>
                       </div>
                     </td>
                     <td>
                     <div class="form-group">
                           <input ng-model="user.email" type="email" name="email" class="form-control" id="email" value="@{{ user.email }}">
-                           <label class="error">@{{ error.email[0] }}</label>
+                           <label class="error" ng-if="error.email[0] != null">@{{ error.email[0] }}</label>
                       </div>
                     </td>
                     <td>
                       <div class="form-group">
                           <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" value="">
-                          <label class="error">@{{ error.password[0] }}</label>
+                          <label class="error" ng-if="error.password[0] != null">@{{ error.password[0] }}</label>
                       </div>
                     </td>
                   </tr>
@@ -70,8 +69,8 @@
                 <div class="row" style="margin-top: 30px;">
                   <div class="col-md-4"></div>
                   <div class="col-md-4 text-center">
-                      <a href="" ng-click="updateUser(user)" name="submit" class="btn btn-primary" style="margin-right:5px;">Update</a>
-                      <a href="" class="btn btn-primary" style="margin-left:5px;">Cancel</a>
+                      <button type="submit" href="" ng-click="updateUser(user)" name="submit" class="btn btn-primary" style="margin-right:5px;">Update</button>
+                      <button type="reset" href="" class="btn btn-primary" style="margin-left:5px;">Cancel</button>
                   </div>
                   <div class="col-md-4"></div>
                 </row>
@@ -93,7 +92,10 @@
 @endsection
 
 @section('bottom-js')
+<!-- Validatejs -->
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/user/UserCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/RoleResource.js') }}"></script>
 @endsection 

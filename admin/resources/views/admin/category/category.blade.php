@@ -96,6 +96,8 @@
 @stop  
 
 @section('bottom-js')
+<!-- Toggle -->		
+<script src="{{ asset('assets/base/bower_components/bootstrap/dist/js/bootstrap-toggle.min.js') }}"></script>
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>

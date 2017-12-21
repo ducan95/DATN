@@ -104,12 +104,12 @@ Route::group([
   /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
       /** Get List Roles **/
-      Route::get('/', [
+     /*  Route::get('/', [
           'uses' => 'RolesController@actionList',
           'as'   => 'apiListRole'
       ]);
-      
-      Route::get('/{id}', [
+       */
+      Route::get('/{search?}', [
           'uses' => 'RolesController@actionFind',
           'as'   => 'apiFindRole'
       ]);

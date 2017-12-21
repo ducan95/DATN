@@ -1,0 +1,26 @@
+{
+  "name": "sougou_zyanaru",
+  "version": "1.0.0",
+  "description": "Newspaper Adults",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "Build less"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/InternTeam2017/sougou_zyanaru.git"
+  },
+  "keywords": [
+    "SougouZyanaru"
+  ],
+  "author": "PHP InternShip Pro Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/InternTeam2017/sougou_zyanaru/issues"
+  },
+  "homepage": "https://gitlab.com/InternTeam2017/sougou_zyanaru#README",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2"
+  }
+}

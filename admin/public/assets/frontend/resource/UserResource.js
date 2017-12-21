@@ -17,7 +17,7 @@ SOUGOU_ZYANARU_MODULE
 })
 .service('popupService',function($window){
     this.showPopup=function(message){
-        return $window.confirm(message);
+      return $window.confirm(message);
     }
 });
 

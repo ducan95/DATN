@@ -36,31 +36,28 @@
                   <td>
                     <div class="form-group">
                         <input ng-model="user.username" type="text" name="username" class="form-control" id="username" placeholder="Enter name">
-                        <label class="error"></label>
+                        <label class="error" ng-if="error.username[0] != null">@{{ error.username[0] }}</label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
-                        {{--  <label>Chọn Q</label>  --}}
-                        <select ng-init="user.id_role=''" ng-model="user.id_role" name="id_role" class="form-control">
-                            <option value="">Chọn quyền</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Mod</option>
-                            <option value="3">User</option>
+                        <select ng-init="user.role_code=''" name="role_code" class="form-control" ng-model="user.role_code">
+                          <option value="">Chọn quyền</option>
+                          <option ng-repeat="role in roles" value="@{{ role.role_code }}">@{{ role.name }}</option>
                         </select>
-                        <label class="error"></label>
+                        <label class="error" ng-if="error.role_code[0] != null">@{{ error.role_code[0] }}</label>
                     </div>
                   </td>
                   <td>
                    <div class="form-group">
-                        <input ng-model="user.email" type="email" name="email" class="form-control" id="email" placeholder="Enter an email">
-                        <label class="error"></label>
+                        <input ng-model="user.email" type="text" name="email" class="form-control" id="email" placeholder="Enter an email">
+                        <label class="error" ng-if="error.email[0] != null">@{{ error.email[0] }}</label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
                         <input ng-model="user.password" type="password" name="password" class="form-control" id="password" placeholder="Type your password">
-                        <label class="error"></label>
+                        <label class="error" ng-if="error.password[0] != null">@{{ error.password[0] }}</label>
                     </div>
                   </td>
                 </tr>
@@ -69,7 +66,7 @@
               <div class="row" style="margin-top: 30px;">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 text-center">
-                    <button type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">Add</button>
+                    <button ng-click="" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">Add</button>
                     <button type="reset" class="btn btn-primary" style="margin-left:5px;">Cancel</button>
                 </div>
                  <div class="col-md-4"></div>
@@ -87,15 +84,13 @@
     </section>
 
   </div> <!-- /.ng-controller -->
-  <form action="{{ route('apiImageSave') }}" method="POST" enctype="multipart/form-data" >
-    {{csrf_field()}}
-    <input type="file" name="file" class="file">
-    <input type="submit" name="">
-  </form>
 @endsection    
 
 @section('bottom-js')
+<!-- Validatejs -->
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/user/UserCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/RoleResource.js') }}"></script>
 @endsection 

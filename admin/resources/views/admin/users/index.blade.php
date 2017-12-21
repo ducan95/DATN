@@ -35,10 +35,10 @@
                   <th>Password</th>
                   <th>Chức năng</th>
                 </tr>
-                <tr ng-repeat="user in users">
+                <tr ng-repeat="user in users | orderBy : 'id_user'">
                   <td>@{{ user.id_user }}</td>
                   <td>@{{ user.username }}</td>
-                  <td>@{{ user.id_role }}</td>
+                  <td ng-repeat="role in roles" ng-if="user.role_code == role.role_code">@{{ role.name }}</td>
                   <td>@{{ user.email }}</td>
                   <td>**********</td>
                   <td>
@@ -64,4 +64,5 @@
 <script src="{{ asset('assets/theme/js/edit-table.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/user/UserCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/RoleResource.js') }}"></script>
 @endsection 
