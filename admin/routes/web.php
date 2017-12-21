@@ -223,7 +223,12 @@ Route::group([
 });
 
     
-
+Route::group(['prefix' => 'member', 'namespace' => 'WebClient'],function(){
+  Route::get('/',[
+    'uses'  => 'MemberController@index',
+    'as'    => 'webClientMemberIndex'
+  ]);
+});
 
 
 
