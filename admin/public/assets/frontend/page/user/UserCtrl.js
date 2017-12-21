@@ -17,20 +17,13 @@ SOUGOU_ZYANARU_MODULE
     RoleService.find({}, function (res) {
     if (typeof res != "undefined") {
       $scope.roles = res.data;
-      //console.log($scope.roles);
     }
   })
 
-
-
   //Redirect edit page
   $scope.redirectEdit = function (id_user) { 
-    //$window.location.href = '/admincp/user/edit/'+id_user;
+    $window.location.href = '/admin/user/edit#id='+id_user;
     $scope.id_user = id_user;
-    console.log($scope.id_user);
-    $window.location.href = '/admin/user/edit';
-   
-
   }
 
   // Delete users
@@ -39,11 +32,16 @@ SOUGOU_ZYANARU_MODULE
       var user = UserService.get({ id: id_user }, function (res) {
         if (typeof res != "undefined") {
           var user = res.data;
-          UserService.delete({ id: user.id_user},function () {
-            console.log('Deleting user with id ' + id_user);
-            //Ridirect
-            $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
-          });
+          // Check delete admin
+          if (user.role_code == 's_admin') {
+            alert('削除できません。');
+          } else {
+            UserService.delete({ id: user.id_user }, function () {
+              console.log('Deleting user with id ' + id_user);
+              //Ridirect
+              $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
+            });
+          }
         }
       });
     }
@@ -60,7 +58,6 @@ SOUGOU_ZYANARU_MODULE
   RoleService.find({}, function (res) {
     if (typeof res != "undefined") {
       $scope.roles = res.data;
-      //console.log($scope.roles);
     }
   });  
   
@@ -105,7 +102,6 @@ SOUGOU_ZYANARU_MODULE
         $scope.user.$save(function () {
           // Redirect
           $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user';
-          console.log('Thêm thành công nà, ahihi');
         });
       }
   };
@@ -191,7 +187,6 @@ SOUGOU_ZYANARU_MODULE
   $scope.loadUser = function () { 
     UserService.get({ id: $scope.id },function(res) {
       $scope.user = res.data;
-      //console.log($scope.user);
     });
   };
 
