@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','status', 'is_deleted', 'id_role',
+        'username', 'email', 'password','status', 'is_deleted', 'role_code',
     ];
 
     // Redifine primary key

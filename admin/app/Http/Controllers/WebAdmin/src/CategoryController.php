@@ -11,7 +11,7 @@ class CategoryController extends \App\Http\Controllers\WebAdmin\WebController
     
     public function viewIndex()
     {
-        return view('templates.admin.category.category');
+        return view('admin.category.category');
     }
 
     public function viewPost()
@@ -21,7 +21,7 @@ class CategoryController extends \App\Http\Controllers\WebAdmin\WebController
 
     public function viewEdit()
     {
-        return view('templates.admin.category.editcategorychildren');
+        return view('admin.category.editcategorychildren');
     }
 
     public function viewDelete()
@@ -31,11 +31,11 @@ class CategoryController extends \App\Http\Controllers\WebAdmin\WebController
 
     public function viewAddChildren()
     {
-        return view('templates.admin.category.addcategorychildern');
+        return view('admin.category.addcategorychildern');
     }
     public function viewAdd()
     {
-    	return view('templates.admin.category.addcategory');    
+    	return view('admin.category.addcategory');    
     }
     
     public function viewFind()

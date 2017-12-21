@@ -2,7 +2,9 @@
 namespace App\Http\Controllers\Api\src;
 use WebService\Service\Roles\RolesService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\WebApiController as WebApiController;
+use Extention\ApiRequest;
+use Extention\Api;
+use App\Http\Controllers\Api\WebApiController as WebApiController; 
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -11,17 +13,40 @@ use App\Http\Controllers\Api\WebApiController as WebApiController;
  */
 class RolesController extends WebApiController
 {	
-    public function actionList()
-    {	
-    	return RolesService::getInstance()->list();
-    }
+  
+  public function actionList()
+  {	
+    return RolesService::getInstance()->list();
+  }
 
-    public function actionFind($id)
-    {
-        return RolesService::getInstance()->find($id);
-    }
 
-    public function actionSave(Request $request)
+  /**
+   * search Role by keyword
+   *
+   * @param  Request $request
+   * @return Response
+   */  
+  public function actionFind($search = '', Request $request)
+  { 
+    $res = RolesService::getInstance()->find($request); 
+    if (!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data']]);
+    } else {
+      return Api::response([ 
+        'is_success'  => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors'      => $res['errors']['msg']
+      ]);
+    }
+  }
+
+  public function actionFindOne($id)
+  {
+    return RolesService::getInstance()->findOne($id);
+  }
+
+
+  public function actionSave(Request $request)
     {   
     	$this->validate($request,[
             'name' => 'required |min:6 |max:32'

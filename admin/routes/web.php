@@ -13,8 +13,6 @@
 Route::pattern('id', '[0-9]+');
 Route::pattern('search', '[A-Za-z]+');
 
-
-
 /**
  * ROUTE LOGIN
  */  
@@ -126,12 +124,12 @@ Route::group([
   /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
       /** Get List Roles **/
-      Route::get('/', [
+     /*  Route::get('/', [
           'uses' => 'RolesController@actionList',
           'as'   => 'apiListRole'
       ]);
-      
-      Route::get('/{id}', [
+       */
+      Route::get('/{search?}', [
           'uses' => 'RolesController@actionFind',
           'as'   => 'apiFindRole'
       ]);
@@ -172,36 +170,46 @@ Route::group([
         'uses' => 'UserController@actionUpdate',
         'as' => 'apiUserUpdate'
     ]);
+    
     Route::delete('/{id}', [
         'uses' => 'UserController@actionDelete',
         'as' => 'apiUserDelete'
     ]);
   });
 
-  Route::group(['prefix' => '/category'], function(){
-      // Get list users
-      Route::get('/list', [
-          'uses' => 'CategoryController@actionList',
-          'as' => 'apiCategoryList'
-      ]);
-      // Get user
-      Route::get('/find/{id_category}', [
-          'uses' => 'CategoryController@actionFindOne',
-          'as' => 'apiCategoryShow'
-      ]);
-      Route::post('/add', [
-          'uses' => 'CategoryController@actionSave',
-          'as' => 'apiCategorySave'
-      ]);
-      Route::put('/{id}', [
-          'uses' => 'CategoryController@actionUpdate',
-          'as' => 'apiCategoryUpdate'
-      ]);
-      Route::delete('/{id}', [
-          'user' => 'CategoryController@actionDelete',
-          'as' => 'apiCategoryDelete'
-      ]);
-  });
+
+    Route::group(['prefix' => '/category'], function(){
+        
+        Route::get('/', [
+            'uses' => 'CategoryController@actionList',
+            'as' => 'apiCategoryList'
+        ]);
+        Route::get('/{id}',[
+          'uses' => 'CategoryController@actionListOne',
+            'as' => 'apiCategoryListOne'
+        ]);
+        
+        Route::get('/categorychildren/{id}', [
+            'uses' => 'CategoryController@actionFindOne',
+            'as' => 'apiCategoryShow'
+        ]);
+        Route::post('/add', [
+            'uses' => 'CategoryController@actionSave',
+            'as' => 'apiCategorySave'
+        ]);
+        Route::post('/addchildren',[
+            'uses' => 'CategoryController@actionSaveChil',
+            'as'   => 'apiCategorySaveChil'
+        ]);
+        Route::put('/{id}', [
+            'uses' => 'CategoryController@actionUpdate',
+            'as' => 'apiCategoryUpdate'
+        ]);
+        Route::delete('/{id}', [
+            'user' => 'CategoryController@actionDelete',
+            'as' => 'apiCategoryDelete'
+        ]);
+    });
 
 
   Route::group(['prefix' => '/images'],function(){
@@ -235,6 +243,13 @@ Route::group([
 });
 
     
+Route::group(['prefix' => 'member', 'namespace' => 'WebClient'],function(){
+  Route::get('/',[
+    'uses'  => 'MemberController@index',
+    'as'    => 'webClientMemberIndex'
+  ]);
+});
+
 
 
 

@@ -2,6 +2,7 @@
 namespace WebService\Service\Roles;
 use WebService\Repository\Roles\RolesRepository;
 use WebService\Service\Service;
+use Validator;
 
 /**
  * Created by PhpStorm.
@@ -16,11 +17,42 @@ class RolesService extends Service
         return RolesRepository::getInstance()->list();
     }
 
-    public function find($id)
-    {   
-        
-        return RolesRepository::getInstance()->find($id);
+    /**
+     * Find function
+     * @pram 
+     * Return res
+     */
+    public function find($request)
+	{ 
+    try {
+      //Lấy dữ liệu
+      $dataReq = [];
+      if(!empty($request->query('name')) ) {
+        $dataReq['name'] = $request->query('name');
+      }
+      if(!empty($request->query('role_code')) ) {
+        $dataReq['role_code'] = $request->query('role_code');
+      }
+      $res['data'] = RolesRepository::getInstance()->find($dataReq); 
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
     }
+
+    return $res;
+	}
+
+    public function findOne($id)
+    {	
+    try {
+        $res['data'] = RolesRepository::getInstance()->findOne($id);
+    } catch(\Exception $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
+    }
+    return $res;
+    }
+
 
     public function save($request)
     {	// TODO: Implement save() method.
@@ -36,12 +68,5 @@ class RolesService extends Service
     public function delete($id)
     {	
     	return RolesRepository::getInstance()->delete($id);
-    }
-
-    
-
-    public function findOne()
-    {
-    	// TODO: Implement findOne() method.
     }
 }

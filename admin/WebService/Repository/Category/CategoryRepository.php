@@ -13,16 +13,15 @@ use WebService\Repository\Repository;
 class CategoryRepository extends Repository
 {
 
-  public function save($request)
+  public function save($dataReq)
   {
     try{
-      $data = $request->all();
       $category = new Category();
-      $global_status = ((isset($data['global_status']))?1:0);
-      $menu_status = ((isset($data['menu_status']))?1:0);
+      $global_status = ((isset($dataReq['global_status']))?1:0);
+      $menu_status = ((isset($dataReq['menu_status']))?1:0);
       $category->fill([
-        'name' => $data['name'],
-        'slug' => $data['slug'],
+        'name' => $dataReq['name'],
+        'slug' => $dataReq['slug'],
         'global_status' => $global_status,
         'menu_status' => $menu_status,
         'is_deleted' => false,
@@ -36,10 +35,10 @@ class CategoryRepository extends Repository
     }
   }
 
-  public function update($request,$id)
+  public function update($dataReq,$id)
   {
     try{
-      $data=$request->all();
+      $data=$dataReq->all();
       $category=Category::find($id);
       $category->fill([
         'name' => $data['name'],
@@ -81,6 +80,15 @@ class CategoryRepository extends Repository
     }
   }
 
+  public function listOne($id){
+    try {
+      return Category::where('id_category','=',$id)->get();
+    } catch(\Exception $e){ 
+      throw $e;
+    }
+  }
+
+
   public function findOne($id)
   {
     try{
@@ -97,9 +105,30 @@ class CategoryRepository extends Repository
     }
   }
 
-  public function find($dataRes){
+  public function find($dataReq){
 
   }
+  public function saveChil($dataReq){
+      try{
+      $data = $dataReq->all();
+      $category = new Category();
+      $global_status = ((isset($dataReq['global_status']))?1:0);
+      $menu_status = ((isset($dataReq['menu_status']))?1:0);
+      $category->fill([
+        'name' => $dataReq['name'],
+        'slug' => $dataReq['slug'],
+        'global_status' => $global_status,
+        'menu_status' => $menu_status,
+        'is_deleted' => false,
+        'id_category_parent' => $dataReq['id_category']
+      ]);
+      $category->save() ;
+      return $category;
+    }
+    catch(\Exception  $e){ 
+      throw  $e;  
+    }
+    }
 
 }
     

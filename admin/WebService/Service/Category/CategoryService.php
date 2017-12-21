@@ -78,6 +78,21 @@ class CategoryService extends Service
     return $res;
   }
 
+  public function listOne($id){
+    $result=CategoryRepository::getInstance()->listOne($id);
+      try{
+        if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No Record');
+      }
+      }catch(\Exception $e) {
+        $res['errors'] = $e->getMessage();
+      }
+    return $res;
+  }
+
     public function findOne($id)
     {
       $result=CategoryRepository::getInstance()->findOne($id);
@@ -98,5 +113,23 @@ class CategoryService extends Service
     {
 
     }
+    public function saveChil($request){
+      $validator = Validator::make($request->all(), [
+      'name' => 'required|max:255 ',
+      'slug' => 'required',
+    ],[]);
+    if($validator ->fails()) {
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try{
+        $res['data']= CategoryRepository::getInstance()->saveChil($request);
+      }catch(\Exception $e){
+        $res['errors']= $e ->getMessage();
+      }
+    }
+    return $res;
+    }
 
 }
+      

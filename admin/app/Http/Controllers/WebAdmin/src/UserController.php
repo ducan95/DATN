@@ -11,7 +11,7 @@ class UserController extends \App\Http\Controllers\WebAdmin\WebController
     
     public function viewIndex()
     {
-        return view('templates.admin.users.index');
+        return view('admin.users.index');
     }
 
     public function viewPost()
@@ -21,7 +21,7 @@ class UserController extends \App\Http\Controllers\WebAdmin\WebController
 
     public function viewEdit()
     {
-        return view('templates.admin.users.edit');
+        return view('admin.users.edit');
     }
 
     public function viewDelete()
@@ -35,7 +35,7 @@ class UserController extends \App\Http\Controllers\WebAdmin\WebController
     }
     public function viewAdd()
     {
-    	return view('templates.admin.users.add');    
+    	return view('admin.users.add');    
     }
 
    
