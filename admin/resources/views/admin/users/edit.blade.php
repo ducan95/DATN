@@ -6,14 +6,14 @@
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        ユーザー情報 編集
-        <small>preview of simple tables</small>
+          @lang('user.admin_user_edit')
+        {{--<small>preview of simple tables</small>--}}
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol>
+      {{--<ol class="breadcrumb">--}}
+        {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
+        {{--<li><a href="#">Tables</a></li>--}}
+        {{--<li class="active">Simple</li>--}}
+      {{--</ol>--}}
     </section>
 
     <!-- Main content -->
@@ -30,10 +30,10 @@
               <div class="box-body">
                 <table class="table table-bordered">
                   <tr>
-                    <th>ユーザー名</th>
-                    <th>権限</th>
-                    <th>Email</th>
-                    <th>Password</th>
+                    <th>@lang('user.admin_user_name')</th>
+                    <th>@lang('user.admin_user_role')</th>
+                    <th>@lang('user.admin_user_email')</th>
+                    <th>@lang('web.password')</th>
                   </tr>
                   <tr>
                     <td>
@@ -68,8 +68,8 @@
                 <div class="row" style="margin-top: 30px;">
                   <div class="col-md-4"></div>
                   <div class="col-md-4 text-center">
-                      <button type="submit" href="" ng-click="updateUser(user)" name="submit" class="btn btn-primary" style="margin-right:5px;">変更</button>
-                      <button type="reset" href="" class="btn btn-default" style="margin-left:5px;">キャンセル</button>
+                      <button type="submit" href="" ng-click="updateUser(user)" name="submit" class="btn btn-primary" style="margin-right:5px;">@lang('web.edit')</button>
+                      <button type="reset" href="" class="btn btn-primary" style="margin-left:5px;">@lang('web.cancel')</button>
                   </div>
                   <div class="col-md-4"></div>
                 </row>

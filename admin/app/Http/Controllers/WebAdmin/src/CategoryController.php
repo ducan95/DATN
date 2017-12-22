@@ -24,6 +24,10 @@ class CategoryController extends \App\Http\Controllers\WebAdmin\WebController
         return view('admin.category.editcategorychildren');
     }
 
+    public function viewEditParent(){
+        return view("admin.category.editcategory");
+    }
+
     public function viewDelete()
     {
         

@@ -39,8 +39,13 @@
               <div class="form-group">
               	<label class="col-sm-3 control-label">Parent Name</label>
               	<div class="col-sm-9">
-              		<input type="text" ng-model="category.name"  class="form-control">
-                  <input type="hidden" ng-model="categorychil.id_category" ng-value="@{{ category.id_category}}" name="id_category">
+              		<!-- <input type="text" ng-model="category.name"  class="form-control" disabled>
+                  <input type="hidden" ng-model="categorychil.id_category" ng-value="id_category" name="id_category"> -->
+                    <!-- <select  class="form-control" ng-sele>
+                      <option ng-repeat="cate in categorytparent" value="id_category">@{{ cate.name }}</option>
+                    </select> -->
+                    <select type="text" class="form-control" ng-options="cate.id_category as cate.name for cate in categorytparent" ng-model="categorychil.parent_category">
+                    </select>
               	</div>
               </div>
               <div class="row" style="padding-bottom: 20px">
@@ -62,9 +67,7 @@
 
 @endsection  
 @section('bottom-js')
-<!-- Toggle -->		
-<script src="{{ asset('assets/base/bower_components/bootstrap/dist/js/bootstrap-toggle.min.js') }}"></script>
-<!-- Edit table -->
+
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
 

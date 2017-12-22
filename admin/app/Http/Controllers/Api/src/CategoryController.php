@@ -63,20 +63,34 @@ class CategoryController extends WebApiController
     }
   }
 
+  public function actionUpdateChil(Request $request,$id)
+  {
+   $res=CategoryService::getInstance()->updatechil($request,$id);
+    if(!isset($res['errors'])){
+      return Api::response(([ 'data' => $res['data'] ]));
+    }else{
+      return Api::response(([
+        'is_success' => false,
+        'status_code' =>500,
+        'errors' =>$res['errors']
+      ]));
+    } 
+  }
+
   public function actionDelete($id)
   {
     $res =  CategoryService::getInstance()->delete($id);
-      if(!isset($res['errors'])) {
-        return Api::response([ 'data' => $res['data']]);
-      }else {
-        return Api::response([ 
-          'is_success' => false,
-          'status_code' => 404,
-          'errors' => $res['errors']
-        ]);
-      } 
-
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data'], 'status_code' => 204]);
+    }else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg']
+      ]);
+    } 
   }
+
   public function actionFind($search, Request $request){
     //Do something
   }

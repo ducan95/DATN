@@ -86,6 +86,10 @@ Route::group([
           'uses' => 'CategoryController@viewAddChildren',
           'as' =>'webCategoryAddChildren'
       ]);
+       Route::get('/editparent',[
+          'uses' => 'CategoryController@viewEditParent',
+          'as' =>'webCategoryEditParent'
+      ]);
 
 
       Route::get('/edit',[
@@ -205,8 +209,12 @@ Route::group([
             'uses' => 'CategoryController@actionUpdate',
             'as' => 'apiCategoryUpdate'
         ]);
+        Route::put('/categorychildren/{id}', [
+            'uses' => 'CategoryController@actionUpdateChil',
+            'as' => 'apiCategoryUpdateChil'
+        ]);
         Route::delete('/{id}', [
-            'user' => 'CategoryController@actionDelete',
+            'uses' => 'CategoryController@actionDelete',
             'as' => 'apiCategoryDelete'
         ]);
     });
