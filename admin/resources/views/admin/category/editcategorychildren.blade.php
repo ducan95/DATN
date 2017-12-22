@@ -8,19 +8,21 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box">
-					<form class="form-horizontal" role="form" ng-submit="updateCategoryChil(category)" id="editcategorychil"> 
+					<form class="form-horizontal" role="form" ng-submit="updateCategoryChil(category)" id="main"> 
 					 <div class="box-body">
               <div class="form-group">
                   <label for="" class="col-sm-3 control-label">Category Name</label>
                   <div class="col-sm-9">
                     <input class="form-control" ng-model="category.name" name="name" type="text">
-                  </div>
+										<label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
+									</div>
               </div>
                 <div class="form-group">
                   <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" ng-model="category.slug" name="slug">
-                  </div>
+										<label class="error" ng-if="error.slug[0] != null">@{{ error.slug[0] }}</label>
+									</div>
                 </div>
                 <div class="form-group">
 	              	<label class="col-sm-3 control-label">Global Status</label>
@@ -64,7 +66,8 @@
 
 @endsection  
 @section('bottom-js')
-
+<!-- Validatejs -->
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
