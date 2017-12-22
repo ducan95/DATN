@@ -45,7 +45,6 @@
                     <td>
                       <div class="form-group">
                           <select ng-init="user.role_code=''" name="role_code" class="form-control" ng-model="user.role_code">
-                            <option value="">Chọn quyền</option>
                             <option ng-repeat="role in roles" value="@{{ role.role_code }}">@{{ role.name }}</option>
                           </select>
                           <label class="error" ng-if="error.role_code[0] != null"></label>
@@ -59,7 +58,7 @@
                     </td>
                     <td>
                       <div class="form-group">
-                          <input required ng-model="user.password" type="password" name="password" class="form-control" id="password" value="">
+                          <input ng-model="user.password" type="password" name="password" class="form-control" id="password" value="">
                           <label class="error" ng-if="error.password[0] != null">@{{ error.password[0] }}</label>
                       </div>
                     </td>
