@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/Ionicons/css/ionicons.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/AdminLTE.min.css') }}">
+  <!-- Custom style -->
+  <link rel="stylesheet" href="{{ asset('assets/theme/css/custom.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/fakeloader/fakeloader.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
@@ -71,15 +73,9 @@
 <script src="{{ asset('assets/base/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('assets/base/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <!-- Angular JS and resource -->
 <script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
-{{--  <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>  --}}
-<!-- FastClick -->
-<script src="{{ asset('assets/base/bower_components/fastclick/lib/fastclick.js') }}"></script>
-
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
 

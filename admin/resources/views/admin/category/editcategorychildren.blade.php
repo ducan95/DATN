@@ -68,11 +68,10 @@
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
+
 @endsection 
 	              
 
-		
-			
 
 
                 

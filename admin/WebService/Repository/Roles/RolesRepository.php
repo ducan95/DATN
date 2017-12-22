@@ -3,9 +3,11 @@ namespace WebService\Repository\Roles;
 use WebService\Repository\Repository;
 use App\Roles;
 use Extention\Api;
+
+
 /**
  * Created by PhpStorm.
- * User: rikkei
+ * Roles: rikkei
  * Date: 13/12/2017
  * Time: 19:37
  */
@@ -17,16 +19,39 @@ class RolesRepository extends Repository
         return Api::response(['data' => $roles]);
     }
 
-    public function find($id)
-    {
-        $role = Roles::find($id);
-        if(!empty($role)) {
-            return Api::response(['data' => $role]);
-        } else {
-            return Api::response(['status_code' => 404, 'is_success' => 'false']);
+    /**
+     * Find fuction
+     */
+	public function find($dataReq = '') 
+	{ 
+    try {   
+      $query = Roles::where('id_role', '>', 0);
+      $dataMol= ['name', 'role_code'];
+      if(!empty($dataReq)) {
+        foreach ($dataMol as $value) {
+          if(isset($dataReq[$value])) {
+            if(is_string($dataReq[$value])) {
+              $query = $query->where($value, 'LIKE', '%'.$dataReq[$value].'%' );
+            } else {
+              $query = $query->where($value, '=', $dataReq[$value] );
+            }
+          }    
         }
-        
+      } 
+      return $query->get();    
+    } catch(\Exception $e) {
+        throw $e;
+    } 
+  }
+
+  public function findOne($id)
+  {
+    try {
+      return Roles::where('id_role', '=',$id)->first();
+    } catch(\Exception $e){ 
+      throw $e;
     }
+  }
 
     public function save($request)
     {	
@@ -57,8 +82,5 @@ class RolesRepository extends Repository
 
     
 
-  public function findOne()
-  {
-    // TODO: Implement findOne() method.
-  }
+
 }

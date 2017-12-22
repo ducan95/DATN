@@ -108,12 +108,12 @@ Route::group([
   /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
       /** Get List Roles **/
-      Route::get('/', [
+     /*  Route::get('/', [
           'uses' => 'RolesController@actionList',
           'as'   => 'apiListRole'
       ]);
-      
-      Route::get('/{id}', [
+       */
+      Route::get('/{search?}', [
           'uses' => 'RolesController@actionFind',
           'as'   => 'apiFindRole'
       ]);
@@ -231,7 +231,12 @@ Route::group([
 });
 
     
-
+Route::group(['prefix' => 'member', 'namespace' => 'WebClient'],function(){
+  Route::get('/',[
+    'uses'  => 'MemberController@index',
+    'as'    => 'webClientMemberIndex'
+  ]);
+});
 
 
 

@@ -26,8 +26,8 @@ class UserService extends Service
       if(!empty($request->query('status')) ) {
         $dataReq['status'] = $request->query('status');
       }
-      if(!empty($request->query('id_role')) ) {
-        $dataReq['id_role'] = $request->query('id_role');
+      if(!empty($request->query('role_code')) ) {
+        $dataReq['role_code'] = $request->query('role_code');
       }
       if(!empty($request->query('paginate')) ) {
         $dataReq['paginate'] = $request->query('paginate');
@@ -58,14 +58,14 @@ class UserService extends Service
       'username' => 'required|max:200',
       'email' => 'required |email',
       'password' => 'required',
-      'id_role' =>  'required'
+      'role_code' =>  'required'
     ],[
       'username.required' => trans('validate.username_required'),
       'username.max' => trans('validate.username_max_255_characters'),
       'email.required' => trans('validate.email_required'),
       'email.email' => trans('validate.email_must_be_valid_email_address'),
       'password.required' => trans('validate.password_required'),
-      'id_role.required' => trans('validate.id_role_required')
+      'role_code.required' => trans('validate.role_code_required')
     ]);
 
     if($validator ->fails()) {
@@ -88,14 +88,14 @@ class UserService extends Service
       'username' => 'required|max:255',
       'email' => 'required |email',
       'password' => 'required',
-      'id_role' =>  'required'
+      'role_code' =>  'required'
     ],[
       'username.required' => trans('validate.username_required'),
       'username.max' => trans('validate.username_max_255_characters'),
       'email.required' => trans('validate.email_required'),
       'email.email' => trans('validate.email_must_be_valid_email_address'),
       'password.required' => trans('validate.password_required'),
-      'id_role.required' => trans('validate.id_role_required')
+      'role_code.required' => trans('validate.role_code_required')
     ]);
 
     if($validator ->fails()) {

@@ -93,6 +93,14 @@ class CategoryRepository extends Repository
     }
   }
 
+  public function deleteparent($id){
+    try{
+
+    }catch(\Exception $e){
+      throw $e;
+    }
+    }
+
   public function list()
   { 
     try{
