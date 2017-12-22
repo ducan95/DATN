@@ -51,12 +51,23 @@ class CategoryService extends Service
     return $res;
   }
 
+  public function updatechil($request,$id)
+  {
+    try{
+      $res['data']=CategoryRepository::getInstance()->updatechil($request,$id);
+    }catch(\Exception $e){
+      $res['errors']= $e ->getMessage();
+    }
+    return $res; 
+  }
+
   public function delete($id)
   {
     try{
-      $res['data']=CategoryRepository::getInstance()->delete($id);
-    }catch(\Exception $e){
-      $res['errors']=$e -> getMessage();
+      $res['data'] = CategoryRepository::getInstance()->delete($id);
+    }catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
     }
     return $res;
   }

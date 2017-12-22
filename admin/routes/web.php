@@ -189,8 +189,12 @@ Route::group([
             'uses' => 'CategoryController@actionUpdate',
             'as' => 'apiCategoryUpdate'
         ]);
+        Route::put('/categorychildren/{id}', [
+            'uses' => 'CategoryController@actionUpdateChil',
+            'as' => 'apiCategoryUpdateChil'
+        ]);
         Route::delete('/{id}', [
-            'user' => 'CategoryController@actionDelete',
+            'uses' => 'CategoryController@actionDelete',
             'as' => 'apiCategoryDelete'
         ]);
     });

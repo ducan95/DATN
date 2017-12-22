@@ -20,6 +20,9 @@ SOUGOU_ZYANARU_MODULE
       method: 'GET',
       isArray: false
     },
+    update:{
+    	method:"PUT"
+    }
   });
 })
 .factory('CategoryChildrenAddService',function($resource){
