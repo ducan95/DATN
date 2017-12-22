@@ -4,21 +4,20 @@
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Danh sách người dùng
-        <small>preview of simple tables</small>
+        @lang('user.admin_user_list')
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol>
+      {{--<ol class="breadcrumb">--}}
+        {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
+        {{--<li><a href="#">Tables</a></li>--}}
+        {{--<li class="active">Simple</li>--}}
+      {{--</ol>--}}
     </section>
 
     <!-- Main content -->
     <section class="content">
       <div class="row" style="margin-bottom: 15px;margin-top:15px;">
         <div class="col-md-2">
-            <a href="{{ route('webUserAdd') }}" class="btn btn-block btn-success">Add new</a>
+            <a href="{{ route('webUserAdd') }}" class="btn btn-block btn-success">@lang('user.admin_user_add_new')</a>
         </div>
       </div>
       <div class="row">
@@ -28,12 +27,12 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover" id="user-table">
                 <tr>
-                  <th>#No</th>
-                  <th>Tên user</th>
-                  <th>Quyền hạn</th>
-                  <th>Email</th>
-                  <th>Password</th>
-                  <th>Chức năng</th>
+                  <th>#</th>
+                  <th>@lang('user.admin_user_name')</th>
+                  <th>@lang('user.admin_user_role')</th>
+                  <th>@lang('user.admin_user_email')</th>
+                  <th>@lang('web.password')</th>
+                  <th></th>
                 </tr>
                 <tr ng-repeat="user in users | orderBy : 'id_user'">
                   <td>@{{ user.id_user }}</td>
@@ -42,9 +41,9 @@
                   <td>@{{ user.email }}</td>
                   <td>**********</td>
                   <td>
-                    <a href="" ng-click="redirectEdit(user.id_user)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="javascript:void(0)" ng-if="user.role_code != 's_admin'" class="btn btn-sm btn-danger" ng-click="deleteUser(user.id_user)"><i class="fa fa-trash-o"></i> Delete</a>
-                    <a href="javascript:void(0)" ng-if="user.role_code == 's_admin'" class="btn btn-sm btn-danger" href="javascript:void(0)"><i class="fa fa-trash-o"></i> Delete</a>
+                    <a href="" ng-click="redirectEdit(user.id_user)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> @lang('web.edit')</a>
+                    <a href="javascript:void(0)" ng-if="user.role_code != 's_admin'" class="btn btn-sm btn-danger" ng-click="deleteUser(user.id_user)"><i class="fa fa-trash-o"></i> @lang('web.delete')</a>
+                    <a href="javascript:void(0)" ng-if="user.role_code == 's_admin'" class="btn btn-sm btn-danger" href="javascript:void(0)"><i class="fa fa-trash-o"></i> @lang('web.delete')</a>
                   </td>  
                 </tr>
               </table>
