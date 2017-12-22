@@ -93,6 +93,26 @@ Route::group([
           'as' =>'webCategorEdit'
       ]);
   });
+
+  /** router web release **/
+  Route::group([ 'prefix' => 'release' ],function(){
+
+      Route::get('/',[
+          'uses' => 'ReleaseController@viewIndex' ,
+          'as'  => 'webReleaseIndex'
+      ]);
+
+      Route::get('/edit',[
+          'uses' => 'ReleaseController@viewEdit' ,
+          'as'  => 'webReleaseEdit'
+      ]);
+
+
+      Route::get('/add',[
+            'uses' => 'ReleaseController@viewAdd' ,
+            'as'  => 'webReleaseAdd'
+        ]);
+  });
 });
 /**
  * ROUTE ADMIN API

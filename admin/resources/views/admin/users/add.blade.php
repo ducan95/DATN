@@ -6,7 +6,7 @@
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tạo mới người dùng
+        ユーザー新規追加
         <small>preview of simple tables</small>
       </h1>
       <ol class="breadcrumb">
@@ -27,8 +27,8 @@
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
-                  <th>Tên người dùng</th>
-                  <th>Quyền hạn</th>
+                  <th>ユーザー名</th>
+                  <th>権限</th>
                   <th>Email</th>
                   <th>Password</th>
                 </tr>
@@ -66,8 +66,8 @@
               <div class="row" style="margin-top: 30px;">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 text-center">
-                    <button ng-click="" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">Add</button>
-                    <button type="reset" class="btn btn-primary" style="margin-left:5px;">Cancel</button>
+                    <button ng-click="" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">加追</button>
+                    <button type="reset" class="btn btn-default" style="margin-left:5px;">キャンセル</button>
                 </div>
                  <div class="col-md-4"></div>
               </row>
