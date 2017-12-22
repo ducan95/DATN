@@ -64,9 +64,26 @@ SOUGOU_ZYANARU_MODULE
 	.controller('CategoryAddCtrl', function ($scope, CategoryAddService,$window) {
   $scope.category = new CategoryAddService();  
   $scope.addCategory = function () { 
-    $scope.category.$save(function () {
-      $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/category';
-    });
+    //Validate form
+    var constraints = {
+      name: {
+        presence: true,
+      },
+      slug: {
+        presence: true,
+      },
+    };
+    var form = document.querySelector("form#main");
+    validate.validators.presence.message = '空白のところで入力してください。';
+    $scope.error = validate(form, constraints);
+
+    // Check success
+    if ($scope.error == undefined) {
+      $scope.category.$save(function () {
+        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
+      });
+    }
+   
   };
 })
 
@@ -74,10 +91,27 @@ SOUGOU_ZYANARU_MODULE
   .controller('CategoryChildrenAddCtrl',function($scope,CategoryChildrenAddService,CategoryService,$window){
     $scope.categorychil=new CategoryChildrenAddService();
     $scope.addCategoryChil=function(){
-      console.log($scope.categorychil)
-      $scope.categorychil.$save(function(){
-      $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/category';
-      })
+      //console.log($scope.categorychil)
+      //Validate form
+      var constraints = {
+        name: {
+          presence: true,
+        },
+        slug: {
+          presence: true,
+        },
+       
+      };
+      var form = document.querySelector("form#main");
+      validate.validators.presence.message = '空白のところで入力してください。';
+      $scope.error = validate(form, constraints);
+
+      if ($scope.error == undefined) {
+        $scope.categorychil.$save(function () {
+          $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
+        })
+      }
+     
     }
       CategoryService.find({}, function (res) {
         if (typeof res != "undefined") {  
@@ -94,26 +128,41 @@ SOUGOU_ZYANARU_MODULE
     $scope.updateCategory = function (categoryparent) {
     // console.log(categoryparent);
 
-    var form = document.querySelector("form#editparent");
+    //var form = document.querySelector("form#editparent");
     // $scope.error = validate(form, constraints) || {};
     // console.log($scope.error);
+      //Validate form
+      var constraints = {
+        name: {
+          presence: true,
+        },
+        slug: {
+          presence: true,
+        },
 
-    //Get value from ng-model
-    var getname = categoryparent.name;
-    var getslug    = categoryparent.slug;
-    var getglobal_status = categoryparent.global_status;
-    var getmenu_status     = categoryparent.menu_status;
-    
-    // Update category
-    CategoryService.update({ 
-      id:         $scope.id,
-      name:   getname,
-      slug:      getslug,
-      global_status:   getglobal_status,
-      menu_status:    getmenu_status,
-      is_deleted: false 
-    }, {});
-    $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/category';
+      };
+      var form = document.querySelector("form#main");
+      validate.validators.presence.message = '空白のところで入力してください。';
+      $scope.error = validate(form, constraints);
+
+      if ($scope.error == undefined) {
+        //Get value from ng-model
+        var getname = categoryparent.name;
+        var getslug = categoryparent.slug;
+        var getglobal_status = categoryparent.global_status;
+        var getmenu_status = categoryparent.menu_status;
+
+        // Update category
+        CategoryService.update({
+          id: $scope.id,
+          name: getname,
+          slug: getslug,
+          global_status: getglobal_status,
+          menu_status: getmenu_status,
+          is_deleted: false
+        }, {});
+        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
+      }
     } 
      $scope.loadCategory = function () { 
       CategoryService.get({ id: $scope.id },function(res) {
@@ -129,25 +178,39 @@ SOUGOU_ZYANARU_MODULE
     $scope.id      = id.join('');
 
     $scope.updateCategoryChil=function(category){
-      var form = document.querySelector("form#editcategorychil");
 
-      var getname = category.name;
-      var getslug    = category.slug;
-      var getglobal_status = category.global_status;
-      var getmenu_status     = category.menu_status;
-      var getid_category_parent=category.parent_category;
-      
-      // Update category
-      CategoryChildrenService.update({ 
-        id:         $scope.id,
-        name:   getname,
-        slug:      getslug,
-        global_status:   getglobal_status,
-        menu_status:    getmenu_status,
-        is_deleted: false ,
-        id_category_parent: getid_category_parent
-    }, {});
-       $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/category';
+      var constraints = {
+        name: {
+          presence: true,
+        },
+        slug: {
+          presence: true,
+        },
+
+      };
+      var form = document.querySelector("form#main");
+      validate.validators.presence.message = '空白のところで入力してください。';
+      $scope.error = validate(form, constraints);
+
+      if ($scope.error == undefined) {
+        var getname = category.name;
+        var getslug    = category.slug;
+        var getglobal_status = category.global_status;
+        var getmenu_status     = category.menu_status;
+        var getid_category_parent=category.parent_category;
+        
+        // Update category
+        CategoryChildrenService.update({ 
+          id:         $scope.id,
+          name:   getname,
+          slug:      getslug,
+          global_status:   getglobal_status,
+          menu_status:    getmenu_status,
+          is_deleted: false ,
+          id_category_parent: getid_category_parent
+      }, {});
+        $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/category';
+      }
     }
 
     CategoryService.find({}, function (res) {
