@@ -9,32 +9,36 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box">
-					<form class="form-horizontal" ng-submit='addCategoryChil()' method="post">
+					<form class="form-horizontal" ng-submit='addCategoryChil()' method="post" id="main">
 						{{ csrf_field() }}	
 					 <div class="box-body">
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Category Name</label>
                 <div class="col-sm-9">
-                  <input class="form-control" ng-model="categorychil.name" placeholder="...name" name="name" type="text" required>
+                 <input class="form-control" ng-model="categorychil.name" placeholder="...name" name="name" type="text" required>
+                  <label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control" ng-model='categorychil.slug' name="slug" placeholder="...slug" required>
+                  <label class="error" ng-if="error.slug[0] != null">@{{ error.slug[0] }}</label>
                 </div>
               </div>
               <div class="form-group">
               	<label class="col-sm-3 control-label">Display Global Navi</label>
               	<div class="col-sm-9">
-              		<input type="checkbox" name="global_status" value="1" ng-model="categorychil.global_status" >
-              	</div>
+              		<input type="checkbox" name="global_status" value="1" ng-model="categorychil.global_status">
+                  <label class="error" ng-if="error.global_status[0] != null">@{{ error.global_status[0] }}</label>
+                </div>
               </div>
               <div class="form-group">
               	<label class="col-sm-3 control-label">Display Menu Bar</label>
               	<div class="col-sm-9">
               		<input type="checkbox"  name="menu_status" value="1" ng-model="categorychil.menu_status">
-              	</div>
+                  <label class="error" ng-if="error.menu_status[0] != null">@{{ error.menu_status[0] }}</label>
+                </div>
               </div>
               <div class="form-group">
               	<label class="col-sm-3 control-label">Parent Name</label>
@@ -67,7 +71,8 @@
 
 @endsection  
 @section('bottom-js')
-
+<!-- Validatejs -->
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
 

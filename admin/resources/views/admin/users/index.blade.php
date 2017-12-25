@@ -35,10 +35,10 @@
                   <th></th>
                 </tr>
                 <tr ng-repeat="user in users | orderBy : 'id_user'">
-                  <td>@{{ user.id_user }}</td>
-                  <td>@{{ user.username }}</td>
-                  <td ng-repeat="role in roles" ng-if="user.role_code == role.role_code">@{{ role.name }}</td>
-                  <td>@{{ user.email }}</td>
+                  <td ng-bind="$index+1"></td>
+                  <td ng-bind="user.username"></td>
+                  <td ng-repeat="role in roles" ng-if="user.role_code == role.role_code" ng-bind="role.name"></td>
+                  <td ng-bind="user.email"></td>
                   <td>**********</td>
                   <td>
                     <a href="" ng-click="redirectEdit(user.id_user)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> @lang('web.edit')</a>

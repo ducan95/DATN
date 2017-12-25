@@ -8,18 +8,20 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box">
-					<form class="form-horizontal" role="form" ng-submit="updateCategory(categoryparent)" id="editparent">
+					<form class="form-horizontal" role="form" ng-submit="updateCategory(categoryparent)" id="main">
 						<div class="box-body">
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Category Name</label>
                 <div class="col-sm-9">
                   <input class="form-control" type="text" ng-model="categoryparent.name" name="name" required>
+                  <label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control" ng-model='categoryparent.slug' name="slug" required>
+                  <label class="error" ng-if="error.slug[0] != null">@{{ error.slug[0] }}</label>
                 </div>
               </div>
               <div class="form-group">
@@ -52,7 +54,8 @@
 
 @endsection  
 @section('bottom-js')
-
+<!-- Validatejs -->
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 <!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
