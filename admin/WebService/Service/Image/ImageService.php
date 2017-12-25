@@ -25,6 +25,9 @@ class ImageService extends Service
       if(!empty($request->query('description')) ) {
         $dataReq['description'] = $description;
       }
+      if(!empty($request->query('namepost')) ) {
+        $dataReq['namepost'] = $request->query('namepost');
+      }
       if(!empty($request->query('path')) ) {
         $dataReq['path'] = $request->query('path');
       }
@@ -55,9 +58,6 @@ class ImageService extends Service
 
   public function save($request)
   {	
-     $res['data'] = $this->createImageBlur($request->file('file')); return $res;
-    /*
-    return $this->createImageBlur($request->file('file'));
     $validator = Validator::make($request->all(), [
       'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ],[
@@ -75,11 +75,12 @@ class ImageService extends Service
         $res['errors']['status_code'] =  500; 
       }  
     }
-    return $res;  */
+    return $res;  
 	}
 
   public function update($request, $id)
   {      
+     $res['data'] = $id; return $res;
 	}
 
   public function delete($id)

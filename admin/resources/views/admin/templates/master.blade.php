@@ -31,7 +31,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">     
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini" ng-cloak>
 <div></div>
@@ -76,6 +76,9 @@
 <!-- Angular JS and resource -->
 <script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/ng-file-upload.min.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/ng-file-upload-shim.min.js') }}"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
 

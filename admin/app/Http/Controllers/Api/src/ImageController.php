@@ -77,8 +77,17 @@ class ImageController extends WebApiController
    * @return Response
    */
   public function actionUpdate(Request $request, $id)
-  {   
-    
+  {  
+    $resImage = ImageService::getInstance()->update($request, $id); 
+    if(!isset($resImage['errors'])) {
+      return Api::response(['data' => $resImage['data'] ])   ;
+    } else {
+      return Api::response([
+        'is_success' => false,
+        'errors' => $resImage['errors']['msg'],
+        'status_code' => $resImage['errors']['status_code'],
+      ])  ;
+    }
   }
   /**
    * delete image 

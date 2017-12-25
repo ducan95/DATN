@@ -1,7 +1,7 @@
 <?php 
 	namespace Extention;
 	use App\Images;
-
+	use Image;
 trait Media {
 
 
@@ -12,7 +12,8 @@ trait Media {
     return [
       'name' => $nameImage,
       //'path' => $fileBulr->storeAs(config('images.path.imageBlur'), $nameImage),
-      'path' => $file->storeAs(config('admin.images.path.imageDefault'), $nameImage),
+      'path' => $file->storeAs(config('admin.images.path.imageDefault'), $nameImage, 'public'),
+      'jpg' => Image::make('public/'.config('admin.images.path.imageDefault').'/'.$nameImage)->encode('jpg', 75)->save()
     ];
 	}
  

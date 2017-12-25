@@ -101,17 +101,17 @@ Route::group([
       'as' => 'webImageIndex'
     ]);
 
-    Route::get('/', function(){
+    Route::get('/add', [
       'uses' => 'ImageController@viewAdd',
       'as' => 'webImageAdd'
-    });
+    ]);
 
-    Route::get('/edit', function(){
+    Route::get('/edit', [
       'uses' => 'ImageController@viewEdit',
       'as' => 'webImageEdit'
-    });
+    ]);
 
-  })
+  });
 
 });
 /**
@@ -214,7 +214,7 @@ Route::group([
 
   Route::group(['prefix' => '/images'],function(){
 
-    Route::get('/{search?}', [
+    Route::get('/', [
       'uses' => 'ImageController@actionFind',
       'as' => 'apiImageFind'
 

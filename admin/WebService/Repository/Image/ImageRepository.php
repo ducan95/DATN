@@ -2,6 +2,8 @@
 namespace WebService\Repository\Image;
 use WebService\Repository\Repository;
 use App\Images;
+use App\PostImage;
+use App\Post;
 
 /**
  * Created by SublimeText.
@@ -16,17 +18,25 @@ class ImageRepository extends Repository
   public function find($dataReq = '') 
   { 
     try {   
-      $query = $query = Images::where('id_image', '>', 0)->where('is_deleted','=', false);
+      $query = Images::leftjoin('post_image', 'images.id_image', '=', 'post_image.id_image')
+              ->leftjoin('posts', 'post_image.id_post', '=', 'posts.id_post')
+              ->select('images.*', 'posts.title as namePost')
+              ->select('images.*',  'posts.title as namePost')
+              ->where('images.id_image', '>', 0)
+              ->where('images.is_deleted','=', false);
       $dataMol= ['name', 'description', 'path', 'path_paint'];
       if(!empty($dataReq)) {
         foreach ($dataMol as $value) { 
           if(isset($dataReq[$value]) ) {
             if(is_string($dataReq[$value])) {
-              $query = $query->where($value, 'LIKE', '%'.$dataReq[$value].'%' );
+              $query = $query->where('images.'.$value, 'LIKE', '%'.$dataReq[$value].'%' );
             } else {
-              $query = $query->where($value, '=', $dataReq[$value] );
+              $query = $query->where('images.'.$value, '=', $dataReq[$value] );
             }
           } 
+        }
+        if(isset($dataReq['namepost'])) {
+          $query = $query->where('posts.title', 'LIKE', '%'.$dataReq['namepost'].'%' );
         }
         if(!empty($dataReq['paginate'])) {
           return $query->paginate($dataReq['paginate']); 
@@ -41,7 +51,11 @@ class ImageRepository extends Repository
   public function findOne($id)
   { 
     try{
-      return Images::where('id_image', "=", $id)->where('is_deleted', '=', false)->first();
+      return Images::join('post_image', 'images.id_image', '=', 'post_image.id_image')
+      ->join('posts', 'post_image.id_post', '=', 'posts.id_post')
+      ->where('images.id_image', "=", $id)
+      ->where('images.is_deleted', '=', false)
+      ->select('images.*', 'posts.title as namePost')->get();
     } catch(\Exception $e){
       throw $e;
     }

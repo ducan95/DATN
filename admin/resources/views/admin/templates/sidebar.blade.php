@@ -31,7 +31,7 @@
           </a>
         </li>
         <li class="">
-          <a href="#">
+          <a href="{{route('webImageIndex')}}">
             <i class="fa fa-picture-o"></i>
             <span>{{trans('web.images')}}</span>
           </a>

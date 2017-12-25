@@ -11,7 +11,7 @@ class ImageController extends WebController
     
     public function viewIndex()
     {
-        return view('templates.admin.users.index');
+        return view('admin.images.index');
     }
 
     public function viewPost()
@@ -21,7 +21,7 @@ class ImageController extends WebController
 
     public function viewEdit()
     {
-        return view('templates.admin.users.edit');
+        return view('admin.images.eidt');
     }
 
     public function viewDelete()
@@ -35,7 +35,7 @@ class ImageController extends WebController
     }
     public function viewAdd()
     {
-    	return view('templates.admin.users.add');    
+    	return view('admin.images.add');   
     }
 
    
