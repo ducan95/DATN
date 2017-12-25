@@ -13,13 +13,13 @@
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Category Name</label>
                 <div class="col-sm-9">
-                  <input class="form-control" type="text" ng-model="categoryparent.name" name="name">
+                  <input class="form-control" type="text" ng-model="categoryparent.name" name="name" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" ng-model='categoryparent.slug' name="slug">
+                  <input type="text" class="form-control" ng-model='categoryparent.slug' name="slug" required>
                 </div>
               </div>
               <div class="form-group">
@@ -37,7 +37,7 @@
               <div class="row" style="padding-bottom: 20px">
               	<div class="col-md-4"></div>
 		            <div class="col-md-4 text-center">
-                  <button type="submit" ng-click="updateCategory(categoryparent)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit</button>
+                  <button type="submit" ng-click="updateCategory(categoryparent)" class="btn btn-primary">Edit</button>
                   <a href="{{ route('webCategoryIndex') }}"><button type="button" class="btn btn-primary" style="margin-left:5px;">Cancel</button></a>
 	              </div>
             	<div class="col-md-4"></div>

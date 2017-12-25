@@ -21,7 +21,7 @@
 	                <div class="form-group">
 	                  <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
 	                  <div class="col-sm-9">
-	                    <input type="text" class="form-control" placeholder="...slug" ng-model="category.slug" name="slug">
+	                    <input type="text" class="form-control" placeholder="...slug" ng-model="category.slug" name="slug" required>
 	                  </div>
 	                </div>
 	                <div class="form-group">

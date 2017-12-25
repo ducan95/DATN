@@ -15,19 +15,19 @@
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Category Name</label>
                 <div class="col-sm-9">
-                  <input class="form-control" ng-model="categorychil.name" placeholder="...name" name="name" type="text">
+                  <input class="form-control" ng-model="categorychil.name" placeholder="...name" name="name" type="text" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" ng-model='categorychil.slug' name="slug" placeholder="...slug" >
+                  <input type="text" class="form-control" ng-model='categorychil.slug' name="slug" placeholder="...slug" required>
                 </div>
               </div>
               <div class="form-group">
               	<label class="col-sm-3 control-label">Display Global Navi</label>
               	<div class="col-sm-9">
-              		<input type="checkbox" name="global_status" value="1" ng-model="categorychil.global_status">
+              		<input type="checkbox" name="global_status" value="1" ng-model="categorychil.global_status" >
               	</div>
               </div>
               <div class="form-group">

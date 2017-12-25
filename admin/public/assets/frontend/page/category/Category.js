@@ -8,9 +8,9 @@ SOUGOU_ZYANARU_MODULE
   })
 
   //Show category children
-  $scope.categoryChildren=new CategoryChildrenService();
+  $scope.categoryservice=new CategoryChildrenService();
   $scope.changeToCategoryChil=function(id_category){
-		$scope.categoryChildren.$find({id: id_category},function (res){
+		$scope.categoryservice.$find({id: id_category},function (res){
 		if (typeof res != "undefined") {  
       $scope.categoryChildren = res.data;
       $scope.categoryParent=res.data[0];
@@ -48,15 +48,18 @@ SOUGOU_ZYANARU_MODULE
   }  
 
   //delete category parent
-  $scope.categoryChildren=new CategoryChildrenService();
   $scope.deleteCategory=function(id_category){
-    if(popupService.showPopup('Please delete category children!!!')){
-      categoryChildren.$find({id: id_category},function (res){
-      if (typeof res != "undefined") {  
-        $scope.categoryChildren = res.data;
+     if (popupService.showPopup('Really delete this?')) {
+      var category = CategoryService.get({ id: id_category }, function (res) {
+        if (typeof res != "undefined") {
+          var category = res.data;
+            CategoryService.delete({ id: category[0].id_category},function () {
+            console.log('Deleting category parent with id ' + id_category);
+            //Ridirect
+            $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
+          });
         }
       });
-
     }
   }
 })
@@ -157,10 +160,6 @@ SOUGOU_ZYANARU_MODULE
           $scope.id_category=value.id_category;
           // console.log($scope.id_category);
       })
-
-      
-      // $scope.id_category_parent=res.data[0].id_category;
-      // console.log($scope.id_category_parent)
       }
     })
 
@@ -174,6 +173,7 @@ SOUGOU_ZYANARU_MODULE
   })
   
       
+
 
 
 

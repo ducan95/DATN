@@ -81,10 +81,19 @@ class CategoryRepository extends Repository
   public function delete($id)
   {
     try {
-      if(!empty(Category::find($id))) {
+      if(!empty(Category::find($id))){
         $category = Category::find($id);
+        $category->is_deleted=true;
+        $category->save();
+        if($category->id_category_parent === 0){
+          $categorychildren=Category::where('id_category_parent','=',$id)->where('is_deleted','=',false)->get();
+          $categorychildren->is_deleted=true;
+          $categorychildren->save();
+        }
+        else{
         $category->is_deleted = true;
         $category->save();
+        }
       } else {
         return  ;
       }
@@ -93,13 +102,6 @@ class CategoryRepository extends Repository
     }
   }
 
-  public function deleteparent($id){
-    try{
-
-    }catch(\Exception $e){
-      throw $e;
-    }
-    }
 
   public function list()
   { 
@@ -167,3 +169,4 @@ class CategoryRepository extends Repository
     
     
 
+       
