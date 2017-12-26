@@ -69,8 +69,8 @@ class ImageRepository extends Repository
         $image->fill([
           'name'   => $dataReq['name'],
           'description' => config('admin.images.media'),
-          'path'   => $dataReq['path'],
-          'path_paint' => "chua lam",
+          'path'   => $dataReq['pathDefault'],
+          'path_paint' => $dataReq['pathBlur'],
           'is_deleted' => false,
         ]);
         $image->save() ;

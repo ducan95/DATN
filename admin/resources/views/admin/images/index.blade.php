@@ -3,19 +3,18 @@
 <div ng-controller="ImageCtrl">
    <!-- Content Header (Page header) -->
     <section class="content-header">
-     <h3>List hinh anh da dang ki</h3>
+     <h3>{{ trans('web.list_image') }}</h3>
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="row" style="margin-bottom: 15px;margin-top:15px;">
         <div class="col-md-2">
-          <a href="{{ route('webImageAdd')}}"  class="btn btn-block btn-success">Add new</a>
+          <a href="{{ route('webImageAdd')}}"  class="btn btn-block btn-success">{{ trans('web.add_new_image') }}</a>
         </div>
         <div class="col-md-10">
           <div class="box-tools">
             <div class="input-group input-group-sm" >
-              <input type="text" name="table_search" ng-model='parameter' class="form-control pull-right" placeholder="Search">
+              <input type="text" name="table_search" ng-model='parameter' class="form-control pull-right" placeholder="">
 
               <div class="input-group-btn">
                 <button type="submit" ng-click="searchImage()" class="btn btn-default"><i class="fa fa-search"></i></button>

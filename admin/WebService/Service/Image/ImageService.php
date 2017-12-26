@@ -14,7 +14,6 @@ class ImageService extends Service
 {
   use Media; 
 
-
 	public function find($request)
 	{ 
     try {
@@ -57,11 +56,13 @@ class ImageService extends Service
   }
 
   public function save($request)
-  {	
+  {	 
     $validator = Validator::make($request->all(), [
-      'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'file' => 'required|image| max:320Mb',
     ],[
       'file.required'=> trans('validate.image_required'),
+      'file.image'=> trans('validate.image_required'),
+      'file.max'=> trans('validate.image_required'),
     ]);
     if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
@@ -69,7 +70,7 @@ class ImageService extends Service
     } else {
       try {
         $dataReq = $this->saveImage( $request->file('file'), config('admin.images.name.media') );
-        $res['data'] = ImageRepository::getInstance()->save($dataReq);  
+        $res['data'] =  ImageRepository::getInstance()->save($dataReq);  
       } catch(\Expention $e) {
         $res['errors']['msg'] = $e->getMessage();
         $res['errors']['status_code'] =  500; 

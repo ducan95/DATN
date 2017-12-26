@@ -10,6 +10,8 @@
 		'id_role_required' => 'id_roleフィールドは必須です',
 		'email_must_be_valid_email_address'=>'電子メールは有効な電子メールアドレスでなければなりません',
 		'image_required' => 'ファイル欄は必須です',
+		'image_required' => 'ファイル欄は必須です',
+		'image_required' => 'ファイル欄は必須です',
 		
 
 	]
