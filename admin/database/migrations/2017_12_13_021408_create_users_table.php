@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('status');
-            $table->integer('id_role');
+            $table->string('role_code');
             $table->boolean('is_deleted');
             $table->timestamps();
         });

@@ -86,12 +86,36 @@ Route::group([
           'uses' => 'CategoryController@viewAddChildren',
           'as' =>'webCategoryAddChildren'
       ]);
+       Route::get('/editparent',[
+          'uses' => 'CategoryController@viewEditParent',
+          'as' =>'webCategoryEditParent'
+      ]);
 
 
       Route::get('/edit',[
           'uses' => 'CategoryController@viewEdit',
           'as' =>'webCategorEdit'
       ]);
+  });
+
+  /** router web release **/
+  Route::group([ 'prefix' => 'release' ],function(){
+
+      Route::get('/',[
+          'uses' => 'ReleaseController@viewIndex' ,
+          'as'  => 'webReleaseIndex'
+      ]);
+
+      Route::get('/edit',[
+          'uses' => 'ReleaseController@viewEdit' ,
+          'as'  => 'webReleaseEdit'
+      ]);
+
+
+      Route::get('/add',[
+            'uses' => 'ReleaseController@viewAdd' ,
+            'as'  => 'webReleaseAdd'
+        ]);
   });
 });
 /**
@@ -104,12 +128,12 @@ Route::group([
   /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
       /** Get List Roles **/
-      Route::get('/', [
+     /*  Route::get('/', [
           'uses' => 'RolesController@actionList',
           'as'   => 'apiListRole'
       ]);
-      
-      Route::get('/{id}', [
+       */
+      Route::get('/{search?}', [
           'uses' => 'RolesController@actionFind',
           'as'   => 'apiFindRole'
       ]);
@@ -185,8 +209,12 @@ Route::group([
             'uses' => 'CategoryController@actionUpdate',
             'as' => 'apiCategoryUpdate'
         ]);
+        Route::put('/categorychildren/{id}', [
+            'uses' => 'CategoryController@actionUpdateChil',
+            'as' => 'apiCategoryUpdateChil'
+        ]);
         Route::delete('/{id}', [
-            'user' => 'CategoryController@actionDelete',
+            'uses' => 'CategoryController@actionDelete',
             'as' => 'apiCategoryDelete'
         ]);
     });

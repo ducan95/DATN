@@ -1,0 +1,13 @@
+label.error {
+  color: #d9534f;
+  font-weight: 400;
+  font-size: .8em;
+}
+.release-section {
+  margin-bottom: 20px;
+}
+.pg-section {
+  background: #ecf0f5;
+  border: none;
+  margin-bottom: 0;
+}

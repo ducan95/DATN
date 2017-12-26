@@ -16,7 +16,7 @@ class UserRepository extends Repository
   { 
     try {   
       $query = User::where('id_user', '>', 0)->where('is_deleted', '=', false);
-      $dataMol= ['username', 'email', 'status', 'id_role'];
+      $dataMol= ['username', 'email', 'status', 'role_code'];
       if(!empty($dataReq)) {
         foreach ($dataMol as $value) {
           if(isset($dataReq[$value])) {
@@ -55,8 +55,8 @@ class UserRepository extends Repository
         'email'      => $dataReq['email'],
         'password'   => bcrypt($dataReq['password']),
         'is_deleted' => false,
-        'status'     => false,
-        'id_role'    => $dataReq['id_role'],
+        'status'     => true,
+        'role_code'  => $dataReq['role_code'],
       ]);
       $user->save() ;
       return $user;
@@ -76,7 +76,7 @@ class UserRepository extends Repository
           'password'    => bcrypt($dataReq['password']),
           'status'      => true,
           'is_delected' => false,
-          'id_role'     => $dataReq['id_role'],
+          'role_code'     => $dataReq['role_code'],
         ]);  
         $user->save();
         return $user;  

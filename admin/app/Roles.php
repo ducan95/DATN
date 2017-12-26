@@ -8,6 +8,14 @@ class Roles extends Model
 {
     protected $table = 'roles';
     protected $primaryKey = 'id_role';
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'role_code'
+    ];
 
     protected function user()
     {
