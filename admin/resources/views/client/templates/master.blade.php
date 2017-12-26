@@ -15,33 +15,9 @@
 <body>
     <div id="page">
         <div id="wrapper" class="container">
-            <header>
-                <nav>
-                    <a class="navbar-brand left" href="#">
-                        <img src="{{ asset('client/images/banner.jpg') }}" alt="" srcset="">
-                    </a>
-                    <div class="left-nav left">
-                        <ul>
-                            <li>
-                                <a href="#" id="register">
-                                    <img src="{{ asset('client/images/register.jpg') }}" alt="" srcset="">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" id="email">
-                                    <img src="{{ asset('client/images/email.jpg') }}" alt="" srcset="">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="right-nav right">
-                        <a href="#">
-                            <img class="right" src="{{ asset('client/images/adver-top.jpg') }}" alt="" srcset="">
-                        </a>
-                    </div>
-                </nav>
-
-            </header>
+            {{--  ###### Layout #######  --}}
+             @include("client.templates.header") 
+            {{--  ###### Layout #######  --}}
             <div class="content container">
                 <div class="row">
                     <div role="tabpanel">
@@ -87,35 +63,25 @@
                 </div>
             </div>
             <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-9">
+                        {{--  ###### Layout #######  --}}
+                        @yield('content')
+                        {{--  ###### Layout #######  --}}
+                    </div>
 
+                    <!-- navbav -->
+                    <div class="col-md-3">
+                        {{--  ###### Layout #######  --}}
+                        @include("client.templates.nav-bar") 
+                        {{--  ###### Layout #######  --}}
+                    </div>
+                    <!-- /navbav -->
+                </div>
             </div>
-            <footer class="main-footer">
-            	<div class="">
-	            	<div class="row">
-	            		<div class="col-md-12">
-	            			<div class="row">
-	            				<div class="col-md-4 col-sm-4">
-	            					<i class="fa fa-play" aria-hidden="true"></i>
-	            					<a href="">このサイトについて</a>
-	            				</div>
-	            				<div class="col-md-4 col-sm-4">
-	            					<i class="fa fa-play" aria-hidden="true"></i>
-	            					<a href="">困ったときは</a>
-	            				</div>
-	            				<div class="col-md-4 col-sm-4">
-	            					<i class="fa fa-play" aria-hidden="true"></i>
-	            					<a href="">退会はこちら</a>
-	            				</div>
-	            			</div>
-	            		</div>
-	            	</div>
-	            	<div class="row" style="margin-top: 1%">
-	            		<div class="col-md-8 offset-2">
-	            				<h4 class="h4">© 講談社 All Rights Reserved</h4>
-	            		</div>
-	            	</div>
-	            </div>
-            </footer>
+            {{--  ###### Layout #######  --}}
+            @include("client.templates.footer") 
+            {{--  ###### Layout #######  --}}
         </div>
     </div>
     <script src="{{ asset('client/vendor/jquery.min.js') }}"></script>
