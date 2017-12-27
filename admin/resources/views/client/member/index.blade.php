@@ -4,29 +4,29 @@
     @if(Session::get('status') != null)
     <p class="alert alert-danger">{{ Session::get('status')}}</p>
     @endif
-	<i class="fa fa-th-large" aria-hidden="true"></i><span>Đăng ký thành viên</span>
+	<i class="fa fa-th-large" aria-hidden="true"></i><span>会員登録</span>
 	<form action="{{ route('webClientMemberSave') }}" method="post" id="main" class="form">
 		{{ csrf_field() }}
 	  <div class="form-group">
-	    <label for="exampleInputEmail1">Địa chỉ Email</label>
+	    <label for="exampleInputEmail1">電子メールアドレス</label>
 	    <input type="email" class="form-control" placeholder="Email" name="email" >
 	  </div>
 	  <div class="form-group">
-	    <label for="exampleInputPassword1">Mật khẩu</label>
+	    <label for="exampleInputPassword1">パスワード</label>
 	    <input type="password" class="form-control" placeholder="Password" name="password" required>
 	  </div>
 	  <div class="form-group">
-	  	<label>Ngày sinh</label>
+	  	<label>生年月日</label>
 		<input type="date" name="birthday">
 	  </div>
 	  <div class="checkbox">
-	    <label class="checkbox-inline">Giới tính: 
-	      <input type="radio" value="0" name="gender" checked> Nữ
-	      <input type="radio" value="1" name="gender"> Nam
+	    <label class="checkbox-inline">セックス: 
+	      <input type="radio" value="0" name="gender" checked> 女性
+	      <input type="radio" value="1" name="gender"> 男性
       </label>
 	  </div>
 		<div class="form-group" >
-			<input type="checkbox" name="is_receive_email" value="1">Tôi muốn nhận Email từ Friday về việc xử lý các thông tin cá nhân
+			<input type="checkbox" name="is_receive_email" value="1">私は金曜日から個人情報の処理に関する電子メールを受け取りたい
 		</div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
