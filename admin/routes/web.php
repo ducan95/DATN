@@ -268,13 +268,27 @@ Route::group([
         'as' => 'apiImageDelete'
     ]);
   });
+
+  /*Route::group(['prefix' => '/member'], function(){
+        
+    Route::get('/', [
+        'uses' => 'MemberController@actionSave',
+        'as' => 'apiMemberSave'
+    ]);
+  });*/
+
 });
 
     
 Route::group(['prefix' => 'member', 'namespace' => 'WebClient'],function(){
-  Route::get('/',[
+  Route::get('',[
     'uses'  => 'MemberController@index',
     'as'    => 'webClientMemberIndex'
+  ]);
+
+  Route::post('register',[
+    'uses'  => 'MemberController@save',
+    'as'    => 'webClientMemberSave'
   ]);
 });
 
