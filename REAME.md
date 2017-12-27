@@ -25,6 +25,9 @@ pull code sau đó dùng lệnh
  -  composer update
  -  php artisan vendor:publish -- provider="Intervention\Image\ImageServiceProviderLaravel5"
 
+** 26/12: cài thư viện angular toastr** 
+Chạy lệnh :  npm install angular-toastr
+
 
 
 

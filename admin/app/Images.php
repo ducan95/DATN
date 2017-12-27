@@ -13,7 +13,8 @@ class Images extends Model
     protected $fillable = ['name', 'description', 'path', 'path_blur', 'is_deleted'];
     
 
-   /* public function post() {
+   /* public function post() 
+    {
     	return $this->belongsToMany('App\Post', 'post_image', 'id_image', 'id_post');
     }*/
 
