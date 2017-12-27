@@ -19,9 +19,13 @@ class MembersTableSeeder extends Seeder
                 'birthday'   		=> '1996-10-24' ,
                 'gender'  			=> false ,
                 'is_receive_email'	=> true,
-                'status'			=> true,
+                'member_plan_code'	=> 'free',
                 'is_deleted' 		=> false,
             ]
         );
     }
 }
+
+
+                
+

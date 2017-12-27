@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Images extends Model
 {
     protected $table = 'images';
-    protected $fillable = ['name', 'description', 'path', 'path_paint', 'is_deleted'];
+
     protected $primaryKey = 'id_image';
 
-    public function post() {
-    	return $this->belongsToMany(Post::class,'ImagePost', 'id_image', 'id_post');
-    }
+    protected $fillable = ['name', 'description', 'path', 'path_blur', 'is_deleted'];
+    
+
+   /* public function post() 
+    {
+    	return $this->belongsToMany('App\Post', 'post_image', 'id_image', 'id_post');
+    }*/
 
 }

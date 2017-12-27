@@ -45,59 +45,75 @@ Route::group([
   'prefix'     => config('admin.prefix.web'),
   'namespace'  => 'WebAdmin\src'
 ], function() {
-  /** home **/
+
   Route::get('/',[
     'uses' => 'AdminController@index',
     'as' => 'getIndex'
   ]);
-  /** router web user **/
+
   Route::group([ 'prefix' => 'user' ],function(){
 
-      Route::get('/',[
-          'uses' => 'UserController@viewIndex' ,
-          'as'  => 'webUserIndex'
-      ]);
+    Route::get('/',[
+        'uses' => 'UserController@viewIndex' ,
+        'as'  => 'webUserIndex'
+    ]);
 
-      Route::get('/edit',[
-          'uses' => 'UserController@viewEdit' ,
-          'as'  => 'webUserEdit'
-      ]);
+    Route::get('/edit',[
+        'uses' => 'UserController@viewEdit' ,
+        'as'  => 'webUserEdit'
+    ]);
 
-
-      Route::get('/add',[
-            'uses' => 'UserController@viewAdd' ,
-            'as'  => 'webUserAdd'
-        ]);
+    Route::get('/add',[
+          'uses' => 'UserController@viewAdd' ,
+          'as'  => 'webUserAdd'
+    ]);
   });
 
   Route::group([ 'prefix' => 'category' ],function(){
 
-      Route::get('/',[
-          'uses' => 'CategoryController@viewIndex',
-          'as' =>'webCategoryIndex'
-      ]);
+    Route::get('/',[
+        'uses' => 'CategoryController@viewIndex',
+        'as' =>'webCategoryIndex'
+    ]);
 
-      Route::get('/add',[
-          'uses' => 'CategoryController@viewAdd',
-          'as' =>'webCategoryAdd'
-      ]);
+    Route::get('/add',[
+        'uses' => 'CategoryController@viewAdd',
+        'as' =>'webCategoryAdd'
+    ]);
 
-      Route::get('/addchildren',[
-          'uses' => 'CategoryController@viewAddChildren',
-          'as' =>'webCategoryAddChildren'
-      ]);
-       Route::get('/editparent',[
-          'uses' => 'CategoryController@viewEditParent',
-          'as' =>'webCategoryEditParent'
-      ]);
+    Route::get('/addchildren',[
+        'uses' => 'CategoryController@viewAddChildren',
+        'as' =>'webCategoryAddChildren'
+    ]);
+     Route::get('/editparent',[
+        'uses' => 'CategoryController@viewEditParent',
+        'as' =>'webCategoryEditParent'
+    ]);
 
 
-      Route::get('/edit',[
-          'uses' => 'CategoryController@viewEdit',
-          'as' =>'webCategorEdit'
-      ]);
+    Route::get('/edit',[
+        'uses' => 'CategoryController@viewEdit',
+        'as' =>'webCategorEdit'
+    ]);
   });
 
+  Route::group([ 'prefix' => 'images'], function(){
+    
+    Route::get('/', [
+      'uses' => 'ImageController@viewIndex',
+      'as' => 'webImageIndex'
+    ]);
+
+    Route::get('/add', [
+      'uses' => 'ImageController@viewAdd',
+      'as' => 'webImageAdd'
+    ]);
+
+    Route::get('/edit', [
+      'uses' => 'ImageController@viewEdit',
+      'as' => 'webImageEdit'
+    ]);
+  });  
   /** router web release **/
   Route::group([ 'prefix' => 'release' ],function(){
 
@@ -117,6 +133,27 @@ Route::group([
             'as'  => 'webReleaseAdd'
         ]);
   });
+
+  Route::group([ 'prefix' => 'post' ],function(){
+
+      Route::get('/',[
+          'uses' => 'PostController@viewIndex' ,
+          'as'  => 'webPostIndex'
+      ]);
+
+      Route::get('/edit',[
+          'uses' => 'PostController@viewEdit' ,
+          'as'  => 'webPostEdit'
+      ]);
+
+
+      Route::get('/add',[
+            'uses' => 'PostController@viewAdd' ,
+            'as'  => 'webPostAdd'
+        ]);
+
+  });
+
 });
 /**
  * ROUTE ADMIN API
@@ -127,36 +164,36 @@ Route::group([
 ], function(){
   /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
-      /** Get List Roles **/
-     /*  Route::get('/', [
-          'uses' => 'RolesController@actionList',
-          'as'   => 'apiListRole'
-      ]);
-       */
-      Route::get('/{search?}', [
-          'uses' => 'RolesController@actionFind',
-          'as'   => 'apiFindRole'
-      ]);
-      
-      Route::post('/', [
-          'uses' => 'RolesController@actionSave',
-          'as'   => 'apiSaveRole'
-      ]);
+    /** Get List Roles **/
+     Route::get('/', [
+        'uses' => 'RolesController@actionList',
+        'as'   => 'apiListRole'
+    ]);
+     
+    Route::get('/{search?}', [
+        'uses' => 'RolesController@actionFind',
+        'as'   => 'apiFindRole'
+    ]);
+    
+    Route::post('/', [
+        'uses' => 'RolesController@actionSave',
+        'as'   => 'apiSaveRole'
+    ]);
 
-      Route::put('/{id}/huynh', [
-          'uses' => 'RolesController@actionUpdate',
-          'as'   => 'postUpdateRole'
-      ]);
+    Route::put('/{id}/huynh', [
+        'uses' => 'RolesController@actionUpdate',
+        'as'   => 'postUpdateRole'
+    ]);
 
-      Route::delete('{id}',[
-          'uses' => 'RolesController@actionDelete',
-          'as'   => 'postDeleteRole'
-      ]);
+    Route::delete('{id}',[
+        'uses' => 'RolesController@actionDelete',
+        'as'   => 'postDeleteRole'
+    ]);
   });
   /** router user api **/
   Route::group(['prefix' => '/user'], function(){
 
-    Route::get('/{search?}', [
+    Route::get('/', [
         'uses' => 'UserController@actionFind',
         'as' => 'apiUserFind'
     ]);
@@ -179,53 +216,50 @@ Route::group([
         'uses' => 'UserController@actionDelete',
         'as' => 'apiUserDelete'
     ]);
+  });  
+  /** router category api **/
+  Route::group(['prefix' => '/category'], function(){
+        
+    Route::get('/', [
+        'uses' => 'CategoryController@actionList',
+        'as' => 'apiCategoryList'
+    ]);
+    Route::get('/{id}',[
+      'uses' => 'CategoryController@actionListOne',
+        'as' => 'apiCategoryListOne'
+    ]);
+    
+    Route::get('/categorychildren/{id}', [
+        'uses' => 'CategoryController@actionFindOne',
+        'as' => 'apiCategoryShow'
+    ]);
+    Route::post('/add', [
+        'uses' => 'CategoryController@actionSave',
+        'as' => 'apiCategorySave'
+    ]);
+    Route::post('/addchildren',[
+        'uses' => 'CategoryController@actionSaveChil',
+        'as'   => 'apiCategorySaveChil'
+    ]);
+    Route::put('/{id}', [
+        'uses' => 'CategoryController@actionUpdate',
+        'as' => 'apiCategoryUpdate'
+    ]);
+    Route::put('/categorychildren/{id}', [
+        'uses' => 'CategoryController@actionUpdateChil',
+        'as' => 'apiCategoryUpdateChil'
+    ]);
+    Route::delete('/{id}', [
+        'uses' => 'CategoryController@actionDelete',
+        'as' => 'apiCategoryDelete'
+    ]);
   });
-
-
-    Route::group(['prefix' => '/category'], function(){
-        
-        Route::get('/', [
-            'uses' => 'CategoryController@actionList',
-            'as' => 'apiCategoryList'
-        ]);
-        Route::get('/{id}',[
-          'uses' => 'CategoryController@actionListOne',
-            'as' => 'apiCategoryListOne'
-        ]);
-        
-        Route::get('/categorychildren/{id}', [
-            'uses' => 'CategoryController@actionFindOne',
-            'as' => 'apiCategoryShow'
-        ]);
-        Route::post('/add', [
-            'uses' => 'CategoryController@actionSave',
-            'as' => 'apiCategorySave'
-        ]);
-        Route::post('/addchildren',[
-            'uses' => 'CategoryController@actionSaveChil',
-            'as'   => 'apiCategorySaveChil'
-        ]);
-        Route::put('/{id}', [
-            'uses' => 'CategoryController@actionUpdate',
-            'as' => 'apiCategoryUpdate'
-        ]);
-        Route::put('/categorychildren/{id}', [
-            'uses' => 'CategoryController@actionUpdateChil',
-            'as' => 'apiCategoryUpdateChil'
-        ]);
-        Route::delete('/{id}', [
-            'uses' => 'CategoryController@actionDelete',
-            'as' => 'apiCategoryDelete'
-        ]);
-    });
-
-
+  /** router images api **/
   Route::group(['prefix' => '/images'],function(){
 
-    Route::get('/{search?}', [
+    Route::get('/', [
       'uses' => 'ImageController@actionFind',
       'as' => 'apiImageFind'
-
     ]);
 
     Route::get('/{id}', [
@@ -252,13 +286,16 @@ Route::group([
 });
 
     
-Route::group(['prefix' => 'member', 'namespace' => 'WebClient'],function(){
-  Route::get('',[
+Route::group([
+  'prefix' => 'member', 
+  'namespace' => 'WebClient'
+],function(){
+  Route::get('/',[
     'uses'  => 'MemberController@index',
     'as'    => 'webClientMemberIndex'
   ]);
 
-  Route::post('register',[
+  Route::post('/register',[
     'uses'  => 'MemberController@save',
     'as'    => 'webClientMemberSave'
   ]);

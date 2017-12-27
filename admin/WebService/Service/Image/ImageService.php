@@ -5,15 +5,15 @@ use WebService\Service\Service;
 use Validator;
 use Extention\Media;
 /**
- * Created by SublimeText.
+ * Created by PHPTEAM
  * User: Huynh
  * Date: 18/12/2017
  * Time: 15:00
  */
 class ImageService extends Service
-{
+{ 
+  /* trait Media contains image processing functions */
   use Media; 
-
 
 	public function find($request)
 	{ 
@@ -53,33 +53,35 @@ class ImageService extends Service
     return $res;
   }
 
+
   public function save($request)
-  {	
-     $res['data'] = $this->createImageBlur($request->file('file')); return $res;
-    /*
-    return $this->createImageBlur($request->file('file'));
+  {	 
     $validator = Validator::make($request->all(), [
-      'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'file' => 'required|image| max:327680',
     ],[
       'file.required'=> trans('validate.image_required'),
+      'file.image'=> trans('validate.image_must_be_valid_image_address'),
+      'file.max'=> trans('validate.maximum_image_size_is_320MB'),
     ]);
+    
     if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
       $res['errors']['status_code'] = 400; 
     } else {
       try {
         $dataReq = $this->saveImage( $request->file('file'), config('admin.images.name.media') );
-        $res['data'] = ImageRepository::getInstance()->save($dataReq);  
+        $res['data'] =  ImageRepository::getInstance()->save($dataReq);  
       } catch(\Expention $e) {
         $res['errors']['msg'] = $e->getMessage();
         $res['errors']['status_code'] =  500; 
       }  
     }
-    return $res;  */
+    return $res;  
 	}
 
   public function update($request, $id)
   {      
+     $res['data'] = $id; return $res;
 	}
 
   public function delete($id)

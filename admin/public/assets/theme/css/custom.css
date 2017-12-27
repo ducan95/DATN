@@ -3,6 +3,92 @@ label.error {
   font-weight: 400;
   font-size: .8em;
 }
+<<<<<<< HEAD
+.item-image {
+  border:2px solid #7777779e;
+  margin-bottom: 10px;
+}
+
+.item-image .content-image-left {
+	width: 5%;
+	float: left;
+	position: relative;
+}
+.item-image .content-image-left a {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+}
+
+.item-image .content-image-right {
+	width: 95%;
+	float: right;
+	border: 1px solid  #bfbfbf;
+	border-left: 2px solid  #999;
+	/*min-height: 80px;*/
+}
+.item-image .content-image-right .content-image-top {
+	display: block;
+  border-bottom: 2px solid #bfbfbf;
+  padding: 5px;
+  background-color: #99999991;
+}
+.item-image .content-image-right .content-image-top .image{
+	width: 10% ;
+	float: left;
+}
+.item-image .content-image-right .content-image-top .name{
+	width: 70% ;
+	float: left;
+}
+.item-image .content-image-right .content-image-top .name-image{
+	display: block;
+}
+.item-image .content-image-right .content-image-top .name-image{
+}
+.item-image .content-image-right .content-image-top .create{
+	width: 20% ;
+	float: left;
+}
+.item-image .content-image-right .content-image-bottom {
+	padding: 5px;
+}
+.item-image .content-image-right .content-image-bottom .path{
+	width: 10% ;
+	float: left;
+}
+.item-image .content-image-right .content-image-bottom .url-image{}
+.clear {
+	clear: both;
+}
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    /* width: 200px; */
+    min-height: 200px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.drop-box p {
+    font-size: 10px;
+    margin-top: 15px;
+    font-family: Arial;
+}
+
+.dragover {
+    border: 5px dashed blue;
+}
+.content-header {
+
+}
+.content-header h3{
+	background-color: #999999a8;
+    padding: 5px;
+    border: 1px solid #999;	
+}
 .release-section {
   margin-bottom: 20px;
 }

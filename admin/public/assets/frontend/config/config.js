@@ -1,7 +1,7 @@
 /**
  * Created by rikkei on 15/12/2017.
  */
-var SOUGOU_ZYANARU_MODULE = angular.module("sougou_zyanaru", ['ngResource']);
+var SOUGOU_ZYANARU_MODULE = angular.module("sougou_zyanaru", ['ngResource', 'ngFileUpload', 'toastr']);
 
 
 SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {
@@ -41,3 +41,8 @@ SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {
 SOUGOU_ZYANARU_MODULE.config(['$httpProvider', function ($httpProvider) {
   $httpProvider.interceptors.push('HttpInterceptor');
 }]);
+
+// validate.
+SOUGOU_ZYANARU_MODULE.service('trans',function(){
+    this.messageDelete = "該当の画像の削除を行います。よろしいですか?";
+});

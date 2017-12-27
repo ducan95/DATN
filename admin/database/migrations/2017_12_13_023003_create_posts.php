@@ -15,19 +15,17 @@ class CreatePosts extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id_post');
+            $table->integer('id_release_number')->unique();
             $table->string('title');
             $table->string('slug');
             $table->integer('status')->unsigned();
-            $table->string('thumbnail');
-            $table->string('thumbnail_path');
-            $table->integer('id_release_number')->unique();
+            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail_path')->nullable();
             $table->dateTime('time_begin');
             $table->dateTime('time_end');
-            $table->string('password');
             $table->integer('status_preview_top')->unsigned();
-            $table->dateTime('deleted_at');
+            $table->dateTime('deleted_at')->notnull();
             $table->boolean('is_deleted');
-            $table->string('url_image');
         });
     }
 
