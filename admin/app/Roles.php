@@ -19,6 +19,6 @@ class Roles extends Model
 
     protected function user()
     {
-    	return	$this->hasMany(User::class, 'id_role');
+    	return	$this->hasMany(User::class, 'role_code');
     }
 }

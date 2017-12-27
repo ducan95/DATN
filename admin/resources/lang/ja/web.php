@@ -14,6 +14,12 @@
 		'search' => '検索',
 		'confirm' => '削除確認',
 		'the_image_list' => '画像の一覧へ'
+	    'save'=>'登録',
+	    'edit'=> '編集',
+	    'delete'=> '削除',
+	    'cancel'=> 'キャンセル',
+	    'password'=> 'パスワード'
+
 
 	]
 	

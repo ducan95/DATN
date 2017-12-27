@@ -86,6 +86,10 @@ Route::group([
           'uses' => 'CategoryController@viewAddChildren',
           'as' =>'webCategoryAddChildren'
       ]);
+       Route::get('/editparent',[
+          'uses' => 'CategoryController@viewEditParent',
+          'as' =>'webCategoryEditParent'
+      ]);
 
 
       Route::get('/edit',[
@@ -110,6 +114,44 @@ Route::group([
       'uses' => 'ImageController@viewEdit',
       'as' => 'webImageEdit'
     ]);
+
+  /** router web release **/
+  Route::group([ 'prefix' => 'release' ],function(){
+
+      Route::get('/',[
+          'uses' => 'ReleaseController@viewIndex' ,
+          'as'  => 'webReleaseIndex'
+      ]);
+
+      Route::get('/edit',[
+          'uses' => 'ReleaseController@viewEdit' ,
+          'as'  => 'webReleaseEdit'
+      ]);
+
+
+      Route::get('/add',[
+            'uses' => 'ReleaseController@viewAdd' ,
+            'as'  => 'webReleaseAdd'
+        ]);
+  });
+
+  Route::group([ 'prefix' => 'post' ],function(){
+
+      Route::get('/',[
+          'uses' => 'PostController@viewIndex' ,
+          'as'  => 'webPostIndex'
+      ]);
+
+      Route::get('/edit',[
+          'uses' => 'PostController@viewEdit' ,
+          'as'  => 'webPostEdit'
+      ]);
+
+
+      Route::get('/add',[
+            'uses' => 'PostController@viewAdd' ,
+            'as'  => 'webPostAdd'
+        ]);
 
   });
 
@@ -176,6 +218,7 @@ Route::group([
         'as' => 'apiUserDelete'
     ]);
   });
+<<<<<<< HEAD
   /** router category api **/
   Route::group(['prefix' => '/category'], function(){
       
@@ -210,6 +253,48 @@ Route::group([
       ]);
   });
   /** router images api **/
+=======
+
+
+    Route::group(['prefix' => '/category'], function(){
+        
+        Route::get('/', [
+            'uses' => 'CategoryController@actionList',
+            'as' => 'apiCategoryList'
+        ]);
+        Route::get('/{id}',[
+          'uses' => 'CategoryController@actionListOne',
+            'as' => 'apiCategoryListOne'
+        ]);
+        
+        Route::get('/categorychildren/{id}', [
+            'uses' => 'CategoryController@actionFindOne',
+            'as' => 'apiCategoryShow'
+        ]);
+        Route::post('/add', [
+            'uses' => 'CategoryController@actionSave',
+            'as' => 'apiCategorySave'
+        ]);
+        Route::post('/addchildren',[
+            'uses' => 'CategoryController@actionSaveChil',
+            'as'   => 'apiCategorySaveChil'
+        ]);
+        Route::put('/{id}', [
+            'uses' => 'CategoryController@actionUpdate',
+            'as' => 'apiCategoryUpdate'
+        ]);
+        Route::put('/categorychildren/{id}', [
+            'uses' => 'CategoryController@actionUpdateChil',
+            'as' => 'apiCategoryUpdateChil'
+        ]);
+        Route::delete('/{id}', [
+            'uses' => 'CategoryController@actionDelete',
+            'as' => 'apiCategoryDelete'
+        ]);
+    });
+
+
+>>>>>>> db732ef0835b4db2a48befe97ea4070418d15f30
   Route::group(['prefix' => '/images'],function(){
 
     Route::get('/', [
@@ -237,14 +322,31 @@ Route::group([
         'as' => 'apiImageDelete'
     ]);
   });
+<<<<<<< HEAD
   
+=======
+
+  /*Route::group(['prefix' => '/member'], function(){
+        
+    Route::get('/', [
+        'uses' => 'MemberController@actionSave',
+        'as' => 'apiMemberSave'
+    ]);
+  });*/
+
+>>>>>>> db732ef0835b4db2a48befe97ea4070418d15f30
 });
 
     
 Route::group(['prefix' => 'member', 'namespace' => 'WebClient'],function(){
-  Route::get('/',[
+  Route::get('',[
     'uses'  => 'MemberController@index',
     'as'    => 'webClientMemberIndex'
+  ]);
+
+  Route::post('register',[
+    'uses'  => 'MemberController@save',
+    'as'    => 'webClientMemberSave'
   ]);
 });
 

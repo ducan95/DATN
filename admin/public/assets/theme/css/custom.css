@@ -3,6 +3,7 @@ label.error {
   font-weight: 400;
   font-size: .8em;
 }
+<<<<<<< HEAD
 .item-image {
   border:2px solid #7777779e;
   margin-bottom: 10px;
@@ -87,4 +88,12 @@ label.error {
 	background-color: #999999a8;
     padding: 5px;
     border: 1px solid #999;	
+}
+.release-section {
+  margin-bottom: 20px;
+}
+.pg-section {
+  background: #ecf0f5;
+  border: none;
+  margin-bottom: 0;
 }

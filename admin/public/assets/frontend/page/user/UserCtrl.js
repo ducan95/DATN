@@ -57,7 +57,10 @@ SOUGOU_ZYANARU_MODULE
   //Get role -> showview
   RoleService.find({}, function (res) {
     if (typeof res != "undefined") {
+
       $scope.roles = res.data;
+      $scope.roles.splice(0, 1);
+
     }
   });  
   
@@ -117,13 +120,7 @@ SOUGOU_ZYANARU_MODULE
   var id         = url.hash.match(/\d/g);
   $scope.id      = id.join('');
 
-  //Get role -> showview
-  RoleService.find({}, function (res) {
-    if (typeof res != "undefined") {
-      $scope.roles = res.data;
-      //console.log($scope.roles);
-    }
-  });  
+  
 
   $scope.updateUser = function (user) { 
     //Validate form
@@ -188,6 +185,15 @@ SOUGOU_ZYANARU_MODULE
     UserService.get({ id: $scope.id },function(res) {
       $scope.user = res.data;
     });
+    //Get role -> showview
+    RoleService.find({}, function (res) {
+      if (typeof res != "undefined") {
+        $scope.roles = res.data;
+        /* if ($scope.roles['role_code'] != 's_admin') {
+          $scope.roles.splice(0, 1);
+        } */
+      }
+    });  
   };
 
   $scope.loadUser(); 

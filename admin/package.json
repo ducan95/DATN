@@ -22,6 +22,8 @@
     },
     "dependencies": {
         "angular-toastr": "^2.1.1",
-        "angularjs-toaster": "^2.2.0"
+        "angularjs-toaster": "^2.2.0",
+        "sweetalert2": "^7.1.2"
+
     }
 }

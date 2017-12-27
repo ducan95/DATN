@@ -8,6 +8,9 @@ SOUGOU_ZYANARU_MODULE
       method: 'GET',
       isArray: false
     },
+    update:{
+		method:'PUT'
+	}
   });
 })
 .factory('CategoryChildrenService',function($resource){
@@ -17,6 +20,9 @@ SOUGOU_ZYANARU_MODULE
       method: 'GET',
       isArray: false
     },
+    update:{
+    	method:"PUT"
+    }
   });
 })
 .factory('CategoryChildrenAddService',function($resource){
@@ -38,37 +44,3 @@ SOUGOU_ZYANARU_MODULE
         return $window.confirm(message);
     }
 });
-
-// })
-// //Take category parent in form add category children
-// .factory('CategoryParentService',function($resource){
-// 	var data= $resource('web_api/category/listone/:id', { category:'@category'},{
-// 	list:{
-// 		url: '/web_api/category/listone/:id',
-// 		method: 'GET',
-// 		isArray:false
-// 	}
-// 	})
-// 	return data;
-// })
-
-// //Api list category children when click category parent
-// .factory('CategoryChildrenService',function($resource){
-// 	var data= $resource('web_api/category/find/:id', { category:'@category'},{
-// 	find:{
-// 		url: '/web_api/category/find/:id',
-// 		method: 'GET',
-// 		isArray:false
-// 	}
-// 	})
-// 	return data;
-// })
-//Api add Category parent
-	
-// //Api add Category Children
-// .factory('CategoryChildrenAddService',function($resource){
-// 	return $resource('web_api/category/addChil/',{ id: '@_id'},{
-// 		update:{
-// 			method:'POST'
-// 		}
-// 	});

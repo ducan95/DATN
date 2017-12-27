@@ -5,8 +5,8 @@
     <section class="sidebar">
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="active menu-open">
-          <a href="#">
+        <li class="menu-open">
+          <a href="{{ route('webReleaseIndex') }}">
             <i class="fa fa-barcode"></i> <span>{{trans('web.Registration_releasenumber')}}
 </span>
             {{--  <span class="pull-right-container">
@@ -15,7 +15,7 @@
           </a>
         </li>
         <li class="">
-          <a href="#">
+          <a href="{{ route('webPostIndex')}}">
             <i class="fa fa-pencil"></i>
             <span>{{trans('web.list_archive')}}
 </span></span>

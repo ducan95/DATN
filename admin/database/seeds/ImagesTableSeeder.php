@@ -10,7 +10,16 @@ class ImagesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        //
-    }
+    {	
+    	for($i=0;$i<=10;$i++) {
+      	DB::table('images')->insert([
+            'name'  			=> 'cover'.'25-12-2017'.$i.'.jpg' ,
+            'description' 		=> 'cover' ,
+            'path' 				=> 'pathDefault'.'25-12-2017'.$i.'.jpg',
+            'path_blur'   		=> 'pathBlur/cover'.'25-12-2017'.$i.'.jpg' ,
+            'is_deleted'  			=> false , 
+        ]);
+    	}
+	  }
+
 }

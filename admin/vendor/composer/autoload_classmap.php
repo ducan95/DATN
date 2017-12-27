@@ -27,6 +27,8 @@ return array(
     'App\\Http\\Controllers\\WebAdmin\\src\\AdminController' => $baseDir . '/app/Http/Controllers/WebAdmin/src/AdminController.php',
     'App\\Http\\Controllers\\WebAdmin\\src\\CategoryController' => $baseDir . '/app/Http/Controllers/WebAdmin/src/CategoryController.php',
     'App\\Http\\Controllers\\WebAdmin\\src\\ImageController' => $baseDir . '/app/Http/Controllers/WebAdmin/src/ImageController.php',
+    'App\\Http\\Controllers\\WebAdmin\\src\\PostController' => $baseDir . '/app/Http/Controllers/WebAdmin/src/PostController.php',
+    'App\\Http\\Controllers\\WebAdmin\\src\\ReleaseController' => $baseDir . '/app/Http/Controllers/WebAdmin/src/ReleaseController.php',
     'App\\Http\\Controllers\\WebAdmin\\src\\RolesController' => $baseDir . '/app/Http/Controllers/WebAdmin/src/RolesController.php',
     'App\\Http\\Controllers\\WebAdmin\\src\\UserController' => $baseDir . '/app/Http/Controllers/WebAdmin/src/UserController.php',
     'App\\Http\\Controllers\\WebAmin\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/WebAdmin/Auth/LoginController.php',
@@ -41,6 +43,7 @@ return array(
     'App\\Http\\Requests\\CategoryRequest' => $baseDir . '/app/Http/Requests/CategoryRequest.php',
     'App\\Http\\Requests\\UserRequest' => $baseDir . '/app/Http/Requests/UserRequest.php',
     'App\\Images' => $baseDir . '/app/Images.php',
+    'App\\Member' => $baseDir . '/app/Member.php',
     'App\\Post' => $baseDir . '/app/Post.php',
     'App\\PostCategory' => $baseDir . '/app/PostCategory.php',
     'App\\PostImage' => $baseDir . '/app/PostImage.php',
@@ -1887,6 +1890,7 @@ return array(
     'Illuminate\\View\\ViewFinderInterface' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
     'Illuminate\\View\\ViewName' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewName.php',
     'Illuminate\\View\\ViewServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+<<<<<<< HEAD
     'ImagePostTableSeeder' => $baseDir . '/database/seeds/ImagePostTableSeeder.php',
     'ImagesTableSeeder' => $baseDir . '/database/seeds/ImagesTableSeeder.php',
     'Imagine\\Draw\\DrawerInterface' => $vendorDir . '/imagine/imagine/lib/Imagine/Draw/DrawerInterface.php',
@@ -2099,6 +2103,9 @@ return array(
     'Intervention\\Image\\Point' => $vendorDir . '/intervention/image/src/Intervention/Image/Point.php',
     'Intervention\\Image\\Response' => $vendorDir . '/intervention/image/src/Intervention/Image/Response.php',
     'Intervention\\Image\\Size' => $vendorDir . '/intervention/image/src/Intervention/Image/Size.php',
+=======
+    'ImagesTableSeeder' => $baseDir . '/database/seeds/ImagesTableSeeder.php',
+>>>>>>> db732ef0835b4db2a48befe97ea4070418d15f30
     'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
     'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
     'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => $vendorDir . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
@@ -2152,6 +2159,7 @@ return array(
     'League\\Flysystem\\Util\\ContentListingFormatter' => $vendorDir . '/league/flysystem/src/Util/ContentListingFormatter.php',
     'League\\Flysystem\\Util\\MimeType' => $vendorDir . '/league/flysystem/src/Util/MimeType.php',
     'League\\Flysystem\\Util\\StreamHasher' => $vendorDir . '/league/flysystem/src/Util/StreamHasher.php',
+    'MembersTableSeeder' => $baseDir . '/database/seeds/MembersTableSeeder.php',
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
     'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',
@@ -2960,7 +2968,11 @@ return array(
     'PhpParser\\Serializer\\XML' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Serializer/XML.php',
     'PhpParser\\Unserializer' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer.php',
     'PhpParser\\Unserializer\\XML' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer/XML.php',
+<<<<<<< HEAD
     'PostTableSeeder' => $baseDir . '/database/seeds/PostTableSeeder.php',
+=======
+    'PostsTableSeeder' => $baseDir . '/database/seeds/PostsTableSeeder.php',
+>>>>>>> db732ef0835b4db2a48befe97ea4070418d15f30
     'Prophecy\\Argument' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument.php',
     'Prophecy\\Argument\\ArgumentsWildcard' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
     'Prophecy\\Argument\\Token\\AnyValueToken' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',
@@ -3247,7 +3259,7 @@ return array(
     'Ramsey\\Uuid\\UuidFactory' => $vendorDir . '/ramsey/uuid/src/UuidFactory.php',
     'Ramsey\\Uuid\\UuidFactoryInterface' => $vendorDir . '/ramsey/uuid/src/UuidFactoryInterface.php',
     'Ramsey\\Uuid\\UuidInterface' => $vendorDir . '/ramsey/uuid/src/UuidInterface.php',
-    'Release_numberTableSeeder' => $baseDir . '/database/seeds/Release_numberTableSeeder.php',
+    'ReleaseNumberTableSeeder' => $baseDir . '/database/seeds/ReleaseNumberTableSeeder.php',
     'RolesTableSeeder' => $baseDir . '/database/seeds/RolesTableSeeder.php',
     'SebastianBergmann\\CodeCoverage\\CodeCoverage' => $vendorDir . '/phpunit/php-code-coverage/src/CodeCoverage.php',
     'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',

@@ -1,6 +1,14 @@
 @extends('admin.templates.master')
 @section('content')
 <div ng-controller="CategoryCtrl">
+  <style type="text/css">
+/*    #a:hover { 
+    background-color: yellow;
+  }*/
+  #a.active{
+      color: red;
+    }
+  </style>
 	<h2 style="margin-top: 0px;padding-top: 25px;padding-left: 15px">List Category</h2>
 	 <section class="content">
       <div class="row">
@@ -8,38 +16,24 @@
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <table class="table table-striped">
+              <table class="table table-hover">
                 <tr>
-                  <th style="width: 10px">ID</th>
-                  <th>Name</th>
-                  <th>Update</th>
-                  <th style="width: 40px">Delete</th>
+                  <th style="width: 10px">No</th>
+                  <th style="padding-left: 50px">Name</th>
+                  <th>Slug</th>
+                  <th style="padding-left: 50px">Status</th>
                 </tr>
-                <tr ng-repeat='category in categories'> 
-                  <td style="cursor: pointer;" ng-click="changeToCategoryChil(category.id_category)">@{{ category.id_category }}</td>
-                  <td style="cursor: pointer;" ng-click="changeToCategoryChil(category.id_category)">@{{ category.name }}</td>
+                <tr ng-repeat='category in categories' ng-class="{'active':category.id_category==states.categoryactive}" id="a" class="category" ng-click="states.categoryactive=category.id_category"> 
+                  <td>@{{ $index +1}}</td>
+                  <td style="cursor: pointer;padding-left: 50px" ng-click="changeToCategoryChil(category.id_category)">@{{ category.name }}</td>
+                  <td>@{{ category.slug }}</td>
                   <td>
-                    	<a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Update</button></a>                
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
-                        Delete
+                    	<a href="" ng-click="redirecteditparent(category.id_category)"><button class="btnMize btn btn-primary"><i class="fa fa-edit"></i>Update</button></a>                
+                    <button type="button" class="btn btn-danger" href="javascript:void(0)"
+                    ng-click="deleteCategory(category.id_category)"><i class="fa fa-trash-o"></i>
+                      Delete
                     </button>
                   </td>
-                    <div id="myModal"  class="modal fade" tabindex="-1" role="dialog">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Delete Category Parent?</h4>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-primary">Yes</button>
-                          </div>
-                        </div><!-- /.modal-content -->
-                      </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
                 </tr>
               </table>
             </div>
@@ -56,22 +50,22 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <table class="table table-striped">
+              <table class="table table-hover">
                 <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Tên Danh Mục</th>
-                  <th>Sửa</th>
-                  <th style="width: 40px">Xóa</th>
+                  <th style="width: 10px">No</th>
+                  <th style="padding-left: 50px">Name</th>
+                  <th>Slug</th>
+                  <th style="padding-left: 50px">Status</th>
                 </tr>
                 <tr ng-repeat='categoryChil in categoryChildren'>
-                  <td>@{{ categoryChil.id_category }}</td>
-                  <td>@{{ categoryChil.name}}</td>
+                  <td>@{{ $index + 1 }}</td>
+                  <td style="padding-left: 50px">@{{ categoryChil.name}}</td>
+                  <td>@{{ categoryChil.slug }}</td>
                   <td>
-                      <a href="{{ route('webCategorEdit') }}"><button class="btnMize btn btn-primary">Update</button></a>                
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
-                        Delete
+                    <a href="" ng-click="redirecteditchil(categoryChil.id_category)"><button class="btnMize btn btn-primary"><i class="fa fa-edit"></i>Update</button></a>
+                    <button type="button" class="btn btn-danger" href="javascript:void(0)"
+                    ng-click="deleteCategoryChil(categoryChil.id_category)"><i class="fa fa-trash-o"></i>
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -81,7 +75,8 @@
             <!-- /.box-body -->
           </div>
           <div>
-            <a href="" ng-click="redirectAddChil(categoryParent.id_category_parent)"><button   type="button" class="btn btn-primary">Add Category Children</button></a>
+            <!-- <a href="" ng-click="redirectAddChil(categoryParent.id_category_parent)"><button   type="button" class="btn btn-primary">Add Category Children</button></a> -->
+            <a href="{{ route('webCategoryAddChildren')}}"><button type="button" class="btn btn-primary">Add Category Children</button></a>
               
           </div>
           <!-- /.box -->
@@ -96,10 +91,10 @@
 @stop  
 
 @section('bottom-js')
-<!-- Toggle -->		
-<script src="{{ asset('assets/base/bower_components/bootstrap/dist/js/bootstrap-toggle.min.js') }}"></script>
-<!-- Edit table -->
 <script src="{{ asset('assets/frontend/page/category/Category.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
 @endsection 
               
+                     
+                 
+                  

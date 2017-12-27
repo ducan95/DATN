@@ -19,9 +19,8 @@ class CreatePosts extends Migration
             $table->string('title');
             $table->string('slug');
             $table->integer('status')->unsigned();
-            $table->string('password');
-            $table->string('thumbnail');
-            $table->string('thumbnail_path');
+            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail_path')->nullable();
             $table->dateTime('time_begin');
             $table->dateTime('time_end');
             $table->integer('status_preview_top')->unsigned();

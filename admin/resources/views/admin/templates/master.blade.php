@@ -18,6 +18,8 @@
   <!-- Custom style -->
   <link rel="stylesheet" href="{{ asset('assets/theme/css/custom.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/fakeloader/fakeloader.css') }}">
+  <!-- <link rel="stylesheet" href="{{ asset('bower_components/ckeditor') }}"> -->
+  @yield('custom-css')
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/skins/_all-skins.min.css') }}">
@@ -82,6 +84,7 @@
 <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 
 <!-- SlimScroll -->
 <script src="{{ asset('assets/base/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>

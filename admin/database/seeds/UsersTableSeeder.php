@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Roles;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -11,16 +11,21 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
-            [
-                'id_user'  => '2' ,
-                'username' => 'Quyen Luu' ,
-                'email'    => 'b@gmail.com' ,
-                'status'   => '1' ,
-                'id_role'  => '1' ,
-                'password' => bcrypt('123'),
-                'is_deleted' => '1'
-            ]
-        );
+
+        $roles = Roles::all();
+        $i=1;
+        foreach ($roles as $role) {
+            $i++;
+                DB::table('users')->insert(
+                [
+                    'username'   => 'Super'.$i ,
+                    'email'      => $i.'admin@gmail.com' ,
+                    'status'     => true ,
+                    'role_code'  => $role->role_code,
+                    'password'   => bcrypt('123456'),
+                    'is_deleted' => false
+                ]
+            );
+            }
+        }
     }
-}
