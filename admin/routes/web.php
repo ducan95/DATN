@@ -249,14 +249,6 @@ Route::group([
     ]);
   });
 
-  /*Route::group(['prefix' => '/member'], function(){
-        
-    Route::get('/', [
-        'uses' => 'MemberController@actionSave',
-        'as' => 'apiMemberSave'
-    ]);
-  });*/
-
 });
 
     

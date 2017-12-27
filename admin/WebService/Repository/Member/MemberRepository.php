@@ -24,7 +24,7 @@ class MemberRepository extends Repository
         'birthday'					=> $dataReq['birthday'],
         'gender' 						=> $dataReq['gender'],
         'is_receive_email' 	=> $is_receive_email,
-        'status' 						=> 0,
+        'member_plan_code' 	=> 'free',
         'is_deleted' 				=> false,
         'id_category_parent'=> 0,
       ]);

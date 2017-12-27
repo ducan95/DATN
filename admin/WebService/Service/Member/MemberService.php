@@ -31,7 +31,8 @@ class MemberService extends Service
       try{
         $res['data']= MemberRepository::getInstance()->save($request);
       }catch(\Exception $e){
-        $res['errors']= $e ->getMessage();
+        $res['errors']['msg'] = $e ->getMessage();
+        $res['errors']['status_code'] = 500;
       }
     }
     return $res;

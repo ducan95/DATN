@@ -18,7 +18,7 @@
             {{--  ###### Layout #######  --}}
              @include("client.templates.header") 
             {{--  ###### Layout #######  --}}
-            <div class="content container">
+            <div class="content">
                 <div class="row">
                     <div role="tabpanel">
                         <!-- Nav tabs -->
@@ -84,9 +84,16 @@
             {{--  ###### Layout #######  --}}
         </div>
     </div>
-    <script src="{{ asset('client/vendor/jquery.min.js') }}"></script>
+    <script>
+      var APP_CONFIGURATION = {
+        BASE_URL: "{{ url('/') }}"
+      }
+    </script>
+    <!-- <script src="{{ asset('client/vendor/jquery.min.js') }}"></script> -->
     <script src="{{ asset('client/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('client/js/myjs.js') }}"></script>
+
+    @yield('bottom-js')
 </body>
 
 </html>

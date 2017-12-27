@@ -1,53 +1,23 @@
 @extends('client.templates.master')
 @section('content')
 <div>
-	@if (count($errors) >0)
-        <div class="box-body">
-              <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-               {{--   <h4><i class="icon fa fa-ban"></i> Alert!</h4>  --}}
-          @foreach($errors->all() as $error)
-              <p>{{ $error }}</p>
-          @endforeach
-          </div>
-     @endif
-    
-     @if (session('status'))
-          <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{--  <h4><i class="icon fa fa-ban"></i> Alert!</h4>  --}}
-             <p>{{ session('status') }}</p>
-        </div> 
-     @endif
+    @if(Session::get('status') != null)
+    <p class="alert alert-danger">{{ Session::get('status')}}</p>
+    @endif
 	<i class="fa fa-th-large" aria-hidden="true"></i><span>Đăng ký thành viên</span>
-	<form action="{{ route('webClientMemberSave') }}" method="post">
+	<form action="{{ route('webClientMemberSave') }}" method="post" id="main" class="form">
 		{{ csrf_field() }}
 	  <div class="form-group">
 	    <label for="exampleInputEmail1">Địa chỉ Email</label>
-	    <input type="email" class="form-control" placeholder="Email" name="email" required="" >
+	    <input type="email" class="form-control" placeholder="Email" name="email" >
 	  </div>
 	  <div class="form-group">
 	    <label for="exampleInputPassword1">Mật khẩu</label>
-	    <input type="password" class="form-control" placeholder="Password" name="password" required="" >
+	    <input type="password" class="form-control" placeholder="Password" name="password" required>
 	  </div>
 	  <div class="form-group">
 	  	<label>Ngày sinh</label>
-	  	<!-- <select name="yearBirth">
-	  		<?php for($i=1980; $i<= 2017; $i++){ ?> 
-			  <option value="{{ $i }}">{{ $i }}</option>
-			  <?php } ?>
-			</select> /
-			<select name="monthBirth">
-	  		<?php for($i=1; $i<= 12; $i++){ ?> 
-			  <option value="{{ $i }}">{{ $i }}</option>
-			  <?php } ?> 
-			</select> /
-			<select name="dateBirth">
-	  		<?php for($i=1; $i<= 31; $i++){ ?> 
-			  <option value="{{ $i }}">{{ $i }}</option>
-			  <?php } ?>
-			</select> -->
-			<input type="date" name="birthday">
+		<input type="date" name="birthday">
 	  </div>
 	  <div class="checkbox">
 	    <label class="checkbox-inline">Giới tính: 
@@ -60,5 +30,41 @@
 		</div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
+	<script src="{{ asset('assets/frontend/page/member/jquery-3.2.1.min.js') }}"></script>
+	<script src="{{ asset('assets/frontend/page/member/jquery.validate.min.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.form').validate({
+				ignore: [],
+				debug: false,
+				rules: {
+					password: {
+						required: true,
+						minlength: 6,
+					},
+					email: {
+						required: true,
+						email: true,
+					},
+					birthday: {
+						required: true,
+					},
+				},
+				messages: {
+					password: {
+						required: "Vui lòng nhập password",
+						minlength: '{{trans('web.Registration_releasenumber')}}',
+					},
+					email: {
+						required: "Vui lòng nhập địa chỉ mail của bạn",
+						email: "Địa chỉ mail không xác thực",
+					},
+					birthday: {
+						required: "Vui lòng nhập ngày sinh",
+					},
+				}
+			});		
+		});	
+	</script>
 </div>
 @stop
