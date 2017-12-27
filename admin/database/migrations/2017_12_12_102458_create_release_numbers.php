@@ -16,8 +16,8 @@ class CreateReleaseNumbers extends Migration
         Schema::create('release_numbers', function (Blueprint $table) {
             $table->increments('id_release_number');
             $table->string('name');
-            $table->string('image_release');
-            $table->string('image_header');
+            $table->string('image_release_path');
+            $table->string('image_header_path');
             $table->boolean('is_deleted');
             $table->timestamps();
         });

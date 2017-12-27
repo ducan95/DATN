@@ -15,7 +15,7 @@
           </a>
         </li>
         <li class="">
-          <a href="#">
+          <a href="{{ route('webPostIndex')}}">
             <i class="fa fa-pencil"></i>
             <span>{{trans('web.list_archive')}}
 </span></span>

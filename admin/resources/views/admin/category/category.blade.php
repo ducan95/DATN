@@ -1,6 +1,14 @@
 @extends('admin.templates.master')
 @section('content')
 <div ng-controller="CategoryCtrl">
+  <style type="text/css">
+/*    #a:hover { 
+    background-color: yellow;
+  }*/
+  #a.active{
+      color: red;
+    }
+  </style>
 	<h2 style="margin-top: 0px;padding-top: 25px;padding-left: 15px">List Category</h2>
 	 <section class="content">
       <div class="row">
@@ -15,7 +23,7 @@
                   <th>Slug</th>
                   <th style="padding-left: 50px">Status</th>
                 </tr>
-                <tr ng-repeat='category in categories'> 
+                <tr ng-repeat='category in categories' ng-class="{'active':category.id_category==states.categoryactive}" id="a" class="category" ng-click="states.categoryactive=category.id_category"> 
                   <td>@{{ $index +1}}</td>
                   <td style="cursor: pointer;padding-left: 50px" ng-click="changeToCategoryChil(category.id_category)">@{{ category.name }}</td>
                   <td>@{{ category.slug }}</td>

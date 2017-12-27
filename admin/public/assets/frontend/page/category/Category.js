@@ -4,6 +4,8 @@ SOUGOU_ZYANARU_MODULE
   CategoryService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.categories = res.data;
+      $scope.states={};
+      $scope.states.categoryactive=res.data[0];
     }
   })
 
@@ -163,10 +165,11 @@ SOUGOU_ZYANARU_MODULE
           global_status: getglobal_status,
           menu_status: getmenu_status,
           is_deleted: false
-        }, {});
+        },function (){
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
-      }
+      });
     } 
+  };  
      $scope.loadCategory = function () { 
       CategoryService.get({ id: $scope.id },function(res) {
       $scope.categoryparent = res.data[0];
@@ -211,10 +214,11 @@ SOUGOU_ZYANARU_MODULE
           menu_status:    getmenu_status,
           is_deleted: false ,
           id_category_parent: getid_category_parent
-      }, {});
-        $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/category';
-      }
-    }
+      }, function (){
+        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
+      });
+    } 
+  };  
 
     CategoryService.find({}, function (res) {
     if (typeof res != "undefined") {  

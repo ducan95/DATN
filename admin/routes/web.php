@@ -117,6 +117,26 @@ Route::group([
             'as'  => 'webReleaseAdd'
         ]);
   });
+
+  Route::group([ 'prefix' => 'post' ],function(){
+
+      Route::get('/',[
+          'uses' => 'PostController@viewIndex' ,
+          'as'  => 'webPostIndex'
+      ]);
+
+      Route::get('/edit',[
+          'uses' => 'PostController@viewEdit' ,
+          'as'  => 'webPostEdit'
+      ]);
+
+
+      Route::get('/add',[
+            'uses' => 'PostController@viewAdd' ,
+            'as'  => 'webPostAdd'
+        ]);
+  });
+
 });
 /**
  * ROUTE ADMIN API
