@@ -16,9 +16,9 @@ class MemberController extends Controller
     public function save(Request $request){
     	$res = MemberService::getInstance()->save($request); 
     	if(isset($res['data'])){
-    		$request->session()->flash('status','You have successfully registered.');
+    		$request->session()->flash('status',trans('validate.webClient.register_success'));
       } else{
-    		$request->session()->flash('status','Fail.');
+    		$request->session()->flash('status',trans('validate.webClient.register_fail'));
     	}
       return redirect()->route('webClientMemberIndex');
     }

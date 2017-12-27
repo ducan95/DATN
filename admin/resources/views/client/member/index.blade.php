@@ -52,15 +52,15 @@
 				},
 				messages: {
 					password: {
-						required: "Vui lòng nhập password",
-						minlength: '{{trans('web.Registration_releasenumber')}}',
+						required: '{{trans('validate.webClient.password_required')}}',
+						minlength: '{{trans('validate.webClient.password_min_6_characters')}}',
 					},
 					email: {
-						required: "Vui lòng nhập địa chỉ mail của bạn",
-						email: "Địa chỉ mail không xác thực",
+						required: '{{trans('validate.webClient.email_required')}}',
+						email: '{{trans('validate.webClient.email_must_be_valid_email_address')}}',
 					},
 					birthday: {
-						required: "Vui lòng nhập ngày sinh",
+						required: '{{trans('validate.webClient.birthday_required')}}',
 					},
 				}
 			});		
