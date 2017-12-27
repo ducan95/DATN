@@ -152,7 +152,7 @@ Route::group([
   /** router user api **/
   Route::group(['prefix' => '/user'], function(){
 
-    Route::get('/{search?}', [
+    Route::get('/', [
         'uses' => 'UserController@actionFind',
         'as' => 'apiUserFind'
     ]);
@@ -176,7 +176,7 @@ Route::group([
         'as' => 'apiUserDelete'
     ]);
   });
-
+  /** router category api **/
   Route::group(['prefix' => '/category'], function(){
       
       Route::get('/', [
@@ -209,8 +209,7 @@ Route::group([
           'as' => 'apiCategoryDelete'
       ]);
   });
-
-
+  /** router images api **/
   Route::group(['prefix' => '/images'],function(){
 
     Route::get('/', [

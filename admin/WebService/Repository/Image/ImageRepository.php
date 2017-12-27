@@ -18,13 +18,9 @@ class ImageRepository extends Repository
   public function find($dataReq = '') 
   { 
     try {   
-      $query = Images::leftjoin('post_image', 'images.id_image', '=', 'post_image.id_image')
-              ->leftjoin('posts', 'post_image.id_post', '=', 'posts.id_post')
-              ->select('images.*', 'posts.title as namePost')
-              ->select('images.*',  'posts.title as namePost')
-              ->where('images.id_image', '>', 0)
+      $query = Images::where('images.id_image', '>', 0)
               ->where('images.is_deleted','=', false);
-      $dataMol= ['name', 'description', 'path', 'path_paint'];
+      $dataMol= ['name', 'description', 'path', 'path_blur'];
       if(!empty($dataReq)) {
         foreach ($dataMol as $value) { 
           if(isset($dataReq[$value]) ) {
@@ -35,14 +31,11 @@ class ImageRepository extends Repository
             }
           } 
         }
-        if(isset($dataReq['namepost'])) {
-          $query = $query->where('posts.title', 'LIKE', '%'.$dataReq['namepost'].'%' );
-        }
         if(!empty($dataReq['paginate'])) {
           return $query->paginate($dataReq['paginate']); 
         }  
       } 
-      return $query->get();
+      return $query->orderBy('id_image','ASC')->get();
     } catch(\Exception $e) {
         throw $e;
     } 
@@ -51,11 +44,10 @@ class ImageRepository extends Repository
   public function findOne($id)
   { 
     try{
-      return Images::join('post_image', 'images.id_image', '=', 'post_image.id_image')
-      ->join('posts', 'post_image.id_post', '=', 'posts.id_post')
-      ->where('images.id_image', "=", $id)
-      ->where('images.is_deleted', '=', false)
-      ->select('images.*', 'posts.title as namePost')->get();
+      return Images::where('images.id_image', "=", $id)
+              ->where('images.is_deleted', '=', false)
+              ->select('images.*', 'posts.title as namePost')
+              ->get();
     } catch(\Exception $e){
       throw $e;
     }
@@ -70,7 +62,7 @@ class ImageRepository extends Repository
           'name'   => $dataReq['name'],
           'description' => config('admin.images.media'),
           'path'   => $dataReq['pathDefault'],
-          'path_paint' => $dataReq['pathBlur'],
+          'path_blur' => $dataReq['pathBlur'],
           'is_deleted' => false,
         ]);
         $image->save() ;

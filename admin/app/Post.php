@@ -10,14 +10,14 @@ class Post extends Model
   protected $primaryKey='id_post';
   protected $fillable = ['title', 'slug', 'status', 'thumbnail', 'thumbnail_path', 'id_release_number', 'time_begin', 'time_end', 'password', 'status_preview_top', 'deleted_at', 'is_deleted', 'url_image'];
   
-  public function release_number()
+ /* public function release_number()
   {
   	return $this->belongsTo(ReleaseNumbers::class, 'id_release_number', $primaryKey);
   }
-
+*/
   public function image() 
   {
-  	return $this->belongsToMany('App\Images', 'post_image', 'id_post', 'id_image');
+  	return $this->belongsToMany(Images::class, 'post_image', 'id_post', 'id_image');
   }
 
 }

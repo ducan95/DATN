@@ -24,7 +24,8 @@
               <button class="button" ngf-select="upload($files)" ng-model="file" name="file"   ngf-pattern="'image/*'" ngf-accept="'image/*'" >{{ trans('web.add_new_image') }}</button>
               <p>{{ trans('web.add_new_image') }}</p> 
           </div>
-        </div>
+
+      
       </div>
     </section>
 

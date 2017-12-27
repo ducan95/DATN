@@ -78,7 +78,8 @@
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/ng-file-upload.min.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/ng-file-upload-shim.min.js') }}"></script>
-
+<script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
 

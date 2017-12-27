@@ -1,15 +1,15 @@
 <?php 
-	namespace Extention;
-	use App\Images;
-	use File;
-	use Intervention\Image\ImageManagerStatic as Image;
+namespace Extention;
+use App\Images;
+use File;
+use Intervention\Image\ImageManagerStatic as Image;
+use Carbon\Carbon;	
 
 trait Media {
 
 
 	protected function saveImage($image, $name, $path ='')
 	{	
-	
 		$imageBlur = Image::make($image->getRealPath()); 
 		$imageBlur->blur(15);
 		$imageBlur->encode('jpg');
@@ -29,8 +29,7 @@ trait Media {
     	$name = empty($name) ? str_random(10).time() . '_'  : $name ;
     }	
 		$stt = Images::where('name', 'LIKE', '%'.$name.'%')->count()+2;
-		$name = $name. date('Y-m-d')."-".$stt.".jpg";
-		return $name;
+		return $name. date('Y-m-d')."-".$stt.".jpg";
 	}
 
 	protected function deleteImage()

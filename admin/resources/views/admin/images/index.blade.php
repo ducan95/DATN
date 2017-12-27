@@ -39,13 +39,13 @@
                 </div>
                 <div class="name">
                     <div class="name-image">
-                      <a href="">@{{image.name}}</a>
+                      <a href="" ng-bind = "image.name"></a>
                     </div>  
                     <div class="name-archive">
-                      <span>@{{image.namePost}}</span>
+                      <span ng-bind = "image.namePost"></span>
                     </div> 
                 </div>
-                <div class="create">@{{image.created_at}}</div>
+                <div class="create" ng-bind = "image.created_at"></div>
                 <div class="clear"></div>
               </div>
               <div class="content-image-bottom">

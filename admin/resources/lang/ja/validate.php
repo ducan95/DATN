@@ -10,8 +10,8 @@
 		'id_role_required' => 'id_roleフィールドは必須です',
 		'email_must_be_valid_email_address'=>'電子メールは有効な電子メールアドレスでなければなりません',
 		'image_required' => 'ファイル欄は必須です',
-		'image_required' => 'ファイル欄は必須です',
-		'image_required' => 'ファイル欄は必須です',
+		'image_must_be_valid_image_address' => 'ファイル欄は必須です',
+		'maximum_image_size_is_320MB' => '最大画像サイズは320MB',
 		
 
 	]

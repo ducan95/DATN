@@ -6,7 +6,7 @@ use Extention\Media;
 use Extention\Api;
 use App\Http\Controllers\Api\WebApiController as WebApiController;
 /**
- * Created by SublimeText.
+ * ImageController.
  * User: Huynh
  * Date: 18/12/2017
  * Time: 15:00
@@ -18,7 +18,7 @@ class ImageController extends WebApiController
    * @param  Request $request
    * @return Response
    */ 
-  public function actionFind($search = '', Request $request)
+  public function actionFind(Request $request)
   { 
     $res = ImageService::getInstance()->find($request); 
     if(!isset($res['errors'])) {

@@ -5,13 +5,14 @@ use WebService\Service\Service;
 use Validator;
 use Extention\Media;
 /**
- * Created by SublimeText.
+ * Created by PHPTEAM
  * User: Huynh
  * Date: 18/12/2017
  * Time: 15:00
  */
 class ImageService extends Service
-{
+{ 
+  /* trait Media contains image processing functions */
   use Media; 
 
 	public function find($request)
@@ -23,9 +24,6 @@ class ImageService extends Service
       }
       if(!empty($request->query('description')) ) {
         $dataReq['description'] = $description;
-      }
-      if(!empty($request->query('namepost')) ) {
-        $dataReq['namepost'] = $request->query('namepost');
       }
       if(!empty($request->query('path')) ) {
         $dataReq['path'] = $request->query('path');
@@ -55,15 +53,17 @@ class ImageService extends Service
     return $res;
   }
 
+
   public function save($request)
   {	 
     $validator = Validator::make($request->all(), [
-      'file' => 'required|image| max:320Mb',
+      'file' => 'required|image| max:327680',
     ],[
       'file.required'=> trans('validate.image_required'),
-      'file.image'=> trans('validate.image_required'),
-      'file.max'=> trans('validate.image_required'),
+      'file.image'=> trans('validate.image_must_be_valid_image_address'),
+      'file.max'=> trans('validate.maximum_image_size_is_320MB'),
     ]);
+    
     if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
       $res['errors']['status_code'] = 400; 
