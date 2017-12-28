@@ -19,7 +19,7 @@ class UserController extends WebApiController
    * @param  Request $request
    * @return Response
    */  
-  public function actionFind( Request $request)
+  public function actionFind(Request $request)
   { 
     $res = UserService::getInstance()->find($request); 
     if(!isset($res['errors'])) {

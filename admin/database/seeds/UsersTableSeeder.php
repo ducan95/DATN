@@ -16,16 +16,15 @@ class UsersTableSeeder extends Seeder
         $i=1;
         foreach ($roles as $role) {
             $i++;
-                DB::table('users')->insert(
-                [
-                    'username'   => 'Super'.$i ,
-                    'email'      => $i.'admin@gmail.com' ,
-                    'status'     => true ,
-                    'role_code'  => $role->role_code,
-                    'password'   => bcrypt('123456'),
-                    'is_deleted' => false
-                ]
-            );
-            }
+            DB::table('users')->insert(
+            [
+                'username'   => 'User'.$i ,
+                'email'      => 'admin'.$i.'@gmail.com' ,
+                'status'     => true ,
+                'role_code'  => $role->role_code,
+                'password'   => bcrypt('123456'),
+                'is_deleted' => false
+            ]);
         }
     }
+}

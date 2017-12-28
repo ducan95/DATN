@@ -283,6 +283,37 @@ Route::group([
     ]);
   });
 
+  /**                    **
+   *  RELEASE NUMBER API  *
+   **                   **/   
+  Route::group(['prefix' => '/release'],function(){
+
+    Route::get('/', [
+      'uses' => 'ReleaseController@actionFind',
+      'as'   => 'apiReleaseFind'
+    ]);
+
+    Route::get('/{id}', [
+        'uses' => 'ReleaseController@actionFindOne',
+        'as'   => 'apiReleaseShow'
+    ]);
+
+    Route::post('/', [
+      'uses' => 'ReleaseController@actionSave',
+      'as'   => 'apiReleaseSave'
+    ]);
+
+    Route::put('/{id}', [
+        'uses' => 'ReleaseController@actionUpdate',
+        'as'   => 'apiReleaseUpdate'
+    ]);
+
+    Route::delete('/{id}', [
+        'uses' => 'ReleaseController@actionDelete',
+        'as'   => 'apiReleaseDelete'
+    ]);
+  });
+
 });
 
     

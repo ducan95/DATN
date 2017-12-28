@@ -15,7 +15,7 @@ class RolesRepository extends Repository
 {
     public function list()
     {   
-        $roles = Roles::orderBy('id_role','DESC')->get();
+        $roles = Roles::orderBy('id_role','ASC')->get();
         return Api::response(['data' => $roles]);
     }
 
