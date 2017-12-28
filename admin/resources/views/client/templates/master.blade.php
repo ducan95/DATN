@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ asset('client/vendor/fa/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/mycss.css') }}">
     <link rel="shortcut icon" href="{{ asset('client/images/faviconf.ico') }}" type="image/x-icon">
+    <script src="{{ asset('assets/base/bower_components/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/base/bower_components/jquery.validate.min.js') }}"></script>
 </head>
 
 <body>
