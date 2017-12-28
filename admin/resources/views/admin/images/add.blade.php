@@ -16,12 +16,11 @@
       <div class="row">
         <div class="col-xs-12" >
           Drop File:
-          <div ngf-drop  ng-model="files" class="drop-box" 
+          <div ngf-drop  ng-model="files" class="drop-box"  ngf-max-size="320MB"
               ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-              accept="image/*,application/pdf" 
-              ngf-pattern="'image/*,application/pdf'">{{ trans('web.add_new_image') }}
+              accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
               <p>{{ trans('web.add_new_image') }}</p> 
-              <button class="button" ngf-select="upload($files)" ng-model="file" name="file"   ngf-pattern="'image/*'" ngf-accept="'image/*'" >{{ trans('web.add_new_image') }}</button>
+              <button class="button" ngf-max-size="320MB" ngf-select="upload($files)" ng-model="file" name="file"   ngf-pattern="'image/*'" ngf-accept="'image/*'" >{{ trans('web.add_new_image') }}</button>
               <p>{{ trans('web.add_new_image') }}</p> 
           </div>
 

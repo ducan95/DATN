@@ -50,7 +50,7 @@ Route::group([
     'uses' => 'AdminController@index',
     'as' => 'getIndex'
   ]);
-
+   /** router web user **/
   Route::group([ 'prefix' => 'user' ],function(){
 
     Route::get('/',[
@@ -68,7 +68,7 @@ Route::group([
           'as'  => 'webUserAdd'
     ]);
   });
-
+   /** router web category **/
   Route::group([ 'prefix' => 'category' ],function(){
 
     Route::get('/',[
@@ -96,7 +96,7 @@ Route::group([
         'as' =>'webCategorEdit'
     ]);
   });
-
+   /** router web images **/
   Route::group([ 'prefix' => 'images'], function(){
     
     Route::get('/', [
@@ -133,7 +133,7 @@ Route::group([
             'as'  => 'webReleaseAdd'
         ]);
   });
-
+   /** router web post **/
   Route::group([ 'prefix' => 'post' ],function(){
 
       Route::get('/',[

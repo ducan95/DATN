@@ -59,7 +59,7 @@ class ImageController extends WebApiController
    */
   public function actionSave(Request $request)
   {  
-    $resImage = ImageService::getInstance()->save($request);
+    $resImage = ImageService::getInstance()->save($request); 
     if(!isset($resImage['errors'])) {
       return Api::response(['data' => $resImage['data'] ])   ;
     } else {
@@ -77,7 +77,7 @@ class ImageController extends WebApiController
    * @return Response
    */
   public function actionUpdate(Request $request, $id)
-  {  
+  { 
     $resImage = ImageService::getInstance()->update($request, $id); 
     if(!isset($resImage['errors'])) {
       return Api::response(['data' => $resImage['data'] ])   ;

@@ -14,8 +14,8 @@ return [
 			'media' => 'media'
 		],	
 		'path' => [
-			'imageBlur' => 'imgBlur',
-			'imageDefault' => 'imgDefault'
+			'imageBlur' => 'imageBlur',
+			'imageDefault' => 'imageDefault'
 		]
 	]
 

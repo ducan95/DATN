@@ -12,6 +12,8 @@
 		'image_required' => 'ファイル欄は必須です',
 		'image_must_be_valid_image_address' => 'ファイル欄は必須です',
 		'maximum_image_size_is_320MB' => '最大画像サイズは320MB',
+		'name_invalid' => '名前が無効です',
+		'name_exists' => '名前が存在する'
 		
 
 	]
