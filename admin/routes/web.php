@@ -68,7 +68,14 @@ Route::group([
           'as'  => 'webUserAdd'
     ]);
   });
-
+  /********************************************** */
+  Route::group(['prefix' => 'member' ], function(){
+      Route::get('/',[
+          'uses' => 'MemberController@viewIndex',
+          'as' => 'webMemberIndex'
+      ]);
+  });
+  /********************************************** */
   Route::group([ 'prefix' => 'category' ],function(){
 
     Route::get('/',[
@@ -217,6 +224,23 @@ Route::group([
         'as' => 'apiUserDelete'
     ]);
   });  
+  /**ROUTER MEMBER API**/
+  Route::group(['prefix' => '/member'],function(){
+		Route::get('/', [
+			'uses' => 'MemberController@actionFind',
+			'as' => 'apiMemberFind'
+		]);
+
+		Route::delete('/{id}',[
+			'uses' => 'MemberController@actionDelete',
+			'as' => 'apiMemberDelete'
+		]);
+
+		Route::put('/{id}',[
+			'uses' => 'MemberController@actionUpdate',
+			'as' => 'apiMemberUpdate'
+		]);
+	});
   /** router category api **/
   Route::group(['prefix' => '/category'], function(){
         

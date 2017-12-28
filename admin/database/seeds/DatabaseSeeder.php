@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call('ImagePostTableSeeder');
         $this->call('UsersTableSeeder');
         $this->call('ReleaseNumberTableSeeder');
-
+        $this->call('MembersTableSeeder');
     }
 }

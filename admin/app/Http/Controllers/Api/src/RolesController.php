@@ -14,10 +14,10 @@ use App\Http\Controllers\Api\WebApiController as WebApiController;
 class RolesController extends WebApiController
 {	
   
-  public function actionList()
-  {	
-    return RolesService::getInstance()->list();
-  }
+  // public function actionList()
+  // {	
+  //   return RolesService::getInstance()->list();
+  // }
 
 
   /**
@@ -26,7 +26,7 @@ class RolesController extends WebApiController
    * @param  Request $request
    * @return Response
    */  
-  public function actionFind($search = '', Request $request)
+  public function actionFind( Request $request )
   { 
     $res = RolesService::getInstance()->find($request); 
     if (!isset($res['errors'])) {
