@@ -11,9 +11,10 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Api\\IWebApiController' => $baseDir . '/app/Http/Controllers/Api/IWebApiController.php',
     'App\\Http\\Controllers\\Api\\WebApiController' => $baseDir . '/app/Http/Controllers/Api/WebApiController.php',
+    'App\\Http\\Controllers\\Api\\client\\MemberController' => $baseDir . '/app/Http/Controllers/Api/client/MemberController.php',
     'App\\Http\\Controllers\\Api\\src\\CategoryController' => $baseDir . '/app/Http/Controllers/Api/src/CategoryController.php',
     'App\\Http\\Controllers\\Api\\src\\ImageController' => $baseDir . '/app/Http/Controllers/Api/src/ImageController.php',
-    'App\\Http\\Controllers\\Api\\src\\ReleaseNumberController' => $baseDir . '/app/Http/Controllers/Api/src/ReleaseNumberController.php',
+    'App\\Http\\Controllers\\Api\\src\\ReleaseController' => $baseDir . '/app/Http/Controllers/Api/src/ReleaseController.php',
     'App\\Http\\Controllers\\Api\\src\\RolesController' => $baseDir . '/app/Http/Controllers/Api/src/RolesController.php',
     'App\\Http\\Controllers\\Api\\src\\UserController' => $baseDir . '/app/Http/Controllers/Api/src/UserController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
@@ -53,7 +54,7 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
-    'App\\ReleaseNumbers' => $baseDir . '/app/ReleaseNumbers.php',
+    'App\\Release' => $baseDir . '/app/Release.php',
     'App\\Roles' => $baseDir . '/app/Roles.php',
     'App\\User' => $baseDir . '/app/User.php',
     'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
@@ -2966,7 +2967,9 @@ return array(
     'PhpParser\\Unserializer' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer.php',
     'PhpParser\\Unserializer\\XML' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer/XML.php',
     'PostTableSeeder' => $baseDir . '/database/seeds/PostTableSeeder.php',
+
     'PostsTableSeeder' => $baseDir . '/database/seeds/PostsTableSeeder.php',
+
     'Prophecy\\Argument' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument.php',
     'Prophecy\\Argument\\ArgumentsWildcard' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
     'Prophecy\\Argument\\Token\\AnyValueToken' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',
@@ -3253,8 +3256,11 @@ return array(
     'Ramsey\\Uuid\\UuidFactory' => $vendorDir . '/ramsey/uuid/src/UuidFactory.php',
     'Ramsey\\Uuid\\UuidFactoryInterface' => $vendorDir . '/ramsey/uuid/src/UuidFactoryInterface.php',
     'Ramsey\\Uuid\\UuidInterface' => $vendorDir . '/ramsey/uuid/src/UuidInterface.php',
+
     'ReleaseNumberTableSeeder' => $baseDir . '/database/seeds/ReleaseNumberTableSeeder.php',
-    'Release_numberTableSeeder' => $baseDir . '/database/seeds/Release_numberTableSeeder.php',
+
+    'ReleaseTableSeeder' => $baseDir . '/database/seeds/ReleaseTableSeeder.php',
+
     'RolesTableSeeder' => $baseDir . '/database/seeds/RolesTableSeeder.php',
     'SebastianBergmann\\CodeCoverage\\CodeCoverage' => $vendorDir . '/phpunit/php-code-coverage/src/CodeCoverage.php',
     'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
@@ -3929,7 +3935,11 @@ return array(
     'WebService\\Repository\\IRepository' => $baseDir . '/WebService/Repository/IRepository.php',
     'WebService\\Repository\\Image\\ImageRepository' => $baseDir . '/WebService/Repository/Image/ImageRepository.php',
     'WebService\\Repository\\Member\\MemberRepository' => $baseDir . '/WebService/Repository/Member/MemberRepository.php',
+
     'WebService\\Repository\\ReleaseNumber\\ReleaseNumberRepository' => $baseDir . '/WebService/Repository/ReleaseNumber/ReleaseNumberRepository.php',
+
+    'WebService\\Repository\\Release\\ReleaseRepository' => $baseDir . '/WebService/Repository/Release/ReleaseRepository.php',
+
     'WebService\\Repository\\Repository' => $baseDir . '/WebService/Repository/Repository.php',
     'WebService\\Repository\\Roles\\RolesRepository' => $baseDir . '/WebService/Repository/Roles/RolesRepository.php',
     'WebService\\Repository\\User\\UserRepository' => $baseDir . '/WebService/Repository/User/UserRepository.php',
@@ -3938,6 +3948,9 @@ return array(
     'WebService\\Service\\Image\\ImageService' => $baseDir . '/WebService/Service/Image/ImageService.php',
     'WebService\\Service\\Member\\MemberService' => $baseDir . '/WebService/Service/Member/MemberService.php',
     'WebService\\Service\\ReleaseNumber\\ReleaseNumberService' => $baseDir . '/WebService/Service/ReleaseNumber/ReleaseNumberService.php',
+
+    'WebService\\Service\\Release\\ReleaseService' => $baseDir . '/WebService/Service/Release/ReleaseService.php',
+
     'WebService\\Service\\Roles\\RolesService' => $baseDir . '/WebService/Service/Roles/RolesService.php',
     'WebService\\Service\\Service' => $baseDir . '/WebService/Service/Service.php',
     'WebService\\Service\\User\\UserService' => $baseDir . '/WebService/Service/User/UserService.php',

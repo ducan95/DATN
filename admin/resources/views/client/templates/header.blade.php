@@ -6,12 +6,12 @@
         <div class="left-nav left">
             <ul>
                 <li>
-                    <a href="#" id="register">
+                    <a href="{{ route('getLoginEndUser') }}" id="login">
                         <img src="{{ asset('client/images/register.jpg') }}" alt="" srcset="">
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="email">
+                    <a href="{{ route('webClientMemberIndex') }}" id="register">
                         <img src="{{ asset('client/images/email.jpg') }}" alt="" srcset="">
                     </a>
                 </li>

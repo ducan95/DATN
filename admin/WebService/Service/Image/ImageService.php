@@ -69,7 +69,7 @@ class ImageService extends Service
       $res['errors']['status_code'] = 400; 
     } else {
       try {
-        $dataReq = $this->saveImage( $request->file('file'), config('admin.images.name.media') );
+        $dataReq = $this->saveImage( $request->file('file'), config('admin.images.name.media'));
         $res['data'] =  ImageRepository::getInstance()->save($dataReq);  
       } catch(\Expention $e) {
         $res['errors']['msg'] = $e->getMessage();
@@ -81,7 +81,32 @@ class ImageService extends Service
 
   public function update($request, $id)
   {      
-     $res['data'] = $id; return $res;
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|max:200',
+    ],[
+      'name.required'=> trans('validate.image_required'),
+      'name.max'=> trans('validate.maximum_image_size_is_320MB'),
+    ]);
+
+    if($validator ->fails()) {
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400; 
+    } else {
+      try {
+        $image = ImageRepository::getInstance()->findOne($id); 
+        $dataReq = $this->renameImage($image, $request->name); 
+        if(!isset($dataReq['errors'])) {
+          $res['data'] =  ImageRepository::getInstance()->update($dataReq, $id);     
+        } else {
+          $res['errors']['msg'] = $dataReq['errors'];
+          $res['errors']['status_code'] =  500;   
+        }
+      } catch(\Expention $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] =  500; 
+      }  
+    }
+    return $res; 
 	}
 
   public function delete($id)

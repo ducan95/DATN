@@ -8,30 +8,29 @@
 	<form action="{{ route('webClientMemberSave') }}" method="post" id="main" class="form">
 		{{ csrf_field() }}
 	  <div class="form-group">
-	    <label for="exampleInputEmail1">電子メールアドレス</label>
+	    <label class="label" for="exampleInputEmail1">電子メールアドレス</label>
 	    <input type="email" class="form-control" placeholder="Email" name="email" >
 	  </div>
 	  <div class="form-group">
-	    <label for="exampleInputPassword1">パスワード</label>
+	    <label class="label" for="exampleInputPassword1">パスワード</label>
 	    <input type="password" class="form-control" placeholder="Password" name="password" required>
 	  </div>
 	  <div class="form-group">
-	  	<label>生年月日</label>
-		<input type="date" name="birthday">
+	  	<label class="label">生年月日</label>
+			<input type="date" name="birthday">
 	  </div>
 	  <div class="checkbox">
-	    <label class="checkbox-inline">セックス: 
+	    <label  class="checkbox-inline label">セックス:
 	      <input type="radio" value="0" name="gender" checked> 女性
 	      <input type="radio" value="1" name="gender"> 男性
       </label>
 	  </div>
 		<div class="form-group" >
-			<input type="checkbox" name="is_receive_email" value="1">私は金曜日から個人情報の処理に関する電子メールを受け取りたい
+			<input type="checkbox" name="is_receive_email" value="1" checked>私は金曜日から個人情報の処理に関する電子メールを受け取りたい
 		</div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
-	<script src="{{ asset('assets/frontend/page/member/jquery-3.2.1.min.js') }}"></script>
-	<script src="{{ asset('assets/frontend/page/member/jquery.validate.min.js') }}"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.form').validate({

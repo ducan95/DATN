@@ -4,24 +4,17 @@ use WebService\Repository\Repository;
 use App\Roles;
 use Extention\Api;
 
-
-/**
- * Created by PhpStorm.
- * Roles: rikkei
- * Date: 13/12/2017
- * Time: 19:37
- */
 class RolesRepository extends Repository
 {
     public function list()
     {   
-        $roles = Roles::orderBy('id_role','DESC')->get();
+        $roles = Roles::orderBy('id_role','ASC')->get();
         return Api::response(['data' => $roles]);
     }
 
-    /**
-     * Find fuction
-     */
+  /**
+   * Find fuction
+   */
 	public function find($dataReq = '') 
 	{ 
     try {   
@@ -53,14 +46,14 @@ class RolesRepository extends Repository
     }
   }
 
-    public function save($request)
-    {	
-    // TODO: Implement save() method.
-	  	$role = new Roles();
-	  	$role->name= "name";//$request->name;
-	  	$role -> save();
-        return Api::response(['status_code' => 200, 'is_success' => 'true']);
-    }
+  public function save($request)
+  {	
+  // TODO: Implement save() method.
+  	$role = new Roles();
+  	$role->name= "name";//$request->name;
+  	$role -> save();
+      return Api::response(['status_code' => 200, 'is_success' => 'true']);
+  }
 
 	public function update($request, $id)
 	{
@@ -70,15 +63,15 @@ class RolesRepository extends Repository
         return Api::response(['status_code' => 200, 'is_success' => 'true']);
 	}
 
-    public function delete($id)
-    {	
-    	$role = Roles::findOrFail($id);
-    	if (!empty($role)) {
-    		if($role -> delete()) {
-                return Api::response(['status_code' => 200, 'is_success' => 'true']);
-    		}
-    	}
-    }
+  public function delete($id)
+  {	
+  	$role = Roles::findOrFail($id);
+  	if (!empty($role)) {
+  		if($role -> delete()) {
+              return Api::response(['status_code' => 200, 'is_success' => 'true']);
+  		}
+  	}
+  }
 
     
 

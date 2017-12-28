@@ -97,3 +97,8 @@ label.error{
     color:red;
     font-style: italic;
 }
+
+.label{
+    border-left: 4px solid #423939;
+    padding: 0px 8px;
+}

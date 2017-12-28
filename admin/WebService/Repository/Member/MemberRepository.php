@@ -24,9 +24,8 @@ class MemberRepository extends Repository
         'birthday'					=> $dataReq['birthday'],
         'gender' 						=> $dataReq['gender'],
         'is_receive_email' 	=> $is_receive_email,
-        'member_plan_code' 	=> 'free',
+        'member_plan_code' 	=> config('admin.member.member_plan_code'),
         'is_deleted' 				=> false,
-        'id_category_parent'=> 0,
       ]);
       $member->save() ;
       return $member;

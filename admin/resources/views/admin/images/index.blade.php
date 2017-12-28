@@ -30,6 +30,7 @@
               <a href="javascript:void(0)"  ng-click="deleteImage(image.id_image, $index)">
                 <i class="fa  fa-trash"></i></a>
             </div>
+            
             <div class="content-image-right">
               <div class="content-image-top">
                 <div class="image">

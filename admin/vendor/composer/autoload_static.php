@@ -396,9 +396,10 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Api\\IWebApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/IWebApiController.php',
         'App\\Http\\Controllers\\Api\\WebApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/WebApiController.php',
+        'App\\Http\\Controllers\\Api\\client\\MemberController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/client/MemberController.php',
         'App\\Http\\Controllers\\Api\\src\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/CategoryController.php',
         'App\\Http\\Controllers\\Api\\src\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/ImageController.php',
-        'App\\Http\\Controllers\\Api\\src\\ReleaseNumberController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/ReleaseNumberController.php',
+        'App\\Http\\Controllers\\Api\\src\\ReleaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/ReleaseController.php',
         'App\\Http\\Controllers\\Api\\src\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/RolesController.php',
         'App\\Http\\Controllers\\Api\\src\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/UserController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -412,9 +413,15 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'App\\Http\\Controllers\\WebAdmin\\src\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/AdminController.php',
         'App\\Http\\Controllers\\WebAdmin\\src\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/CategoryController.php',
         'App\\Http\\Controllers\\WebAdmin\\src\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/ImageController.php',
+
         'App\\Http\\Controllers\\WebAdmin\\src\\MemberController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/MemberController.php',
         'App\\Http\\Controllers\\WebAdmin\\src\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/PostController.php',
         'App\\Http\\Controllers\\WebAdmin\\src\\ReleaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/ReleaseController.php',
+
+        'App\\Http\\Controllers\\WebAdmin\\src\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/PostController.php',
+        'App\\Http\\Controllers\\WebAdmin\\src\\ReleaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/ReleaseController.php',
+        'App\\Http\\Controllers\\WebAdmin\\src\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/RolesController.php',
+
         'App\\Http\\Controllers\\WebAdmin\\src\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/UserController.php',
         'App\\Http\\Controllers\\WebAmin\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/Auth/LoginController.php',
         'App\\Http\\Controllers\\WebClient\\MemberController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/MemberController.php',
@@ -438,7 +445,7 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\ReleaseNumbers' => __DIR__ . '/../..' . '/app/ReleaseNumbers.php',
+        'App\\Release' => __DIR__ . '/../..' . '/app/Release.php',
         'App\\Roles' => __DIR__ . '/../..' . '/app/Roles.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
@@ -3638,8 +3645,12 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
+<<<<<<< HEAD
         'ReleaseNumberTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ReleaseNumberTableSeeder.php',
         'Release_numberTableSeeder' => __DIR__ . '/../..' . '/database/seeds/Release_numberTableSeeder.php',
+=======
+        'ReleaseTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ReleaseTableSeeder.php',
+>>>>>>> 49f5b1647e623642d4e1575c4d807221c11ccfde
         'RolesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RolesTableSeeder.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
@@ -4314,7 +4325,11 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'WebService\\Repository\\IRepository' => __DIR__ . '/../..' . '/WebService/Repository/IRepository.php',
         'WebService\\Repository\\Image\\ImageRepository' => __DIR__ . '/../..' . '/WebService/Repository/Image/ImageRepository.php',
         'WebService\\Repository\\Member\\MemberRepository' => __DIR__ . '/../..' . '/WebService/Repository/Member/MemberRepository.php',
+<<<<<<< HEAD
         'WebService\\Repository\\ReleaseNumber\\ReleaseNumberRepository' => __DIR__ . '/../..' . '/WebService/Repository/ReleaseNumber/ReleaseNumberRepository.php',
+=======
+        'WebService\\Repository\\Release\\ReleaseRepository' => __DIR__ . '/../..' . '/WebService/Repository/Release/ReleaseRepository.php',
+>>>>>>> 49f5b1647e623642d4e1575c4d807221c11ccfde
         'WebService\\Repository\\Repository' => __DIR__ . '/../..' . '/WebService/Repository/Repository.php',
         'WebService\\Repository\\Roles\\RolesRepository' => __DIR__ . '/../..' . '/WebService/Repository/Roles/RolesRepository.php',
         'WebService\\Repository\\User\\UserRepository' => __DIR__ . '/../..' . '/WebService/Repository/User/UserRepository.php',
@@ -4322,7 +4337,11 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'WebService\\Service\\IService' => __DIR__ . '/../..' . '/WebService/Service/IService.php',
         'WebService\\Service\\Image\\ImageService' => __DIR__ . '/../..' . '/WebService/Service/Image/ImageService.php',
         'WebService\\Service\\Member\\MemberService' => __DIR__ . '/../..' . '/WebService/Service/Member/MemberService.php',
+<<<<<<< HEAD
         'WebService\\Service\\ReleaseNumber\\ReleaseNumberService' => __DIR__ . '/../..' . '/WebService/Service/ReleaseNumber/ReleaseNumberService.php',
+=======
+        'WebService\\Service\\Release\\ReleaseService' => __DIR__ . '/../..' . '/WebService/Service/Release/ReleaseService.php',
+>>>>>>> 49f5b1647e623642d4e1575c4d807221c11ccfde
         'WebService\\Service\\Roles\\RolesService' => __DIR__ . '/../..' . '/WebService/Service/Roles/RolesService.php',
         'WebService\\Service\\Service' => __DIR__ . '/../..' . '/WebService/Service/Service.php',
         'WebService\\Service\\User\\UserService' => __DIR__ . '/../..' . '/WebService/Service/User/UserService.php',

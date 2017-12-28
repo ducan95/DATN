@@ -50,7 +50,7 @@ Route::group([
     'uses' => 'AdminController@index',
     'as' => 'getIndex'
   ]);
-
+   /** router web user **/
   Route::group([ 'prefix' => 'user' ],function(){
 
     Route::get('/',[
@@ -68,6 +68,7 @@ Route::group([
           'as'  => 'webUserAdd'
     ]);
   });
+<<<<<<< HEAD
   /********************************************** */
   Route::group(['prefix' => 'member' ], function(){
       Route::get('/',[
@@ -76,6 +77,9 @@ Route::group([
       ]);
   });
   /********************************************** */
+=======
+   /** router web category **/
+>>>>>>> 49f5b1647e623642d4e1575c4d807221c11ccfde
   Route::group([ 'prefix' => 'category' ],function(){
 
     Route::get('/',[
@@ -103,7 +107,7 @@ Route::group([
         'as' =>'webCategorEdit'
     ]);
   });
-
+   /** router web images **/
   Route::group([ 'prefix' => 'images'], function(){
     
     Route::get('/', [
@@ -140,7 +144,7 @@ Route::group([
             'as'  => 'webReleaseAdd'
         ]);
   });
-
+   /** router web post **/
   Route::group([ 'prefix' => 'post' ],function(){
 
       Route::get('/',[
@@ -307,14 +311,48 @@ Route::group([
     ]);
   });
 
+  /**                    **
+   *  RELEASE NUMBER API  *
+   **                   **/   
+  Route::group(['prefix' => '/release'],function(){
+
+    Route::get('/', [
+      'uses' => 'ReleaseController@actionFind',
+      'as'   => 'apiReleaseFind'
+    ]);
+
+    Route::get('/{id}', [
+        'uses' => 'ReleaseController@actionFindOne',
+        'as'   => 'apiReleaseShow'
+    ]);
+
+    Route::post('/', [
+      'uses' => 'ReleaseController@actionSave',
+      'as'   => 'apiReleaseSave'
+    ]);
+
+    Route::put('/{id}', [
+        'uses' => 'ReleaseController@actionUpdate',
+        'as'   => 'apiReleaseUpdate'
+    ]);
+
+    Route::delete('/{id}', [
+        'uses' => 'ReleaseController@actionDelete',
+        'as'   => 'apiReleaseDelete'
+    ]);
+  });
+
 });
 
+/**
+ * ROUTE END USER
+ */ 
     
 Route::group([
-  'prefix' => 'member', 
+  'prefix'    => '', 
   'namespace' => 'WebClient'
 ],function(){
-  Route::get('/',[
+  Route::get('member',[
     'uses'  => 'MemberController@index',
     'as'    => 'webClientMemberIndex'
   ]);
@@ -323,9 +361,37 @@ Route::group([
     'uses'  => 'MemberController@save',
     'as'    => 'webClientMemberSave'
   ]);
+
+  Route::get('home',[
+    'uses'  => 'EndUserController@index',
+    'as'    => 'WebClientEndUserIndex',
+  ]);
+  
 });
 
+/**
+ * ROUTE LOGIN END USER
+ */  
+Route::group([
+  'prefix'    => 'login-end-user',
+  'namespace' => 'WebClient\Auth'
+], function(){
 
+  Route::get('login', [
+    'uses'  => 'AuthController@getLogin',
+    'as'    => 'getLoginEndUser',
+  ]);
+
+  Route::post('login', [   
+    'uses'  => 'AuthController@postLogin',
+    'as'    => 'postLoginEndUser'
+  ]);
+
+  Route::get('logout', [
+    'as'    => 'getLogout', 
+    'uses'  => 'AuthController@getLogoutEndUser'
+  ]);
+});
 
 
 

@@ -18,9 +18,17 @@
 	    'edit'=> '編集',
 	    'delete'=> '削除',
 	    'cancel'=> 'キャンセル',
-	    'password'=> 'パスワード'
+	    'password'=> 'パスワード',
 
-
+	   'webClient' => [
+			'new_arrivals' => '新着',
+			'performing_arts' => '芸能',
+			'case'	=> '事件',
+			'sport'	=> 'スポーツ',
+			'column' => 'コラム',
+			'gravure' => 'グラビア',
+			'recommendation'=> 'オススメ',
+		]
 	]
 	
 ?>
