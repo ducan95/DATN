@@ -285,12 +285,15 @@ Route::group([
 
 });
 
+/**
+ * ROUTE END USER
+ */ 
     
 Route::group([
-  'prefix' => 'member', 
+  'prefix'    => '', 
   'namespace' => 'WebClient'
 ],function(){
-  Route::get('/',[
+  Route::get('member',[
     'uses'  => 'MemberController@index',
     'as'    => 'webClientMemberIndex'
   ]);
@@ -299,9 +302,37 @@ Route::group([
     'uses'  => 'MemberController@save',
     'as'    => 'webClientMemberSave'
   ]);
+
+  Route::get('home',[
+    'uses'  => 'EndUserController@index',
+    'as'    => 'WebClientEndUserIndex',
+  ]);
+  
 });
 
+/**
+ * ROUTE LOGIN END USER
+ */  
+Route::group([
+  'prefix'    => 'login-end-user',
+  'namespace' => 'WebClient\Auth'
+], function(){
 
+  Route::get('login', [
+    'uses'  => 'AuthController@getLogin',
+    'as'    => 'getLoginEndUser',
+  ]);
+
+  Route::post('login', [   
+    'uses'  => 'AuthController@postLogin',
+    'as'    => 'postLoginEndUser'
+  ]);
+
+  Route::get('logout', [
+    'as'    => 'getLogout', 
+    'uses'  => 'AuthController@getLogoutEndUser'
+  ]);
+});
 
 
 

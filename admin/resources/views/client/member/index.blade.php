@@ -26,7 +26,7 @@
       </label>
 	  </div>
 		<div class="form-group" >
-			<input type="checkbox" name="is_receive_email" value="1">私は金曜日から個人情報の処理に関する電子メールを受け取りたい
+			<input type="checkbox" name="is_receive_email" value="1" checked>私は金曜日から個人情報の処理に関する電子メールを受け取りたい
 		</div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
