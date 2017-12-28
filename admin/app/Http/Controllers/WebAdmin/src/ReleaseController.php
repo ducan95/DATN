@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class ReleaseController extends Controller
 {
-     public function viewIndex()
+    public function viewIndex()
     {
         return view('admin.release.index');
     }

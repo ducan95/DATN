@@ -57,7 +57,7 @@ SOUGOU_ZYANARU_MODULE
   //Get role -> showview
   RoleService.find({}, function (res) {
     if (typeof res != "undefined") {
-
+      //console.log(res.data);
       $scope.roles = res.data;
       $scope.roles.splice(0, 1);
 

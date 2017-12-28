@@ -26,7 +26,7 @@ class RolesController extends WebApiController
    * @param  Request $request
    * @return Response
    */  
-  public function actionFind($search = '', Request $request)
+  public function actionFind(Request $request)
   { 
     $res = RolesService::getInstance()->find($request); 
     if (!isset($res['errors'])) {
@@ -48,28 +48,12 @@ class RolesController extends WebApiController
 
   public function actionSave(Request $request)
     {   
-    	$this->validate($request,[
-            'name' => 'required |min:6 |max:32'
-        ],[
-            'name.required' => 'please enter an name',
-            'name.min' => 'name min of 6 charactor',
-            'name.max' => 'name maximum of 6 charactor',
-        ]);
-
         return RolesService::getInstance()->save($request);
     }
     
     // TODO: Implement actionUpdate() method.
     public function actionUpdate(Request $request, $id)
     {
-        $this->validate($request,[
-            'name' => 'required |min:6 |max:32'
-        ],[
-            'name.required' => 'please enter an name',
-            'name.min' => 'name min of 6 charactor',
-            'name.max' => 'name maximum of 6 charactor',
-        ]);
-        
         return RolesService::getInstance()->postUpdate($request, $id);
     }
     public function actionDelete($id)

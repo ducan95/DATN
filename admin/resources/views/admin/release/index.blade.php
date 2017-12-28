@@ -1,11 +1,11 @@
 @extends('admin.templates.master')
 @section('content')
-<div>
+<div ng-controller="ReleaseCtrl">
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         発売号一覧
-        <small>preview of simple tables</small>
+        {{-- <small>preview of simple tables</small> --}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -80,7 +80,7 @@
     </section>
 
     <section class="invoice pg-section">
-      <div class="row">
+      <div class="row text-center">
         <ul class="pagination no-margin text-center">
           <li>
             <a href="#">«</a>
@@ -90,6 +90,9 @@
           </li>
           <li class="active">
             <a href="#">2</a>
+          </li>
+          <li>
+            <a href="#">..</a>
           </li>
           <li>
             <a href="#">3</a>
@@ -104,4 +107,6 @@
 @endsection  
 
 @section('bottom-js')
+<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 @endsection 
