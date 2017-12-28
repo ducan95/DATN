@@ -3,7 +3,7 @@
  */
 
 
-  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',function($scope, trans, Service, $window, popupService)
+  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',function($scope, trans, toastr, Service, $window, popupService)
   { 
     $scope.location = APP_CONFIGURATION.BASE_URL;
     // find image id
@@ -61,12 +61,20 @@
       }  
     }); 
     */
+
+    // update name image 
     $scope.updateImage = function (id) {
       Service.update({
         id   :  id   ,
-        name : "zxczxcxzcxz"
+        name : 'cover'
       }, function (res){
-        console.log(res);
+        if(typeof res != "undefined") {
+          if(res.is_success) {
+            toastr.success('success !');
+          } else { 
+            toastr.error(res.errors, 'ERROR !!!');
+          }    
+        }
       });
     }
   });
