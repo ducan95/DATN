@@ -17,7 +17,11 @@ return [
 			'imageBlur' => 'imgBlur',
 			'imageDefault' => 'imgDefault'
 		]
-	]
+	],
+
+	'member' => [
+		'member_plan_code' => 'free',
+	],
 
 
 
