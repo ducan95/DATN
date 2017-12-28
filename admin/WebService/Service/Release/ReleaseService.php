@@ -67,7 +67,32 @@ class ReleaseService extends Service
    */
   public function save($request)
   {
-    $validator = Valida 
+    $validator = Validator::make($request->all(), 
+      [
+        'name'               => 'required',
+        'image_release_path' => 'required',
+        'image_header_path'  => 'required',
+      ], 
+      [
+        'username.required'           => trans('release.nameRequired'),
+        'image_release_path.required' => trans('release.imgReleaseRequired'),
+        'image_header_path.required'  => trans('release.imgHeaderRequired'),
+      ]
+    );
+
+    if ($validator->fails()) {
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try {
+        $res['data'] = ReleaseRepository::getInstance()->save($request->all());
+      } catch(\Exception $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
+      }
+    }
+
+    return $res;
   }
 
   public function update($request , $id)
