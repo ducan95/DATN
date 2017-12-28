@@ -1,11 +1,16 @@
 <?php
+
 namespace WebService\Service\Release;
-use WebService\Repository\Release\ReleaseRepository;
+
+use Validator;
 use WebService\Service\Service;
+use Illuminate\Support\Facades\Auth;
+use WebService\Repository\Release\ReleaseRepository;
 
 /**
-*
- */
+* Create by Quyen Luu
+* Date: 28/12/2017  
+*/
 class ReleaseService extends Service
 {
 
@@ -39,15 +44,30 @@ class ReleaseService extends Service
     return $res;
   }
 
-
+  /**
+   * [Find 1 release number]
+   * @param  [type] $id [description]
+   * @return [type]     [description]
+   */
   public function findOne($id)
   {
-    // TODO: Implement findOne() method.
+    try {
+      $res['data'] = ReleaseRepository::getInstance()->findOne($id);
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+    return $res;
   }
   
+  /**
+   * [Save release number]
+   * @param  [type] $request [description]
+   * @return [type]          [description]
+   */
   public function save($request)
   {
-    // TODO: Implement save() method.
+    $validator = Valida 
   }
 
   public function update($request , $id)

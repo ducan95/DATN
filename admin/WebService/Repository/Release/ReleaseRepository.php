@@ -84,14 +84,53 @@ class ReleaseRepository extends Repository
   
   }
 
-	public function update($request, $id)
+  /**
+   * [Update release number]
+   * @param  [type] $dataReq [description]
+   * @param  [type] $id      [description]
+   * @return [type]          [description]
+   */
+	public function update($dataReq, $id)
 	{
-	    
+	 try {
+    $release = Release::find($id);
+    if (!empty($release)) {
+      $release->fill([
+        'name'               => $dataReq['name'],
+        'image_release_path' => $dataReq['image_release_path'],
+        'image_header_path'  => $dataReq['image_header_path'],
+        'is_deleted'         => false
+      ]);
+
+      $release->save();
+      return $release;
+    } else {
+      return null;
+    }
+
+   } catch(\Exception $e) {
+    throw $e;
+   }
 	}
 
+  /**
+   * [Delete release number]
+   * @param  [type] $id [description]
+   * @return [type]     [description]
+   */
   public function delete($id)
   {	
-  	
+  	try {
+      if (!empty(Release::find($id))) {
+        $release = Release::find($id);
+        $user->is_deleted = true;
+        $user->save();
+      } else {
+        return null;
+      }
+    } catch(\Exception $e) {
+      throw $e;
+    }
   }
 
     
