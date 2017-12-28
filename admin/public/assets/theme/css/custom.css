@@ -4,53 +4,54 @@ label.error {
   font-weight: 400;
   font-size: .8em;
 }
-item-image {
-  border: 2px solid #7777779e 9e;
+
+.item-image {
+  border:2px solid #7777779e;
   margin-bottom: 10px;
 }
-item-image .content-image-left {
+.item-image .content-image-left {
   width: 5%;
   float: left;
   position: relative;
 }
-item-image .content-image-left a {
+.item-image .content-image-left a {
   position: absolute;
   left: 0;
   bottom: 0;
   top: 0;
   right: 0;
 }
-item-image .content-image-right {
+.item-image .content-image-right {
   width: 95%;
   float: right;
   border: 1px solid #bfbfbf;
   border-left: 2px solid #99999991 91;
 }
-item-image .content-image-right .content-image-top {
+.item-image .content-image-right .content-image-top {
   display: block;
   border-bottom: 2px solid #bfbfbf;
   padding: 5px;
   background-color: #99999991 91;
 }
-item-image .content-image-right .content-image-top .image {
+.item-image .content-image-right .content-image-top .image {
   width: 10% ;
   float: left;
 }
-item-image .content-image-right .content-image-top .name {
+.item-image .content-image-right .content-image-top .name {
   width: 70% ;
   float: left;
 }
-item-image .content-image-right .content-image-top .create {
+.item-image .content-image-right .content-image-top .create {
   width: 20% ;
   float: left;
 }
-item-image .content-image-right .content-image-top .name-image {
+.item-image .content-image-right .content-image-top .name-image {
   display: block;
 }
-item-image .content-image-right .content-image-bottom {
+.item-image .content-image-right .content-image-bottom {
   padding: 5px;
 }
-item-image .content-image-right .content-image-bottom .path {
+.item-image .content-image-right .content-image-bottom .path {
   width: 10% ;
   float: left;
 }
@@ -71,7 +72,7 @@ item-image .content-image-right .content-image-bottom .path {
   font-family: Arial;
   font-size: 10px;
 }
-dragover {
+.dragover {
   border: 5px dashed #0000FF;
 }
 .content-header h3 {

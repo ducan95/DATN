@@ -60,27 +60,21 @@
         }    
       }  
     }); 
-
-    $scope.updateImage = function () {
+    */
+    $scope.updateImage = function (id) {
       Service.update({
-        id:         20,
+        id   :  id   ,
+        name : "zxczxcxzcxz"
       }, function (res){
         console.log(res);
       });
-    }*/
-
-
+    }
   });
 
 
 SOUGOU_ZYANARU_MODULE.controller('ImageAdd', ['$scope', 'Upload', '$timeout','toastr', function ($scope, Upload, $timeout, toastr) {
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
-    });
-    $scope.$watch('file', function () {
-        if ($scope.file != null) {
-            $scope.files = [$scope.file]; 
-        }
     });
     $scope.log = '';
     
@@ -96,23 +90,11 @@ SOUGOU_ZYANARU_MODULE.controller('ImageAdd', ['$scope', 'Upload', '$timeout','to
                       file: file  
                     }
                 }).then(function (resp) {
-                   toastr.success($scope.log);
-                   // Show progress upload image
-                    $timeout(function() {
-                        $scope.log = 'file: ' +
-                        resp.config.data.file.name +
-                        ', Response: ' + JSON.stringify(resp.data) +
-                        '\n' + $scope.log;
-
-                    });
-                    
+                  toastr.success('Success ' + resp.config.data.file.name );     
                 }, function (evt) {
                     // Show all progress upload image
-                    var progressPercentage = parseInt(100.0 *
-                        evt.loaded / evt.total);
-                    $scope.log = 'progress: ' + progressPercentage + 
-                      '% ' + evt.config.data.file.name + '\n' + 
-                      $scope.log;
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                 });
               }
             }

@@ -12,10 +12,12 @@ class ReleaseNumberTableSeeder extends Seeder
     public function run()
     {
         DB::table('release_numbers')->insert([
+            'id_release_number'=> 1,
         	'name' => 'SPH001',
         	'image_release_path' => '001.jpg',
           	'image_header_path' => '002.jpg',
-          	'is_deleted'        => false
+          	'is_deleted'        => false,
+            
         ]);
     }
 }

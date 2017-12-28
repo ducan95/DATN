@@ -4,7 +4,7 @@ use WebService\Repository\Repository;
 use App\Images;
 use App\PostImage;
 use App\Post;
-
+use Extention\Media;
 /**
  * Created by SublimeText.
  * User: Huynh
@@ -14,7 +14,7 @@ use App\Post;
 class ImageRepository extends Repository
 {
   
-  
+   use Media; 
   public function find($dataReq = '') 
   { 
     try {   
@@ -46,8 +46,7 @@ class ImageRepository extends Repository
     try{
       return Images::where('images.id_image', "=", $id)
               ->where('images.is_deleted', '=', false)
-              ->select('images.*', 'posts.title as namePost')
-              ->get();
+              ->first();
     } catch(\Exception $e){
       throw $e;
     }
@@ -61,8 +60,8 @@ class ImageRepository extends Repository
         $image->fill([
           'name'   => $dataReq['name'],
           'description' => config('admin.images.media'),
-          'path'   => $dataReq['pathDefault'],
-          'path_blur' => $dataReq['pathBlur'],
+          'path'   => $dataReq['path'],
+          'path_blur' => $dataReq['path_blur'],
           'is_deleted' => false,
         ]);
         $image->save() ;
@@ -75,7 +74,18 @@ class ImageRepository extends Repository
 
   public function update($dataReq, $id)
   { 
-      
+    try{
+      if(isset($dataReq)) {
+        $image = Images::where('id_image', '=', $id)->where('is_deleted', '=', false)->first();
+        $image->name = $dataReq['name'];
+        $image->path = $dataReq['path'];
+        $image->path_blur = $dataReq['path_blur'];
+        $image->save() ;
+        return $image;  
+      }
+    } catch(\Exception  $e){ 
+      throw  $e;  
+    }
   }
 
   public function delete($id)
