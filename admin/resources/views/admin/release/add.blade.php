@@ -6,12 +6,12 @@
 @endsection
 
 @section('content')
-<div>
+<div ng-controller="ReleaseAddCtrl">
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        発売号新規登録
-        <small>preview of simple tables</small>
+        {{ trans('release.addRelease') }}
+        {{-- <small>preview of simple tables</small> --}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -38,24 +38,23 @@
                   {{ csrf_field() }}
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="txtName">発売号の名称を設定してください。</label>
-                      <input type="text" class="form-control" id="txtName" placeholder="2016年10月14日号">
+                      <label for="txtName">{{ trans('release.nameRelease') }}</label>
+                      <input type="text" class="form-control" id="txtName" value="@{{ date }}号">
                     </div>
                     <div class="form-group">
-                        <label for="input-file">発売号の画像を登録してください。</label>
+                        <label for="input-file">{{ trans('release.imageRelease') }}</label>
                         <input data-height="130" type="file" id="input-file" class="dropify" />
                     </div>
-
                     <div class="form-group">
-                        <label for="input-file-mobile">モバイル用のヘッダー画像を登録してください。</label>
+                        <label for="input-file-mobile">{{ trans('release.headerRelease') }}</label>
                         <input data-height="130" type="file" id="input-file-mobile" class="dropify" />
                     </div>
                   </div>
                   <!-- /.box-body -->
 
                   <div class="box-footer text-center" style="padding-bottom: 70px">
-                    <button onclick="submitFunction()" type="submit" name="submit" class="btn btn-primary">設定完了</button>
-                    <button type="reset" class="btn btn-default">キャンセル</button>
+                    <button onclick="submitFunction()" type="submit" name="submit" class="btn btn-primary">{{ trans('web.confirm') }}</button>
+                    <button type="reset" class="btn btn-default">{{ trans('web.cancel') }}</button>
                   </div>
                 </form>
               </div>
@@ -107,4 +106,8 @@ function submitFunction () {
   })
 }  
 </script>
+<script src="{{ asset('assets/base/bower_components/moment/moment.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/moment/locale/ja.js') }}"></script>
+<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 @endsection 

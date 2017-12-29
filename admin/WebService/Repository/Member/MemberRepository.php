@@ -6,7 +6,7 @@ use WebService\Repository\Repository;
 
 /**
  * Created by PhpStorm.
- * User: rikkei
+ *  : rikkei
  * Date: 13/12/2017
  * Time: 19:37
  */
@@ -37,12 +37,40 @@ class MemberRepository extends Repository
 
   public function update($dataReq,$id)
   {
+    try{
+      $member = Member::find($id);
+      if(!empty($member)) {
+        $user->fill([
+          'email'       => $dataReq['email'],
+          'password'    => bcrypt($dataReq['password']),
+          'gender'      =>$dataReq['gender'],
+          'is_delected' => false,
+        ]);  
+        $member->save();
+        return $member;  
+      } else {
+        return null;
+      }
+    } catch(\Exception  $e){
+      throw $e;
+      
+    }
     
   }
 
   public function delete($id)
   {
-    
+    try {
+      if(!empty(Member::find($id))) {
+        $member = Member::find($id);
+        $member->is_deleted = true;
+        $member->save();
+      } else {
+        return ;
+      }
+    } catch(\Exception  $e) { 
+      throw $e;
+    }
   }
 
   public function list()
@@ -67,7 +95,27 @@ class MemberRepository extends Repository
   }
 
   public function find($dataReq){
-
+    try {   
+      $query = Member::where('id_member', '>', 0)->where('is_deleted', '=', false);
+      $dataMol= ['email', 'password', 'birthday', 'gender'];
+      if(!empty($dataReq)) {
+        foreach ($dataMol as $value) {
+          if(isset($dataReq[$value])) {
+            if(is_string($dataReq[$value])) {
+              $query = $query->where($value, 'LIKE', '%'.$dataReq[$value].'%' );
+            } else {
+              $query = $query->where($value, '=', $dataReq[$value] );
+            }
+          }    
+        }
+        if(!empty($dataReq['paginate'])) {
+          return $query->paginate($dataReq['paginate']); 
+        }
+      } 
+      return $query->get();    
+    } catch(\Exception $e) {
+        throw $e;
+    }
   }
 
 }

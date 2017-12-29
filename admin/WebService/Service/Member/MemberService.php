@@ -40,11 +40,24 @@ class MemberService extends Service
 
   public function update($request,$id)
   {
-    
+    try {
+      $res['data'] = MemberRepository::getInstance()->update($request->all(), $id);
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+    return $res;    
   }
 
   public function delete($id)
   {
+    try{
+      $res['data'] = MemberRepository::getInstance()->delete($id);
+    }catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+    return $res;
     
   }
 
@@ -74,7 +87,29 @@ class MemberService extends Service
     
     public function find($request)
     {
-
+      try {
+        $dataReq = [];
+        if(!empty($request->query('email')) ) {
+          $dataReq['email'] = $request->query('email');
+        }
+        if(!empty($request->query('password')) ) {
+          $dataReq['password'] = $request->query('password');
+        }
+        if(!empty($request->query('birthday')) ) {
+          $dataReq['birthday'] = $request->query('birthday');
+        }
+        if(!empty($request->query('gender')) ) {
+          $dataReq['gender'] = $request->query('gender');
+        }
+        if(!empty($request->query('paginate')) ) {
+          $dataReq['paginate'] = $request->query('paginate');
+        }
+        $res['data'] = MemberRepository::getInstance()->find($dataReq); 
+      } catch(\Exception $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
+      }
+      return $res;
     }
 
 }
