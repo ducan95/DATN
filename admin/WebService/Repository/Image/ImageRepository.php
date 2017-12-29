@@ -35,7 +35,7 @@ class ImageRepository extends Repository
           return $query->paginate($dataReq['paginate']); 
         }  
       } 
-      return $query->orderBy('id_image','ASC')->get();
+      return $query->paginate(10); 
     } catch(\Exception $e) {
         throw $e;
     } 

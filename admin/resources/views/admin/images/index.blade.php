@@ -1,6 +1,6 @@
 @extends('admin.templates.master')
 @section('content')
-<div ng-controller="ImageCtrl">
+<div ng-controller="ImageCtrl" ng-init="getImages(1)">
    <!-- Content Header (Page header) -->
     <section class="content-header">
      <h3>{{ trans('web.list_image') }}</h3>
@@ -61,7 +61,20 @@
         </div>
       </div>
     </section>
+
     <!-- /.content -->
+  <ul class="pagination">
+    <li  ng-show="currentPage != 1">
+      <a  href="javascript:void(0)"  ng-click=getImages(prePage)>Prev</a>
+    </li>
+    <li ng-repeat="i in totalPages" ng-class="{active : currentPage == i}">
+      <a href="javascript:void(0)" ng-bind="i" ng-click=getImages(i)></a>
+    </li>
+    <li  ng-show="currentPage != lastPage" >
+      <a href="javascript:void(0)"  ng-click=getImages(nextPage)>Next</a>
+    </li>
+  </ul>
+  
 </div>
 @endsection  
 
