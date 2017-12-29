@@ -17,7 +17,7 @@
     <section class="content">
       <div class="row" style="margin-bottom: 15px;margin-top:15px;">
         <div class="col-md-2">
-            <a href="{{ route('webUserAdd') }}" class="btn btn-block btn-success">Add new user</a>
+            <a href="{{ route('webMemberAdd') }}" class="btn btn-block btn-success">Add new member</a>
         </div>
       </div>
       <div class="row">
