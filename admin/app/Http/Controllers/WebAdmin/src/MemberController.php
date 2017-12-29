@@ -34,8 +34,8 @@ class MemberController extends \App\Http\Controllers\WebAdmin\WebController
         
     }
     public function viewAdd()
-    {
-    
+    {   
+        return view('admin.member.add');
     }
 
    

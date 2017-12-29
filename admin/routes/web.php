@@ -69,12 +69,19 @@ Route::group([
     ]);
   });
 
+
+
   Route::group(['prefix' => 'member' ], function(){
       Route::get('/',[
           'uses' => 'MemberController@viewIndex',
           'as' => 'webMemberIndex'
       ]);
+      Route::get('/add',[
+          'uses' => 'MemberController@viewAdd',
+          'as' => 'webMemberAdd'
+      ]);
   });
+
 
   Route::group([ 'prefix' => 'category' ],function(){
 
