@@ -50,7 +50,21 @@ class MemberService extends Service
 
   public function list()
   {
-    
+    $result= MemberRepository::getInstance()->list();
+    try
+    {
+      if(!empty($result)){
+        $res['data']=$result;
+      }
+      else{
+        throw new \Exception("No Record");
+        }
+    }    
+    catch(\Exception $e){
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+    return $res;
   }
 
     public function findOne($id)

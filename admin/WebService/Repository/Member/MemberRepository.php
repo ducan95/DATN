@@ -47,7 +47,13 @@ class MemberRepository extends Repository
 
   public function list()
   { 
-    
+    try{
+      $member=Member::where('is_deleted','=',false)->get();
+      return $member;
+    }
+    catch(\Exception $e){
+      throw $e;
+    }
   }
 
   public function listOne($id){
