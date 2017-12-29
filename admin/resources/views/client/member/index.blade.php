@@ -30,8 +30,7 @@
 		</div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
-	<script src="{{ asset('assets/frontend/page/member/jquery-3.2.1.min.js') }}"></script>
-	<script src="{{ asset('assets/frontend/page/member/jquery.validate.min.js') }}"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.form').validate({
