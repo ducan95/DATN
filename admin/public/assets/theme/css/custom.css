@@ -98,3 +98,18 @@ label.error {
 .release-section:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
+.list-img-upload {
+  border: 5px dashed #DDD;
+  min-height: 110px;
+  margin: 10px;
+}
+.list-img-upload .image{
+  border-radius: 5px;
+  border: 1px solid;
+  margin: 5px;
+  display: inline-block;
+}  
+.list-img-upload img{
+  width: 150px;
+  height: 100px;
+}

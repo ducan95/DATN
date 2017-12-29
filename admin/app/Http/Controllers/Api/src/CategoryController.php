@@ -91,7 +91,7 @@ class CategoryController extends WebApiController
     } 
   }
 
-  public function actionFind($search, Request $request){
+  public function actionFind(Request $request){
     //Do something
   }
 

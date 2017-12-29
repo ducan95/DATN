@@ -1,4 +1,4 @@
-@extends('client.templates.master')\
+@extends('client.templates.master')
 @section('content')
 
 @stop

@@ -1,7 +1,7 @@
 /**
  * Created by rikkei on 15/12/2017.
  */
-var SOUGOU_ZYANARU_MODULE = angular.module("sougou_zyanaru", ['ngResource', 'ngFileUpload', 'toastr']);
+var SOUGOU_ZYANARU_MODULE = angular.module("sougou_zyanaru", ['ngResource', 'ngFileUpload', 'toastr', 'bw.paging']);
 
 
 SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {
@@ -18,9 +18,7 @@ SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {
     response: function (response) {
       requestCount--;
       if (requestCount == 0) {
-        setTimeout(function () {
-          $("#spinner_sougouzyanaru").removeClass('show-spinner');
-        },200);
+        $("#spinner_sougouzyanaru").removeClass('show-spinner');
       }
 
       return response || $q.when(response);
@@ -28,9 +26,7 @@ SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {
     responseError: function (response) {
       requestCount--;
       if (requestCount == 0) {
-        setTimeout(function () {
-          $("#spinner_sougouzyanaru").removeClass('show-spinner');
-        },200);
+        $("#spinner_sougouzyanaru").removeClass('show-spinner');
       }
       return $q.reject(response);
     }

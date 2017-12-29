@@ -9,7 +9,7 @@
 		{{ csrf_field() }}
 	  <div class="form-group">
 	    <label class="label" for="exampleInputEmail1">電子メールアドレス</label>
-	    <input type="email" class="form-control" placeholder="Email" name="email" >
+	    <input type="email" class="form-control" placeholder="Email" name="email">
 	  </div>
 	  <div class="form-group">
 	    <label class="label" for="exampleInputPassword1">パスワード</label>
