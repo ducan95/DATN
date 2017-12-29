@@ -24,14 +24,15 @@
               <p>{{ trans('web.add_new_image') }}</p> 
           </div>    
         </div>
-      </div>
-      <div class="col-xs-12 ">
-        <div class="list-img-upload" >
-          <div class="image" ng-repeat="path in pathImages">
-            <img  src="{{storage_asset()}}/@{{path}}">     
+      
+        <div class="col-xs-12 ">
+          <div class="list-img-upload" >
+            <div class="image" ng-repeat="path in pathImages">
+              <img  src="{{storage_asset()}}/@{{path}}">     
+            </div>
           </div>
-        </div>
-      </div>  
+        </div> 
+      </div>   
     </section>
 
     

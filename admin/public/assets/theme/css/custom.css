@@ -101,6 +101,7 @@ label.error {
 .list-img-upload {
   border: 5px dashed #DDD;
   min-height: 110px;
+  margin: 10px;
 }
 .list-img-upload .image{
   border-radius: 5px;
