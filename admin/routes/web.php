@@ -69,7 +69,8 @@ Route::group([
     ]);
   });
 
-  /********************************************** */
+
+
   Route::group(['prefix' => 'member' ], function(){
       Route::get('/',[
           'uses' => 'MemberController@viewIndex',
@@ -80,9 +81,7 @@ Route::group([
           'as' => 'webMemberAdd'
       ]);
   });
-  /********************************************** */
 
-   /** router web category **/
 
   Route::group([ 'prefix' => 'category' ],function(){
 

@@ -1,12 +1,12 @@
 @extends('admin.templates.master')
 @section('content')
 
-  <div ng-controller="UserAddCtrl"> 
+  <div ng-controller="MembAddCtrl"> 
 
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          @lang('user.admin_user_add_new')
+          Add new member
         {{--<small>preview of simple tables</small>--}}
       </h1>
       {{--<ol class="breadcrumb">--}}
@@ -22,42 +22,45 @@
         <div class="col-md-12">
           <div class="box">
             <!-- /.box-header -->
-            <form role="form" method="post" id="main" ng-submit="addUser()">
+            <form role="form" method="post" id="main" ng-submit="addMember()">
             {{ csrf_field() }}
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
-                  <th>@lang('user.admin_user_name')</th>
-                  <th>@lang('user.admin_user_role')</th>
-                  <th>@lang('user.admin_user_email')</th>
-                  <th>@lang('web.password')</th>
+                  <th>Email</th>
+                  <th>Birthday</th>
+                  <th>Gender</th>
+                  <th>Password</th>
                 </tr>
                 <tr>
                   <td>
                     <div class="form-group">
-                        <input ng-model=".email" type="text" name="username" class="form-control" id="username" placeholder="Enter name">
+                        <input ng-model="member.email" type="text" name="email" class="form-control" id="email" placeholder="Enter email">
                         <label class="error" ng-if="error.username[0] != null">@{{ error.username[0] }}</label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
-                        <select ng-init="user.role_code=''" name="role_code" class="form-control" ng-model="user.role_code">
-                          <option value="">Chọn quyền</option>
-                          <option ng-repeat="role in roles" value="@{{ role.role_code }}">@{{ role.name }}</option>
-                        </select>
-                        <label class="error" ng-if="error.role_code[0] != null">@{{ error.role_code[0] }}</label>
-                    </div>
-                  </td>
-                  <td>
-                   <div class="form-group">
-                        <input ng-model="user.email" type="text" name="email" class="form-control" id="email" placeholder="Enter an email">
-                        <label class="error" ng-if="error.email[0] != null">@{{ error.email[0] }}</label>
+                      <div class="input-group date" data-provide="datepicker">
+                        <input type="text" class="form-control" placeholder="Pick your date">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                      </div>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
-                        <input ng-model="user.password" type="password" name="password" class="form-control" id="password" placeholder="Type your password">
-                        <label class="error" ng-if="error.password[0] != null">@{{ error.password[0] }}</label>
+                      <select class="form-control">
+                          <option value="true">Male</option>
+                          <option value="false">Female</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                        <input ng-model="member.password" type="password" name="email" class="form-control" id="password" placeholder="Enter password">
+                        <label class="error" ng-if="error.username[0] != null">@{{ error.username[0] }}</label>
                     </div>
                   </td>
                 </tr>
@@ -89,6 +92,9 @@
 @section('bottom-js')
 <!-- Validatejs -->
 <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
-<!-- Edit table -->
+<script src="{{ asset('assets/base/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
 <script src="{{ asset('assets/frontend/page/user/MemberCtrl.js') }}"></script>
+<script>
+
+</script>
 @endsection 

@@ -12,6 +12,10 @@
 		<link rel="shortcut icon" href="{{ asset('client/images/faviconf.ico') }}" type="image/x-icon">
 		<script src="{{ asset('assets/base/bower_components/jquery-3.2.1.min.js') }}"></script>
 		<script src="{{ asset('assets/base/bower_components/jquery.validate.min.js') }}"></script>
+		<script src="{{ asset('client/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('client/js/myjs.js') }}"></script>
+
+		@yield('bottom-js')
 </head>
 
 <body>
@@ -92,10 +96,7 @@
 			}
 		</script>
 		<!-- <script src="{{ asset('client/vendor/jquery.min.js') }}"></script> -->
-		<script src="{{ asset('client/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-		<script src="{{ asset('client/js/myjs.js') }}"></script>
-
-		@yield('bottom-js')
+		
 </body>
 
 </html>

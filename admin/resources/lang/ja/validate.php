@@ -22,6 +22,7 @@
 			'birthday_required' 				=> '誕生日のフィールドは必須です',
 			'register_success'				  => 'あなたは登録に成功しました。',
 			'register_fail'							=> '失敗します',
+			'login_fail'								=> 'メールアドレスまたはパスワードが間違っています。'
 		]
 
 	]
