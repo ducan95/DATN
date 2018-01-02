@@ -41,7 +41,7 @@
 @endsection  
 
 @section('bottom-js')
-
+<script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/image/ImageCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
 

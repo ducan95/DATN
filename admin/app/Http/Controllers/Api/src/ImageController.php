@@ -59,7 +59,7 @@ class ImageController extends WebApiController
    */
   public function actionSave(Request $request)
   {  
-    $resImage = ImageService::getInstance()->save($request); 
+    $resImage = ImageService::getInstance()->save($request);
     if(!isset($resImage['errors'])) {
       return Api::response(['data' => $resImage['data'] ])   ;
     } else {

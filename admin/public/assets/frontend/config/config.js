@@ -38,7 +38,4 @@ SOUGOU_ZYANARU_MODULE.config(['$httpProvider', function ($httpProvider) {
   $httpProvider.interceptors.push('HttpInterceptor');
 }]);
 
-// validate.
-SOUGOU_ZYANARU_MODULE.service('trans',function(){
-    this.messageDelete = "該当の画像の削除を行います。よろしいですか?";
-});
+

@@ -55,13 +55,15 @@ class ImageService extends Service
 
 
   public function save($request)
-  {	 
+  {	
     $validator = Validator::make($request->all(), [
       'file' => 'required|image| max:327680',
+      'name' => 'required'
     ],[
       'file.required'=> trans('validate.image_required'),
       'file.image'=> trans('validate.image_must_be_valid_image_address'),
       'file.max'=> trans('validate.maximum_image_size_is_320MB'),
+      'name' => trans('validate.name_exists')
     ]);
     
     if($validator ->fails()) {
@@ -69,7 +71,7 @@ class ImageService extends Service
       $res['errors']['status_code'] = 400; 
     } else {
       try {
-        $dataReq = $this->saveImage( $request->file('file'), config('admin.images.name.media'));
+        $dataReq = $this->saveImage( $request->file('file'), $request->name);
         $res['data'] =  ImageRepository::getInstance()->save($dataReq);  
       } catch(\Expention $e) {
         $res['errors']['msg'] = $e->getMessage();
