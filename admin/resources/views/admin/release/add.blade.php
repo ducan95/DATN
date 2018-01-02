@@ -34,42 +34,40 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="txtName">{{ trans('release.nameRelease') }}</label>
-                      <input ng-model="release.name" type="text" class="form-control" id="txtName" ng-init="release.name=date">
+                      <input ng-model="release.name" name="name" type="text" class="form-control" id="txtName" ng-init="release.name=date">
                       <label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
                     </div>
 
                     <div class="form-group">
-                        <label for="input-file">{{ trans('release.imageRelease') }}</label>
-                        <div 
+                      <label for="input-file">{{ trans('release.imageRelease') }}</label>
+                      <div 
                         ngf-drop ngf-select 
                         ng-model="release.releaseImage" 
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
-                        ngf-multiple="true" 
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                          <span class="fa fa-cloud-upload"></span>
-                          {{ trans('release.addImage') }}
-                       </div>
+                        <span class="fa fa-cloud-upload upload-icon"></span>
+                        {{ trans('release.addImage') }}
+                     </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="input-file">{{ trans('release.headerRelease') }}</label>
-                        <div 
+                      <label for="input-file">{{ trans('release.headerRelease') }}</label>
+                      <div 
                         ngf-drop ngf-select 
                         ng-model="release.headerImage" 
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
-                        ngf-multiple="true" 
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                          <span class="fa fa-cloud-upload"></span>
-                          {{ trans('release.addImage') }}
-                       </div>
+                        <span class="fa fa-cloud-upload upload-icon"></span>
+                        {{ trans('release.addImage') }}
+                      </div>
                     </div>
                   </div>
                   <!-- /.box-body -->
@@ -92,14 +90,12 @@
 @endsection  
 
 @section('bottom-js')
-<!-- Angular Paging -->
-<script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
+<!-- AngularResource -->
+<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <!-- Validatejs -->
 <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 <!-- MomentJS -->
 <script src="{{ asset('assets/base/bower_components/moment/moment.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/moment/locale/ja.js') }}"></script>
-<!-- AngularResource -->
-<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
-<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 @endsection 

@@ -14,7 +14,7 @@ SOUGOU_ZYANARU_MODULE
     }
   })
 
-    RoleService.find({}, function (res) {
+  RoleService.find({}, function (res) {
     if (typeof res != "undefined") {
       $scope.roles = res.data;
     }
@@ -65,12 +65,10 @@ SOUGOU_ZYANARU_MODULE
       //console.log(res.data);
       $scope.roles = res.data;
       $scope.roles.splice(0, 1);
-
     }
   });  
   
   $scope.addUser = function () { 
-
       //Validate form
       var constraints = {
         email: {

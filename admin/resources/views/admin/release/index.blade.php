@@ -17,7 +17,7 @@
     </div>
     <!-- /.content -->
 
-    <section class="invoice release-section" ng-repeat="release in releases">
+    <section class="invoice release-section" ng-if="releases != undefine" ng-repeat="release in releases">
       <div class="row">
         <div class="col-md-3 text-center">
           <img src="{{ storage_asset() }}/@{{ release.image_release_path }}" class="img-responsive release-img" alt="">
@@ -27,7 +27,7 @@
           <h4>@{{ release.name }}</h4>
         </div>
         <div class="col-md-3 text-left">
-          <a href="" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>
+          <a href="" ng-click="redirectEdit(release.id_release_number)" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>
           <a href="javascript:void(0)" ng-click="delete(release.id_release_number)" style="margin-left: 2px" class="btn btn-default">
             <i class="fa fa-trash-o"></i>
           </a>

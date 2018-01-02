@@ -384,11 +384,11 @@ Route::group([
     'uses'  => 'AuthController@postLogin',
     'as'    => 'postLoginEndUser'
   ]);
-/*
+
   Route::get('logout', [
     'as'    => 'getLogoutEndUser', 
     'uses'  => 'AuthController@getLogoutEndUser'
-  ]);*/
+  ]);
 });
 
 

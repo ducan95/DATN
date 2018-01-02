@@ -9,7 +9,6 @@ SOUGOU_ZYANARU_MODULE
 	 * @return {[type]}                 [description]
 	 */
 	.controller('ReleaseCtrl', function ($scope, ReleaseService, popupService, $window, toastr) {
-
 	  // Pagination
 	  $scope.currentPage = 1;
 		$scope.lastPage    = 0;
@@ -47,15 +46,20 @@ SOUGOU_ZYANARU_MODULE
 		  			$scope.deleteRelease = ReleaseService.delete({ id: release.id_release_number }, function () {
               if($scope.deleteRelease.is_success == true) {
 		            $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
-		            toastr.success('Xóa thành công !');
+		            toastr.success('Xóa thành công!');
 		          } else { 
-		            toastr.error('Có lỗi khi xóa vui lòng thử lại');
+		            toastr.error('Try again!');
 		          }   
             });
 		  		} 
 		  	});
 	  	}
 	  }
+
+    //Ridirect Edit page
+    $scope.redirectEdit = function (id) { 
+      $window.location.href = '/admin/release/edit#id='+id;
+    }
 
 	})
 
@@ -69,21 +73,84 @@ SOUGOU_ZYANARU_MODULE
   	var friday = moment().day(19).format('LL'); //Friday: 5 + 7 + 7
   	$scope.date = friday+'号';
 
+    //Add new release number function
   	$scope.release = new ReleaseService();
   	$scope.addRelease = function () { 
-  		if (popupService.showPopup('発売号の情報を登録します。よろしいですか?')) {
-  			$scope.release.$save(function () {
-        	if($scope.release.is_success == true) {
-            $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
-            toastr.success('Thêm thành công !');
-          } else { 
-            toastr.error('Có lỗi khi thêm vui lòng thử lại');
-          }   
-      	});
-  		}
-  	}
+      //Validate form
+      var constraints = {
+        name: {
+          presence: true,
+        },
+      };
+      var form = document.querySelector("form#main");
+      validate.validators.presence.message = '空白のところで入力してください。';
+      $scope.error = validate(form, constraints);
+
+      // Check success
+      if ($scope.error == undefined) {
+        if (popupService.showPopup('発売号の情報を登録します。よろしいですか?')) {
+          $scope.release.$save(function () {
+            if($scope.release.is_success == true) {
+              $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
+              toastr.success('Thêm thành công !');
+            } else { 
+              toastr.error('Error! Please try again.');
+            }   
+          });
+        }
+      } 
+  	}//END ADD RELEASE
 
   })
+  
+  /**
+   * [Edit release number]
+   * @param  {[type]} $scope     [description]
+   * @return {[type]}            [description]
+   */
+  .controller('ReleaseEditCtrl', function ($scope, ReleaseService, toastr, popupService, $window) {
+    //Get id from url
+    var url   = new URL(window.location.href); 
+    var id    = url.hash.match(/\d/g);
+    $scope.id = id.join('');
 
+    $scope.updateRelease = function (release) { 
+      //Validate form
+      var constraints = {
+        name: {
+          presence: true,
+        },
+      };
+      var form = document.querySelector("form#main");
+      validate.validators.presence.message = '空白のところで入力してください。';
+      $scope.error = validate(form, constraints);
+
+      // If clean data -> Edit
+      if ($scope.error == undefined) {
+        //Get value from ng-model
+        var getName = release.name;
+
+        // Update relase
+        ReleaseService.update({
+          id:     $scope.id,
+          name:   getName,
+          is_deleted: false
+        }, function (){
+          // Redirect
+          //$window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
+        });
+      }
+    }
+
+  // Show user 
+  $scope.loadRelease = function () { 
+    ReleaseService.get({ id: $scope.id },function(res) {
+      $scope.release = res.data;
+      console.log(res.data);
+    });
+  }
+  $scope.loadRelease(); 
+
+})  
 
 
