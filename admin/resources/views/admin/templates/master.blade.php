@@ -13,6 +13,9 @@
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/Ionicons/css/ionicons.min.css') }}">
+  <!-- Toast -->
+  <link rel="stylesheet" href="{{ asset('assets/base/bower_components/toast/angular-toastr.css') }}" />
+
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/AdminLTE.min.css') }}">
   <!-- Custom style -->
@@ -78,15 +81,16 @@
 <!-- Angular JS and resource -->
 <script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
+<!-- Angular Toast -->
+<script src="{{ asset('assets/base/bower_components/toast/angular-toastr.tpls.js') }}"></script>
+<!-- Angular Ng-File-Upload -->
 <script src="{{ asset('assets/base/bower_components/ng-file-upload.min.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/ng-file-upload-shim.min.js') }}"></script>
+<!-- Angular Paging -->
 <script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
-<script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
-<link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
-
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 
 <!-- SlimScroll -->
 <script src="{{ asset('assets/base/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>

@@ -64,14 +64,20 @@
 
     <!-- /.content -->
   <ul class="pagination">
-    <li  ng-show="currentPage != 1">
-      <a  href="javascript:void(0)"  ng-click=getImages(prePage)>Prev</a>
+    <li ng-if="currentPage == 1" class="disabled">
+      <a href="javascript:void(0)">Prev</a>
     </li>
-    <li ng-repeat="i in totalPages" ng-class="{active : currentPage == i}">
+    <li  ng-show="currentPage != 1">
+      <a  href="javascript:void(0)" ng-click=getImages(prePage)>Prev</a>
+    </li>
+    <li ng-repeat="i in totalPages" ng-class="{ active: currentPage == i }">
       <a href="javascript:void(0)" ng-bind="i" ng-click=getImages(i)></a>
     </li>
     <li  ng-show="currentPage != lastPage" >
-      <a href="javascript:void(0)"  ng-click=getImages(nextPage)>Next</a>
+      <a href="javascript:void(0)" ng-click=getImages(nextPage)>Next</a>
+    </li>
+    <li ng-if="currentPage == lastPage" class="disabled">
+      <a href="javascript:void(0)">Next</a>
     </li>
   </ul>
   
@@ -79,8 +85,7 @@
 @endsection  
 
 @section('bottom-js')
-
 <script src="{{ asset('assets/frontend/page/image/ImageCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
-
+<script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
 @endsection 

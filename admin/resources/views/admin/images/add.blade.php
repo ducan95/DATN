@@ -41,6 +41,10 @@
 @endsection  
 
 @section('bottom-js')
+<!-- Angular Ng-File-Upload -->
+<script src="{{ asset('assets/base/bower_components/ng-file-upload.min.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/ng-file-upload-shim.min.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
 
 <script src="{{ asset('assets/frontend/page/image/ImageCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>

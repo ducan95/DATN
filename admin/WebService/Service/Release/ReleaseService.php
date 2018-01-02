@@ -34,10 +34,10 @@ class ReleaseService extends Service
         $dataReq['image_header_path'] = $request->query('image_header_path');
       }
 
-      $res['data'] = ReleaseRepository::getInstance()->find($dataReq);
+      $res['data'] = ReleaseRepository::getInstance()->find($dataReq);  
 
     } catch(\Exception $e) {
-      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['msg']         = $e->getMessage();
       $res['errors']['status_code'] = 500;
     }
 
@@ -66,32 +66,33 @@ class ReleaseService extends Service
    * @return [type]          [description]
    */
   public function save($request)
-  {
+  { 
     $validator = Validator::make($request->all(), 
       [
-        'name'               => 'required',
-        'image_release_path' => 'required',
-        'image_header_path'  => 'required',
+        'name' => 'required',
       ], 
       [
-        'username.required'           => trans('release.nameRequired'),
-        'image_release_path.required' => trans('release.imgReleaseRequired'),
-        'image_header_path.required'  => trans('release.imgHeaderRequired'),
+        'name.required' => trans('release.nameRequired'),
       ]
     );
 
-    if ($validator->fails()) {
+    if($validator ->fails()) {
       $res['errors']['msg'] = $validator->errors();
       $res['errors']['status_code'] = 400;
     } else {
       try {
-        $res['data'] = ReleaseRepository::getInstance()->save($request->all());
+        $dataReq['name'] = $request->name;
+        //$dataReq['is_deleted'] = false;
+        $dataReq['image_release_path'] = !empty($request->image_release_path) ? : 'imageDefault/no-image.jpg';
+        $dataReq['image_header_path']  = !empty($request->image_header_path) ? : 'imageDefault/no-banner.jpg';
+        $res['data'] = ReleaseRepository::getInstance()->save($dataReq);
+        return $res;
       } catch(\Exception $e) {
         $res['errors']['msg'] = $e->getMessage();
         $res['errors']['status_code'] = 500;
-      }
+      }  
     }
-
+    
     return $res;
   }
 
@@ -100,9 +101,21 @@ class ReleaseService extends Service
     // TODO: Implement update() method.
   }
 
+  /**
+   * [Delete Release number]
+   * @param  [type] $id [description]
+   * @return [type]     [description]
+   */
   public function delete($id)
   {
-    // TODO: Implement delete() method.
+    try {
+      $res['data'] = ReleaseRepository::getInstance()->delete($id);
+    } catch(\Exception $e) {
+      $res['errors']['msg']         = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+
+    return $res;
   }
 
   

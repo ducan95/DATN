@@ -14,6 +14,7 @@
       if(typeof res != "undefined") {
         if(res.is_success) {
           $scope.image = res.data; 
+          console.log($scope.image);
         }     
       }
     }); 
@@ -36,6 +37,7 @@
       }
       Service.get({page:pageNumber},function(res) {
         if(res.data != undefined) {
+          //console.log(res.data); 
           $scope.images  = res.data.data;
           $scope.total  = res.data.total;
           $scope.currentPage  = res.data.current_page;
