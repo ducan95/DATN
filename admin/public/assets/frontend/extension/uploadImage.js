@@ -5,7 +5,7 @@
  * @param array file, name
  * @return promise
  */
-SOUGOU_ZYANARU_MODULE.service('uploadImage', function(Upload){
+SOUGOU_ZYANARU_MODULE.service('uploadImage', function(Upload){ 
   this.upload = function (files, name) {
     if (files && files.length) { 
       for (var i = 0; i < files.length; i++) {

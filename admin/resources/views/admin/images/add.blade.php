@@ -20,7 +20,8 @@
               ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
               accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
               <p>{{ trans('web.add_new_image') }}</p> 
-              <button class="button" ngf-max-size="320MB" ngf-select="upload($files)" ng-model="file" name="file"   ngf-pattern="'image/*'" ngf-accept="'image/*'" >{{ trans('web.add_new_image') }}</button>
+              <button class="button"  ngf-max-size="320MB" ngf-select="upload($files)" ng-model="file" name="files"   ngf-pattern="'image/*'" ngf-multiple="true" ngf-accept="'image/*'" >
+              {{ trans('web.add_new_image') }}</button>
               <p>{{ trans('web.add_new_image') }}</p> 
           </div>    
         </div>

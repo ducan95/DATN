@@ -8,16 +8,11 @@ class Post extends Model
 {
   protected $table='posts';
   protected $primaryKey='id_post';
-  protected $fillable = ['title', 'slug', 'status','thumbnail_path', 'id_release_number', 'time_begin', 'time_end', 'status_preview_top', 'deleted_at', 'is_deleted', 'url_image'];
+  protected $fillable = ['title', 'slug', 'status','thumbnail_path', 'id_release_number', 'time_begin', 'time_end', 'status_preview_top', 'deleted_at', 'is_deleted', 'url_image', 'id_user'];
   
   public function release_number()
   {
   	return $this->belongsTo(ReleaseNumbers::class, 'id_release_number', $primaryKey);
   }
-
-  /*public function image() 
-  {
-  	return $this->belongsToMany(Images::class, 'post_image', 'id_post', 'id_image');
-  }*/
 
 }

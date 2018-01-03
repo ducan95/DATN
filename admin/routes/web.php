@@ -99,11 +99,11 @@ Route::group([
         'uses' => 'CategoryController@viewAddChildren',
         'as' =>'webCategoryAddChildren'
     ]);
+
      Route::get('/editparent',[
         'uses' => 'CategoryController@viewEditParent',
         'as' =>'webCategoryEditParent'
     ]);
-
 
     Route::get('/edit',[
         'uses' => 'CategoryController@viewEdit',
@@ -313,10 +313,7 @@ Route::group([
         'as' => 'apiImageDelete'
     ]);
   });
-
-  /**                    **
-   *  RELEASE NUMBER API  *
-   **                   **/   
+  /** router images release **/
   Route::group(['prefix' => '/release'],function(){
 
     Route::get('/', [
@@ -344,6 +341,34 @@ Route::group([
         'as'   => 'apiReleaseDelete'
     ]);
   });
+  /** router images post **/
+  Route::group(['prefix' => '/post'], function(){
+
+    Route::get('/', [
+        'uses' => 'PostController@actionFind',
+        'as' => 'apiPostFind'
+    ]);
+    
+    Route::get('/{id}', [
+        'uses' => 'PostController@actionFindOne',
+        'as' => 'apiPostShow'
+    ]);
+    Route::post('/', [
+        'uses' => 'PostController@actionSave',
+        'as' => 'apiPostSave'
+    ]);
+
+    Route::put('/{id}', [
+        'uses' => 'PostController@actionUpdate',
+        'as' => 'apiPostUpdate'
+    ]);
+    
+    Route::delete('/{id}', [
+        'uses' => 'PostController@actionDelete',
+        'as' => 'apiPostDelete'
+    ]);
+  });  
+
 
 });
 

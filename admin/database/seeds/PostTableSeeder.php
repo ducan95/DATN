@@ -19,6 +19,7 @@ class PostTableSeeder extends Seeder
         $tit = $title[$i].$i;
         DB::table('posts')->insert([
             'id_release_number' => 1,
+            'id_user' => 1,
             'title' => $tit,
             'slug' => $title[$i],
             'status' => true,
