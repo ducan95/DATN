@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::pattern('name','(.*)');
 Route::pattern('id', '[0-9]+');
 Route::pattern('search', '[A-Za-z]+');
 
@@ -390,9 +391,14 @@ Route::group([
     'as'    => 'webClientMemberSave'
   ]);
 
-  Route::get('home',[
+  Route::get('',[
     'uses'  => 'EndUserController@index',
     'as'    => 'WebClientEndUserIndex',
+  ]);
+
+  Route::get('/{name}-{id}',[
+    'uses'  => 'EndUserController@cat',
+    'as'  => 'WebClientEndUserCat'
   ]);
   
 });
@@ -416,7 +422,7 @@ Route::group([
   ]);
 
   Route::get('logout', [
-    'as'    => 'getLogout', 
+    'as'    => 'getLogoutEndUser', 
     'uses'  => 'AuthController@getLogoutEndUser'
   ]);
 });

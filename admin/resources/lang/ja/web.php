@@ -14,19 +14,23 @@
 		'search' => '検索',
 		'confirm' => '削除確認',
 		'the_image_list' => '画像の一覧へ',
+
     'save'=>'登録',
     'edit'=> '編集',
     'delete'=> '削除',
     'cancel'=> 'キャンセル',
     'password'=> 'パスワード',
-    'webClient' => [
-		'new_arrivals' => '新着',
-		'performing_arts' => '芸能',
-		'case'	=> '事件',
-		'sport'	=> 'スポーツ',
-		'column' => 'コラム',
-		'gravure' => 'グラビア',
-		'recommendation'=> 'オススメ',
+    
+	  'webClient' => [
+			'new_arrivals' 		=> '新着',
+			'performing_arts' => '芸能',
+			'case'						=> '事件',
+			'sport'						=> 'スポーツ',
+			'column' 					=> 'コラム',
+			'gravure' 				=> 'グラビア',
+			'recommendation'	=> 'オススメ',
+			'logout'					=> 'ログアウト',
+
 		]
 	]
 	

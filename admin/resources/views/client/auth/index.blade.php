@@ -18,6 +18,7 @@
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
 </div>
+@section('usersite-bottom-js')
 <script type="text/javascript">
 		$(document).ready(function(){
 			$('.form').validate({
@@ -46,4 +47,5 @@
 			});		
 		});	
 	</script>
+	@endsection
 @stop

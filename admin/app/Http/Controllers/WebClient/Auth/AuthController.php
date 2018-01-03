@@ -32,11 +32,14 @@ class AuthController extends Controller
       return redirect()->back()->with('status', trans('validate.webClient.login_fail'));
     }
     
- }
+  }
  
      /**
       * action admincp/logout
       * @return RedirectResponse
       */
-
+  public function getLogoutEndUser(){
+    Auth::guard('member')->logout();
+    return redirect()->route('getLoginEndUser');
+  }
 }

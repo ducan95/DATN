@@ -1,7 +1,7 @@
 *{margin:0;padding:0}
 body,html{
     width: 100%;
-    /*height: 100%;*/
+    
 }
 body{
     background-color: red;
@@ -34,6 +34,12 @@ ul{
 nav{
     overflow: hidden;
 }
+.navbar{
+    overflow: visible;
+}
+.nav-link{
+    margin: 0px 15px;
+}
 .navbar-brand{
     margin-right: 2px;
 }
@@ -47,12 +53,12 @@ nav{
 .right-nav img{
     margin-top: 6px;
 }
-ul.mtab{
+ul.mtab {
 
 
 }
-ul.mtab li{}
-ul.mtab li a{
+ul.mtab li {}
+ul.mtab li a {
     color: black;
     text-decoration: none;
     display: inline-block;
@@ -64,8 +70,88 @@ ul.mtab li a{
 li.active{
     border-bottom: 2px solid red;
 }
+/*CAT - NAR-BAR*/
+.wrap_customize {
+    background-color: #f7f1f1;
+    border-radius: : 1px solid #f7f1f1;
+    margin-bottom: 10px;
+}
+.containt_customize{
+    /*background-color: #C1C1C1;*/
+    padding: 8px;
+    border-radius: 8px;
+}
+.customize_h4{
+    background-color: #303130;
+    padding: 8px;
+    color: white;
+}
+.customize{
+    border-bottom: 1px solid #bdafaf;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+.customize:last-child{
+    border-bottom: none;
+}
+.img-cat-mize {
+    width: 120px; 
+    height: 120px;
+}
+.font {
+    background-color:#d72727; 
+    margin-top:15px;
+}
+.h3_mize {
+    font-size: 1.1em;
+    line-height: 17px;
+    color: #292929;
+    font-weight: bold;
+    padding: 4px 8px;
+    border: none;
+    margin-left: 16px;
+    margin-top: 13px;
+    margin-bottom: 0;
+    display: inline-block;
+    background-color: white;
+}
+.row_mize {
+    margin-right: 0;
+    margin-left: 0;
+    padding-bottom: 8px;
+}
+
+.wrap_customize a {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.img_adv {
+    width: 300px;
+    height: 100px;
+}
+.containt_min {
+    background-color:#FBFAF8; 
+    padding:8px;
+}
+.label-free {
+    background-color: #93c47d;
+    color: #fff;
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
 footer{
-    width: 96%;
+    /*width: 96%;*/
     /*position: absolute;*/
     /*bottom: 0;*/
 }

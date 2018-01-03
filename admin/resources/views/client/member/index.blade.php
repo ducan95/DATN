@@ -1,8 +1,11 @@
 @extends('client.templates.master')
 @section('content')
 <div>
-    @if(Session::get('status') != null)
-    <p class="alert alert-danger">{{ Session::get('status')}}</p>
+    @if(Session::get('status_fail') != null)
+    <p class="alert alert-danger">{{ Session::get('status_fail')}}</p>
+    @endif
+    @if(Session::get('status_success') != null)
+    <p class="alert alert-success">{{ Session::get('status_success')}}</p>
     @endif
 	<i class="fa fa-th-large" aria-hidden="true"></i><span>会員登録</span>
 	<form action="{{ route('webClientMemberSave') }}" method="post" id="main" class="form">
@@ -31,6 +34,7 @@
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
 	
+	@section('usersite-bottom-js')
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.form').validate({
@@ -65,5 +69,6 @@
 			});		
 		});	
 	</script>
+	@endsection
 </div>
 @stop
