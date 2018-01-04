@@ -15,14 +15,14 @@
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Category Name</label>
                 <div class="col-sm-9">
-                 <input class="form-control" ng-model="categorychil.name" placeholder="...name" name="name" type="text" required>
+                 <input class="form-control" ng-model="categorychil.name" placeholder="...name" name="name" type="text" >
                   <label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" ng-model='categorychil.slug' name="slug" placeholder="...slug" required>
+                  <input type="text" class="form-control" ng-model='categorychil.slug' name="slug" placeholder="...slug" >
                   <label class="error" ng-if="error.slug[0] != null">@{{ error.slug[0] }}</label>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                     <!-- <select  class="form-control" ng-sele>
                       <option ng-repeat="cate in categorytparent" value="id_category">@{{ cate.name }}</option>
                     </select> -->
-                    <select type="text" class="form-control" ng-options="cate.id_category as cate.name for cate in categorytparent" ng-model="categorychil.parent_category">
+                    <select type="text" class="form-control" ng-options="cate.id_category as cate.name for cate in categorytparent" ng-model="categorychil.parent_category" name="parent">
                     </select>
               	</div>
               </div>

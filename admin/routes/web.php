@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::pattern('name','(.*)');
 Route::pattern('id', '[0-9]+');
 Route::pattern('search', '[A-Za-z]+');
 
@@ -99,11 +100,11 @@ Route::group([
         'uses' => 'CategoryController@viewAddChildren',
         'as' =>'webCategoryAddChildren'
     ]);
+
      Route::get('/editparent',[
         'uses' => 'CategoryController@viewEditParent',
         'as' =>'webCategoryEditParent'
     ]);
-
 
     Route::get('/edit',[
         'uses' => 'CategoryController@viewEdit',
@@ -313,10 +314,7 @@ Route::group([
         'as' => 'apiImageDelete'
     ]);
   });
-
-  /**                    **
-   *  RELEASE NUMBER API  *
-   **                   **/   
+  /** router images release **/
   Route::group(['prefix' => '/release'],function(){
     Route::get('/', [
       'uses' => 'ReleaseController@actionFind',
@@ -339,6 +337,34 @@ Route::group([
         'as'   => 'apiReleaseDelete'
     ]);
   });
+  /** router images post **/
+  Route::group(['prefix' => '/post'], function(){
+
+    Route::get('/', [
+        'uses' => 'PostController@actionFind',
+        'as' => 'apiPostFind'
+    ]);
+    
+    Route::get('/{id}', [
+        'uses' => 'PostController@actionFindOne',
+        'as' => 'apiPostShow'
+    ]);
+    Route::post('/', [
+        'uses' => 'PostController@actionSave',
+        'as' => 'apiPostSave'
+    ]);
+
+    Route::put('/{id}', [
+        'uses' => 'PostController@actionUpdate',
+        'as' => 'apiPostUpdate'
+    ]);
+    
+    Route::delete('/{id}', [
+        'uses' => 'PostController@actionDelete',
+        'as' => 'apiPostDelete'
+    ]);
+  });  
+
 
 });
 
@@ -360,9 +386,14 @@ Route::group([
     'as'    => 'webClientMemberSave'
   ]);
 
-  Route::get('home',[
+  Route::get('',[
     'uses'  => 'EndUserController@index',
     'as'    => 'WebClientEndUserIndex',
+  ]);
+
+  Route::get('/{name}-{id}',[
+    'uses'  => 'EndUserController@cat',
+    'as'  => 'WebClientEndUserCat'
   ]);
   
 });

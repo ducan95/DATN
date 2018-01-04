@@ -86,16 +86,27 @@
 SOUGOU_ZYANARU_MODULE.controller('ImageAdd', ['$scope', 'uploadImage', 'toastr', function ($scope, uploadImage, toastr) {
     $scope.name = "media";
     $scope.pathImages = [];
-    $scope.$watch('files',function () {
-      if($scope.files != undefined) {
-        uploadImage.upload($scope.files, $scope.name).then(function(resp){
+
+    $scope.$watch('files',function (files) {
+      $scope.uploadImages(files);
+    });
+
+    $scope.upload = function(file) {
+      $scope.uploadImages(file);
+    }
+
+    $scope.uploadImages = function (files) {
+      if(files != undefined) {
+        uploadImage.upload(files, $scope.name).then(function(resp){
           toastr.success('success !!!' + resp.data.data.name);
           $scope.pathImages.push(resp.data.data.path);
         }, function(resp){
           toastr.errors('errors !!!');
-        }); 
-      };
-    });
+        });   
+      }
+    } 
+
+
 }]);
 
 

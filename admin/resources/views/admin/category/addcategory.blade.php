@@ -22,10 +22,10 @@
 	                <div class="form-group">
 	                  <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
 	                  <div class="col-sm-9">
-	                    <input type="text" class="form-control" placeholder="...slug" ng-model="category.slug" name="slug" required>
-	                  </div>
+	                    <input type="text" class="form-control" placeholder="...slug" ng-model="category.slug" name="slug" >
 	                    <label class="error" ng-if="error.slug[0] != null">@{{ error.slug[0] }}</label>
-										</div>
+	                  </div>
+									</div>
 	                </div>
 	                <div class="form-group">
 	                	<label class="col-sm-3 control-label">Display Global Navi</label>
