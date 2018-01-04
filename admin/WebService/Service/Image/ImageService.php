@@ -71,7 +71,7 @@ class ImageService extends Service
       $res['errors']['status_code'] = 400; 
     } else {
       try {
-        $dataReq = $this->saveImage( $request->file('file'), $request->name);
+        $dataReq = $this->saveImage( $request->file('file'), $request->name); //return $dataReq;
         $res['data'] =  ImageRepository::getInstance()->save($dataReq);  
       } catch(\Expention $e) {
         $res['errors']['msg'] = $e->getMessage();

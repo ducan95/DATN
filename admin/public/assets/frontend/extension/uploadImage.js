@@ -6,10 +6,10 @@
  * @return promise
  */
 SOUGOU_ZYANARU_MODULE.service('uploadImage', function(Upload){ 
-  this.upload = function (files, name) {
-    if (files && files.length) { 
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
+  this.upload = function (files, name) {  
+    if (files && files.length) {  console.log(files);
+      for (var i = 0; i < files.length; i++) { 
+        var file = files[i]; console.log(file);
         if (!file.$error) {
           var image = Upload.upload({
             url: '/web_api/images',

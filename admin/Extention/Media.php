@@ -11,18 +11,17 @@ trait Media {
 
 	protected function saveImage($image, $name, $path ='')
 	{	
-
 		$imageBlur = Image::make($image->getRealPath()); 
 		$imageBlur->blur(15);
 		$imageBlur->encode('jpg');
-        $destinationPath = public_path('storage/'.config('admin.images.path.imageBlur'));
-        $nameImage = $this->createNameImage($name); $nameImage = $nameImage['name'];
-        $imageBlur->save($destinationPath.'/'.$nameImage);
-        return [
-          'name' => $nameImage,
-          'path' => $image->storeAs(config('admin.images.path.imageDefault'), $nameImage, 'public'),
-          'path_blur' => config('admin.images.path.imageBlur').'/'.$nameImage,
-        ];
+    $destinationPath = public_path('storage/'.config('admin.images.path.imageBlur'));
+    $nameImage = $this->createNameImage($name); $nameImage = $nameImage['name'];
+    $imageBlur->save($destinationPath.'/'.$nameImage);
+    return [
+      'name' => $nameImage,
+      'path' => $image->storeAs(config('admin.images.path.imageDefault'), $nameImage, 'public'),
+      'path_blur' => config('admin.images.path.imageBlur').'/'.$nameImage,
+    ];
 	}
  
 

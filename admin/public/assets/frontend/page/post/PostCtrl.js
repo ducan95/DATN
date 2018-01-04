@@ -3,7 +3,8 @@
 /**
  * Show and delete User
  * */
-  SOUGOU_ZYANARU_MODULE.controller('PostCtrl', function ($scope, PostService, CategoryService, CategoryChildrenService, $window) {
+  SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
+  function ($scope, PostService, CategoryService, CategoryChildrenService, $q, $window, uploadImage, toastr) {
     //Get list users
     PostService.find({}, function (res) {
       if (typeof res != "undefined") {  
@@ -34,7 +35,7 @@
       { id : 3 , name : ' Công khai'},
       { id : 4 , name : ' Không công khai'},
     ];
-    //
+    //search post
     $scope.searchPost = function() {
       PostService.get({search:$scope.parameter}, function(res) {
         if(typeof res != "undefined") {
@@ -104,31 +105,75 @@
         }
       });
     }
-  }); 
 
-  SOUGOU_ZYANARU_MODULE.controller('CreatpostCtrl',function($scope, PostService, CategoryService, CategoryChildrenService){
-    $scope.posts=new PostService();
-
-    CategoryService.find({},function(res){
-      if(typeof res != "undefined"){
-        $scope.categories = res.data;
-        console.log($scope.categories);
-      }
-    })
-
-    $scope.categoryChildren = [];
+    // get category children whit id category parent
+    $scope.catChildren = [];
     $scope.category =new CategoryChildrenService();
     $scope.listcategorychil=function(id_category) {
       $scope.category.$find({id: id_category},function (res) {
         if (typeof res != "undefined") { 
-          $scope.categoryChildren['key'] =id_category;
-          $scope.categoryChildren['data'] = res.data;
+          $scope.catChildren['key'] =id_category;
+          $scope.catChildren['data'] = res.data;
         }
       });
     }
+    // save post
+    /* get path thumbnail*/
+    $scope.$watch('thumbnail', function(){
 
-    $scope.status=[{key:'1',value :'Draff'},{key:'2',value :'ABC'},{key:'3',value :'KFH'}];
-    console.log($scope.status)
+    });
+    $scope.getPathThumbnail = function(thumbnail) {
+      var defThumbnail = $q.defer(); //create deferrend
+      if(thumbnail != undefined) {
+        uploadImage.upload(thumbnail, 'archive').success(
+        function(resp){ 
+          defThumbnail.resolve(resp); 
+        }).error(function(resp){
+          defThumbnail.reject(resp);
+        });   
+      } 
+      return  defThumbnail.promise; 
+    }
+    //get path image of detail post
+    var files = []  ; // image detail post
+    var filesvvv = []  ; // image detail post
+    $scope.$watch('file', function() { 
+      if($scope.file != undefined) {
+        files.push($scope.file[0]); 
+      }
+    });
+    $scope.getPathImage = function(files) { 
+      var defImage = $q.defer(); //create deferrend
+      if( files != undefined) { 
+        uploadImage.upload(files, 'archive').success(
+        function(resp){
+          defImage.resolve(resp);
+        }).error(function(resp){
+          defImage.reject(resp);
+        });
+      }  
+     return  defImage.promise; 
+    }
+
+    $scope.creatpost = function(){ 
+      $scope.getPathImage(files).then(function(response){
+        console.log(response);
+        var pathImages = response.data.path ;
+      });
+      /*console.log($scope.thumbnail); console.log(files);
+      $scope.getPathThumbnail($scope.thumbnail).then(function(response){ console.log(response);
+        var thumbnail = response.data.path;
+        
+      });*/
+    };
+
+
+
+  }); 
+
+
+  SOUGOU_ZYANARU_MODULE.controller('CreatpostCtrl',function($scope, PostService, CategoryService, CategoryChildrenService){
+    $scope.posts = new PostService();
     $scope.creatpost=function(){
       $scope.posts.$save(function () {
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';

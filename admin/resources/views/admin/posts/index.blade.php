@@ -28,15 +28,19 @@
 			</div>
 			<div class="col-md-2">
 				<label>Category Parent</label>
-				<select ng-options="category.id_category as category.name for category in categories" 
-  			 ng-model="categoryParent" ng-change="getCatChildren()"></select>
+                <select name='categoryParent' ng-model='categoryParent' ng-change='getCatChildren()'>
+                    <option value="">Category Parent</option>
+                    <option ng-repeat="category in categories" value="@{{category.id_category }}" ng-bind="category.name"></option>
+                </select>
 			</div>
 			<div class="col-md-2">
 				<label>Category Children</label>
-  			 <select>
-  			 	<option ng-repeat= "icategoryChildren in categoryChildrens" 
-  			 				value="@{{icategoryChildren.id_category}}" ng-bind = "icategoryChildren.name"></option>
-  			 </select>
+                <select name='categoryChildren' ng-model='categoryChildren' >
+                    <option value="">Category Children</option>
+                    <option ng-repeat="categoryChildren in categoryChildrens"
+                            value="@{{categoryChildren.id_category }}" ng-bind="categoryChildren.name">
+                    </option>
+                </select>
 			</div>
 			<div class="col-md-1">
 				<label>Status</label>
@@ -76,64 +80,64 @@
             <td ng-bind="post.release_name"></td>
             <td ng-bind="post.time_begin"></td>
             <td>
-								<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="ridirectquickedit(post.id_post)">Quick Edit</button>
-								<form id="myModal" class="modal fade" role="form" ng-submit="quickedit(editpost)">
-									<div class="modal-dialog">
-								    <!-- Modal content-->
-								    <div class="modal-content">
-								      <div class="modal-header">
-								        <button type="button" class="close" data-dismiss="modal">&times;</button>
-								        <h4 class="modal-title">Quick Edit</h4>
-								      </div>
-								      <div class="modal-body">
-								        <div class="row">
-								        	<div class="form-group">
-							        			<label class="col-md-3">Post Title</label>
-							        			<div class="col-md-9">
-							        				<input type="text" name="title" class="form-control" ng-model="editpost.title">
-							        			</div>
-								        	</div>
-								        	<div class="form-group" style="padding-top: 40px">
-							        			<label class="col-md-3">Release Number</label>
-							        			<div class="col-md-9">
-							        				<select class="form-control" ng-model="releasenumber">
-							        					<option value="abc">ABC</option>
-							        				</select>
-							        			</div>
-								        	</div>
-								        	<div class="form-group" style="padding-top: 40px">
-							        			<label class="col-md-3">Date Start</label>
-							        			<div class="col-md-9">
-							        				<input type="datetime" name="time_begin" class="form-control" ng-model="editpost.time_begin">
-							        			</div>
-								        	</div>
-								        	<div class="form-group" style="padding-top: 40px">
-							        			<label class="col-md-3">Date End</label>
-							        			<div class="col-md-9">
-							        				<input type="datetime" name="time_end" class="form-control" ng-model="editpost.time_end">
-							        			</div>
-								        	</div>
-								        	<div class="form-group" style="padding-top: 40px">
-							        			<label class="col-md-3">Status</label>
-							        			<div class="col-md-9">
-							        				<select ng-model="editpost.status_post" ng-options="st.key as st.value for st in status">
-							        					<!-- <option ng-value="Draff" selected="selected"></option>
-							        					<option ng-value="ABC"></option>
-							        					<option ng-value="EFK"></option> -->
-							        				</select>
-							        			</div>
-								        	</div>
-								        </div>
-								      </div>
-								    <div class="modal-footer">
-								        <button type="submit" ng-click="quickedit(editpost)" data-dismiss="modal" class="btn btn-primary">Update</button>
-								      </div>
-								    </div>
-								  </div>						
-								</form>
-							<a href="#"><button class="btn btn-primary">Nhan Ban</button></a>
-							<a href="#"><button class="btn btn-primary">View</button></a>
-							<a href="#"><button class="btn btn-primary">Edit</button></a>
+			<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="ridirectquickedit(post.id_post)">Quick Edit</button>
+			<form id="myModal" class="modal fade" role="form" ng-submit="quickedit(editpost)">
+				<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Quick Edit</h4>
+				  </div>
+				  <div class="modal-body">
+					<div class="row">
+						<div class="form-group">
+							<label class="col-md-3">Post Title</label>
+							<div class="col-md-9">
+								<input type="text" name="title" class="form-control" ng-model="editpost.title">
+							</div>
+						</div>
+						<div class="form-group" style="padding-top: 40px">
+							<label class="col-md-3">Release Number</label>
+							<div class="col-md-9">
+								<select class="form-control" ng-model="releasenumber">
+									<option value="abc">ABC</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group" style="padding-top: 40px">
+							<label class="col-md-3">Date Start</label>
+							<div class="col-md-9">
+								<input type="datetime" name="time_begin" class="form-control" ng-model="editpost.time_begin">
+							</div>
+						</div>
+						<div class="form-group" style="padding-top: 40px">
+							<label class="col-md-3">Date End</label>
+							<div class="col-md-9">
+								<input type="datetime" name="time_end" class="form-control" ng-model="editpost.time_end">
+							</div>
+						</div>
+						<div class="form-group" style="padding-top: 40px">
+							<label class="col-md-3">Status</label>
+							<div class="col-md-9">
+								<select ng-model="editpost.status_post" ng-options="st.key as st.value for st in status">
+									<!-- <option ng-value="Draff" selected="selected"></option>
+									<option ng-value="ABC"></option>
+									<option ng-value="EFK"></option> -->
+								</select>
+							</div>
+						</div>
+					</div>
+				  </div>
+				<div class="modal-footer">
+					<button type="submit" ng-click="quickedit(editpost)" data-dismiss="modal" class="btn btn-primary">Update</button>
+				  </div>
+				</div>
+			  </div>
+			</form>
+			<a href="#"><button class="btn btn-primary">Nhan Ban</button></a>
+			<a href="#"><button class="btn btn-primary">View</button></a>
+			<a href="#"><button class="btn btn-primary">Edit</button></a>
             </td>
           </tr>
         </table>
