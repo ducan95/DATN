@@ -1,6 +1,6 @@
 @extends('admin.templates.master')
 @section('content')
-<div ng-controller="ReleaseCtrl" ng-init="getImages(1)">
+<div ng-controller="ReleaseCtrl" ng-init="getRelease(1)">
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-3 text-left">
           <a href="" ng-click="redirectEdit(release.id_release_number)" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>
-          <a href="javascript:void(0)" ng-click="delete(release.id_release_number)" style="margin-left: 2px" class="btn btn-default">
+          <a href="javascript:void(0)" ng-click="delete(release.id_release_number, $index)" style="margin-left: 2px" class="btn btn-default">
             <i class="fa fa-trash-o"></i>
           </a>
         </div>
@@ -37,19 +37,19 @@
     </section>
 
     <section class="invoice pg-section">
-      <div class="row text-center">
+      <div class="row text-center" ng-if="lastPage > 1">
         <ul class="pagination no-margin text-center">
           <li ng-if="currentPage == 1" class="disabled">
             <a href="javascript:void(0)">«</a>
           </li>
           <li ng-if="currentPage != 1">
-            <a href="javascript:void(0)" ng-click=getImages(prePage)>«</a>
+            <a href="javascript:void(0)" ng-click=getRelease(prePage)>«</a>
           </li>
           <li ng-repeat="i in totalPages" ng-class="{ active: currentPage == i }">
-            <a href="javascript:void(0)" ng-bind="i" ng-click=getImages(i)></a>
+            <a href="javascript:void(0)" ng-bind="i" ng-click=getRelease(i)></a>
           </li>
           <li ng-show="currentPage != lastPage" >
-            <a href="javascript:void(0)" ng-click=getImages(nextPage)>»</a>
+            <a href="javascript:void(0)" ng-click=getRelease(nextPage)>»</a>
           </li>
           <li ng-if="currentPage == lastPage" class="disabled">
             <a href="javascript:void(0)">»</a>

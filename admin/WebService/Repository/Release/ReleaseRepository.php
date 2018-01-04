@@ -41,7 +41,7 @@ class ReleaseRepository extends Repository
         return $query->paginate($dataReq['paginate']); 
       }  
 
-      return $query->paginate(3); 
+      return $query->paginate(5); 
 
     } catch(\Exception $e) {
       throw $e;

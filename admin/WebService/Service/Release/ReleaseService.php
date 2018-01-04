@@ -83,8 +83,8 @@ class ReleaseService extends Service
       try {
         $dataReq['name'] = $request->name;
         //$dataReq['is_deleted'] = false;
-        $dataReq['image_release_path'] = !empty($request->image_release_path) ? : 'imageDefault/no-image.jpg';
-        $dataReq['image_header_path']  = !empty($request->image_header_path) ? : 'imageDefault/no-banner.jpg';
+        $dataReq['image_release_path'] = !empty($request->image_release_path) ? $request->image_release_path : 'imageDefault/no-image.jpg';
+        $dataReq['image_header_path']  = !empty($request->image_header_path) ? $request->image_header_path : 'imageDefault/no-banner.jpg';
         $res['data'] = ReleaseRepository::getInstance()->save($dataReq);
         return $res;
       } catch(\Exception $e) {

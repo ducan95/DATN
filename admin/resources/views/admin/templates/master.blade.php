@@ -99,6 +99,7 @@
 
 {{--angular app--}}
 <script src="{{ asset('assets/frontend/config/config.js') }}"></script>
+<script src="{{ asset('assets/frontend/extension/lang.js') }}"></script>
 
 @yield('bottom-js')
 

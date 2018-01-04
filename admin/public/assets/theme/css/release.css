@@ -40,6 +40,9 @@
   margin-bottom: 3px;
   color: #ccc;
 }
+.upload-box b {
+  font-weight: 400;
+}
 .upload-box div.upload-preview {
   position: absolute;
   top: 0;

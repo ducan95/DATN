@@ -18,7 +18,7 @@
         }     
       }
     }); 
-    //find iamge of parameter
+    //find image of parameter
     $scope.searchImage = function() {
       Service.get({name:$scope.parameter}, function(res) {
         if(typeof res != "undefined") {
@@ -83,33 +83,19 @@
   });
 
 
-SOUGOU_ZYANARU_MODULE.controller('ImageAdd', ['$scope', 'Upload', '$timeout','toastr', function ($scope, Upload, $timeout, toastr) {
-    $scope.$watch('files', function () {
-        $scope.upload($scope.files);
-    });
-    $scope.log = '';
+SOUGOU_ZYANARU_MODULE.controller('ImageAdd', ['$scope', 'uploadImage', 'toastr', function ($scope, uploadImage, toastr) {
+    $scope.name = "media";
     $scope.pathImages = [];
-    $scope.upload = function (files) {
-        if (files && files.length) {
-            for (var i = 0; i < files.length; i++) {
-              var file = files[i];
-              if (!file.$error) {
-                Upload.upload({
-                    url: '/web_api/images',
-                    data: {
-                      username: $scope.username,
-                      file: file  
-                    }
-                }).then(function (resp) {
-                  $scope.pathImages.push(resp.data.data.path);
-                  toastr.success('Success ' + resp.config.data.file.name );     
-                }, function (evt) {
-                    // Show all progress upload image
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                   // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                });
-              }
-            }
-        }
-    };
+    $scope.$watch('files',function () {
+      if($scope.files != undefined) {
+        uploadImage.upload($scope.files, $scope.name).then(function(resp){
+          toastr.success('success !!!' + resp.data.data.name);
+          $scope.pathImages.push(resp.data.data.path);
+        }, function(resp){
+          toastr.errors('errors !!!');
+        }); 
+      };
+    });
 }]);
+
+

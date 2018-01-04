@@ -29,7 +29,7 @@
             <!-- form start -->
             <div class="row">
               <div class="col-md-9">
-                <form role="form" method="post" id="main" ng-submit="addRelease()" enctype="multipart/form-data">
+                <form role="form" name="myForm" method="post" id="main" ng-submit="addRelease(release.image_release_path, release.image_header_path)" enctype="multipart/form-data">
                   {{ csrf_field() }}
                   <div class="box-body">
                     <div class="form-group">
@@ -42,15 +42,20 @@
                       <label for="input-file">{{ trans('release.imageRelease') }}</label>
                       <div 
                         ngf-drop ngf-select 
-                        ng-model="release.releaseImage" 
+                        ng-model="release.image_release_path"
+                        name="file"
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                        <span class="fa fa-cloud-upload upload-icon"></span>
-                        {{ trans('release.addImage') }}
+                        <span ng-if="release.image_release_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_release_path == undefined">{{ trans('release.addImage') }}</b>
+                        
+                        <div ng-if="release.image_release_path != undefined" class="upload-preview">
+                          <img ng-show="release.image_release_path" ngf-src="release.image_release_path" class=""> 
+                        </div>
                      </div>
                     </div>
 
@@ -58,15 +63,20 @@
                       <label for="input-file">{{ trans('release.headerRelease') }}</label>
                       <div 
                         ngf-drop ngf-select 
-                        ng-model="release.headerImage" 
+                        ng-model="release.image_header_path"
+                        name="file2"
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                        <span class="fa fa-cloud-upload upload-icon"></span>
-                        {{ trans('release.addImage') }}
+                        <span ng-if="release.image_header_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_header_path == undefined">{{ trans('release.addImage') }}</b>
+                        
+                        <div ng-if="release.image_header_path != undefined" class="upload-preview">
+                          <img ng-show="release.image_header_path" ngf-src="release.image_header_path" class=""> 
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -92,6 +102,7 @@
 @section('bottom-js')
 <!-- AngularResource -->
 <script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <!-- Validatejs -->
 <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>

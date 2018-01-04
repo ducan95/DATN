@@ -59,7 +59,7 @@
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                        <div  class="upload-preview">
+                        <div class="upload-preview">
                           <img src="{{ storage_asset() }}/@{{ release.image_release_path }}">
                           <button type="button" class="upload-clear btn btn-danger btn-flat">Remove</button>
                         </div>
@@ -119,6 +119,7 @@
 @section('bottom-js')
 <!-- AngularResource -->
 <script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <!-- Validatejs -->
 <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
