@@ -3,6 +3,7 @@
  */
 
 SOUGOU_ZYANARU_MODULE
+// Api list member
 .factory('MemberService', function ($resource) {
   return $resource('/web_api/member/:id', { id: '@id' }, {
     find: {
@@ -12,9 +13,19 @@ SOUGOU_ZYANARU_MODULE
     },
     update: {
       method: 'PUT'
-    }
+    },
+
   });
 })
+
+/*.factory('MemberAddService', function ($resource) {
+  return $resource('/web_api/member/add/:id', { id: '@_id' }, {
+    update: {
+      method: 'POST'
+    }
+  });
+})*/
+
 .service('popupService',function($window){
     this.showPopup=function(message){
       return $window.confirm(message);

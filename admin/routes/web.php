@@ -73,14 +73,20 @@ Route::group([
 
 
   Route::group(['prefix' => 'member' ], function(){
-      Route::get('/',[
-          'uses' => 'MemberController@viewIndex',
-          'as' => 'webMemberIndex'
-      ]);
-      Route::get('/add',[
-          'uses' => 'MemberController@viewAdd',
-          'as' => 'webMemberAdd'
-      ]);
+    Route::get('/',[
+      'uses'  => 'MemberController@viewIndex',
+      'as'    => 'webMemberIndex'
+    ]);
+
+    Route::get('/add',[
+      'uses'  => 'MemberController@viewAdd',
+      'as'    => 'webMemberAdd'
+    ]);
+
+    Route::get('/edit',[
+      'uses'  => 'MemberController@viewEdit',
+      'as'    => 'webMemberEdit'
+    ]);
   });
 
 
@@ -180,7 +186,7 @@ Route::group([
   /** router role api **/
   Route::group(['prefix' => '/roles'], function(){
     /** Get List Roles **/
-     Route::get('/', [
+    Route::get('/', [
         'uses' => 'RolesController@actionList',
         'as'   => 'apiListRole'
     ]);
@@ -235,18 +241,28 @@ Route::group([
   /**ROUTER MEMBER API**/
   Route::group(['prefix' => '/member'],function(){
 		Route::get('/', [
-			'uses' => 'MemberController@actionFind',
-			'as' => 'apiMemberFind'
+			'uses'  => 'MemberController@actionFind',
+			'as'    => 'apiMemberFind'
 		]);
 
+    Route::get('/{id}', [
+      'uses'  => 'MemberController@actionFindOne',
+      'as'    => 'apiUserShow'
+    ]);
+
+    Route::post('/',[
+      'uses'  => 'MemberController@actionSave',
+      'as'    => 'apiMemberSave',
+    ]);
+
 		Route::delete('/{id}',[
-			'uses' => 'MemberController@actionDelete',
-			'as' => 'apiMemberDelete'
+			'uses'  => 'MemberController@actionDelete',
+			'as'    => 'apiMemberDelete'
 		]);
 
 		Route::put('/{id}',[
 			'uses' => 'MemberController@actionUpdate',
-			'as' => 'apiMemberUpdate'
+			'as'   => 'apiMemberUpdate'
 		]);
 	});
   /** router category api **/

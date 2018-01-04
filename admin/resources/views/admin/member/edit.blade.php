@@ -1,12 +1,12 @@
 @extends('admin.templates.master')
 @section('content')
 
-  <div ng-controller="MemberAddCtrl"> 
+  <div ng-controller="MemberUpdateCtrl"> 
 
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          Add new member
+          Edit member
         {{--<small>preview of simple tables</small>--}}
       </h1>
       {{--<ol class="breadcrumb">--}}
@@ -22,7 +22,7 @@
         <div class="col-md-12">
           <div class="box">
             <!-- /.box-header -->
-            <form role="form" method="post" id="main" ng-submit="addMember()">
+            <form role="form" method="post" id="main" ng-submit="updateMember(member)">
             {{ csrf_field() }}
             <div class="box-body">
               <table class="table table-bordered">
@@ -35,20 +35,20 @@
                 <tr>
                   <td>
                     <div class="form-group">
-                        <input ng-model="member.email" type="email" name="email" class="form-control" id="email" placeholder="Enter email" >
+                        <input ng-model="member.email" type="email" name="email" class="form-control" id="email" value="@{{ member.email }}" >
                         <label class="error" ng-if="error.email[0] != null">@{{ error.email[0] }}</label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
-                        <input ng-model="member.password" type="password" name="password" class="form-control" id="password" placeholder="Enter password" >
+                        <input ng-model="member.password" type="password" name="password" class="form-control" id="password" value="" >
                         <label class="error" ng-if="error.password[0] != null">@{{ error.password[0] }}</label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
                       <div class="input-group date">
-                        <input ng-model="member.birthday" type="date" name="birthday" class="form-control">
+                        <input ng-model="member.birthday" type="date" name="birthday" class="form-control" value="">
                         <!-- <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div> -->
@@ -72,7 +72,7 @@
               <div class="row" style="margin-top: 30px;">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 text-center">
-                    <button ng-click="" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">@lang('web.save')</button>
+                    <button ng-click="updateMember(member)" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">@lang('web.save')</button>
                     <a href="{{ route('webMemberIndex') }}"><button type="button" class="btn btn-primary" style="margin-left:5px;">@lang('web.cancel')</button></a>
                 </div>
                  <div class="col-md-4"></div>

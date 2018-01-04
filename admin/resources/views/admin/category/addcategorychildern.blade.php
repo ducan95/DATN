@@ -49,7 +49,9 @@
                       <option ng-repeat="cate in categorytparent" value="id_category">@{{ cate.name }}</option>
                     </select> -->
                     <select type="text" class="form-control" ng-options="cate.id_category as cate.name for cate in categorytparent" ng-model="categorychil.parent_category" name="parent">
+                      <option value="">---Choose a category parent---</option>
                     </select>
+                    <label class="error" ng-if="error.parent[0] != null">@{{ error.parent[0] }}</label>
               	</div>
               </div>
               <div class="row" style="padding-bottom: 20px">

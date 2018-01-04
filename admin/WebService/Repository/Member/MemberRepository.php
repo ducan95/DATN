@@ -17,13 +17,13 @@ class MemberRepository extends Repository
   {
     try{
       $member = new Member();
-      // $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
+      $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
       $member->fill([
         'email' 						=> $dataReq['email'],
         'password' 					=> bcrypt($dataReq['password']),
         'birthday'					=> $dataReq['birthday'],
         'gender' 						=> $dataReq['gender'],
-        // 'is_receive_email' 	=> $is_receive_email,
+        'is_receive_email' 	=> $is_receive_email,
         'member_plan_code' 	=> config('admin.member.member_plan_code'),
         'is_deleted' 				=> false,
       ]);
@@ -37,6 +37,28 @@ class MemberRepository extends Repository
 
   public function update($dataReq,$id)
   {
+    try{
+      $member = Member::find($id);
+      if(!empty($member)) {
+        $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
+        $member->fill([
+          'email'             => $dataReq['email'],
+          'password'          => bcrypt($dataReq['password']),
+          'birthday'          => $dataReq['birthday'],
+          'gender'            => $dataReq['gender'],
+          'is_receive_email'  => $is_receive_email,
+          'member_plan_code'  => config('admin.member.member_plan_code'),
+          'is_deleted'        => false,
+        ]);
+        $member->save();
+        return $member;  
+      } else {
+        return null;
+      }
+    } catch(\Exception  $e){
+      throw $e;
+      
+    }
   }
 
   public function delete($id)
@@ -72,7 +94,11 @@ class MemberRepository extends Repository
 
   public function findOne($id)
   {
-    
+    try {
+      return Member::where('id_member', '=',$id)->where('is_deleted', '=', false)->first();
+    } catch(\Exception $e){ 
+      throw $e;
+    }
   }
 
   public function find($dataReq){
