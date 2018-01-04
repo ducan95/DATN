@@ -1,17 +1,11 @@
 @extends('admin.templates.master')
 @section('content')
-<div ng-controller="ReleaseCtrl">
+<div ng-controller="ReleaseCtrl" ng-init="getRelease(1)">
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         {{ trans('release.listRelease') }}
-        {{-- <small>preview of simple tables</small> --}}
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol>
     </section>
 
     <div class="pad margin no-print">
@@ -23,7 +17,7 @@
     </div>
     <!-- /.content -->
 
-    <section class="invoice release-section" ng-repeat="release in releases | orderBy: '-id_release_number' ">
+    <section class="invoice release-section" ng-if="releases != undefine" ng-repeat="release in releases">
       <div class="row">
         <div class="col-md-3 text-center">
           <img src="{{ storage_asset() }}/@{{ release.image_release_path }}" class="img-responsive release-img" alt="">
@@ -33,8 +27,8 @@
           <h4>@{{ release.name }}</h4>
         </div>
         <div class="col-md-3 text-left">
-          <a href="" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>
-          <a href="" style="margin-left: 2px" class="btn btn-default">
+          <a href="" ng-click="redirectEdit(release.id_release_number)" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>
+          <a href="javascript:void(0)" ng-click="delete(release.id_release_number, $index)" style="margin-left: 2px" class="btn btn-default">
             <i class="fa fa-trash-o"></i>
           </a>
         </div>
@@ -43,25 +37,22 @@
     </section>
 
     <section class="invoice pg-section">
-      <div class="row text-center">
+      <div class="row text-center" ng-if="lastPage > 1">
         <ul class="pagination no-margin text-center">
-          <li>
-            <a href="#">«</a>
+          <li ng-if="currentPage == 1" class="disabled">
+            <a href="javascript:void(0)">«</a>
           </li>
-          <li>
-            <a href="#">1</a>
+          <li ng-if="currentPage != 1">
+            <a href="javascript:void(0)" ng-click=getRelease(prePage)>«</a>
           </li>
-          <li class="active">
-            <a href="#">2</a>
+          <li ng-repeat="i in totalPages" ng-class="{ active: currentPage == i }">
+            <a href="javascript:void(0)" ng-bind="i" ng-click=getRelease(i)></a>
           </li>
-          <li>
-            <a href="#">..</a>
+          <li ng-show="currentPage != lastPage" >
+            <a href="javascript:void(0)" ng-click=getRelease(nextPage)>»</a>
           </li>
-          <li>
-            <a href="#">3</a>
-          </li>
-          <li>
-            <a href="#">»</a>
+          <li ng-if="currentPage == lastPage" class="disabled">
+            <a href="javascript:void(0)">»</a>
           </li>
         </ul>
       </div>
@@ -72,4 +63,6 @@
 @section('bottom-js')
 <script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
+<!-- Angular Paging -->
+<script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
 @endsection 

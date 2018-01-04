@@ -24,3 +24,19 @@ SOUGOU_ZYANARU_MODULE.service('uploadImage', function(Upload){
     } 
   };
 });
+
+// Release
+SOUGOU_ZYANARU_MODULE.service('uploadImg', function(Upload){
+  this.upload = function (file, name) {
+    if (file) { 
+      var image = Upload.upload({
+        url: '/web_api/images',
+        data: {
+          name: name,
+          file: file  
+        }
+      });
+      return image;
+    } 
+  };
+});

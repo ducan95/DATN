@@ -11,7 +11,6 @@ trait Media {
 
 	protected function saveImage($image, $name, $path ='')
 	{	
-
 		$imageBlur = Image::make($image->getRealPath()); 
 		$imageBlur->blur(15);
 		$imageBlur->encode('jpg');

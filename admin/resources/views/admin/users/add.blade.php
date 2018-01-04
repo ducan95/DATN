@@ -67,7 +67,7 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4 text-center">
                     <button ng-click="" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">@lang('web.save')</button>
-                    <button type="reset" class="btn btn-primary" style="margin-left:5px;">@lang('web.cancel')</button>
+                    <button type="reset" class="btn btn-default" style="margin-left:5px;">@lang('web.cancel')</button>
                 </div>
                  <div class="col-md-4"></div>
               </row>
