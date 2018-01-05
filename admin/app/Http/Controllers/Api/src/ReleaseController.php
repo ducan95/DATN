@@ -69,9 +69,24 @@ class ReleaseController extends WebApiController
     }
   }
 
+  /**
+   * [actionUpdate description]
+   * @param  Request $request [description]
+   * @param  [type]  $id      [description]
+   * @return [type]           [description]
+   */
   public function actionUpdate(Request $request, $id)
   {   
-   //Code
+    $res = ReleaseService::getInstance()->update($request, $id); 
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data']]);
+    } else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg']
+      ]);
+    } 
   }
 
   /**

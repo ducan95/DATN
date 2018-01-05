@@ -29,7 +29,7 @@
             <!-- form start -->
             <div class="row">
               <div class="col-md-9">
-                <form role="form" name="myForm" method="post" id="main" ng-submit="addRelease(release.image_release_path, release.image_header_path)" enctype="multipart/form-data">
+                <form role="form" name="myForm" method="post" id="main" ng-submit="addRelease()" enctype="multipart/form-data">
                   {{ csrf_field() }}
                   <div class="box-body">
                     <div class="form-group">
@@ -54,7 +54,7 @@
                         <b ng-if="release.image_release_path == undefined">{{ trans('release.addImage') }}</b>
                         
                         <div ng-if="release.image_release_path != undefined" class="upload-preview">
-                          <img ng-show="release.image_release_path" ngf-src="release.image_release_path" class=""> 
+                          <img ng-show="release.image_release_path" ngf-thumbnail="release.image_release_path" class=""> 
                         </div>
                      </div>
                     </div>
@@ -75,7 +75,7 @@
                         <b ng-if="release.image_header_path == undefined">{{ trans('release.addImage') }}</b>
                         
                         <div ng-if="release.image_header_path != undefined" class="upload-preview">
-                          <img ng-show="release.image_header_path" ngf-src="release.image_header_path" class=""> 
+                          <img ng-show="release.image_header_path" ngf-thumbnail="release.image_header_path" class=""> 
                         </div>
                       </div>
                     </div>

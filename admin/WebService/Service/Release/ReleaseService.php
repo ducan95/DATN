@@ -82,9 +82,8 @@ class ReleaseService extends Service
     } else {
       try {
         $dataReq['name'] = $request->name;
-        //$dataReq['is_deleted'] = false;
-        $dataReq['image_release_path'] = !empty($request->image_release_path) ? $request->image_release_path : 'imageDefault/no-image.jpg';
-        $dataReq['image_header_path']  = !empty($request->image_header_path) ? $request->image_header_path : 'imageDefault/no-banner.jpg';
+        $dataReq['image_release_path'] = !empty($request->image_release_path) ? $request->image_release_path : 'assets/img/no-image.jpg';
+        $dataReq['image_header_path']  = !empty($request->image_header_path) ? $request->image_header_path : 'assets/img/no-banner.jpg';
         $res['data'] = ReleaseRepository::getInstance()->save($dataReq);
         return $res;
       } catch(\Exception $e) {
@@ -96,9 +95,38 @@ class ReleaseService extends Service
     return $res;
   }
 
+  /**
+   * [update description]
+   * @param  [type] $request [description]
+   * @param  [type] $id      [description]
+   * @return [type]          [description]
+   */
   public function update($request , $id)
   {
-    // TODO: Implement update() method.
+    $validator = Validator::make($request->all(), 
+      [
+        'name' => 'required',
+      ], 
+      [
+        'name.required' => trans('release.nameRequired'),
+      ]
+    );
+
+    if($validator ->fails()) {
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try {
+        $dataReq['name'] = $request->name;
+        $dataReq['image_release_path'] = !empty($request->image_release_path) ? $request->image_release_path : 'assets/img/no-image.jpg';
+        $dataReq['image_header_path']  = !empty($request->image_header_path) ? $request->image_header_path : 'assets/img/no-banner.jpg';
+        $res['data'] =  ReleaseRepository::getInstance()->update($dataReq, $id);   
+      } catch(\Exception $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
+      }  
+    }
+    return $res;
   }
 
   /**

@@ -20,10 +20,19 @@
     <section class="invoice release-section" ng-if="releases != undefine" ng-repeat="release in releases">
       <div class="row">
         <div class="col-md-3 text-center">
-          <img src="{{ storage_asset() }}/@{{ release.image_release_path }}" class="img-responsive release-img" alt="">
+          <div class="release-thumb">
+            {{-- <img ng-if="release.image_release_path != 'assets/img/no-image.jpg'" src="{{ storage_asset() }}/@{{ release.image_release_path }}" class="img-responsive release-img" alt="">
+            <img ng-if="release.image_release_path == 'assets/img/no-image.jpg'" src="{{ asset('assets/img/no-image.jpg') }}" class="img-responsive release-img" alt=""> --}}
+            <div ng-if="release.image_release_path != 'assets/img/no-image.jpg'" class="release-img" style="background: url('{{ storage_asset() }}/@{{ release.image_release_path }}')"></div>
+            <div ng-if="release.image_release_path == 'assets/img/no-image.jpg'" class="release-img" style="background: url('{{ asset('assets/img/no-image.jpg') }}')"></div>
+          </div>
         </div>
         <div class="col-md-6">
-          <img src="{{ storage_asset() }}/@{{ release.image_header_path }}" class="img-responsive release-img-mobile" alt="">
+          <div class="header-thumb">
+            <div ng-if="release.image_header_path != 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ storage_asset() }}/@{{ release.image_header_path }}')"></div>
+            <div ng-if="release.image_header_path == 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ asset('assets/img/no-banner.jpg') }}')"></div>
+          </div>
+          
           <h4>@{{ release.name }}</h4>
         </div>
         <div class="col-md-3 text-left">
@@ -39,19 +48,19 @@
     <section class="invoice pg-section">
       <div class="row text-center" ng-if="lastPage > 1">
         <ul class="pagination no-margin text-center">
-          <li ng-if="currentPage == 1" class="disabled">
+          <li ng-click="pageChanged()" ng-if="currentPage == 1" class="disabled">
             <a href="javascript:void(0)">«</a>
           </li>
-          <li ng-if="currentPage != 1">
+          <li ng-click="pageChanged()" ng-if="currentPage != 1">
             <a href="javascript:void(0)" ng-click=getRelease(prePage)>«</a>
           </li>
-          <li ng-repeat="i in totalPages" ng-class="{ active: currentPage == i }">
+          <li ng-click="pageChanged()" ng-repeat="i in totalPages" ng-class="{ active: currentPage == i }">
             <a href="javascript:void(0)" ng-bind="i" ng-click=getRelease(i)></a>
           </li>
-          <li ng-show="currentPage != lastPage" >
+          <li ng-click="pageChanged()" ng-show="currentPage != lastPage" >
             <a href="javascript:void(0)" ng-click=getRelease(nextPage)>»</a>
           </li>
-          <li ng-if="currentPage == lastPage" class="disabled">
+          <li ng-click="pageChanged()" ng-if="currentPage == lastPage" class="disabled">
             <a href="javascript:void(0)">»</a>
           </li>
         </ul>
