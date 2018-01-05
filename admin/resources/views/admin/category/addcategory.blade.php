@@ -15,14 +15,14 @@
 	                <div class="form-group">
 	                  <label for="" class="col-sm-3 control-label">カテゴリー名称</label>
 	                  <div class="col-sm-9">
-	                    <input ng-model="category.name" class="form-control" placeholder="...name" type="text"  name="name">
+	                    <input ng-model="category.name" class="form-control" placeholder="" type="text"  name="name">
 	                  	<label class="error" ng-if="error.name[0] != null" ng-bind="error.name[0]"></label>
 										</div>
 	                </div>
 	                <div class="form-group">
 	                  <label for="" class="col-sm-3 control-label">アドレス用英字名称</label>
 	                  <div class="col-sm-9">
-	                    <input type="text" class="form-control" placeholder="...slug" ng-model="category.slug" name="slug" >
+	                    <input type="text" class="form-control" placeholder="" ng-model="category.slug" name="slug" >
 	                    <label class="error" ng-if="error.slug[0] != null" ng-bind="error.slug[0]"></label>
 	                  </div>
 									</div>
