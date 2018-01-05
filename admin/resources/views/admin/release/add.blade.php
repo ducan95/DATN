@@ -101,7 +101,7 @@
 
 @section('bottom-js')
 <!-- AngularResource -->
-<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/page/release/releaseCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <!-- Validatejs -->
