@@ -95,37 +95,15 @@ SOUGOU_ZYANARU_MODULE
     validate.validators.email.message = 'メールアドレスの入力を行ってください';
     $scope.error = validate(form, constraints);
     console.log($scope.error);
-    //var date= $scope.member.birthday.getDate()+"/"+($scope.member.birthday.getMonth()+1)+"/"+$scope.member.birthday.getFullYear();
     var date = $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";
     if ($scope.error == undefined) {
       $scope.member.birthday = date;
       console.log($scope.member);
       $scope.member.$save(function () {
+      //console.log($scope.member);
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
       });
     }
-    /*var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
-      validate.validators.email.message = 'メールアドレスの入力を行ってください';
-      $scope.error = validate(form, constraints);
-
-      var date = $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";
-
-      if ($scope.error == undefined) {
-        var member_save = new MemberService();
-        member_save.birthday  = date;
-        member_save.email     = $scope.member.email;
-        member_save.gender    = $scope.member.gender;
-        member_save.password  = $scope.member.password;
-        member_save.is_receive_email = 0,
-        member_save.member_plan_code      = 'free',
-        member_save.is_deleted = 0,
-        member_save.is_active  = 1,
-        member_save.$save(function () {
-          console.log(member_save);
-          //$window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
-        });
-      }*/
   }; 
 })
 
