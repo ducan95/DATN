@@ -12,7 +12,7 @@ use WebService\Repository\Repository;
  */
 class MemberRepository extends Repository
 {
-
+  //create new member
   public function save($dataReq)
   {
     try{
@@ -26,6 +26,7 @@ class MemberRepository extends Repository
         'is_receive_email' 	=> $is_receive_email,
         'member_plan_code' 	=> config('admin.member.member_plan_code'),
         'is_deleted' 				=> false,
+        'is_active'         => true,
       ]);
       $member->save() ;
       return $member;
@@ -35,6 +36,7 @@ class MemberRepository extends Repository
     }
   }
 
+  //update member
   public function update($dataReq,$id)
   {
     try{
@@ -49,6 +51,7 @@ class MemberRepository extends Repository
           'is_receive_email'  => $is_receive_email,
           'member_plan_code'  => config('admin.member.member_plan_code'),
           'is_deleted'        => false,
+          'is_active'         => true,
         ]);
         $member->save();
         return $member;  
@@ -61,6 +64,22 @@ class MemberRepository extends Repository
     }
   }
 
+  //active/deactive
+  public function active($id){
+    try {
+      if(!empty(Member::find($id))) {
+        $member = Member::find($id);
+        $member->is_active = ($member->is_active)?'false':'true';
+        $member->save();
+      } else {
+        return ;
+      }
+    } catch(\Exception  $e) { 
+      throw $e;
+    }
+  }
+  
+  //delete member
   public function delete($id)
   {
     try {
@@ -76,22 +95,7 @@ class MemberRepository extends Repository
     }
   }
 
-  public function list()
-  { 
-    try{
-      $member=Member::where('is_deleted','=',false)->get();
-      return $member;
-    }
-    catch(\Exception $e){
-      throw $e;
-    }
-  }
-
-  public function listOne($id){
-    
-  }
-
-
+  //get
   public function findOne($id)
   {
     try {
@@ -101,10 +105,13 @@ class MemberRepository extends Repository
     }
   }
 
-  public function find($dataReq){
+  //display list member
+  public function find($dataReq = ''){
     try {   
-      $query = Member::where('id_member', '>', 0)->where('is_deleted', '=', false);
+      $query = Member::where('id_member', '>', 0)->orderBy('id_member','ASC');
+      //that's fields what i want to show in index
       $dataMol= ['email', 'password', 'birthday', 'gender'];
+      //check to show
       if(!empty($dataReq)) {
         foreach ($dataMol as $value) {
           if(isset($dataReq[$value])) {
@@ -119,7 +126,7 @@ class MemberRepository extends Repository
           return $query->paginate($dataReq['paginate']); 
         }
       } 
-      return $query->get();    
+      return $query->paginate(5);    
     } catch(\Exception $e) {
         throw $e;
     }

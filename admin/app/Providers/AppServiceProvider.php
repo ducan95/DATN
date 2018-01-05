@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view::share('arCats',Category::where('is_deleted','=',0)->where('id_category_parent',0)->get());
+        /*view::share('arCats',Category::where('is_deleted','=',0)->where('id_category_parent',0)->get());*/
     }
 
     /**
