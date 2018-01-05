@@ -40,7 +40,7 @@
               	<div class="col-md-4"></div>
 		            <div class="col-md-4 text-center">
                   <button type="submit" ng-click="updateCategory(categoryparent)" class="btn btn-primary">編集</button>
-                  <a href="{{ route('webCategoryIndex') }}"><button type="button" class="btn btn-primary" style="margin-left:5px;">キャンセル</button></a>
+                  <a href="{{ route('webCategoryIndex') }}"><button type="button" class="btn btn-default" style="margin-left:5px;">キャンセル</button></a>
 	              </div>
             	<div class="col-md-4"></div>
              </div>
