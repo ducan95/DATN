@@ -2,16 +2,36 @@
 
 .release-section {
   margin-bottom: 20px;
-  .release-img,
-  .release-img-mobile {
-    max-width: 60%;
+  .release-thumb {
+    position: relative;
+    width: 60%;
+    height: 160px;
+    margin-left: 20%; 
+    .release-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover !important;
+      background-position: center center !important;
+      cursor: pointer;
+    }
   }
-  .release-img:hover,
-  .release-img-mobile:hover {
-    cursor: pointer;
-  }
-  .release-img {
-    margin-left: 20%;
+  .header-thumb {
+    position: relative;
+    width: 60%;
+    height: 140px;
+    .header-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover !important;
+      background-position: center center !important;
+      cursor: pointer;
+    }
   }
 }
 .release-section:hover {

@@ -24,77 +24,64 @@
             <!-- form start -->
             <div class="row">
               <div class="col-md-9">
-                <form role="form" method="post" id="main" ng-submit="updateRelease(release)" enctype="multipart/form-data">
+                <form role="form" name="myForm" method="post" id="main" ng-submit="updateRelease(release)" enctype="multipart/form-data">
                   {{ csrf_field() }}
                   <div class="box-body">
                     <div class="form-group">
                       <label for="txtName">{{ trans('release.nameRelease') }}</label>
-                      <input ng-model="release.name" ng-value="release.name" name="name" type="text" class="form-control" id="txtName" >
+                      <input ng-model="release.name" name="name" type="text" class="form-control" id="txtName" value="@{{ release.name }}">
                       <label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
                     </div>
 
                     <div class="form-group">
                       <label for="input-file">{{ trans('release.imageRelease') }}</label>
-                      <!-- Release image -->
                       <div 
-                        ng-if="release.image_release_path == 'imageDefault/no-image.jpg'"
                         ngf-drop ngf-select 
-                        ng-model="release.releaseImage" 
+                        ng-model="release.image_release_path"
+                        name="file"
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                        <span class="fa fa-cloud-upload upload-icon"></span>
-                        {{ trans('release.addImage') }}
-                      </div>
-                      <div 
-                        ng-if="release.image_release_path != 'imageDefault/no-image.jpg'"
-                        ngf-drop 
-                        ng-model="release.releaseImage" 
-                        class="upload-box upload-edit" 
-                        ngf-max-size="25MB"
-                        ngf-drag-over-class="'box-dragover'" 
-                        ngf-allow-dir="true"
-                        accept="image/*"
-                        ngf-pattern="'image/*'">
-                        <div class="upload-preview">
-                          <img src="{{ storage_asset() }}/@{{ release.image_release_path }}">
-                          <button type="button" class="upload-clear btn btn-danger btn-flat">Remove</button>
+                        {{-- <span ng-if="release.image_release_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_release_path == undefined">{{ trans('release.addImage') }}</b>
+                        <div ng-if="release.image_release_path != undefined" class="upload-preview">
+                          <img ng-show="release.image_release_path" ngf-thumbnail="release.image_release_path" class=""> 
+                        </div> --}}
+
+                        <div ng-if="release.image_release_path != 'assets/img/no-image.jpg'" class="upload-preview">
+                          <img src="{{ storage_asset() }}/@{{ release.image_release_path }}" class=""> 
                         </div>
-                      </div>
+                        <span ng-if="release.image_release_path == 'assets/img/no-image.jpg'" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_release_path == 'assets/img/no-image.jpg'">{{ trans('release.addImage') }}</b>
+                     </div>
                     </div>
-                    <!-- Header image -->
+
                     <div class="form-group">
                       <label for="input-file">{{ trans('release.headerRelease') }}</label>
                       <div 
-                        ng-if="release.image_header_path == 'imageDefault/no-banner.jpg'"
                         ngf-drop ngf-select 
-                        ng-model="release.headerImage" 
+                        ng-model="release.image_header_path"
+                        name="file2"
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                        <span class="fa fa-cloud-upload upload-icon"></span>
-                        {{ trans('release.addImage') }}
-                      </div>
-                      <div 
-                        ng-if="release.image_header_path != 'imageDefault/no-banner.jpg'"
-                        ngf-drop 
-                        ng-model="release.headerImage" 
-                        class="upload-box upload-edit" 
-                        ngf-max-size="25MB"
-                        ngf-drag-over-class="'box-dragover'" 
-                        ngf-allow-dir="true"
-                        accept="image/*"
-                        ngf-pattern="'image/*'">
-                        <div class="upload-preview">
-                          <img src="{{ storage_asset() }}/@{{ release.image_header_path }}">
-                          <button type="button" class="upload-clear btn btn-danger btn-flat">Remove</button>
+                        {{-- <span ng-if="release.image_header_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_header_path == undefined">{{ trans('release.addImage') }}</b>
+                        <div ng-if="release.image_header_path != undefined" class="upload-preview">
+                          <img ng-show="release.image_header_path" ngf-thumbnail="release.image_header_path" class=""> 
+                        </div> --}}
+
+                        <div ng-if="release.image_header_path != 'assets/img/no-banner.jpg'" class="upload-preview">
+                          <img src="{{ storage_asset() }}/@{{ release.image_header_path }}" class=""> 
                         </div>
+                        <span ng-if="release.image_header_path == 'assets/img/no-banner.jpg'" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_header_path == 'assets/img/no-banner.jpg'">{{ trans('release.addImage') }}</b>
                       </div>
                     </div>
                   </div>
@@ -118,7 +105,7 @@
 
 @section('bottom-js')
 <!-- AngularResource -->
-<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/page/release/releaseCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <!-- Validatejs -->

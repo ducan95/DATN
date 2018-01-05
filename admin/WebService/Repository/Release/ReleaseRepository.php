@@ -34,15 +34,12 @@ class ReleaseRepository extends Repository
           }
         }
       }
-
       $query = $query->orderBy('id_release_number', 'DESC'); 
-
       if(!empty($dataReq['paginate'])) {
         return $query->paginate($dataReq['paginate']); 
       }  
 
       return $query->paginate(5); 
-
     } catch(\Exception $e) {
       throw $e;
     }

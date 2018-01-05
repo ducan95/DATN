@@ -8,7 +8,7 @@ SOUGOU_ZYANARU_MODULE
 	 * @param  {[type]} $scope          [description]
 	 * @return {[type]}                 [description]
 	 */
-	.controller('ReleaseCtrl', function ($scope, ReleaseService, popupService, $window, toastr) {
+	.controller('ReleaseCtrl', function ($scope, ReleaseService, popupService, $window, toastr, $location, $anchorScroll) {
 	  // Pagination
 	  $scope.currentPage = 1;
 		$scope.lastPage    = 0;
@@ -36,6 +36,10 @@ SOUGOU_ZYANARU_MODULE
         }
       });  
     };
+    $scope.pageChanged = function() {
+      $location.hash('top');
+      $anchorScroll();
+    };
 
 	  //Delete release number
 	  $scope.delete = function (id, index) {
@@ -45,9 +49,8 @@ SOUGOU_ZYANARU_MODULE
 		  			var release = res.data;
 		  			$scope.deleteRelease = ReleaseService.delete({ id: release.id_release_number }, function () {
               if($scope.deleteRelease.is_success == true) {
-		            // $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
 		            $scope.releases.splice(index, 1);
-                toastr.success('Xóa thành công!');
+                toastr.success('Success!');
 		          } else { 
 		            toastr.error('Try again!');
 		          }   
@@ -74,8 +77,7 @@ SOUGOU_ZYANARU_MODULE
 
     //Add new release number function
   	$scope.release = new ReleaseService();
-    
-  	$scope.addRelease = function (releaseImage) { 
+  	$scope.addRelease = function () { 
       //Validate form
       var constraints = {
         name: {
@@ -90,12 +92,11 @@ SOUGOU_ZYANARU_MODULE
       if ($scope.error == undefined) {
         if (popupService.showPopup('発売号の情報を登録します。よろしいですか?')) {
           $scope.name = "cover";
-
-          function getPath() {
+          //Get image path
+          function getPath(path) {
             var def  = $q.defer();
-            //Get release path
-            if ($scope.release.image_release_path != undefined) {
-              uploadImg.upload($scope.release.image_release_path, $scope.name)
+            if (path != undefined) {
+              uploadImg.upload(path, $scope.name)
               .then(function(res){
                 $timeout(function () {
                   //Get name after upload
@@ -109,34 +110,13 @@ SOUGOU_ZYANARU_MODULE
             }
             return def.promise;
           }
-
-          // Get header path
-          function getHeaderPath() {
-            var def2  = $q.defer();
-            //console.log($scope.release.image_header_path);
-            if ($scope.release.image_header_path != undefined) {
-              uploadImg.upload($scope.release.image_header_path, $scope.name)
-              .then(function(res){
-                $timeout(function () {
-                  //Get name after upload
-                  def2.resolve(res.data.data.path);
-                });
-              }, function(res){
-                def2.reject('image Error!!!');
-              });
-            } else {
-              def2.resolve('');
-            }
-            return def2.promise;
-          }
          
-          var promise1 = getPath().then(function (value) {
-              return value;
+          var promise1 = getPath($scope.release.image_release_path).then(function (value) {
+            return value;
           });
-          var promise2 = getHeaderPath().then(function (value) {
-              return value; 
+          var promise2 = getPath($scope.release.image_header_path).then(function (value) {
+            return value; 
           });
-
           var theResults = [];
 
           $q.all([promise1, promise2]).then(function(result){
@@ -145,7 +125,7 @@ SOUGOU_ZYANARU_MODULE
             }
             $scope.release.image_release_path = theResults[0];
             $scope.release.image_header_path  = theResults[1];
-
+            //Save to release table
             $scope.release.$save(function () {
               if($scope.release.is_success == true) {
                 $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
@@ -155,11 +135,9 @@ SOUGOU_ZYANARU_MODULE
               }   
             });
           });
-        
         }
       } 
-  	}//END ADD RELEASE
-
+  	}
   }])
   
   /**
@@ -167,7 +145,8 @@ SOUGOU_ZYANARU_MODULE
    * @param  {[type]} $scope     [description]
    * @return {[type]}            [description]
    */
-  .controller('ReleaseEditCtrl', function ($scope, ReleaseService, toastr, popupService, $window) {
+  .controller('ReleaseEditCtrl', ['$scope', 'uploadImg', '$timeout', 'ReleaseService', 'toastr', 'popupService', '$window', '$q', function ($scope, uploadImg, $timeout, ReleaseService, toastr, popupService, $window, $q) {
+
     //Get id from url
     var url   = new URL(window.location.href); 
     var id    = url.hash.match(/\d/g);
@@ -183,21 +162,68 @@ SOUGOU_ZYANARU_MODULE
       var form = document.querySelector("form#main");
       validate.validators.presence.message = '空白のところで入力してください。';
       $scope.error = validate(form, constraints);
-
       // If clean data -> Edit
       if ($scope.error == undefined) {
-        //Get value from ng-model
-        var getName = release.name;
+        if (popupService.showPopup('発売号の情報を登録します。よろしいですか?')) {
+            $scope.name = "cover";
+            //Get image path
+            function getPath(path) {
+              var def  = $q.defer();
+              var regex = new RegExp("\imageDefault(.*)$");
+              if (regex.test(path)) {
+                def.resolve(path);
+              } else if (path == 'assets/img/no-image.jpg') {
+                def.resolve('');
+              } else if (path == 'assets/img/no-banner.jpg') {
+                def.resolve('');
+              } else if (path != undefined) {
+                uploadImg.upload(path, $scope.name)
+                .then(function(res){
+                  $timeout(function () {
+                    //Get name after upload
+                    def.resolve(res.data.data.path);
+                  });
+                }, function(res){
+                  def.reject('image Error!!!');
+                });
+              } else {
+                def.resolve(path);
+              }
+              return def.promise;
+            }
+            var promise1 = getPath($scope.release.image_release_path).then(function (value) {
+              return value;
+            });
+            var promise2 = getPath($scope.release.image_header_path).then(function (value) {
+              return value; 
+            });
+            var theResults = [];
 
-        // Update relase
-        ReleaseService.update({
-          id:     $scope.id,
-          name:   getName,
-          is_deleted: false
-        }, function (){
-          // Redirect
-          //$window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
-        });
+            $q.all([promise1, promise2]).then(function(result){
+              for (var i = 0; i < result.length; i++){
+                  theResults.push(result[i]);
+              }
+              $scope.release.image_release_path = theResults[0];
+              $scope.release.image_header_path  = theResults[1];
+
+              //Get value from ng-model
+              var getName = release.name;
+
+              ReleaseService.update({
+                id:     $scope.id,
+                name:   getName,
+                image_release_path: $scope.release.image_release_path,
+                image_header_path: $scope.release.image_header_path
+              }, function (){
+                // Redirect
+                $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/release';
+                toastr.success('Success!');
+              });
+
+            });
+
+          
+        }
       }
     }
 
@@ -205,11 +231,10 @@ SOUGOU_ZYANARU_MODULE
   $scope.loadRelease = function () { 
     ReleaseService.get({ id: $scope.id },function(res) {
       $scope.release = res.data;
-      console.log(res.data);
     });
   }
   $scope.loadRelease(); 
 
-})  
+}])  
 
 
