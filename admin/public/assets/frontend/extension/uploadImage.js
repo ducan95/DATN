@@ -6,10 +6,11 @@
  * @return promise
  */
 SOUGOU_ZYANARU_MODULE.service('uploadImage', function(Upload){ 
-  this.upload = function (files, name) {  
-    if (files && files.length) {  console.log(files);
+  this.upload = function (files, name) { 
+    var res = [] ;
+    if (files && files.length) { 
       for (var i = 0; i < files.length; i++) { 
-        var file = files[i]; console.log(file);
+        var file = files[i]; 
         if (!file.$error) {
           var image = Upload.upload({
             url: '/web_api/images',
@@ -18,9 +19,10 @@ SOUGOU_ZYANARU_MODULE.service('uploadImage', function(Upload){
               file: file  
             }
           });
-          return image;
+          res.push(image);
         }
       }
+      return res;
     } 
   };
 });

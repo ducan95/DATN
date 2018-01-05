@@ -9,14 +9,14 @@
     PostService.find({}, function (res) {
       if (typeof res != "undefined") {  
         $scope.posts = res.data;
-        console.log($scope.posts)
+       // console.log($scope.posts)
       }
     })
     //Get list category parent
     CategoryService.find({},function(res){
       if(typeof res != "undefined"){
         $scope.categories = res.data;
-        console.log($scope.categories);
+       // console.log($scope.categories);
       }
     })
     //Get list category children
@@ -24,7 +24,7 @@
       CategoryChildrenService.find({id: $scope.categoryParent},function (res) {
         if (typeof res != "undefined") { 
           $scope.categoryChildrens = res.data;
-          console.log($scope.categoryChildrens);
+        //  console.log($scope.categoryChildrens);
         }
       });
     }
@@ -105,81 +105,75 @@
         }
       });
     }
-
     // get category children whit id category parent
     $scope.catChildren = [];
     $scope.category =new CategoryChildrenService();
-    $scope.listcategorychil=function(id_category) {
+    $scope.listcategorychil=function(id_category) { 
       $scope.category.$find({id: id_category},function (res) {
         if (typeof res != "undefined") { 
-          $scope.catChildren['key'] =id_category;
+          $scope.catChildren['key'] = id_category;
           $scope.catChildren['data'] = res.data;
         }
       });
     }
+
     // save post
     /* get path thumbnail*/
-    $scope.$watch('thumbnail', function(){
-
-    });
-    $scope.getPathThumbnail = function(thumbnail) {
-      var defThumbnail = $q.defer(); //create deferrend
-      if(thumbnail != undefined) {
-        uploadImage.upload(thumbnail, 'archive').success(
-        function(resp){ 
-          defThumbnail.resolve(resp); 
-        }).error(function(resp){
-          defThumbnail.reject(resp);
-        });   
+    $scope.getPathImage = function(files) { 
+      if(files != undefined && files.length > 0) {  
+        var res = uploadImage.upload(files,'archive');
+        for (var i = 0; i < res.length; i++) {
+          res[i].success(function(res) { 
+            console.log(res) ;
+          }).error(function(resp) {
+            console.log(res);
+          }); 
+        }
       } 
-      return  defThumbnail.promise; 
     }
     //get path image of detail post
-    var files = []  ; // image detail post
-    var filesvvv = []  ; // image detail post
+    $scope.files = []  ; // image detail post
     $scope.$watch('file', function() { 
-      if($scope.file != undefined) {
-        files.push($scope.file[0]); 
+      if($scope.file != undefined) { 
+        $scope.files.push($scope.file[0]); 
       }
     });
-    $scope.getPathImage = function(files) { 
-      var defImage = $q.defer(); //create deferrend
-      if( files != undefined) { 
-        uploadImage.upload(files, 'archive').success(
-        function(resp){
-          defImage.resolve(resp);
-        }).error(function(resp){
-          defImage.reject(resp);
-        });
-      }  
-     return  defImage.promise; 
-    }
-
-    $scope.creatpost = function(){ 
-      $scope.getPathImage(files).then(function(response){
-        console.log(response);
-        var pathImages = response.data.path ;
-      });
-      /*console.log($scope.thumbnail); console.log(files);
-      $scope.getPathThumbnail($scope.thumbnail).then(function(response){ console.log(response);
-        var thumbnail = response.data.path;
+   /* $scope.getPathImage = function(files) {  
+      if( files != undefined && files.length > 0) { 
+        $res = uploadImage.upload(files, 'archive');
+        for(var i = 0; i < $res.length; i++) { 
+          var defImage = $q.defer(); //create deferrend
+          .success( function(resp) {
+            defImage.resolve(resp);
+          }).error(function(resp) {
+            defImage.reject(resp);
+          });  
+        }
         
-      });*/
+      }  
+     //return  defImage.promise; 
+    }*/
+    // delete image Post Client
+    $scope.deleteImagePost = function($index) {
+      if($index != undefined) {
+        $scope.files.splice($index, 1);  
+      }
+    }
+  
+    // save post
+    $scope.creatpost = function(){ 
+        $scope.getPathImage($scope.thumbnail);
+        $scope.getPathImage($scope.files);
     };
 
 
 
-  }); 
+}); 
 
 
-  SOUGOU_ZYANARU_MODULE.controller('CreatpostCtrl',function($scope, PostService, CategoryService, CategoryChildrenService){
-    $scope.posts = new PostService();
-    $scope.creatpost=function(){
-      $scope.posts.$save(function () {
-        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
-      });  
-    }
-  })
+
+
+
  
         
       

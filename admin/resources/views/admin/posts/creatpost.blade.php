@@ -24,10 +24,10 @@
 							<label class="col-sm-2" id="status">Status : Draff</label>
 						</div>
 						<div class="form-group" id="dateend">
-							<label class="col-sm-2">Date End Public</label>
-							<div class="col-sm-5">
+							<label class="col-sm-7">Date End Public : 1/1/3000</label>
+							<!-- <div class="col-sm-5">
 								<input type="datetime" name="time_end" class="form-control" ng-model="posts.time_end"> 
-							</div>
+							</div> -->
 							<div class="col-sm-2"></div>
 						</div>
 						<div class="form-group" id="article" >
@@ -48,15 +48,20 @@
 						<div class=" box-solid">
 							<div id="thumbnail">
 								<p>Thumbnail</p>
-                <div ngf-drop  ng-model="thumbnail" class="drop-box"  ngf-max-size="320MB"
+                <div ngf-drop ngf-select  ng-model="thumbnail" class="drop-box"  ngf-max-size="320MB"
               ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-              accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
+              accept="image/*"  ngf-pattern="'image/*'" >{{ trans('web.add_new_image') }}
+	              	<div class="re-thumbnail">
+	              		<img ngf-thumbnail="thumbnail[0]" class="thumb">	
+	              	</div>	
           			</div>
 							</div>
 							<div id="release">
 								<span>Release Number</span>
 								<select id="selectrelease">
-									<option>No</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
 								</select>
 							</div>
 							<div id="display">
@@ -86,8 +91,16 @@
                 <div ngf-drop  ng-model="file" class="drop-box"  ngf-max-size="320MB"
 		              ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
 		              accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
+		              <div class= "re-image" >  
+		              	<div class="box-image" ng-repeat="img in files" > 
+		              		<img  ngf-thumbnail="img" class="thumb">	
+		              		<a href="" class="btn-dele-img" ng-click="deleteImagePost($index)">
+		              		  <i class="fa fa-close"></i>
+		              		</a>
+		              	</div>
+		              	
+		              </div>
           			</div>
-							</div>
 						</div>
 					</div>
 				</form>
