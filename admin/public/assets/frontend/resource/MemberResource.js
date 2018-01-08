@@ -14,7 +14,8 @@ SOUGOU_ZYANARU_MODULE
     update: {
       method: 'PUT'
     },
-
+    //dafault is true
+    /*stripTrailingSlashes: true*/
   });
 })
 

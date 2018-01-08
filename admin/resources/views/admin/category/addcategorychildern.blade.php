@@ -60,7 +60,7 @@
                   <button type="submit" class="btn btn-primary" style="margin-left: 95px" data-toggle="modal" data-target="#myModal"> 登録する</button>
                 </div>  
 								<div class="col-md-4">
-                    <a href="{{route('webCategoryIndex')}}"><button type="button" class="btn btn-primary" style="margin-left: -200px">キャンセル</button></a>
+                    <a href="{{route('webCategoryIndex')}}"><button type="button" class="btn btn-default" style="margin-left: -200px">キャンセル</button></a>
                 </div>    
             	</div>
             </div>	

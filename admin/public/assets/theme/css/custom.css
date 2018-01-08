@@ -236,3 +236,43 @@ label.error {
     background-position: 60px 30px;
   }
 }
+
+.list-img-upload .image{
+  border-radius: 5px;
+  border: 1px solid;
+  margin: 5px;
+  display: inline-block;
+}  
+.list-img-upload img{
+  width: 150px;
+  height: 100px;
+}
+.box-solid {
+
+}
+
+
+
+/*animate*/
+
+.animated {
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}

@@ -64,6 +64,18 @@ class MemberService extends Service
     return $res; 
   }
 
+  //active/deactive
+  public function active($id){
+    try{
+      $res['data'] = MemberRepository::getInstance()->active($id);
+    }catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+    return $res;
+  }
+
+  //delete
   public function delete($id)
   {
     try{
@@ -111,6 +123,7 @@ class MemberService extends Service
     try {
       $dataReq = [];
       if(!empty($request->query('email')) ) {
+        //query <=> $_GET->()...
         $dataReq['email'] = $request->query('email');
       }
       if(!empty($request->query('password')) ) {

@@ -6,16 +6,21 @@ SOUGOU_ZYANARU_MODULE
 /**
  * Show and delete User
  * */
-  .controller('MemberCtrl', function ($scope, MemberService, $window, popupService) {
+.controller('MemberCtrl', function ($scope, MemberService, $window, popupService) {
+
+  $scope.location = APP_CONFIGURATION.BASE_URL;
+  $scope.currentPage = 1;
+  $scope.lastPage = 0;
+  $scope.totalPages = 0;
   //Get list users
-  MemberService.find({}, function (res) {
+  /*MemberService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.members = res.data;
     }
-  })
+  })*/
 
-  $scope.deleteMember = function (id_member) {
-    if (popupService.showPopup('本当に削除する')) {
+  $scope.activeMember = function (id_member) {
+    if (popupService.showPopup('Are you sure?')) {
       var member = MemberService.get({ id: id_member }, function (res) {
         if (typeof res != "undefined") {
           var member = res.data;
@@ -29,6 +34,29 @@ SOUGOU_ZYANARU_MODULE
     }
   }  
 
+  //show + paginate
+  $scope.getMembers = function(pageNumber) { 
+    if (pageNumber === undefined) {
+        pageNumber = '1';
+    }
+    MemberService.get({page:pageNumber},function(res) {
+      if(res.data != undefined) {
+        console.log(res); 
+        $scope.members       = res.data.data;
+        $scope.total        = res.data.total;
+        $scope.currentPage  = res.data.current_page;
+        $scope.lastPage     = res.data.last_page;
+        $scope.totalPages   = [];
+        for($i = 1; $i <= $scope.lastPage; $i++) {
+          $scope.totalPages.push($i);  
+        }
+        $scope.prePage  = ($scope.currentPage == 1) ? 1 : $scope.currentPage-1;
+        $scope.nextPage = ($scope.currentPage == $scope.lastPage) ? $scope.currentPage : $scope.currentPage + 1;
+      }
+      
+    });  
+  };
+
   //Redirect edit page
   $scope.redirectEdit = function (id_member) { 
     $window.location.href = '/admin/member/edit#id='+id_member;
@@ -39,42 +67,45 @@ SOUGOU_ZYANARU_MODULE
 
 
   //add member
-  .controller('MemberAddCtrl',function($scope, MemberService, $window, popupService){  
-    $scope.member = new MemberService();
-    $scope.addMember = function(){
-      //validate
-      var constraints = {
-        email: {
-          presence: true,
-          email: true,
-        },
-        birthday: {
-          presence: true,
-        },
-        password: {
-          presence: true,
-          length: {
-            minimum: 6
-          }
-        },
-        gender: {
-          presence: true,
+.controller('MemberAddCtrl',function($scope, MemberService, $window, popupService){  
+  $scope.member = new MemberService();
+  $scope.addMember = function(){
+    //validate
+    var constraints = {
+      email: {
+        presence: true,
+        email: true,
+      },
+      birthday: {
+        presence: true,
+      },
+      password: {
+        presence: true,
+        length: {
+          minimum: 6
         }
-
-      };
-      var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
-      validate.validators.email.message = 'メールアドレスの入力を行ってください';
-      $scope.error = validate(form, constraints);
-      console.log($scope.error);
-     
-      if ($scope.error == undefined) {
-        $scope.member.$save(function () {
-          $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
-        });
+      },
+      gender: {
+        presence: true,
       }
-    }; 
-  })
+
+    };
+    var form = document.querySelector("form#main");
+    validate.validators.presence.message = '空白のところで入力してください。';
+    validate.validators.email.message = 'メールアドレスの入力を行ってください';
+    $scope.error = validate(form, constraints);
+    console.log($scope.error);
+    var date = $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";
+    if ($scope.error == undefined) {
+      $scope.member.birthday = date;
+      console.log($scope.member);
+      $scope.member.$save(function () {
+      //console.log($scope.member);
+        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
+      });
+    }
+  }; 
+})
 
 .controller('MemberUpdateCtrl',function($scope, MemberService, $window, popupService){
   //Get id from url
@@ -109,14 +140,18 @@ SOUGOU_ZYANARU_MODULE
     $scope.error = validate(form, constraints);
     console.log($scope.error);
     //Edit member
+    var date= $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";
+
     if ($scope.error == undefined) {
       //Get value from ng-model
       var getEMail    = member.email;
       var getPassword = member.password;
-      var getBirthday = member.birthday;
+      var getBirthday = date;
       var getGender   = member.gender
+      console.log(getPassword);
+      console.log(getBirthday);
+      console.log(getGender);
 
-      // Update member
       MemberService.update({
         id        : $scope.id,
         email     : getEMail,
@@ -127,7 +162,6 @@ SOUGOU_ZYANARU_MODULE
         is_receive_email: false,
         is_deleted: false
       }, function (){
-        // Redirect
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member';
       });
     }

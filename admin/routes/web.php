@@ -240,25 +240,29 @@ Route::group([
   });  
   /**ROUTER MEMBER API**/
   Route::group(['prefix' => '/member'],function(){
+    //display list member
 		Route::get('/', [
 			'uses'  => 'MemberController@actionFind',
 			'as'    => 'apiMemberFind'
 		]);
 
+    //get trong phương thức
     Route::get('/{id}', [
       'uses'  => 'MemberController@actionFindOne',
       'as'    => 'apiUserShow'
     ]);
 
+    //edit member
     Route::post('/',[
       'uses'  => 'MemberController@actionSave',
       'as'    => 'apiMemberSave',
     ]);
 
 		Route::delete('/{id}',[
-			'uses'  => 'MemberController@actionDelete',
-			'as'    => 'apiMemberDelete'
+			'uses'  => 'MemberController@actionActive',
+			'as'    => 'apiMemberActive'
 		]);
+
 
 		Route::put('/{id}',[
 			'uses' => 'MemberController@actionUpdate',

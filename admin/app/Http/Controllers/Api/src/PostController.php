@@ -19,10 +19,10 @@ class PostController extends WebApiController
    * Edit by Huynh
    * @param  Request $request
    * @return Response
-   */  
+  **/  
   public function actionFind( Request $request)
-  {
-  	$res = PostService::getInstance()->find($request); 
+  { 
+  	$res = PostService::getInstance()->find($request);  
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data']]);
     }else {
@@ -61,8 +61,8 @@ class PostController extends WebApiController
    * @return Response
    */ 
   public function actionSave(Request $request)
-  {  
-    $res = PostService::getInstance()->save($request);
+  { 
+    $res = PostService::getInstance()->save($request); return $res;
       if(!isset($res['errors'])) {
         return Api::response([ 'data' => $res['data']]);
       }else {

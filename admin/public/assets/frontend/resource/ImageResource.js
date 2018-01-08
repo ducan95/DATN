@@ -4,7 +4,7 @@
 
 
 
-SOUGOU_ZYANARU_MODULE.factory('Service', ['$resource', function($resource){
+SOUGOU_ZYANARU_MODULE.factory('ImageService', ['$resource', function($resource){
   return $resource(
   	'/web_api/images/:id', 
   	{id: '@id'},
