@@ -20,7 +20,7 @@ class ImageController extends WebApiController
    */ 
   public function actionFind(Request $request)
   { 
-    $res = ImageService::getInstance()->find($request); 
+    $res = ImageService::getInstance()->find($request);  
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data']]);
     }else {
@@ -57,9 +57,9 @@ class ImageController extends WebApiController
    * @param  Request $request
    * @return Response
    */
-  public function actionSave(Request $request)
+  public function actionSave(Request $request) 
   {  
-    $resImage = ImageService::getInstance()->save($request);
+    $resImage = ImageService::getInstance()->save($request); 
     if(!isset($resImage['errors'])) {
       return Api::response(['data' => $resImage['data'] ])   ;
     } else {

@@ -60,7 +60,7 @@ class PostRepository extends Repository
           return $query->paginate($dataReq['paginate']);
         }
       }
-      return $query->get();	
+      return $query->paginate(2);	
    	} catch(\Exception $e) {
    		throw $e;
     }  
@@ -92,23 +92,16 @@ class PostRepository extends Repository
   public function save($dataReq)
   { 
      try{
-     	$data=$dataReq->all();
-      $post = new Post();
-      $post->fill([
-      	'title'    					=>     $data['title'],
-        'slug'							=>     $data['slug'],
-        'id_user'						=>     $data['id_user'],
-        'password'					=>     $data['password'],
-        'thumbnail_path'		=>     $data['thumbnail_path'],
-        'status_preview_top'=>     $data['status_preview_top'],
-        'content'						=>		 $data['content'],
-        'deleted_at'				=>     $data['deleted_at'],
-        'id_release_number' =>     $data['id_release_number'],
-        'time_begin'    		=>     $data['time_begin'],
-        'time_end'      		=>     $data['time_end'],
-        'is_deleted' 				=>     $data['is_deleted'],
-        'status'     				=>     $data['status']
-      ]);
+      $post = new Post();  
+      $dataFill = [];
+      foreach ($post->getFillable() as $col) {
+        if(isset($dataReq[$col])) {
+          $dataFill[$col] = $dataReq[$col];
+        } else {
+          throw new \Exception($col." thieu");
+        }
+      }   
+      $post->fill($dataFill);
       $post->save();
       return $post;
     }
@@ -123,11 +116,10 @@ class PostRepository extends Repository
    		$data=$dataReq->all();
      	$post = Post::find($id);
      	 if(!empty($post)) {
-       	 $post->fill([
+       	$post->fill([
           'title'    					=> $data['title'],
           'slug'							=> $data['slug'],
           'id_user'						=> $data['id_user'],
-          'password'					=> $data['password'],
           'thumbnail_path'		=> $data['thumbnail_path'],
           'status_preview_top'=> $data['status_preview_top'],
           'deleted_at'				=> $data['deleted_at'],

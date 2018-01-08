@@ -126,9 +126,10 @@ SOUGOU_ZYANARU_MODULE
             $scope.release.image_release_path = theResults[0];
             $scope.release.image_header_path  = theResults[1];
             //Save to release table
+            console.log($scope.release);
             $scope.release.$save(function () {
               if($scope.release.is_success == true) {
-                $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
+                //$window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
                 toastr.success('Thêm thành công !');
               } else { 
                 toastr.error('Error! Please try again.');
