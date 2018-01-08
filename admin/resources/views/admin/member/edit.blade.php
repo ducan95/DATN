@@ -9,11 +9,6 @@
           Edit member
         {{--<small>preview of simple tables</small>--}}
       </h1>
-      {{--<ol class="breadcrumb">--}}
-        {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
-        {{--<li><a href="#">Tables</a></li>--}}
-        {{--<li class="active">Simple</li>--}}
-      {{--</ol>--}}
     </section>
 
     <!-- Main content -->
@@ -41,7 +36,7 @@
                   </td>
                   <td>
                     <div class="form-group">
-                        <input ng-model="member.password" type="password" name="password" class="form-control" id="password" value="@{{ member.password }}" >
+                        <input ng-model="member.password" type="password" name="password" class="form-control" id="password">
                         <label class="error" ng-if="error.password[0] != null">@{{ error.password[0] }}</label>
                     </div>
                   </td>
@@ -58,10 +53,11 @@
                   </td>
                   <td>
                     <div class="form-group">
-                      <select ng-model="member.gender" class="form-control" name="gender">
-                        <option value="">Chọn giới tính</option>
-                        <option value="1" ng-selected="selected">Male</option>
-                        <option value="0">Female</option>
+                      <select ng-model="member.gender" ng-init="genders = [{name: 'Female', value: 0},{name: 'Male', value: 1}]" class="form-control" name="gender">
+                        <option ng-selected="gender.value == member.gender" ng-repeat="gender in genders" value="@{{ gender.value }}">@{{ gender.name }}</option>
+                        <!-- <option value="">---Chọn giới tính---</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option> -->
                       </select>
                       <label class="error" ng-if="error.gender[0] != null">@{{ error.gender[0] }}</label>
                     </div>
