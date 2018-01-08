@@ -1,9 +1,14 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{ trans('web.list_image') }}
+@endsection 
+
 @section('content')
 <div ng-controller="ImageAdd">
    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3>{{ trans('web.list_image') }}</h3>
+      <h1 class="mg-bt-25">{{ trans('web.list_image') }}</h1>
     </section>
 
     <!-- Main content -->

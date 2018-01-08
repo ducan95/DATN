@@ -1,4 +1,9 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{trans('web.user_management')}}
+@endsection 
+
 @section('content')
 <div ng-controller="UserCtrl">
    <!-- Content Header (Page header) -->
