@@ -1,9 +1,14 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{trans('web.category')}}
+@endsection 
+
 @section('content')
 
 <div ng-controller='CategoryChildrenAddCtrl'>
 	<section class="content-header">
-		<h2>子カテゴリー追加</h2>
+		<h1 class="mg-bt-25">子カテゴリー追加</h1>
 	</section>
 	<section class="content">
 		<div class="row">

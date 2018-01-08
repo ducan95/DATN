@@ -1,0 +1,516 @@
+/* CSS custom container */
+@media (min-width: 768px) and (max-width: 991px){
+    .cus-container {
+        width: 768px;
+    }
+}
+
+@media (min-width: 992px){
+    .cus-container {
+        width: 992px;
+    }
+    
+    .main-sidebar-container{
+        width: 330px;
+    }
+    
+    .main-content-container{
+       width: calc(100% - 330px);
+    }
+}
+
+@media (min-width: 1046px){
+    .cus-container {
+        width: 1046px;
+    }
+}
+
+/* CSS*/
+@media (max-width: 767px){
+    .cus-container{
+        padding: 0px;
+    }
+}
+
+@media (min-width: 768px){
+    .cus-container{
+        padding: 20px;
+    }
+}
+
+body{
+    background-color: #da0920;
+    font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, sans-serif !important;
+}
+
+*:not(input):not(textarea){
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -ms-user-select: none !important;
+    -moz-user-select: none !important; 
+    user-select: none !important;
+
+    -webkit-touch-callout: none !important; 
+    -moz-touch-callout: none !important; 
+    -ms-touch-callout: none !important; 
+    -o-touch-callout: none !important;
+    -khtml-touch-callout: none !important;
+    touch-callout: none !important;
+    
+    -webkit-touch-select: none !important;
+    -moz-touch-select: none !important;
+    -ms-touch-select: none !important;
+    -o-touch-select: none !important;
+    -khtml-touch-select: none !important;
+    touch-select: none !important;
+
+/*    -webkit-touch-action:   none !important;
+    -moz-touch-action: none !important;
+    -ms-touch-action: none !important;
+    -o-touch-action: none !important;
+    -khtml-touch-action: none !important;
+    touch-action: none !important;*/
+}
+
+hr{
+    margin: 5px 0px;
+}
+.box{
+    margin-bottom: 0;
+}
+
+.empty-menu{
+    height: 32px
+}
+
+.no-data{
+    font-weight: bold;
+}
+
+/* CSS for header */
+.main-header .navbar {
+    background-color: #fff !important;
+}
+.content-wrapper{
+    background: none
+}
+
+.navbar-brand{
+    height: auto;
+    padding: 0;
+    z-index: 99999;
+}
+
+.main-header .navbar-toggle{
+    background-color: #da0920;
+    border-radius: 0;
+    padding: 0;
+    z-index: 999;
+}
+
+.main-header .navbar-toggle > img{
+    height: 50px;
+    width: 50px;
+}
+
+.main-header {
+    max-height: none;
+}
+
+.skin-purple .wrapper, .skin-purple .main-sidebar, .skin-purple .left-side {
+     background-color: #fff; 
+}
+
+.main-header .navbar-brand img{
+    width: 111px; height: 148px;
+    background: #fff;
+}
+
+/**
+CSS for foooter
+**/
+.main-footer{
+    border-top: 2px solid #db0b21;
+    /*font-size: 0.7em;*/
+    font-size: 15px;
+}
+
+.main-footer .row .row > div .fa{
+    margin-right: 10px;
+}
+
+.main-footer a{
+    color: black;
+}
+
+.scrollToTop{
+    padding:10px; 
+    text-align:center; 
+    background: whiteSmoke;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    display:none;
+    
+    background-image: url('../../media/icon/top.jpg');
+    background-size: contain;
+    background-repeat: no-repeat
+}
+.scrollToTop:hover{
+    text-decoration:none;
+}
+
+.fluct_infeed{
+    width: 100% ;
+}
+
+/* CSS for header on smart phone */
+@media (max-width: 767px){
+    .scrollToTop{
+        width:40px; 
+        height:40px;
+    }
+    .content-container,.padding-mobile{
+        padding: 10px;
+    }
+    
+    /* CSS for menu hide/show */
+    .main-header .navbar {
+        background-color: #313131 !important;
+    }
+    .container-navbar-collapse{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        background: rgba(0,0,0,0.7);
+        padding-left: 30%;
+        height: 100%;
+        z-index: 9999;
+    }
+    
+    #navbar-collapse{
+        margin: 0 -15px;
+        background: rgba(0,0,0,0.5);
+        height: 100%;
+        overflow-y: auto;
+        max-height: 100%;
+    }
+    
+    #navbar-collapse > div{
+        padding: 25px 40px 25px 25px;
+    }
+    
+    #navbar-collapse .btn-close{
+        color: #fff;
+        margin-top: -20px;
+        margin-right: -30px;
+        cursor: pointer;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        padding-top: 8px;
+    }
+    
+    .container-navbar-collapse .navbar-nav>li>a{
+        padding: 10px 0;
+    }
+    .container-navbar-collapse .navbar-nav>li>i{
+        display: inline-block;
+        margin: 0px 0px 0px 0px;
+        padding: 10px 20px 16px 30px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #fff;
+        cursor: pointer;
+        margin-right: -20px;
+        text-align: center;
+        height: 40px;
+        width: 60px;
+    }
+    
+    .main-header #navbar-collapse .nav>li> ul{
+        padding-left: 20px;
+    }
+    
+    .main-header #navbar-collapse .nav>li> ul a{
+        color: #fff;
+    }
+    
+    .container-navbar-collapse .navbar-nav>li{
+        border-bottom: 1px solid #57585d;
+        position: relative;
+    }
+    
+    .container-navbar-collapse .navbar-nav>li:last-child{
+        border-bottom: 0px solid #57585d;
+    }
+    
+    .container-navbar-collapse .navbar-nav>li>ul>li{
+        border-bottom: 1px dashed #57585d;
+        padding: 5px 0px;
+    }
+    
+    .container-navbar-collapse .navbar-nav>li>ul>li:last-child{
+        border-bottom: 0px dashed #57585d;
+    }
+    
+    /* CSS for menu header */
+    .main-header .navbar-custom-menu {
+        margin-top: -122px;
+        z-index: 1;
+        width: calc(100% - 70px);
+    }
+    
+    .main-header .navbar-brand img{
+        height: 120px;
+        width: 90px;
+    }
+    
+    .cus-container .navbar-custom-menu li a{
+        padding-top: 3px;
+        padding-left: 5px;
+    }
+    
+    .main-header .navbar-custom-menu .search{
+        display: none;
+    }
+    
+    .navbar-custom-menu>.navbar-nav {
+        padding-right: 50px;
+        font-size: 0.8em;
+    }
+    
+    .navbar-custom-menu .navbar-nav>li>a {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        line-height: 20px;
+    }
+    
+    /* CSS for menu mobile-navbar-after-logo */
+    #mobile-navbar-after-logo ul,#mobile-navbar-after-logo{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    #mobile-navbar-after-logo li a{
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+    #mobile-navbar-after-logo li{
+        display: inline-block;
+        width: 25%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        float: left;
+        text-align: center;
+        padding: 10px 0;
+        border-right: 1px solid #4e4e4e;
+        border-bottom:2px solid #4e4e4e;
+    }
+    #mobile-navbar-after-logo li:last-child{
+        border-right: 0px solid #4e4e4e;
+    }
+    
+    #mobile-navbar-after-logo li:first-child a{
+        color: #c4061c;
+    }
+    #mobile-navbar-after-logo li:nth-child(2) a{
+        color: #d66d01;
+    }
+    #mobile-navbar-after-logo li:nth-child(3) a{
+        /*color: #e7e7e7;*/
+        color: rgb(215, 82, 139);
+    }
+    #mobile-navbar-after-logo li:last-child a{
+        color: #c3b819;
+    }
+    #mobile-navbar-after-logo li:first-child.active,#mobile-navbar-after-logo li:first-child:hover{
+        border-bottom:2px solid #c4061c;
+    }
+    #mobile-navbar-after-logo li:nth-child(2).active,#mobile-navbar-after-logo li:nth-child(2):hover{
+        border-bottom:2px solid #d66d01;
+    }
+    #mobile-navbar-after-logo li:nth-child(3).active,#mobile-navbar-after-logo li:nth-child(3):hover{
+        /*border-bottom:2px solid #e7e7e7;*/
+        border-bottom:2px solid rgb(215, 82, 139);
+    }
+    #mobile-navbar-after-logo li:last-child.active,#mobile-navbar-after-logo li:last-child:hover{
+        border-bottom:2px solid #c3b819;
+    }
+   
+    /* CSS for advertising */
+    .main-header .navbar-custom-menu .advertising{
+        height: 90px; float: left; width: calc(100% - 20px); margin-left: 20px;
+    }
+    .main-header .navbar-custom-menu .advertising img{
+        max-height: 90px;
+        max-width: 100%;
+    }
+    .main-header .navbar-custom-menu .advertising.ad-full{
+        height: 122px;
+    }
+    .main-header .navbar-custom-menu .advertising.ad-full img{
+        max-height: 122px;
+    }
+    
+    .main-header .navbar-custom-menu .advertising > div{
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px){
+    .navbar-custom-menu>.navbar-nav {
+         float: left; 
+    }
+}
+ 
+/* CSS for PC and Ipad */
+@media (min-width: 768px){
+/*    .container {
+        width: 1046px;
+    }*/
+
+    .scrollToTop{
+        width:90px; 
+        height:90px;
+    }
+
+    .navbar-header {
+        float: left;
+        width: 100%;
+    }
+
+    .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+        margin-left: 0;
+    }
+    
+    .cus-container .navbar-custom-menu ul{
+        width: 158px;
+        margin-left: 4.5px;
+    }
+    .cus-container .navbar-custom-menu li a,.cus-container .navbar-custom-menu li{
+        display: block;
+        width: 100%;
+    }
+    .cus-container .navbar-custom-menu .btn-login{
+        margin: 0px 0px 2px 0px;
+        background-color: #db0a20;
+    }
+    
+    .cus-container .navbar-custom-menu .btn-register{
+        margin: 2px 0px 0px 0px;
+        background-color: #2b2b2b;
+    }
+    .cus-container .navbar-custom-menu .btn-login img,
+    .cus-container .navbar-custom-menu .btn-register img{
+        width:158px;
+        height:72px
+    }
+    
+    .cus-container .navbar-custom-menu li a{
+        /*background: red;*/
+/*        padding-top: 23px;
+        padding-bottom: 23px;*/
+        padding: 0;
+    }
+    
+    .main-header .navbar-custom-menu .search{
+        padding-top: 24px;
+        height: auto;
+        float: right;
+        width: calc(100% - 172px);
+        margin-left: 9px;
+    }
+    
+    .main-header .navbar-custom-menu .search input:focus{
+        border: 1px solid #ccc;
+    }
+    
+    /* CSS for menu */
+    #navbar-collapse{
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 8px;
+    }
+    #navbar-collapse .nav{
+        width: 100%;
+    }
+    .main-header #navbar-collapse .nav>li{
+        display: block;
+        margin: 15px 0 10px 0;
+        width: 14.28%;
+        /*position: relative;*/
+        text-align: center;
+        border-right: 1px solid #ddd;
+    }
+    .main-header #navbar-collapse .nav>li:first-child{
+        border-left: 1px solid #ddd;
+    }
+    .main-header #navbar-collapse .nav>li>a{
+        border-bottom: 2px solid #fff;
+    }
+    .main-header #navbar-collapse .nav>li:hover,.main-header #navbar-collapse .nav>li.active, .main-header #navbar-collapse .nav>li>a:hover,
+    .main-header #navbar-collapse .nav>li>a:hover, .main-header #navbar-collapse .nav>li.active>a{
+        background-color: #fff !important;
+    }
+    .main-header #navbar-collapse .nav>li.active>a{
+        border-bottom: 2px solid #E21E1E;
+    }
+    
+    .main-header #navbar-collapse .nav>li>a{
+        color: #313131 !important;
+        display: block;
+        margin: 0 10px -10px 10px;
+        padding: 0;
+        padding-bottom: 10px;
+    }
+    
+    .main-header .navbar-custom-menu{
+        float: left; 
+        width: calc(100% - 111px);
+        box-sizing: border-box;
+    }
+    
+    .main-header #navbar-collapse .nav>li:hover>a{
+        border-bottom: 2px solid #09c;
+    }
+    
+/*    .main-header #navbar-collapse .nav>li:hover > ul{
+        display: inline-block;
+        color: #fff;
+        position: absolute;
+        background: #fff;
+        border: 1px solid #ddd;
+        top: calc(100% + 2px);
+        width: 100%;
+    }*/
+    .main-header #navbar-collapse .nav>li:hover > ul a{
+        color: #313131 !important;
+    }
+    
+    /* CSS for advertising */
+    .main-header .navbar-custom-menu .advertising{
+        height: 90px; float: left; width: calc(100% - 167px); margin-left: 4.5px;
+    }
+    
+    .main-header .navbar-custom-menu .advertising img{
+        max-height: 90px;
+        max-width: 100%;
+    }
+}

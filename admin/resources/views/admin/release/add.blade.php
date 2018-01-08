@@ -1,10 +1,14 @@
 @extends('admin.templates.master')
 
+@section('title')
+{{trans('web.Registration_releasenumber')}}
+@endsection 
+
 @section('content')
 <div ng-controller="ReleaseAddCtrl">
    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
+      <h1 class="mg-bt-25">
         {{ trans('release.addRelease') }}
         {{-- <small>preview of simple tables</small> --}}
       </h1>

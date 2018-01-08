@@ -1,8 +1,13 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{trans('web.category')}}
+@endsection 
+
 @section('content')
 <div ng-controller="Editcategorychil">
 	<section class="content-header">
-		<h2>子カテゴリー管理</h2>
+		<h1 class="mg-bt-25">子カテゴリー管理</h1>
 	</section>
 	<section class="content">
 		<div class="row">

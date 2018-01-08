@@ -50,9 +50,9 @@ SOUGOU_ZYANARU_MODULE
 		  			$scope.deleteRelease = ReleaseService.delete({ id: release.id_release_number }, function () {
               if($scope.deleteRelease.is_success == true) {
 		            $scope.releases.splice(index, 1);
-                toastr.success('Success!');
+                toastr.success('完了');
 		          } else { 
-		            toastr.error('Try again!');
+		            toastr.error('エラー');
 		          }   
             });
 		  		} 
@@ -103,7 +103,7 @@ SOUGOU_ZYANARU_MODULE
                   def.resolve(res.data.data.path);
                 });
               }, function(res){
-                def.reject('image Error!!!');
+                def.reject('エラー');
               });
             } else {
               def.resolve('');
@@ -129,9 +129,9 @@ SOUGOU_ZYANARU_MODULE
             $scope.release.$save(function () {
               if($scope.release.is_success == true) {
                 $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
-                toastr.success('Thêm thành công !');
+                toastr.success('完了');
               } else { 
-                toastr.error('Error! Please try again.');
+                toastr.error('エラー');
               }   
             });
           });
@@ -184,7 +184,7 @@ SOUGOU_ZYANARU_MODULE
                     def.resolve(res.data.data.path);
                   });
                 }, function(res){
-                  def.reject('image Error!!!');
+                  def.reject('エラー');
                 });
               } else {
                 def.resolve(path);
@@ -217,7 +217,7 @@ SOUGOU_ZYANARU_MODULE
               }, function (){
                 // Redirect
                 $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/release';
-                toastr.success('Success!');
+                toastr.success('完了');
               });
 
             });

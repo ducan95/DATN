@@ -411,6 +411,14 @@ Route::group([
     'uses'  => 'EndUserController@cat',
     'as'  => 'WebClientEndUserCat'
   ]);
+
+  /* Release Client */
+  Route::group(['prefix' => '/release', 'namespace' => 'src'],function(){
+    Route::get('/', [
+      'uses' => 'ClientReleaseController@index',
+      'as'   => 'ClientReleaseIndex'
+    ]);
+  });
   
 });
 

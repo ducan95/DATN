@@ -1,11 +1,16 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{trans('web.user_management')}}
+@endsection 
+
 @section('content')
 
   <div ng-controller="UserUpdateCtrl"> 
 
    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
+      <h1 class="mg-bt-25">
           @lang('user.admin_user_edit')
         {{--<small>preview of simple tables</small>--}}
       </h1>

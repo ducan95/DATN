@@ -1,4 +1,9 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{trans('web.Registration_releasenumber')}}
+@endsection 
+
 @section('content')
 <div ng-controller="ReleaseCtrl" ng-init="getRelease(1)">
    <!-- Content Header (Page header) -->
@@ -33,12 +38,12 @@
             <div ng-if="release.image_header_path == 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ asset('assets/img/no-banner.jpg') }}')"></div>
           </div>
           
-          <h4>@{{ release.name }}</h4>
+          <h4 ng-bind="release.name"></h4>
         </div>
         <div class="col-md-3 text-left">
           <a href="" ng-click="redirectEdit(release.id_release_number)" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>
-          <a href="javascript:void(0)" ng-click="delete(release.id_release_number, $index)" style="margin-left: 2px" class="btn btn-default">
-            <i class="fa fa-trash-o"></i>
+          <a href="javascript:void(0)" ng-click="delete(release.id_release_number, $index)" style="margin-left: 2px" class="btn btn-sm btn-danger">
+            <i class="fa fa-trash-o"></i> @lang('web.delete')
           </a>
         </div>
         <!-- /.col -->
