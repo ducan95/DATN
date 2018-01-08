@@ -6,7 +6,7 @@ SOUGOU_ZYANARU_MODULE
 /**
  * Show and delete User
  * */
-.controller('MemberCtrl', function ($scope, MemberService, $window, popupService) {
+.controller('MemberCtrl',['$scope','MemberService', '$window', 'popupService','tranDate' ,function ($scope, MemberService, $window, popupService,tranDate) {
 
   $scope.location = APP_CONFIGURATION.BASE_URL;
   $scope.currentPage = 1;
@@ -41,7 +41,10 @@ SOUGOU_ZYANARU_MODULE
     MemberService.get({page:pageNumber},function(res) {
       if(res.data != undefined) {
         $scope.members       = res.data.data;
-        console.log($scope.members); 
+        console.log($scope.members);
+        angular.forEach($scope.members,function(value){
+          value.birthday = tranDate.tranDate(value.birthday);
+        });
         $scope.total        = res.data.total;
         $scope.currentPage  = res.data.current_page;
         $scope.lastPage     = res.data.last_page;
@@ -62,7 +65,7 @@ SOUGOU_ZYANARU_MODULE
     $scope.id_member = id_member;
   }
 
-})
+}])
 
 
   //add member
