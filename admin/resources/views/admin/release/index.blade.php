@@ -42,8 +42,8 @@
         </div>
         <div class="col-md-3 text-left">
           <a href="" ng-click="redirectEdit(release.id_release_number)" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>
-          <a href="javascript:void(0)" ng-click="delete(release.id_release_number, $index)" style="margin-left: 2px" class="btn btn-sm btn-danger">
-            <i class="fa fa-trash-o"></i> @lang('web.delete')
+          <a href="javascript:void(0)" ng-click="delete(release.id_release_number, $index)" style="margin-left: 2px" class="btn btn-danger">
+            @lang('web.delete')
           </a>
         </div>
         <!-- /.col -->
@@ -79,4 +79,5 @@
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <!-- Angular Paging -->
 <script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
+
 @endsection 

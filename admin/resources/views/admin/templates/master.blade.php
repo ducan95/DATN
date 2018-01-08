@@ -91,15 +91,18 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
-
 <!-- SlimScroll -->
 <script src="{{ asset('assets/base/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/base/dist/js/demo.js') }}"></script>
 
-{{--angular app--}}
+<!-- App Config -->
 <script src="{{ asset('assets/frontend/config/config.js') }}"></script>
+<!-- Japanese Charecter -->
 <script src="{{ asset('assets/frontend/extension/lang.js') }}"></script>
+<!-- Ng-Clipboard -->
+<script src="{{ asset('assets/base/bower_components/clipboard.min.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/ngclipboard.min.js') }}"></script>
 
 @yield('bottom-js')
 

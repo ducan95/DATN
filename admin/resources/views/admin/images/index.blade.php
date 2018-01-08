@@ -43,8 +43,12 @@
                     </div>
                     <p class="media-name">
                       <a target="_blank" href="{{storage_asset()}}/@{{image.path}}">{{ storage_asset() }}/@{{ image.path }}</a>
+                      <button title="Copy URL image to clipboard" class="btn btn-copy" ngclipboard ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" data-clipboard-text="{{storage_asset()}}/@{{image.path}}">
+                        <img src="{{ asset('assets/img/icon/clippy.svg') }}" alt="Copy to clipboard">
+                      </button>
                       <span ng-bind="image.name"></span>
                     </p>
+                   
                   </td>
                   <td style="width: 200px" ng-bind="image.created_at"></td>
                 </tr>

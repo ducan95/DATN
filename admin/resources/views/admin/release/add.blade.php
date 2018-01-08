@@ -47,7 +47,7 @@
                       <div 
                         ngf-drop ngf-select 
                         ng-model="release.image_release_path"
-                        name="file"
+                        name="image_release_path"
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
@@ -61,6 +61,7 @@
                           <img ng-show="release.image_release_path" ngf-thumbnail="release.image_release_path" class=""> 
                         </div>
                      </div>
+                     <i ng-show="myForm.release.image_release_path.$error.required">*required</i><br>
                     </div>
 
                     <div class="form-group">
@@ -68,7 +69,7 @@
                       <div 
                         ngf-drop ngf-select 
                         ng-model="release.image_header_path"
-                        name="file2"
+                        name="image_header_path"
                         class="upload-box" 
                         ngf-max-size="25MB"
                         ngf-drag-over-class="'box-dragover'" 
@@ -87,7 +88,7 @@
                   <!-- /.box-body -->
 
                   <div class="box-footer text-center" style="padding-bottom: 70px">
-                    <button type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.confirm') }}</button>
+                    <button ng-disabled="disable == true" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.confirm') }}</button>
                     <button type="reset" class="btn btn-default" style="margin-left:5px;">{{ trans('web.cancel') }}</button>
                   </div>
                 </form>

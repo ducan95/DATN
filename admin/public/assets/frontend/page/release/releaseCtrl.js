@@ -43,16 +43,16 @@ SOUGOU_ZYANARU_MODULE
 
 	  //Delete release number
 	  $scope.delete = function (id, index) {
-	  	if (popupService.showPopup('本当に削除する')) {
+	  	if (popupService.showPopup(TRANS.CONFIRM_DELETE)) {
 		  	var release = ReleaseService.get({ id: id }, function (res) {
 		  		if (typeof res != 'undefined') {
 		  			var release = res.data;
 		  			$scope.deleteRelease = ReleaseService.delete({ id: release.id_release_number }, function () {
               if($scope.deleteRelease.is_success == true) {
 		            $scope.releases.splice(index, 1);
-                toastr.success('完了');
+                toastr.success(TRANS.SUCCESS);
 		          } else { 
-		            toastr.error('エラー');
+		            toastr.error(TRANS.ERROR);
 		          }   
             });
 		  		} 
@@ -73,10 +73,11 @@ SOUGOU_ZYANARU_MODULE
   .controller('ReleaseAddCtrl', ['$scope', 'uploadImg', '$timeout', 'ReleaseService', 'toastr', 'popupService', '$window', '$q', function ($scope, uploadImg, $timeout, ReleaseService, toastr, popupService, $window, $q) {
   	//Get Friday of next 2 week
   	var friday = moment().day(19).format('LL'); //Friday: 5 + 7 + 7
-  	$scope.date = friday+'号';
+  	$scope.date = friday+TRANS.NUMBER;
 
     //Add new release number function
   	$scope.release = new ReleaseService();
+
   	$scope.addRelease = function () { 
       //Validate form
       var constraints = {
@@ -85,12 +86,13 @@ SOUGOU_ZYANARU_MODULE
         },
       };
       var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
+      validate.validators.presence.message = TRANS.REQUIRED;
       $scope.error = validate(form, constraints);
 
       // Check success
       if ($scope.error == undefined) {
-        if (popupService.showPopup('発売号の情報を登録します。よろしいですか?')) {
+        $scope.disable = false; 
+        if (popupService.showPopup(TRANS.MSG_DELETE)) {
           $scope.name = "cover";
           //Get image path
           function getPath(path) {
@@ -103,7 +105,7 @@ SOUGOU_ZYANARU_MODULE
                   def.resolve(res.data.data.path);
                 });
               }, function(res){
-                def.reject('エラー');
+                def.reject(TRANS.ERROR);
               });
             } else {
               def.resolve('');
@@ -130,14 +132,16 @@ SOUGOU_ZYANARU_MODULE
             $scope.release.$save(function () {
               if($scope.release.is_success == true) {
                 $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/release';
-                toastr.success('完了');
+                toastr.success(TRANS.SUCCESS);
               } else { 
-                toastr.error('エラー');
+                toastr.error(TRANS.ERROR);
               }   
             });
           });
         }
-      } 
+      } else {
+        $scope.disable = true;
+      }
   	}
   }])
   
@@ -161,11 +165,11 @@ SOUGOU_ZYANARU_MODULE
         },
       };
       var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
+      validate.validators.presence.message = TRANS.REQUIRED;
       $scope.error = validate(form, constraints);
       // If clean data -> Edit
       if ($scope.error == undefined) {
-        if (popupService.showPopup('発売号の情報を登録します。よろしいですか?')) {
+        if (popupService.showPopup(TRANS.MSG_DELETE)) {
             $scope.name = "cover";
             //Get image path
             function getPath(path) {
@@ -185,7 +189,7 @@ SOUGOU_ZYANARU_MODULE
                     def.resolve(res.data.data.path);
                   });
                 }, function(res){
-                  def.reject('エラー');
+                  def.reject(TRANS.ERROR);
                 });
               } else {
                 def.resolve(path);
@@ -218,7 +222,7 @@ SOUGOU_ZYANARU_MODULE
               }, function (){
                 // Redirect
                 $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/release';
-                toastr.success('完了');
+                toastr.success(TRANS.SUCCESS);
               });
 
             });

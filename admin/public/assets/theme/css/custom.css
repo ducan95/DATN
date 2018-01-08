@@ -97,12 +97,42 @@ label.error {
   font-size: 14px;
 }
 .media-wrap .media-name a {
-  display: block;
+  display: inline-block;
   font-weight: 700;
 }
 .media-wrap .media-name span {
   display: block;
   margin-top: 3px;
+}
+.btn-copy {
+  float: right;
+  margin-right: 222px;
+  position: relative;
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #333;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #eee;
+  background-image: linear-gradient(#fcfcfc, #eee);
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+}
+.btn-copy img {
+  margin-top: -9px;
+  position: relative;
+  top: 3px;
+  width: 14px;
+  height: 14px;
 }
 .mg-bt-25 {
   margin-bottom: 25px !important;
@@ -235,44 +265,4 @@ label.error {
   to {
     background-position: 60px 30px;
   }
-}
-
-.list-img-upload .image{
-  border-radius: 5px;
-  border: 1px solid;
-  margin: 5px;
-  display: inline-block;
-}  
-.list-img-upload img{
-  width: 150px;
-  height: 100px;
-}
-.box-solid {
-
-}
-
-
-
-/*animate*/
-
-.animated {
-  -webkit-animation-duration: 1.5s;
-  animation-duration: 1.5s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
 }
