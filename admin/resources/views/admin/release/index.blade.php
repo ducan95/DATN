@@ -70,7 +70,7 @@
 @endsection  
 
 @section('bottom-js')
-<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/page/release/releaseCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <!-- Angular Paging -->
 <script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>

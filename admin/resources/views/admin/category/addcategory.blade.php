@@ -3,7 +3,7 @@
 
 <div ng-controller="CategoryAddCtrl">
 	<section class="content-header">
-		<h2>List Category</h2>
+		<h2>親カテゴリー新規追加</h2>
 	</section>
 	<section class="content">
 		<div class="row">
@@ -13,42 +13,42 @@
 					 {{ csrf_field() }}	
 					<div class="box-body">
 	                <div class="form-group">
-	                  <label for="" class="col-sm-3 control-label">Category Name</label>
+	                  <label for="" class="col-sm-3 control-label">カテゴリー名称</label>
 	                  <div class="col-sm-9">
-	                    <input ng-model="category.name" class="form-control" placeholder="...name" type="text"  name="name">
-	                  	<label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
+	                    <input ng-model="category.name" class="form-control" placeholder="" type="text"  name="name">
+	                  	<label class="error" ng-if="error.name[0] != null" ng-bind="error.name[0]"></label>
 										</div>
 	                </div>
 	                <div class="form-group">
-	                  <label for="" class="col-sm-3 control-label">Name Alphabet For Address</label>
+	                  <label for="" class="col-sm-3 control-label">アドレス用英字名称</label>
 	                  <div class="col-sm-9">
-	                    <input type="text" class="form-control" placeholder="...slug" ng-model="category.slug" name="slug" >
-	                    <label class="error" ng-if="error.slug[0] != null">@{{ error.slug[0] }}</label>
+	                    <input type="text" class="form-control" placeholder="" ng-model="category.slug" name="slug" >
+	                    <label class="error" ng-if="error.slug[0] != null" ng-bind="error.slug[0]"></label>
 	                  </div>
 									</div>
 	                </div>
 	                <div class="form-group">
-	                	<label class="col-sm-3 control-label">Display Global Navi</label>
+	                	<label class="col-sm-3 control-label">グローバルナビ表示</label>
 	                	<div class="col-sm-9">
 	                		<input type="checkbox" checked data-toggle="modal" ng-model="category.global_status"  name="global_status" value="1">
-	                  	<label class="error" ng-if="error.global_status[0] != null">@{{ error.global_status[0] }}</label>
+	                  	<label class="error" ng-if="error.global_status[0] != null" ng-bind="error.global_status[0]"></label>
 										</div>
 	                </div>
 	                <div class="form-group">
-	                	<label class="col-sm-3 control-label">Display Menu Bar</label>
+	                	<label class="col-sm-3 control-label">メニューバー表示</label>
 	                	<div class="col-sm-9">
 	                		<input type="checkbox" checked data-toggle="modal" ng-model="category.menu_status"  
 	                		name="menu_status" value="1">
-	                  	<label class="error" ng-if="error.menu_status[0] != null">@{{ error.menu_status[0] }}</label>
+	                  	<label class="error" ng-if="error.menu_status[0] != null" ng-bind="error.menu_status[0]"></label>
 	                	</div>
 	                </div>
 	                <div class="row" style="padding-bottom: 20px">
 		              	<div class="col-md-4"></div>
 				            	<div class="col-md-4 text-center">
 		                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-												  Add
+												  登録する
 												</button>
-		                    <a href="{{ route('webCategoryIndex') }}"><button type="button" class="btn btn-primary" style="margin-left:5px;">Cancel</button></a>
+		                    <a href="{{ route('webCategoryIndex') }}"><button type="button" class="btn btn-default" style="margin-left:5px;">キャンセル</button></a>
 				              </div>
 		              	<div class="col-md-4"></div>
 	              	</div>

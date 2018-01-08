@@ -41,14 +41,14 @@
                   </td>
                   <td>
                     <div class="form-group">
-                        <input ng-model="member.password" type="password" name="password" class="form-control" id="password" value="" >
+                        <input ng-model="member.password" type="password" name="password" class="form-control" id="password" value="@{{ member.password }}" >
                         <label class="error" ng-if="error.password[0] != null">@{{ error.password[0] }}</label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
                       <div class="input-group date">
-                        <input ng-model="member.birthday" type="date" name="birthday" class="form-control" value="">
+                        <input ng-model="member.birthday" type="date" name="birthday" class="form-control" value="@{{ member.birthday }}">
                         <!-- <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div> -->

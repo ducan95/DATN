@@ -25,41 +25,46 @@
 						  </button>
 						  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 						    <ul class="navbar-nav">
-						    	@foreach($arCats as $arCat)
-						    		<?php
-						    		$id_category = $arCat->id_category;
-						    		$name = $arCat->name;
-					          $slug = str_slug($name);
-					          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_category]);
-					          $checkUrl = '*'.$slug.'*';
-					          //check cat_chil 
-						    		$arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
-						    		$count = count($arChilCats);
-						    		?>
-						    		@if($count>0)
-						    			<li class="nav-item dropdown">
-								        <a class="nav-link dropdown-toggle" href="{{ $url }}" class="{{ ((Request::is($checkUrl)) ? 'active' : '' ) }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								          {{ $arCat->name}}
-								        </a>
-								        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								        	@foreach($arChilCats as $arChilCat)
-								        		@php
-								        			$id_chil_category = $arChilCat->id_category;
-											    		$name = $arChilCat->name;
-										          $slug = str_slug($name);
-										          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_chil_category]);
-										          $checkUrl = '*'.$slug.'*';
-								        		@endphp
-								          <a class="dropdown-item" class="{{ ((Request::is($checkUrl)) ? 'active' : '' ) }}" href="{{ $url }}">{{ $arChilCat->name }}</a>
-								          @endforeach
-								        </div>
-								      </li>
-						    		@else
-						    			<li class="nav-item dropdown">
-								        <a class="nav-link" href="{{ $url }}">{{ $arCat->name}}<span class="sr-only">(current)</span></a>
-								      </li>
-						    		@endif
-						    	@endforeach
+						    	<?php 
+						    	$arCats = DB::table('categories')->where('is_deleted','=',0)->where('id_category_parent',0)->get();
+						    	?>
+						    	@if(!empty($arCats))
+							    	@foreach($arCats as $arCat)
+							    		<?php
+							    		$id_category = $arCat->id_category;
+							    		$name = $arCat->name;
+						          $slug = str_slug($name);
+						          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_category]);
+						          $checkUrl = '*'.$slug.'*';
+						          //check cat_chil 
+							    		$arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
+							    		$count = count($arChilCats);
+							    		?>
+							    		@if($count>0)
+							    			<li class="nav-item dropdown">
+									        <a class="nav-link dropdown-toggle" href="{{ $url }}" class="{{ ((Request::is($checkUrl)) ? 'active' : '' ) }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									          {{ $arCat->name}}
+									        </a>
+									        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									        	@foreach($arChilCats as $arChilCat)
+									        		@php
+									        			$id_chil_category = $arChilCat->id_category;
+												    		$name = $arChilCat->name;
+											          $slug = str_slug($name);
+											          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_chil_category]);
+											          $checkUrl = '*'.$slug.'*';
+									        		@endphp
+									          <a class="dropdown-item" class="{{ ((Request::is($checkUrl)) ? 'active' : '' ) }}" href="{{ $url }}">{{ $arChilCat->name }}</a>
+									          @endforeach
+									        </div>
+									      </li>
+							    		@else
+							    			<li class="nav-item dropdown">
+									        <a class="nav-link" href="{{ $url }}">{{ $arCat->name}}<span class="sr-only">(current)</span></a>
+									      </li>
+							    		@endif
+							    	@endforeach
+							    @endif
 						      <li class="nav-item">
 						        <a class="nav-link" href="{{ route('getLogoutEndUser')}}">{{ trans('web.webClient.logout')}}</a>
 						      </li>
