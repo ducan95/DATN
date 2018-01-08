@@ -18,7 +18,9 @@ SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {
     response: function (response) {
       requestCount--;
       if (requestCount == 0) {
-        $("#spinner_sougouzyanaru").removeClass('show-spinner');
+        setTimeout(function () {
+          $("#spinner_sougouzyanaru").removeClass('show-spinner');
+        }, 250)
       }
 
       return response || $q.when(response);
@@ -26,7 +28,9 @@ SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {
     responseError: function (response) {
       requestCount--;
       if (requestCount == 0) {
-        $("#spinner_sougouzyanaru").removeClass('show-spinner');
+        setTimeout(function () {
+          $("#spinner_sougouzyanaru").removeClass('show-spinner');
+        }, 250)
       }
       return $q.reject(response);
     }
