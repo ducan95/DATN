@@ -85,10 +85,13 @@ class CategoryRepository extends Repository
         $category = Category::find($id);
         $category->is_deleted=true;
         $category->save();
-        if($category->id_category_parent === 0){
-          $categorychildren=Category::where('id_category_parent','=',$id)->where('is_deleted','=',false)->get();
-          $categorychildren->is_deleted=true;
-          $categorychildren->save();
+        if($category->id_category_parent === 0){ 
+          $categoryChildrens=Category::where('id_category_parent','=',$id)->where('is_deleted','=',false)->get();
+          foreach ($categoryChildrens as $categoryChildren) {
+            $categoryChildren->is_deleted=true;
+            $categoryChildren->save();
+          }
+          
         }
         else{
         $category->is_deleted = true;

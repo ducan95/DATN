@@ -10,4 +10,8 @@ class EndUserController extends Controller
   public function index(){
   	return view('client.index');
   }
+
+  public function cat($slug,$id){ //truyen id cua danh muc tin
+  	return view('client.category.index');
+  }
 }

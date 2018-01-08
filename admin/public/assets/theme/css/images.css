@@ -1,0 +1,75 @@
+/*  link color code : https://www.w3schools.com/colors/colors_names.asp */
+.item-image {
+  border: 2px solid #777;
+  margin-bottom: 10px;
+}
+.item-image .content-image-left {
+  width: 5%;
+  float: left;
+  position: relative;
+}
+.item-image .content-image-left a {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+}
+.item-image .content-image-right {
+  width: 95%;
+  float: right;
+  border: 1px solid #bfbfbf;
+  border-left: 2px solid #999;
+}
+.item-image .content-image-right .content-image-top {
+  display: block;
+  border-bottom: 2px solid #bfbfbf;
+  padding: 5px;
+  background-color: #999;
+}
+.item-image .content-image-right .content-image-top .image {
+  width: 10%;
+  float: left;
+}
+.item-image .content-image-right .content-image-top .name {
+  width: 70%;
+  float: left;
+}
+.item-image .content-image-right .content-image-top .create {
+  width: 20%;
+  float: left;
+}
+.item-image .content-image-right .content-image-top .name-image {
+  display: block;
+}
+.item-image .content-image-right .content-image-bottom {
+  padding: 5px;
+}
+.item-image .content-image-right .content-image-bottom .path {
+  width: 10%;
+  float: left;
+}
+.clear {
+  clear: both;
+}
+.drop-box {
+  background: #f8f8f8;
+  border: 5px dashed #dddddd;
+  min-height: 200px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
+}
+.drop-box p {
+  margin-top: 15px;
+  font-family: Arial;
+  font-size: 10px;
+}
+.dragover {
+  border: 5px dashed #0000ff;
+}
+.content-header h3 {
+  background-color: #999;
+  padding: 5px;
+  border: 1px solid #999;
+}

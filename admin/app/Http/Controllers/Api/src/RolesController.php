@@ -14,10 +14,10 @@ use App\Http\Controllers\Api\WebApiController as WebApiController;
 class RolesController extends WebApiController
 {	
   
-  // public function actionList()
-  // {	
-  //   return RolesService::getInstance()->list();
-  // }
+  public function actionList()
+  {	
+    return RolesService::getInstance()->list();
+  }
 
 
   /**

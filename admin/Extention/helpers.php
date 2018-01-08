@@ -13,7 +13,6 @@
 		  return asset('storage/' . trim($url, '/'));
 		}
 	}
-
 	
 
 ?>

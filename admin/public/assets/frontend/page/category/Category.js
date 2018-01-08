@@ -81,7 +81,6 @@ SOUGOU_ZYANARU_MODULE
     var form = document.querySelector("form#main");
     validate.validators.presence.message = '空白のところで入力してください。';
     $scope.error = validate(form, constraints);
-
     // Check success
     if ($scope.error == undefined) {
       $scope.category.$save(function () {
@@ -105,13 +104,17 @@ SOUGOU_ZYANARU_MODULE
         slug: {
           presence: true,
         },
-       
+        parent: {
+          presence: true,
+        },
+
       };
       var form = document.querySelector("form#main");
       validate.validators.presence.message = '空白のところで入力してください。';
       $scope.error = validate(form, constraints);
-
+      
       if ($scope.error == undefined) {
+
         $scope.categorychil.$save(function () {
           $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
         })

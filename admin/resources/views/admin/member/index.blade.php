@@ -4,7 +4,7 @@
    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        List user
+        List Member
       </h1>
       {{--<ol class="breadcrumb">--}}
         {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
@@ -38,11 +38,11 @@
                   <td ng-bind="$index+1"></td>
                   <td ng-bind="member.email"></td>
                   <td ng-bind="member.birthday"></td>
-                  <td ng-if="member.gender==false">Male</td>
-                  <td ng-if="member.gender==true">Female</td>
+                  <td ng-if="member.gender==1">Male</td>
+                  <td ng-if="member.gender==0">Female</td>
                   <td>**********</td>
                   <td>
-                    <a href="" ng-click="" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="javascript:void(0)" ng-click="redirectEdit(member.id_member)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-danger" ng-click="deleteMember(member.id_member)"><i class="fa fa-trash-o"></i>Delete</a>
                   </td>  
                 </tr>

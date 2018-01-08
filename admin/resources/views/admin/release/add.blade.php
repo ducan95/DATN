@@ -1,10 +1,5 @@
 @extends('admin.templates.master')
 
-@section('custom-css')
-<link rel="stylesheet" href="{{ asset('assets/base/bower_components/dropify/dist/css/dropify.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/base/bower_components/sweetalert2/dist/sweetalert2.min.css') }}">
-@endsection
-
 @section('content')
 <div ng-controller="ReleaseAddCtrl">
    <!-- Content Header (Page header) -->
@@ -13,11 +8,11 @@
         {{ trans('release.addRelease') }}
         {{-- <small>preview of simple tables</small> --}}
       </h1>
-      <ol class="breadcrumb">
+      <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
         <li class="active">Simple</li>
-      </ol>
+      </ol> -->
     </section>
 
     <!-- Main content -->
@@ -34,27 +29,62 @@
             <!-- form start -->
             <div class="row">
               <div class="col-md-9">
-                <form role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
+                <form role="form" name="myForm" method="post" id="main" ng-submit="addRelease()" enctype="multipart/form-data">
                   {{ csrf_field() }}
                   <div class="box-body">
                     <div class="form-group">
                       <label for="txtName">{{ trans('release.nameRelease') }}</label>
-                      <input type="text" class="form-control" id="txtName" value="@{{ date }}号">
+                      <input ng-model="release.name" name="name" type="text" class="form-control" id="txtName" ng-init="release.name=date">
+                      <label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
                     </div>
+
                     <div class="form-group">
-                        <label for="input-file">{{ trans('release.imageRelease') }}</label>
-                        <input data-height="130" type="file" id="input-file" class="dropify" />
+                      <label for="input-file">{{ trans('release.imageRelease') }}</label>
+                      <div 
+                        ngf-drop ngf-select 
+                        ng-model="release.image_release_path"
+                        name="file"
+                        class="upload-box" 
+                        ngf-max-size="25MB"
+                        ngf-drag-over-class="'box-dragover'" 
+                        ngf-allow-dir="true"
+                        accept="image/*"
+                        ngf-pattern="'image/*'">
+                        <span ng-if="release.image_release_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_release_path == undefined">{{ trans('release.addImage') }}</b>
+                        
+                        <div ng-if="release.image_release_path != undefined" class="upload-preview">
+                          <img ng-show="release.image_release_path" ngf-thumbnail="release.image_release_path" class=""> 
+                        </div>
+                     </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="input-file-mobile">{{ trans('release.headerRelease') }}</label>
-                        <input data-height="130" type="file" id="input-file-mobile" class="dropify" />
+                      <label for="input-file">{{ trans('release.headerRelease') }}</label>
+                      <div 
+                        ngf-drop ngf-select 
+                        ng-model="release.image_header_path"
+                        name="file2"
+                        class="upload-box" 
+                        ngf-max-size="25MB"
+                        ngf-drag-over-class="'box-dragover'" 
+                        ngf-allow-dir="true"
+                        accept="image/*"
+                        ngf-pattern="'image/*'">
+                        <span ng-if="release.image_header_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
+                        <b ng-if="release.image_header_path == undefined">{{ trans('release.addImage') }}</b>
+                        
+                        <div ng-if="release.image_header_path != undefined" class="upload-preview">
+                          <img ng-show="release.image_header_path" ngf-thumbnail="release.image_header_path" class=""> 
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <!-- /.box-body -->
 
                   <div class="box-footer text-center" style="padding-bottom: 70px">
-                    <button onclick="submitFunction()" type="submit" name="submit" class="btn btn-primary">{{ trans('web.confirm') }}</button>
-                    <button type="reset" class="btn btn-default">{{ trans('web.cancel') }}</button>
+                    <button type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.confirm') }}</button>
+                    <button type="reset" class="btn btn-default" style="margin-left:5px;">{{ trans('web.cancel') }}</button>
                   </div>
                 </form>
               </div>
@@ -70,44 +100,13 @@
 @endsection  
 
 @section('bottom-js')
-<script src="{{ asset('assets/base/bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('assets/base/bower_components/dropify/dist/js/dropify.min.js') }}"></script>
- <script>
-  $(document).ready(function(){
-    // Basic
-    $('.dropify').dropify({
-      messages: {
-        default: 'ここに画像をドラッグ',
-        //replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-        remove:  '削除',
-        error:   'Có lỗi xảy ra, vui lòng thử lại'
-      }
-    });
-  });
-
-//Confirm
-function submitFunction () {
-  swal({
-    title: '登録確認',
-    text: "発売号の情報を登録します。よろしいですか?",
-    type: 'question',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: '設定完了'
-  }).then((result) => {
-    if (result.value) {
-      swal(
-        'Done!',
-        'Your file has been insert.',
-        'success'
-      )
-    }
-  })
-}  
-</script>
+<!-- AngularResource -->
+<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
+<script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
+<!-- Validatejs -->
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
+<!-- MomentJS -->
 <script src="{{ asset('assets/base/bower_components/moment/moment.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/moment/locale/ja.js') }}"></script>
-<script src="{{ asset('assets/frontend/page/release/ReleaseCtrl.js') }}"></script>
-<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 @endsection 

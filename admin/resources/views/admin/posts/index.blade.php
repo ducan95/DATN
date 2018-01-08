@@ -1,6 +1,6 @@
 @extends('admin.templates.master')
 @section('content')
-<div ng-controller="PostCtrl">
+<div ng-controller="PostCtrl" ng-init="getPosts(1)">
 	<section class="content-header">
 		<div class="row">
 			<div class="col-md-2">
@@ -23,29 +23,40 @@
 			<div class="col-md-2">
 				<label>Release Number</label>
 				<select name='releaseNumber' ng-model='releaseNumber'>
-					<option ng-repeat="post in posts" value="" ng-bind="post.release_name"></option>
+					<!-- <option 
+						ng-repeat="post in posts" 
+						value="" 
+						ng-bind="post.release_name">	
+					</option> -->
+					<option value="1">zxcxzc</option>
+					<option value="2">zxcxzc</option>
 				</select>
 			</div>
 			<div class="col-md-2">
 				<label>Category Parent</label>
-                <select name='categoryParent' ng-model='categoryParent' ng-change='getCatChildren()'>
-                    <option value="">Category Parent</option>
-                    <option ng-repeat="category in categories" value="@{{category.id_category }}" ng-bind="category.name"></option>
-                </select>
+          <select name='categoryParent' ng-model='categoryParent' ng-change='getCatChildren()'>
+            <option 
+            	ng-repeat="cat in listCatParent" 
+            	value="@{{cat.id_category }}"
+              ng-bind="cat.name"
+              ng-selected = "cat.id_category == 1 ">
+            </option>
+          </select>
 			</div>
 			<div class="col-md-2">
 				<label>Category Children</label>
-                <select name='categoryChildren' ng-model='categoryChildren' >
-                    <option value="">Category Children</option>
-                    <option ng-repeat="categoryChildren in categoryChildrens"
-                            value="@{{categoryChildren.id_category }}" ng-bind="categoryChildren.name">
-                    </option>
-                </select>
+          <select name='categoryChildren' ng-model='categoryChildren' >
+            <option 
+            	ng-repeat="catChildrent in listCatChildrent"
+              value="@{{catChildrent.id_category }}"
+              ng-bind="catChildrent.name" >
+            </option>
+          </select>
 			</div>
 			<div class="col-md-1">
 				<label>Status</label>
-  			 <select>
-  			 	<option ng-repeat= "item in status" value="@{{item.id}}" ng-bind = "item.name"></option>
+  			 <select ng-model = "status">
+  			 	<option ng-repeat= "item in listStatus" value="@{{item.id}}" ng-bind = "item.name"></option>
   			 </select>
 			</div>
 			<div class="col-md-1">
@@ -143,13 +154,25 @@
         </table>
       </div>
       <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin pull-right">
-          <li><a href="#">&laquo;</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">&raquo;</a></li>
-        </ul>
+        <div ng-if = "lastPage > 1" class="row text-center">
+			    <ul class="pagination">
+			      <li ng-if="currentPage == 1" class="disabled">
+			        <a href="javascript:void(0)">Prev</a>
+			      </li>
+			      <li  ng-show="currentPage != 1">
+			        <a  href="javascript:void(0)"  ng-click=getPosts(prePage)>Prev</a>
+			      </li>
+			      <li ng-repeat="i in totalPages" ng-class="{active : currentPage == i}">
+			        <a href="javascript:void(0)" ng-bind="i" ng-click=getPosts(i)></a>
+			      </li>
+			      <li  ng-show="currentPage != lastPage" >
+			        <a href="javascript:void(0)"  ng-click=getPosts(nextPage)>Next</a>
+			      </li>
+			      <li ng-if="currentPage == lastPage" class="disabled">
+			        <a href="javascript:void(0)">Next</a>
+			      </li>
+			    </ul>  
+			  </div>
       </div>
     </div>
 		</div>
@@ -157,10 +180,12 @@
 </div>	
 @endsection
 @section('bottom-js')
-
-<script src="{{ asset('assets/frontend/page/post/PostCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/PostResource.js') }}"></script>
-
+<script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
+<script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
+<script src="{{ asset('assets/frontend/page/post/PostCtrl.js') }}"></script>
 @endsection 
 
 

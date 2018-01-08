@@ -40,13 +40,28 @@ class MemberService extends Service
 
   public function update($request,$id)
   {
-    try {
-      $res['data'] = MemberRepository::getInstance()->update($request->all(), $id);
-    } catch(\Exception $e) {
-      $res['errors']['msg'] = $e->getMessage();
+    $validator = Validator::make($request->all(), [
+      'email'     => 'required|email',
+      'password'  => 'required',
+      
+    ],[
+      'email.required'    => trans('validate.email_required'),
+      'email.email'       => trans('validate.email_must_be_valid_email_address'),
+      'password.required' => trans('validate.password_required'),
+
+    ]);
+    if($validator ->fails()) {
+      $res['errors']['msg'] = $validator->errors();
       $res['errors']['status_code'] = 500;
+    } else {
+      try{
+        $res['data'] = MemberRepository::getInstance()->update($request->all(), $id);
+      }catch(\Exception $e){
+        $res['errors']['msg'] = $e ->getMessage();
+        $res['errors']['status_code'] = 500;
+      }
     }
-    return $res;    
+    return $res; 
   }
 
   public function delete($id)
@@ -80,37 +95,43 @@ class MemberService extends Service
     return $res;
   }
 
-    public function findOne($id)
-    {
-      
+  public function findOne($id)
+  {
+    try {
+      $res['data'] = MemberRepository::getInstance()->findOne($id);
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
     }
+    return $res;
+  }
     
-    public function find($request)
-    {
-      try {
-        $dataReq = [];
-        if(!empty($request->query('email')) ) {
-          $dataReq['email'] = $request->query('email');
-        }
-        if(!empty($request->query('password')) ) {
-          $dataReq['password'] = $request->query('password');
-        }
-        if(!empty($request->query('birthday')) ) {
-          $dataReq['birthday'] = $request->query('birthday');
-        }
-        if(!empty($request->query('gender')) ) {
-          $dataReq['gender'] = $request->query('gender');
-        }
-        if(!empty($request->query('paginate')) ) {
-          $dataReq['paginate'] = $request->query('paginate');
-        }
-        $res['data'] = MemberRepository::getInstance()->find($dataReq); 
-      } catch(\Exception $e) {
-        $res['errors']['msg'] = $e->getMessage();
-        $res['errors']['status_code'] = 500;
+  public function find($request)
+  {
+    try {
+      $dataReq = [];
+      if(!empty($request->query('email')) ) {
+        $dataReq['email'] = $request->query('email');
       }
-      return $res;
+      if(!empty($request->query('password')) ) {
+        $dataReq['password'] = $request->query('password');
+      }
+      if(!empty($request->query('birthday')) ) {
+        $dataReq['birthday'] = $request->query('birthday');
+      }
+      if(!empty($request->query('gender')) ) {
+        $dataReq['gender'] = $request->query('gender');
+      }
+      if(!empty($request->query('paginate')) ) {
+        $dataReq['paginate'] = $request->query('paginate');
+      }
+      $res['data'] = MemberRepository::getInstance()->find($dataReq); 
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
     }
+    return $res;
+  }
 
 }
       

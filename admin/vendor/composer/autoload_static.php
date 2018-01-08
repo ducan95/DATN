@@ -396,7 +396,6 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Api\\IWebApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/IWebApiController.php',
         'App\\Http\\Controllers\\Api\\WebApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/WebApiController.php',
-        'App\\Http\\Controllers\\Api\\client\\MemberController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/client/MemberController.php',
         'App\\Http\\Controllers\\Api\\src\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/CategoryController.php',
         'App\\Http\\Controllers\\Api\\src\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/ImageController.php',
         'App\\Http\\Controllers\\Api\\src\\ReleaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/src/ReleaseController.php',
@@ -415,15 +414,20 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'App\\Http\\Controllers\\WebAdmin\\src\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/ImageController.php',
 
         'App\\Http\\Controllers\\WebAdmin\\src\\MemberController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/MemberController.php',
-        'App\\Http\\Controllers\\WebAdmin\\src\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/PostController.php',
-        'App\\Http\\Controllers\\WebAdmin\\src\\ReleaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/ReleaseController.php',
-
+        
+        
         'App\\Http\\Controllers\\WebAdmin\\src\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/PostController.php',
         'App\\Http\\Controllers\\WebAdmin\\src\\ReleaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/ReleaseController.php',
         'App\\Http\\Controllers\\WebAdmin\\src\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/RolesController.php',
 
         'App\\Http\\Controllers\\WebAdmin\\src\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/src/UserController.php',
         'App\\Http\\Controllers\\WebAmin\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdmin/Auth/LoginController.php',
+        'App\\Http\\Controllers\\WebClient\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/Auth/AuthController.php',
+        'App\\Http\\Controllers\\WebClient\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/Auth/ForgotPasswordController.php',
+        'App\\Http\\Controllers\\WebClient\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/Auth/LoginController.php',
+        'App\\Http\\Controllers\\WebClient\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/Auth/RegisterController.php',
+        'App\\Http\\Controllers\\WebClient\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\WebClient\\EndUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/EndUserController.php',
         'App\\Http\\Controllers\\WebClient\\MemberController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebClient/MemberController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -433,6 +437,7 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Middleware\\checkAdminLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/checkAdminLogin.php',
         'App\\Http\\Requests\\CategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryRequest.php',
+        'App\\Http\\Requests\\Client\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Client/LoginRequest.php',
         'App\\Http\\Requests\\Client\\RegisterMemberRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Client/RegisterMemberRequest.php',
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
         'App\\Images' => __DIR__ . '/../..' . '/app/Images.php',
@@ -2283,7 +2288,6 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
-        'ImagePostTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ImagePostTableSeeder.php',
         'ImagesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ImagesTableSeeder.php',
         'Imagine\\Draw\\DrawerInterface' => __DIR__ . '/..' . '/imagine/imagine/lib/Imagine/Draw/DrawerInterface.php',
         'Imagine\\Effects\\EffectsInterface' => __DIR__ . '/..' . '/imagine/imagine/lib/Imagine/Effects/EffectsInterface.php',
@@ -3646,8 +3650,6 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
 
-        'ReleaseNumberTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ReleaseNumberTableSeeder.php',
-        'Release_numberTableSeeder' => __DIR__ . '/../..' . '/database/seeds/Release_numberTableSeeder.php',
         'ReleaseTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ReleaseTableSeeder.php',
         'RolesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RolesTableSeeder.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
@@ -4335,11 +4337,7 @@ class ComposerStaticInit35dca202b645c7dc822d5f01d91af0f5
         'WebService\\Service\\IService' => __DIR__ . '/../..' . '/WebService/Service/IService.php',
         'WebService\\Service\\Image\\ImageService' => __DIR__ . '/../..' . '/WebService/Service/Image/ImageService.php',
         'WebService\\Service\\Member\\MemberService' => __DIR__ . '/../..' . '/WebService/Service/Member/MemberService.php',
-
-        'WebService\\Service\\ReleaseNumber\\ReleaseNumberService' => __DIR__ . '/../..' . '/WebService/Service/ReleaseNumber/ReleaseNumberService.php',
-
         'WebService\\Service\\Release\\ReleaseService' => __DIR__ . '/../..' . '/WebService/Service/Release/ReleaseService.php',
-
         'WebService\\Service\\Roles\\RolesService' => __DIR__ . '/../..' . '/WebService/Service/Roles/RolesService.php',
         'WebService\\Service\\Service' => __DIR__ . '/../..' . '/WebService/Service/Service.php',
         'WebService\\Service\\User\\UserService' => __DIR__ . '/../..' . '/WebService/Service/User/UserService.php',

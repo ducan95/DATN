@@ -26,7 +26,7 @@
         </li>
         <li class="">
           <a href="{{ route('webCategoryIndex') }}">
-            <i class="fa fa-newspaper-o"></i>
+            <i class="fa fa-hashtag"></i>
             <span>{{trans('web.category')}}</span>
           </a>
         </li>

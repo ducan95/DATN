@@ -6,11 +6,11 @@ use Extention\Api;
 
 class RolesRepository extends Repository
 {
-    public function list()
-    {   
-        $roles = Roles::orderBy('id_role','ASC')->get();
-        return Api::response(['data' => $roles]);
-    }
+  public function list()
+  {   
+      $roles = Roles::orderBy('id_role','ASC')->get();
+      return Api::response(['data' => $roles]);
+  }
 
   /**
    * Find fuction

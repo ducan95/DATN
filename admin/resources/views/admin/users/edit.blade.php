@@ -69,7 +69,7 @@
                   <div class="col-md-4"></div>
                   <div class="col-md-4 text-center">
                       <button type="submit" href="" ng-click="updateUser(user)" name="submit" class="btn btn-primary" style="margin-right:5px;">@lang('web.edit')</button>
-                      <button type="reset" href="" class="btn btn-primary" style="margin-left:5px;">@lang('web.cancel')</button>
+                      <button type="reset" href="" class="btn btn-default" style="margin-left:5px;">@lang('web.cancel')</button>
                   </div>
                   <div class="col-md-4"></div>
                 </row>

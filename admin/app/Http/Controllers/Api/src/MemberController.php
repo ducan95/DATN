@@ -33,6 +33,19 @@ class MemberController extends WebApiController
     }
   }
 
+  public function actionSave(Request $request)
+  {  
+    $res = MemberService::getInstance()->save($request);
+    if(!isset($res['errors'])){
+      return Api::response(['data' => $res['data']]);
+    }else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg'],
+      ]);
+    }
+  }
   /**
    * search user by id
    *
@@ -41,7 +54,17 @@ class MemberController extends WebApiController
    */ 
   public function actionFindOne($id)
   {   
-    
+    $res = MemberService::getInstance()->findOne($id); 
+
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data']]);
+    }else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg']
+      ]);
+    }
   }
   /**
    * create new user 
@@ -49,10 +72,7 @@ class MemberController extends WebApiController
    * @param  Request $request
    * @return Response
    */ 
-  public function actionSave(Request $request)
-  {  
-    
-  }
+  
 
   /**
    * update user 
@@ -63,7 +83,16 @@ class MemberController extends WebApiController
    */
   public function actionUpdate(Request $request, $id)
   {   
-  
+    $res = MemberService::getInstance()->update($request, $id);
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data']]);
+    } else {
+      return Api::response([
+        'is_success'  => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors'      => $res['errors']['msg']
+      ]);
+    }
   }
 
   /**
@@ -80,9 +109,9 @@ class MemberController extends WebApiController
       return Api::response([ 'data' => $res['data'], 'status_code' => 204]);
     }else {
       return Api::response([ 
-        'is_success' => false,
+        'is_success'  => false,
         'status_code' => $res['errors']['status_code'],
-        'errors' => $res['errors']['msg']
+        'errors'      => $res['errors']['msg']
       ]);
     } 
   }

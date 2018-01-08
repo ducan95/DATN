@@ -21,7 +21,7 @@ class MemberController extends \App\Http\Controllers\WebAdmin\WebController
 
     public function viewEdit()
     {
-
+        return view('admin.member.edit');
     }
 
     public function viewDelete()

@@ -6,7 +6,7 @@ SOUGOU_ZYANARU_MODULE
 /**
  * Show and delete User
  * */
-  .controller('UserCtrl', function ($scope, UserService, $window, popupService, RoleService) {
+  .controller('UserCtrl', function ($scope, UserService, $window, popupService, RoleService, toastr) {
   //Get list users
   UserService.find({}, function (res) {
     if (typeof res != "undefined") {  
@@ -14,7 +14,7 @@ SOUGOU_ZYANARU_MODULE
     }
   })
 
-    RoleService.find({}, function (res) {
+  RoleService.find({}, function (res) {
     if (typeof res != "undefined") {
       $scope.roles = res.data;
     }
@@ -36,10 +36,15 @@ SOUGOU_ZYANARU_MODULE
           if (user.role_code == 's_admin') {
             alert('削除できません。');
           } else {
-            UserService.delete({ id: user.id_user }, function () {
-              console.log('Deleting user with id ' + id_user);
-              //Ridirect
-              $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
+            $scope.user = UserService.delete({ id: user.id_user }, function () {
+              
+              if($scope.user.is_success == true) {
+                $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
+                toastr.success('Xóa thành công !');
+              } else { 
+                toastr.error('Có lỗi khi xóa vui lòng thử lại');
+              }    
+              
             });
           }
         }
@@ -51,7 +56,7 @@ SOUGOU_ZYANARU_MODULE
 /**
  * Creat new user
  * */
-  .controller('UserAddCtrl', function ($scope, UserService, $window, RoleService) {
+  .controller('UserAddCtrl', function ($scope, UserService, $window, RoleService, toastr) {
   $scope.user = new UserService();
   
   //Get role -> showview
@@ -60,12 +65,10 @@ SOUGOU_ZYANARU_MODULE
       //console.log(res.data);
       $scope.roles = res.data;
       $scope.roles.splice(0, 1);
-
     }
   });  
   
   $scope.addUser = function () { 
-
       //Validate form
       var constraints = {
         email: {
@@ -98,13 +101,19 @@ SOUGOU_ZYANARU_MODULE
       validate.validators.presence.message = '空白のところで入力してください。';
       validate.validators.email.message = 'メールアドレスの入力を行ってください';
       $scope.error = validate(form, constraints);
-      // console.log($scope.error);
 
       // Check success
       if ($scope.error == undefined) {
+
+        console.log($scope.user);
         $scope.user.$save(function () {
-          // Redirect
-          $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user';
+          // Redirect & show notification
+          if($scope.user.is_success == true) {
+            $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user';
+            toastr.success('Thêm thành công !');
+          } else { 
+            toastr.error('Có lỗi khi thêm vui lòng thử lại');
+          }    
         });
       }
   };
@@ -119,8 +128,6 @@ SOUGOU_ZYANARU_MODULE
   var url        = new URL(window.location.href); 
   var id         = url.hash.match(/\d/g);
   $scope.id      = id.join('');
-
-  
 
   $scope.updateUser = function (user) { 
     //Validate form
@@ -189,9 +196,6 @@ SOUGOU_ZYANARU_MODULE
     RoleService.find({}, function (res) {
       if (typeof res != "undefined") {
         $scope.roles = res.data;
-        /* if ($scope.roles['role_code'] != 's_admin') {
-          $scope.roles.splice(0, 1);
-        } */
       }
     });  
   };

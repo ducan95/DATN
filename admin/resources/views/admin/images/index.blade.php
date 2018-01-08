@@ -35,7 +35,7 @@
               <div class="content-image-top">
                 <div class="image">
                   <a href="{{storage_asset()}}/@{{image.path}}">
-                    <img  style="width: 50px; height: 50px;" src="{{storage_asset()}}/@{{image.path}}">
+                    <img style="width: 50px; height: 50px;" src="{{storage_asset()}}/@{{image.path}}">
                   </a>
                 </div>
                 <div class="name">
@@ -64,6 +64,9 @@
 
   <div ng-if = "lastPage > 1" class="row text-center">
     <ul class="pagination">
+      <li ng-if="currentPage == 1" class="disabled">
+        <a href="javascript:void(0)">Prev</a>
+      </li>
       <li  ng-show="currentPage != 1">
         <a  href="javascript:void(0)"  ng-click=getImages(prePage)>Prev</a>
       </li>
@@ -73,16 +76,17 @@
       <li  ng-show="currentPage != lastPage" >
         <a href="javascript:void(0)"  ng-click=getImages(nextPage)>Next</a>
       </li>
+      <li ng-if="currentPage == lastPage" class="disabled">
+        <a href="javascript:void(0)">Next</a>
+      </li>
     </ul>  
   </div>  <!-- /.content -->
-  
   
 </div>
 @endsection  
 
 @section('bottom-js')
-
 <script src="{{ asset('assets/frontend/page/image/ImageCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
-
+<script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
 @endsection 

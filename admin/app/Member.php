@@ -17,4 +17,16 @@ class Member extends /*Model*/ Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function getRememberToken() { 
+        return null; 
+    }
+     
+    public function setRememberToken($value) { 
+        
+    } 
+
+    public function getRememberTokenName() { 
+        return null; 
+    }
 }
