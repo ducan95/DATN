@@ -104,6 +104,7 @@
 <script src="{{ asset('assets/base/bower_components/clipboard.min.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/ngclipboard.min.js') }}"></script>
 
+<script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 @yield('bottom-js')
 
 </body>

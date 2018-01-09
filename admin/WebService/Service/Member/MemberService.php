@@ -3,6 +3,7 @@ namespace WebService\Service\Member;
 use WebService\Repository\Member\MemberRepository;
 use WebService\Service\Service;
 use Validator;
+
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -42,12 +43,12 @@ class MemberService extends Service
   {
     $validator = Validator::make($request->all(), [
       'email'     => 'required|email',
-      'password'  => 'required',
+      /*'password'  => 'required',*/
       
     ],[
       'email.required'    => trans('validate.email_required'),
       'email.email'       => trans('validate.email_must_be_valid_email_address'),
-      'password.required' => trans('validate.password_required'),
+      /*'password.required' => trans('validate.password_required'),*/
 
     ]);
     if($validator ->fails()) {

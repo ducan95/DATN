@@ -33,11 +33,11 @@
                   <td ng-bind="member.id_member"></td>
                   <td ng-if="member.is_active == false" style="color: red; text-decoration: line-through;" ng-bind="member.email"></td>
                   <td ng-if="member.is_active == true" ng-bind="member.email"></td>
-                  <td ng-if="member.is_active == false" style="color: red; text-decoration: line-through;" ng-bind="member.birthday"></td>
+                  <td ng-if="member.is_active == false" ng-bind="member.birthday" style="color: red; text-decoration: line-through;" ></td>
                   <td ng-if="member.is_active == true" ng-bind="member.birthday"></td>
                   <td ng-if="member.gender==1">Male</td>
                   <td ng-if="member.gender==0">Female</td>
-                  <td>**********</td>
+                  <td>***********</td>
                   <td>
                     <a href="javascript:void(0)" ng-click="redirectEdit(member.id_member)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> {{ trans('web.edit') }}</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-danger" ng-click="activeMember(member.id_member)"><i class="fa fa-trash-o"></i>{{ trans('web.active') }}</a>
