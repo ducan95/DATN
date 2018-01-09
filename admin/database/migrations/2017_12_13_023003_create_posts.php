@@ -19,6 +19,7 @@ class CreatePosts extends Migration
             $table->integer('id_user');
             $table->string('title');
             $table->string('slug');
+            $table->longText('content');
             $table->integer('status')->unsigned();
             $table->string('thumbnail_path')->nullable();
             $table->dateTime('time_begin');
@@ -26,6 +27,7 @@ class CreatePosts extends Migration
             $table->integer('status_preview_top')->unsigned();
             $table->dateTime('deleted_at')->nullable();
             $table->boolean('is_deleted');
+            $table->timestamps();
         });
     }
 

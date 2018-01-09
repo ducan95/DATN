@@ -100,6 +100,7 @@
 {{--angular app--}}
 <script src="{{ asset('assets/frontend/config/config.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/lang.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/angular-ui-switch.js') }}"></script>
 
 @yield('bottom-js')
 

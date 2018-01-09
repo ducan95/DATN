@@ -45,19 +45,23 @@ class PostService extends Service
   {	
     try {
       $validator = Validator::make($request->all(), [
-        'title' => 'required',
-        'id_release_number' => 'required',
-        'thumbnail_path' => 'required',
-        'status_preview_top'=> 'required',
-        'content ' => 'required',
-        'status' => 'required'
+        /*'title'               => 'required',
+        'thumbnail_path'      => 'required',
+        'id_release_number'   => 'required',
+        'time_begin'          => 'required',
+        'time_end'            => 'required',
+        'status_preview_top ' => 'required',
+        'content'             => 'required',
+        'status'              => 'required'*/
       ],[
-        'title.required'=> trans('validate.image_required'),
+        /*'title.required'=> trans('validate.image_required'),
+        'thumbnail_path..required'=> trans('validate.image_required'),
         'id_release_number.image'=> trans('validate.image_must_be_valid_image_address'),
-        'thumbnail_path.max'=> trans('validate.maximum_image_size_is_320MB'),
-        'status_preview_top' => trans('validate.name_exists')
-        'content' => trans('validate.name_exists')
-        'status' => trans('validate.name_exists')
+        'time_begin.required' => trans('validate.image_required'),
+        'time_end.required' => trans('validate.image_required'),
+        'status_preview_top.required' => trans('validate.name_exists'),
+        'content.required' => trans('validate.image_required'),
+        'status.required' => trans('validate.image_required'),*/
       ]);
 
       if($validator ->fails()) { 
@@ -70,11 +74,10 @@ class PostService extends Service
         if(isset($request->title)){
           $dataReq['slug'] = str_slug($request->title);
         }  
-
-        $dataReq['is_deleted'] = 111;//str_slug($request->title);
-        $dataReq['deleted_at'] = 11;//str_slug($request->title);
-        $dataReq['id_user'] = 11;//str_slug($request->title);
-        $res['data'] = PostRepository::getInstance()->save($dataReq); return $res;
+        $dataReq['is_deleted'] = false;
+        $dataReq['deleted_at'] = null;
+        $dataReq['id_user'] = Auth::user()->id_user; 
+        $res['data'] = PostRepository::getInstance()->save($dataReq); 
       }
     } catch(\Exception $e) {
         $res['errors']['msg'] = $e->getMessage();

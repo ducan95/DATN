@@ -22,7 +22,15 @@
     'active'						=> 'アクティブ',
     'cancel'						=> 'キャンセル',
     'password'					=> 'パスワード',
-    
+    'creat_new_post'    => '新しい投稿を作成',
+    'date_start_public' => '公開開始日',
+    'date_end_public'   => '終了日公開',
+    'creat_finish'      => '完了を作成する',
+    'thumbnail'         => 'サムネイル',
+    'release_number'    => 'リリース番号',
+    'display_top'       => 'ディスプレイトップ',
+    'category'          => 'カテゴリー',
+    'image_for_post'    => '投稿用画像',
 	  'webClient' => [
 			'new_arrivals' 		=> '新着',
 			'performing_arts' => '芸能',
