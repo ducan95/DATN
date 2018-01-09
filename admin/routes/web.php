@@ -42,7 +42,8 @@ Route::group([
  * ROUTE ADMIN WEB
  */
 Route::group([ 
-  'middleware' => 'checkAdminLogin',
+ 'middleware' => 'checkAdminLogin',
+   // 'middleware' => 'CheckUser',
   'prefix'     => config('admin.prefix.web'),
   'namespace'  => 'WebAdmin\src'
 ], function() {
@@ -52,11 +53,14 @@ Route::group([
     'as' => 'getIndex'
   ]);
    /** router web user **/
-  Route::group([ 'prefix' => 'user' ],function(){
+  Route::group([ 
+  'prefix' => 'user',
+  'middleware' => 'CheckUser',
+], function(){
 
     Route::get('/',[
         'uses' => 'UserController@viewIndex' ,
-        'as'  => 'webUserIndex'
+        'as'  => 'webUserIndex',
     ]);
 
     Route::get('/edit',[
