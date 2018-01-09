@@ -1,17 +1,22 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{ trans('web.list_image') }}
+@endsection 
+
 @section('content')
 <div ng-controller="ImageCtrl" ng-init="getImages(1)">
    <!-- Content Header (Page header) -->
     <section class="content-header">
-     <h3>{{ trans('web.list_image') }}</h3>
+     <h1>{{ trans('web.list_image') }}</h1>
     </section>
     <!-- Main content -->
     <section class="content">
-      <div class="row" style="margin-bottom: 15px;margin-top:15px;">
+      <div class="row" style="margin-bottom: 25px;margin-top:15px;">
         <div class="col-md-2">
           <a href="{{ route('webImageAdd')}}"  class="btn btn-block btn-success">{{ trans('web.add_new_image') }}</a>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-4 col-md-offset-6">
           <div class="box-tools">
             <div class="input-group input-group-sm" >
               <input type="text" name="table_search" ng-model='parameter' class="form-control pull-right" placeholder="">
@@ -24,8 +29,33 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 " >
-          <div class="item-image" ng-repeat="image in images">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-striped">
+                <tr ng-repeat="image in images" class="media-wrap">
+                  <td style="width: 10px;padding-left: 30px">
+                    <button ng-click="deleteImage(image.id_image, $index)" type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                  </td>
+                  <td style="padding-left: 20px">
+                    <div class="media-thumbnail">
+                      <div class="media-img" style="background-image: url('{{storage_asset()}}/@{{image.path}}')"></div>
+                    </div>
+                    <p class="media-name">
+                      <a target="_blank" href="{{storage_asset()}}/@{{image.path}}">{{ storage_asset() }}/@{{ image.path }}</a>
+                      <button title="Copy URL image to clipboard" class="btn btn-copy" ngclipboard ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" data-clipboard-text="{{storage_asset()}}/@{{image.path}}">
+                        <img src="{{ asset('assets/img/icon/clippy.svg') }}" alt="Copy to clipboard">
+                      </button>
+                      <span ng-bind="image.name"></span>
+                    </p>
+                   
+                  </td>
+                  <td style="width: 200px" ng-bind="image.created_at"></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          {{-- <div class="item-image" ng-repeat="image in images">
             <div class="content-image-left ">
               <a href="javascript:void(0)"  ng-click="deleteImage(image.id_image, $index)">
                 <i class="fa  fa-trash"></i></a>
@@ -57,7 +87,7 @@
               </div>
             </div>
             <div class="clear"></div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </section>

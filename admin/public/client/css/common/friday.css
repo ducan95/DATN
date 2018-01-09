@@ -1,0 +1,420 @@
+.col-md-2-4{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 992px){
+    .col-md-2-4{
+        float: left;
+        width: 20%;
+    }
+}
+
+/*top space between rows*/
+.top-buffer { margin-top:10px; }
+.top-buffer-30 { margin-top:30px; }
+.top-buffer-60{margin-top: 60px}
+.bottom-buffer { margin-bottom:10px; }
+.bottom-buffer-20{margin-bottom: 20px}
+.bottom-buffer-30{margin-bottom: 30px}
+.bottom-buffer-60{margin-bottom: 60px}
+.btn-custom{
+    background-color: #45818e !important;
+}
+.btn-custom:hover{
+    color:white !important;
+}
+
+.btn-pink{
+    background-color: #E62148;
+    color: #fff;
+}
+
+.btn-sky{
+    background-color: #a4c2f4;
+    color: #222;
+}
+
+.btn-sky:hover{
+    background-color: #8fa9d4;
+}
+.btn-book{
+    background-color: #FBFAF5;
+    padding: 15px;
+    color: #145791;
+    font-weight: bold
+}
+
+.btn-orange{
+    background-color: #EA854F;
+    color: #fff
+}
+
+.btn-orange:hover,.btn-orange:active,.btn-orange:focus{
+    color: #fff;
+    background-color: #ef6f2b;
+}
+
+.btn-info-faint{
+    background-color: #a2cad4;
+    border-color: #5eb9d0;
+}
+
+.btn-info-faint:hover,.btn-info-faint:focus{
+    background-color: #97bac3;
+}
+
+/*==============================================================================
+Login and register button
+==============================================================================*/
+.btn-register-member,
+.btn-login-member,
+.btn-release-member,
+.btn-change-member{
+    display: inline-block;
+    max-width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #fff;
+    border: none;
+    outline: 0;
+    text-align: center
+}
+    
+/*Register button*/
+.btn-register-member{
+    background-image: url('../../media/icon/regist-normal.jpg');
+}
+
+.btn-register-member:hover,
+.btn-register-member:active,
+.btn-register-member:focus{
+    background-image: url('../../media/icon/regist-hover.jpg');
+    /*opacity: 0.7;*/
+}
+
+/*Login button*/
+.btn-login-member{
+    background-image: url('../../media/icon/login-normal.jpg');
+}
+
+.btn-login-member:hover,
+.btn-login-member:active,
+.btn-login-member:focus{
+    background-image: url('../../media/icon/login-hover.jpg');
+    /*opacity: 0.7;*/
+}
+
+.btn-release-member > span,
+.btn-change-member > span{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+}
+
+.btn-release-member,
+.btn-change-member{
+    background-color: #E62148;
+    color: white;
+    border-radius: 5px;
+    height: 60px;
+    font-weight: bold;
+}
+
+.btn-change-member:hover,
+.btn-change-member:active,
+.btn-change-member:focus,
+.btn-release-member:hover,
+.btn-release-member:active,
+.btn-release-member:focus{
+    color: white;
+    opacity: 0.8
+}
+
+.btn-0-336{
+    border-radius: 3px;
+    cursor: pointer
+}
+
+.btn-0-336 > span{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+}
+
+.container-course{
+    margin: 20px 0;
+}
+
+.btn-back,
+.btn-back:active,
+.btn-back:focus,
+.btn-back:hover{
+    border: 1px solid #313131;
+}
+
+/* CSS for label */
+.label-group > p{
+    line-height: initial;
+    padding: 0 0 4px 0;
+}
+
+.label-new{
+    background-color: rgb(255, 0, 0);
+}
+.label-block{
+    display: block;
+    padding: 12px;
+}
+
+.label-block-top-bottom{
+    display: block;
+    padding: 12px 0px 12px 0px;
+}
+.label-credit-only{
+    background-color: #7f6000;
+    color: #fff;
+}
+.label-free{
+    background-color: #93c47d;
+    color: #fff;
+}
+
+.label-archive2{
+    background-color: #85200c;
+    color: #fff;
+}
+
+.label-course{
+    padding: 5px;
+    display: block;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.label-course.large{
+    font-size:20px;
+    font-weight:bold;
+}
+.label-course.label-course-teal{
+    background-color: #1A8188;
+}
+.label-course.label-course-navy{
+    background-color: #1E4891;
+}
+
+.bg-preliminary{
+    background-color: #3c78d8;
+}
+
+.bg-limited{
+    background-color: #38761d;
+}
+
+.friday-loading{
+    background-image: url('../../media/icon/loading.gif');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 20px;
+    display: inline-block;
+}
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover{
+    background-color: #228d9c !important;
+    border: 1px solid transparent
+}
+
+/* CSS for sidebar box */
+.box-sidebar{
+    border-top: 1px solid #d2d6de !important;
+}
+
+.dashed-xs-primary{
+    border: 1px dashed #0B85A1 !important
+}
+
+.dashed-sm-primary{
+    border: 2px dashed #0B85A1 !important
+}
+
+.dashed-md-primary{
+    border: 3px dashed #0B85A1 !important
+}
+
+.dashed-lg-primary{
+    border: 4px dashed #0B85A1 !important
+}
+
+.dashed-xs-default{
+    border: 1px dashed #ddd !important
+}
+
+.dashed-sm-default{
+    border: 2px dashed #ddd !important
+}
+
+.dashed-md-default{
+    border: 3px dashed #ddd !important
+}
+
+.dashed-lg-default{
+    border: 4px dashed #ddd !important
+}
+
+/* CSS for color */
+.text-white{color: #fff}
+
+.text-blurry{
+    color: transparent !important;
+    text-shadow: 0 0 5px rgba( 0, 0, 0, 0.5);
+}
+
+.text-limit{
+    display:inline-block;
+    width:100%;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+
+.text-require:after{
+    content: "※必須";
+    color: #D6134F;
+    float: right!important
+}
+
+.text-orange{
+    /*color: #C65B0D!important;*/
+    color: #EA854F!important;
+    font-weight: bold;
+    line-height: 34px;
+    font-size: 16px;
+}
+
+.text-desc{
+    color: #00f;
+}
+
+.text-pink{
+    color: #d37aa1;
+}
+
+.white-space{
+    white-space: pre-wrap;
+}
+
+/*Link color*/
+.link-gray{
+    color: #333 !important;
+}
+.link-gray:hover,
+.link-gray:active,
+.link-gray:visited{
+    color: gray !important;
+}
+
+/* CSS for admin page */
+.admin-friday-pagination{}
+.admin-friday-pagination .pagination{
+    margin: 0;
+}
+
+/* CSS for user site */
+.box-user-sidebar{
+    border-top: 1px solid #d2d6de !important;
+}
+
+.box-user-sidebar .box-header{
+    background: #303130;
+    color: #fff;
+}
+.box-user-sidebar .box-header .label{
+    border-radius: 10px;
+    padding: 3px 10px;
+    letter-spacing: 1.5px;
+    margin-left: 10px;
+}
+
+
+.box-callout-header{
+    border-left: 3px solid #d72727;
+}
+.box-callout-header > *{
+    border-left: 1px solid #222;
+    border-bottom: 1px solid #222;
+    margin-left: 5px;
+    padding: 5px;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* CSS for line height */
+.line-height-md{
+    line-height: 30px;
+}
+
+/* Large desktops and laptops */
+/*@media (min-width: @screen-lg-min) {}*/
+@media (min-width: 1200px) {}
+
+/* Landscape tablets and medium desktops */
+/*@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {}*/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/* CSS for PC and Ipad */
+@media (min-width: 768px){
+    .mobile-element{
+        display: none !important;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+/*@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {}*/
+@media (max-width: 767px) {
+    .padding-sm{
+        padding: 5px;
+    }
+
+    .mobile-hidden{
+        display: none;
+    }
+    
+    .pc-element{
+        display: none !important;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .padding-sx{
+        padding: 3px;
+    }
+}
+
+/*------------------------------------------------------------------------------
+| Register page
+| ----------------------------------------------------------------------------*/
+.register-note{
+    font-size: 16px;
+    font-weight: bold;
+    color: #f08300;
+}

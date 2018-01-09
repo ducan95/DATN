@@ -17,7 +17,7 @@ class CreateMembersTable extends Migration
             $table->increments('id_member');
             $table->string('email')->unique();
             $table->string('password');
-            $table->dateTime('birthday');
+            $table->date('birthday');
             $table->boolean('gender');
             $table->boolean('is_receive_email');
             $table->string('member_plan_code');

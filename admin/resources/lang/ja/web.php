@@ -40,7 +40,9 @@
 			'gravure' 				=> 'グラビア',
 			'recommendation'	=> 'オススメ',
 			'logout'					=> 'ログアウト',
-
+			'title' => [
+				'release' => '発売号別の記事一覧 - FRIDAYデジタル',
+			],
 		]
 	]
 	

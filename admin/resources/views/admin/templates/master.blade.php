@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> @yield('title')</title>
+  <title> @yield('title') </title>
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/faviconf.ico') }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -38,7 +38,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">     
 </head>
-<body class="hold-transition skin-purple-light sidebar-mini" ng-cloak>
+<body class="hold-transition skin-purple-light sidebar-mini animated fadeIn" ng-cloak>
 <div></div>
 <div id="spinner_sougouzyanaru">
     <div id="spinner_sougouzyanaru-opacity"></div>
@@ -91,17 +91,20 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
-
 <!-- SlimScroll -->
 <script src="{{ asset('assets/base/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/base/dist/js/demo.js') }}"></script>
 
-{{--angular app--}}
+<!-- App Config -->
 <script src="{{ asset('assets/frontend/config/config.js') }}"></script>
+<!-- Japanese Charecter -->
 <script src="{{ asset('assets/frontend/extension/lang.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-ui-switch.js') }}"></script>
-
+<!-- Ng-Clipboard -->
+<script src="{{ asset('assets/base/bower_components/clipboard.min.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/ngclipboard.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 @yield('bottom-js')
 
 </body>

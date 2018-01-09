@@ -33,4 +33,3 @@ SOUGOU_ZYANARU_MODULE
     }
 });
 
-
