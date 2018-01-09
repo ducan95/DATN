@@ -242,6 +242,74 @@ uploadImage, $q, $window, toastr, tranDate ){
     }); */  
   };
 
+  $scope.ridirectquickedit=function(id_post){
+    var editpost=PostService.get({id : id_post},function(res){
+      if (typeof res != "undefined") {
+        var editpost= res.data;
+        $scope.quickedit = function (editpost){
+        var form = document.querySelector("form#myModal");
+
+        //Get value from ng-model
+        var gettitle = editpost.title;
+        var getreleasenumber = 1;
+        var gettime_begin = editpost.time_begin;
+        var gettime_end = editpost.time_end;
+        var deleted_at=null;
+        var is_deleted=false;
+        var getstatus=editpost.status_post;
+
+        console.log(gettitle)
+        console.log(getreleasenumber)
+        console.log(gettime_begin)
+        console.log(gettime_end)
+        console.log(getstatus)
+        console.log(id_post)
+        console.log(editpost.slug)
+        console.log(editpost.thumbnail_path)
+        console.log(editpost.status_preview_top)
+        console.log(editpost.id_user)
+        console.log(deleted_at)
+        console.log(is_deleted)
+        // Update category
+        PostService.update({
+          id              : id_post,
+          title           :gettitle,
+          slug            :editpost.slug,
+          id_user         :editpost.id_user,
+          id_release_number: getreleasenumber,
+          time_begin        : gettime_begin,
+          time_end          : gettime_end,
+          status            : getstatus,
+          thumbnail_path    :editpost.thumbnail_path,
+          status_preview_top :editpost.status_preview_top,
+          password            :editpost.password,
+          deleted_at          :deleted_at,
+          is_deleted          : is_deleted
+        },function (){
+        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
+          });
+        } 
+ 
+        $scope.status=[
+        { id : 1 , name : 'Draff'},
+        { id : 2 , name : 'Chuẩn bị công khai'},
+        { id : 3 , name : ' Công khai'},
+        { id : 4 , name : ' Không công khai'},
+        ];
+        console.log($scope.status)
+
+
+        $scope.loadPost = function () { 
+          PostService.get({ id: id_post },function(res) {
+          $scope.editpost = res.data[0];
+          // console.log($scope.editpost)
+          });
+        };
+        $scope.loadPost();
+      }
+    });
+  }
+
 }])
 
 

@@ -117,17 +117,18 @@ class PostRepository extends Repository
      	$post = Post::find($id);
      	 if(!empty($post)) {
        	$post->fill([
-          'title'    					=> $data['title'],
-          'slug'							=> $data['slug'],
-          'id_user'						=> $data['id_user'],
-          'thumbnail_path'		=> $data['thumbnail_path'],
+          'title'             => $data['title'],
+          'slug'              => $data['slug'],
+          'id_user'           => $data['id_user'],
+          'password'          => $data['password'],
+          'thumbnail_path'    => $data['thumbnail_path'],
           'status_preview_top'=> $data['status_preview_top'],
-          'deleted_at'				=> $data['deleted_at'],
+          'deleted_at'        => $data['deleted_at'],
           'id_release_number' => $data['id_release_number'],
-          'time_begin'    		=> $data['time_begin'],
-          'time_end'      		=> $data['time_end'],
-          'is_deleted' 				=> $data['is_deleted'],
-          'status'     				=> $data['status']
+          'time_begin'        => $data['time_begin'],
+          'time_end'          => $data['time_end'],
+          'is_deleted'        => $data['is_deleted'],
+          'status'            => $data['status']
         ]);  
         $post->save();
         return $post;  

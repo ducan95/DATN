@@ -55,8 +55,8 @@ class PostService extends Service
         'title.required'=> trans('validate.image_required'),
         'id_release_number.image'=> trans('validate.image_must_be_valid_image_address'),
         'thumbnail_path.max'=> trans('validate.maximum_image_size_is_320MB'),
-        'status_preview_top' => trans('validate.name_exists')
-        'content' => trans('validate.name_exists')
+        'status_preview_top' => trans('validate.name_exists'),
+        'content' => trans('validate.name_exists'),
         'status' => trans('validate.name_exists')
       ]);
 

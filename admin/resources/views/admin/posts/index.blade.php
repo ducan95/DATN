@@ -45,7 +45,7 @@
 			</div>
 			<div class="col-md-2">
 				<label>Category Children</label>
-          <select name='categoryChildren' ng-model='categoryChildren' >
+          <select name='categoryChildren' ng-model='categoryChildren' style="width: 115px">
             <option 
             	ng-repeat="catChildrent in listCatChildrent"
               value="@{{catChildrent.id_category }}"
@@ -53,13 +53,13 @@
             </option>
           </select>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label>Status</label>
   			 <select ng-model = "status">
   			 	<option ng-repeat= "item in listStatus" value="@{{item.id}}" ng-bind = "item.name"></option>
   			 </select>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label>Creator</label>
 			</div>
 			<a href="#"><button class="btn btn-primary" style="margin-left: 50px" ng-click="searchPost()">Search</button></a>
@@ -86,7 +86,7 @@
               <img  style="width: 60px; height: 60px;" src="{{storage_asset()}}/@{{post.thumbnail_path}}">
             </td>
             <td ng-bind="post.title"></td>
-            <td ng-bind="post.username"></td>
+            <td ng-bind="post.creator"></td>
             <td ng-bind="post.categories_name"></td>
             <td ng-bind="post.release_name"></td>
             <td ng-bind="post.time_begin"></td>
@@ -131,10 +131,11 @@
 						<div class="form-group" style="padding-top: 40px">
 							<label class="col-md-3">Status</label>
 							<div class="col-md-9">
-								<select ng-model="editpost.status_post" ng-options="st.key as st.value for st in status">
+								<select ng-model="editpost.status_post">
 									<!-- <option ng-value="Draff" selected="selected"></option>
 									<option ng-value="ABC"></option>
 									<option ng-value="EFK"></option> -->
+									<option ng-repeat= "st in status" value="@{{st.id}}" ng-bind = "st.name"></option>
 								</select>
 							</div>
 						</div>
