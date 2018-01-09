@@ -1,7 +1,14 @@
 @extends('admin.templates.master')
+
+@section('title')
+{{trans('web.category')}}
+@endsection 
+
 @section('content')
 <div ng-controller="CategoryCtrl">
-	<h2 style="margin-top: 0px;padding-top: 25px;padding-left: 15px">カテゴリー一覧</h2>
+    <section class="content-header">
+  	 <h1 class="mg-bt-25">カテゴリー一覧</h1>
+    </section>
 	 <section class="content">
       <div class="row">
         <div class="col-md-6">
@@ -9,7 +16,7 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <table class="table table-hover">
-                <caption>親カテゴリー</caption>
+                <tr><th colspan="2">親カテゴリー</th></tr>
                 <tr ng-repeat='category in categories' ng-class="{'active':category.id_category==states.categoryactive}" id="a" class="category" ng-click="states.categoryactive=category.id_category"> 
                   <td style="cursor: pointer;padding-left: 50px" ng-click="changeToCategoryChil(category.id_category)" ng-bind="category.name"></td>
                   <td>
@@ -31,12 +38,10 @@
         <!-- /.col -->
         <div class="col-md-6">
           <div class="box">
-            <div class="box-header">
-            </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <table class="table table-hover">
-                <caption>子カテゴリー</caption>
+                <tr><th colspan="2">子カテゴリー</th></tr>
                 <tr ng-repeat='categoryChil in categoryChildren'>
                   <td ng-bind="$index + 1"></td>
                   <td style="padding-left: 50px" ng-bind="categoryChil.name"></td>

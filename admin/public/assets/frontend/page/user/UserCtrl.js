@@ -1,13 +1,10 @@
 /**
- * Created by rikkei on 15/12/2017.
+ * Created by Rikkei Intern Pro Team on 15/12/2017.
  */
 
 SOUGOU_ZYANARU_MODULE
-/**
- * Show and delete User
- * */
   .controller('UserCtrl', function ($scope, UserService, $window, popupService, RoleService, toastr) {
-  //Get list users
+
   UserService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.users = res.data;
@@ -27,22 +24,22 @@ SOUGOU_ZYANARU_MODULE
   }
 
   // Delete users
-  $scope.deleteUser = function (id_user) {
-    if (popupService.showPopup('本当に削除する')) {
+  $scope.deleteUser = function (id_user, index) {
+    if (popupService.showPopup(TRANS.MSG_DELETE)) {
       var user = UserService.get({ id: id_user }, function (res) {
         if (typeof res != "undefined") {
           var user = res.data;
           // Check delete admin
           if (user.role_code == 's_admin') {
-            alert('削除できません。');
+            alert(TRANS.DELETE_ADMIN);
           } else {
             $scope.user = UserService.delete({ id: user.id_user }, function () {
               
               if($scope.user.is_success == true) {
-                $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
-                toastr.success('Xóa thành công !');
+                $scope.users.splice(index, 1);
+                toastr.success(TRANS.SUCCESS);
               } else { 
-                toastr.error('Có lỗi khi xóa vui lòng thử lại');
+                toastr.error(TRANS.SUCCESS);
               }    
               
             });
@@ -98,8 +95,8 @@ SOUGOU_ZYANARU_MODULE
         },
       };
       var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
-      validate.validators.email.message = 'メールアドレスの入力を行ってください';
+      validate.validators.presence.message = TRANS.REQUIRED;
+      validate.validators.email.message = TRANS.TYPE_EMAIL;
       $scope.error = validate(form, constraints);
 
       // Check success
@@ -110,9 +107,9 @@ SOUGOU_ZYANARU_MODULE
           // Redirect & show notification
           if($scope.user.is_success == true) {
             $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user';
-            toastr.success('Thêm thành công !');
+            toastr.success(TRANS.SUCCESS);
           } else { 
-            toastr.error('Có lỗi khi thêm vui lòng thử lại');
+            toastr.error(TRANS.ERROR);
           }    
         });
       }
@@ -159,8 +156,8 @@ SOUGOU_ZYANARU_MODULE
       },
     };
     var form = document.querySelector("form#main");
-    validate.validators.presence.message = '空白のところで入力してください。';
-    validate.validators.email.message = 'メールアドレスの入力を行ってください';
+    validate.validators.presence.message = TRANS.REQUIRED;
+    validate.validators.email.message = TRANS.TYPE_EMAIL;
     $scope.error = validate(form, constraints);
 
     // If clean data -> Edit

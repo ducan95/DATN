@@ -43,9 +43,11 @@ class MemberRepository extends Repository
       $member = Member::find($id);
       if(!empty($member)) {
         $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
+        $password = (isset($dataReq['password']))? bcrypt($dataReq['password']) :  $member->password;
+        $birthday = (isset($dataReq['birthday']))? $dataReq['birthday']: new date($member->birthday);
         $member->fill([
           'email'             => $dataReq['email'],
-          'password'          => bcrypt($dataReq['password']),
+          'password'          => $password,
           'birthday'          => $dataReq['birthday'],
           'gender'            => $dataReq['gender'],
           'is_receive_email'  => $is_receive_email,
@@ -99,7 +101,7 @@ class MemberRepository extends Repository
   public function findOne($id)
   {
     try {
-      return Member::where('id_member', '=',$id)->where('is_deleted', '=', false)->first();
+      return Member::where('id_member', '=',$id)->first();
     } catch(\Exception $e){ 
       throw $e;
     }

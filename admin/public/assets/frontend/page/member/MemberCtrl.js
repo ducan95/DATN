@@ -6,7 +6,7 @@ SOUGOU_ZYANARU_MODULE
 /**
  * Show and delete User
  * */
-.controller('MemberCtrl', function ($scope, MemberService, $window, popupService) {
+.controller('MemberCtrl',['$scope','MemberService', '$window', 'popupService','tranDate' ,function ($scope, MemberService, $window, popupService,tranDate) {
 
   $scope.location = APP_CONFIGURATION.BASE_URL;
   $scope.currentPage = 1;
@@ -18,7 +18,6 @@ SOUGOU_ZYANARU_MODULE
       $scope.members = res.data;
     }
   })*/
-
   $scope.activeMember = function (id_member) {
     if (popupService.showPopup('Are you sure?')) {
       var member = MemberService.get({ id: id_member }, function (res) {
@@ -41,8 +40,11 @@ SOUGOU_ZYANARU_MODULE
     }
     MemberService.get({page:pageNumber},function(res) {
       if(res.data != undefined) {
-        console.log(res); 
         $scope.members       = res.data.data;
+        console.log($scope.members);
+        angular.forEach($scope.members,function(value){
+          value.birthday = tranDate.tranDate(value.birthday);
+        });
         $scope.total        = res.data.total;
         $scope.currentPage  = res.data.current_page;
         $scope.lastPage     = res.data.last_page;
@@ -63,7 +65,7 @@ SOUGOU_ZYANARU_MODULE
     $scope.id_member = id_member;
   }
 
-})
+}])
 
 
   //add member
@@ -100,7 +102,7 @@ SOUGOU_ZYANARU_MODULE
       $scope.member.birthday = date;
       console.log($scope.member);
       $scope.member.$save(function () {
-      //console.log($scope.member);
+      console.log($scope.member);
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
       });
     }
@@ -124,7 +126,7 @@ SOUGOU_ZYANARU_MODULE
         presence: true,
       },
       password: {
-        presence: true,
+        //presence: true,
         length: {
           minimum: 6
         }
@@ -138,7 +140,6 @@ SOUGOU_ZYANARU_MODULE
     validate.validators.presence.message = '空白のところで入力してください。';
     validate.validators.email.message = 'メールアドレスの入力を行ってください';
     $scope.error = validate(form, constraints);
-    console.log($scope.error);
     //Edit member
     var date= $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";
 
@@ -148,10 +149,7 @@ SOUGOU_ZYANARU_MODULE
       var getPassword = member.password;
       var getBirthday = date;
       var getGender   = member.gender
-      console.log(getPassword);
-      console.log(getBirthday);
-      console.log(getGender);
-
+  
       MemberService.update({
         id        : $scope.id,
         email     : getEMail,
@@ -160,7 +158,8 @@ SOUGOU_ZYANARU_MODULE
         gender    : getGender,
         member_plan_code: 'free',
         is_receive_email: false,
-        is_deleted: false
+        is_deleted: false,
+        is_active : true,
       }, function (){
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member';
       });
@@ -171,6 +170,7 @@ SOUGOU_ZYANARU_MODULE
   $scope.loadMember = function () { 
     MemberService.get({ id: $scope.id },function(res) {
       $scope.member = res.data;
+      $scope.member.birthday = new Date($scope.member.birthday);
     });
   };
   $scope.loadMember();
