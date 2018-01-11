@@ -413,16 +413,45 @@ Route::group([
 
   Route::get('/{name}-{id}',[
     'uses'  => 'EndUserController@cat',
-    'as'  => 'WebClientEndUserCat'
+    'as'    => 'WebClientEndUserCat'
   ]);
 
+  Route::post('loadmore',[
+    'uses'  => 'EndUserController@loadmore',
+    'as'    => 'WebClientEndUserLoadmore',
+  ]);
+
+  Route::get('/{name}-{id}.html',[
+    'uses'  => 'EndUserController@detail',
+    'as'    => 'WebClientEndUserDetail'
+  ]);
+
+  Route::get('release',[
+    'uses'  => 'EndUserController@release',
+    'as'    => 'WebClientEndUserRelease'
+  ]);
+  
+  Route::post('loadmoreRelease',[
+    'uses'  => 'EndUserController@loadmoreRelease',
+    'as'    => 'WebClientEndUserLoadmoreRelease',
+  ]);
+
+  Route::get('release/{id}',[
+    'uses' => 'ReleaseController@postOfRelease',
+    'as'   => 'WebClientReleasePostOfRelease'
+  ]);
+
+  Route::post('loadmorePostOfRealease',[
+    'uses'  => 'ReleaseController@loadmorePostOfRealease',
+    'as'    => 'WebClientReleaseLoadmorePostOfRelease',
+  ]);
   /* Release Client */
-  Route::group(['prefix' => '/release', 'namespace' => 'src'],function(){
+  /*Route::group(['prefix' => '/release', 'namespace' => 'src'],function(){
     Route::get('/', [
       'uses' => 'ClientReleaseController@index',
       'as'   => 'ClientReleaseIndex'
     ]);
-  });
+  });*/
   
 });
 

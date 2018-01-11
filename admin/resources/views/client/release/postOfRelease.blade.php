@@ -2,17 +2,14 @@
 @section('content')
 
 <div>
-	<h4 class="customize_h4">{{ $cat->name}} </h4>
+	<div class="box-callout-header"><span>{{ $release_number->name }}</span></div>
 	<?php 
 		$totalRecord = count($arPosts);
 		$row_count = 4;
 		$totalPage = ceil($totalRecord/$row_count);
 		$current_page = 1;
 		$offset = ($current_page - 1) * $row_count;
-		$arPostsLoad = DB::table('post_category')->join('posts', function($join) {
-                  $join->on('posts.id_post', '=', 'post_category.id_post');  })
-                ->join('categories', function($join) {
-                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->skip($offset)->take(4)->get();
+		$arPostsLoad = DB::table('posts')->where('id_release_number','=',$id)->skip($offset)->take(4)->get();
 	?>
 	<div class="loadmore-{{ $current_page }}">
 		@foreach ($arPostsLoad as $post)
@@ -50,7 +47,7 @@
     function loadmore(current_page, id) {
       var a = '.loadmore-'+current_page;
     $.ajax({
-      url: "{{route('WebClientEndUserLoadmore')}}", 
+      url: "{{route('WebClientReleaseLoadmorePostOfRelease')}}", 
       type: 'POST',
       dataType: 'html',
       data: {

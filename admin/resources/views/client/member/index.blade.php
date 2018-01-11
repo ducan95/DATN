@@ -1,4 +1,4 @@
-@extends('client.templates.master')
+@extends('client.layout.master')
 @section('content')
 <div>
     @if(Session::get('status_fail') != null)
@@ -11,15 +11,15 @@
 	<form action="{{ route('webClientMemberSave') }}" method="post" id="main" class="form">
 		{{ csrf_field() }}
 	  <div class="form-group">
-	    <label class="label" for="exampleInputEmail1">電子メールアドレス</label>
+	    <label class="label label_mize" for="exampleInputEmail1">電子メールアドレス</label>
 	    <input type="email" class="form-control" placeholder="Email" name="email">
 	  </div>
 	  <div class="form-group">
-	    <label class="label" for="exampleInputPassword1">パスワード</label>
-	    <input type="password" class="form-control" placeholder="Password" name="password" required>
+	    <label class="label label_mize" for="exampleInputPassword1">パスワード</label>
+	    <input type="password" class="form-control" placeholder="Password" name="password" >
 	  </div>
 	  <div class="form-group">
-	  	<label class="label">生年月日</label>
+	  	<label class="label label_mize">生年月日</label>
 			<input type="date" name="birthday">
 	  </div>
 	  <div class="checkbox">

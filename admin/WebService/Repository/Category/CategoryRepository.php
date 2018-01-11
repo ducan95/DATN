@@ -166,7 +166,8 @@ class CategoryRepository extends Repository
     catch(\Exception  $e){ 
       throw  $e;  
     }
-    }
+  }
+    
 
 }
     

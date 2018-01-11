@@ -15,4 +15,7 @@ class Post extends Model
   	return $this->belongsTo(ReleaseNumbers::class, 'id_release_number', $primaryKey);
   }
 
+  public function getItem($id){
+  	return $this->findOrFail($id);
+  }
 }

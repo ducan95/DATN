@@ -14,7 +14,7 @@
 		}
 	}
 	
-	/*function format_date($date){
+	function format_date($date){
 		try {
  			if($date != null) {
  				$objArray = explode('-', $date);
@@ -27,5 +27,5 @@
  			throw $e;
  		}
 	}
-*/
+
 ?>
