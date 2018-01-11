@@ -90,22 +90,22 @@ class PostRepository extends Repository
   }
 
   public function save($dataReq)
-  { 
-     try{
+  {  
+    try {
       $post = new Post();  
       $dataFill = [];
-      foreach ($post->getFillable() as $col) {
-        if(isset($dataReq[$col])) {
+      foreach ($post->getFillable() as $col) {  
+        if(isset($dataReq[$col]) ) { 
           $dataFill[$col] = $dataReq[$col];
-        } else {
+        } else if($col != 'deleted_at'){ 
           throw new \Exception($col." thieu");
         }
       }   
-      $post->fill($dataFill);
+      $post->fill($dataFill);  
       $post->save();
       return $post;
     }
-    catch(\Exception  $e){ 
+    catch(\Exception  $e) { 
       throw  $e;  
     }
   }

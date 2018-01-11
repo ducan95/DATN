@@ -23,11 +23,6 @@
 			<div class="col-md-2">
 				<label>Release Number</label>
 				<select name='releaseNumber' ng-model='releaseNumber'>
-					<!-- <option 
-						ng-repeat="post in posts" 
-						value="" 
-						ng-bind="post.release_name">	
-					</option> -->
 					<option value="1">zxcxzc</option>
 					<option value="2">zxcxzc</option>
 				</select>
@@ -86,7 +81,7 @@
               <img  style="width: 60px; height: 60px;" src="{{storage_asset()}}/@{{post.thumbnail_path}}">
             </td>
             <td ng-bind="post.title"></td>
-            <td ng-bind="post.username"></td>
+            <td ng-bind="post.id_user"></td>
             <td ng-bind="post.categories_name"></td>
             <td ng-bind="post.release_name"></td>
             <td ng-bind="post.time_begin"></td>
@@ -183,6 +178,7 @@
 <script src="{{ asset('assets/frontend/resource/PostResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/post/PostCtrl.js') }}"></script>

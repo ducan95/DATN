@@ -4,45 +4,43 @@
 <link rel="stylesheet" href="{{ asset('assets/base/bower_components/dropify/dist/css/dropify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/base/bower_components/sweetalert2/dist/sweetalert2.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/css/posts.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/css/angular-ui-switch.css') }}">
 @endsection
 
 @section('content')
 
 <div ng-controller="PostCtrl">
 	<section class="content-header">
-		<h2>Creat New Post</h2>
+		<h2>{{ trans('web.creat_new_post')}}</h2>
 	</section>
 	<section class="content">
 		<div class="row">
 				<form id="main" role="form" >
 					<div class="col-md-9">
 						<div class="form-group">
-							<label class="col-sm-2">Date Start Public</label>
+							<label class="col-sm-2">{{ trans('web.date_start_public')}}</label>
 							<div class="col-sm-5">
-								<input type="datetime" name="time_begin" class="form-control" 
-								ng-model="posts.time_begin">
+								<input type="date" name="timeBegin" class="form-control" 
+								ng-model="postBeginDate">
 							</div>
-							<label class="col-sm-2" id="status">Status : Draff</label>
+							<label class="col-sm-2" id="status" ng-bind="status"> </label>
 						</div>
 						<div class="form-group" id="dateend">
-							<label class="col-sm-3" >Date End Public :</label>
+							<label class="col-sm-3" >{{ trans('web.date_end_public')}}</label>
 							<label class="col-sm-3" ng-bind="dateStart"> </label>
-							<!-- <div class="col-sm-5">
-								<input type="datetime" name="time_end" class="form-control" ng-model="posts.time_end"> 
-							</div> -->
 							<div class="col-sm-2"></div>
 						</div>
 						<div class="form-group" id="article" >
-							<input  type="text" name="title" ng-model='post.title' style="width: 100%" >
+							<input  type="text" name="title" ng-model='postTitle' style="width: 100%" >
 						</div>
 						<div>
 							<textarea class="form-control ckeditor" rows="7" cols="10" id="editor1" 
-							ng-model="post.content" name="content"></textarea>
+							ng-model="postcontent" name="content"></textarea>
 						</div>
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-4" id="creatfinish">
-								<button class="btn btn-primary" type="submit" ng-click="creatPost()">Creat Finish</button>
+								<button class="btn btn-primary" type="submit" ng-click="creatPost()">{{ trans('web.creat_finish')}}</button>
 							</div>	
 							<div class="col-md-4"></div>
 						</div>	
@@ -50,7 +48,7 @@
 					<div class="col-md-3">
 						<div class=" box-solid">
 							<div id="thumbnail">
-								<p>Thumbnail</p>
+								<p>{{ trans('web.thumbnail')}}</p>
                 <div ngf-drop ngf-select  ng-model="thumbnail" class="drop-box"  ngf-max-size="320MB"
               ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
               accept="image/*"  ngf-pattern="'image/*'" >{{ trans('web.add_new_image') }}
@@ -60,20 +58,22 @@
           			</div>
 							</div>
 							<div id="release">
-								<span>Release Number</span>
-								<select id="selectrelease" ng-model="releaseNumber">
-									<option value="1" selected="selected">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select>
+								<span>{{ trans('web.release_number')}}</span>
+      					<select name="release" id="release" ng-model="listRelease.model">
+						      	<option ng-repeat="option in listRelease.availableOptions" 
+						      					value="@{{option.id_release_number}}"
+						      					ng-bind="option.name" 
+						      					ng-selected="@{{option.id_release_number == 2}}">
+						      	</option>
+						    </select>
 							</div>
 							<div id="display">
-								<p>Display Top</p>
-								<input type="checkbox" ng-model="statusPreviewTop" checked data-toggle="toggle" data-size="mini">
-								@{{statusPreviewTop}}
+								<p>{{ trans('web.display_top')}}</p>
+								<switch id="enabled" name="enabled" ng-model="statusPreviewTop" 
+								class="green"></switch>
 							</div>
 							<div id="category">
-								<p>Category</p>
+								<p>{{ trans('web.category')}}</p>
 								<ul class="sidebar-menu" data-widget="tree" >
 									<li class="" ng-repeat= "catParent in listCatParent">
 					          <input type="checkbox" name="" >
@@ -87,7 +87,7 @@
 								</ul>
 							</div>
 							<div id="image">
-								<p>Image for Post</p>
+								<p>{{ trans('web.image_for_post')}}</p>
                 <div ngf-drop  ng-model="file" class="drop-box"  ngf-max-size="320MB"
 		              ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
 		              accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
@@ -108,16 +108,26 @@
 	</section>	
 </div>
 
+
 @endsection
 @section('bottom-js')
-
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script type="text/javascript" src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/base/bower_components/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript">  
+	 CKEDITOR.replace( 'editor1',
+		{
+			filebrowserBrowseUrl : '{{asset('assets/base/bower_components/ckfinder/ckfinder.html') }}',
+			filebrowserImageBrowseUrl : '{{asset('assets/base/bower_components/ckfinder/ckfinder.html?type=Images')}}',
+			filebrowserFlashBrowseUrl :'{{ asset('assets/base/bower_components/ckfinder/ckfinder.html?type=Flash')}}',
+			filebrowserUploadUrl :'{{ asset('assets/base/bower_components/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files')}}',
+			filebrowserImageUploadUrl : '{{ asset('assets/base/bower_components/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+			filebrowserFlashUploadUrl : '{{asset('assets/base/bower_components/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash')}}'
+		});
+</script>
 <script src="{{ asset('assets/base/bower_components/dropify/dist/js/dropify.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/PostResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/post/PostCtrl.js') }}"></script>

@@ -13,20 +13,21 @@ class CreatePosts extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) { 
-            $table->increments('id_post'); 
-            $table->integer('id_release_number'); 
-            $table->integer('id_user'); 
-            $table->string('title'); 
-            $table->string('slug'); 
-            $table->longText('content'); 
-            $table->integer('status')->unsigned(); 
-            $table->string('thumbnail_path')->nullable(); 
-            $table->dateTime('time_begin'); 
-            $table->dateTime('time_end'); 
-            $table->integer('status_preview_top')->unsigned(); 
-            $table->dateTime('deleted_at')->nullable(); 
-            $table->boolean('is_deleted'); $table->timestamps(); 
+        Schema::create('posts', function (Blueprint $table) {
+            $table->increments('id_post');
+            $table->integer('id_release_number');
+            $table->integer('id_user');
+            $table->string('title');
+            $table->string('slug');
+            $table->longText('content');
+            $table->integer('status')->unsigned();
+            $table->string('thumbnail_path')->nullable();
+            $table->dateTime('time_begin');
+            $table->dateTime('time_end');
+            $table->integer('status_preview_top')->unsigned();
+            $table->dateTime('deleted_at')->nullable();
+            $table->boolean('is_deleted');
+            $table->timestamps();
         });
     }
 

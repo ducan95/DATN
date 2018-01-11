@@ -6,9 +6,9 @@
 
 SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
 ['$scope', 'PostService', 'CategoryService', 'ImageService', 'CategoryChildrenService', 
-'uploadImage', '$q', '$window', 'toastr', 'tranDate',
+'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService',
 function($scope, PostService, CategoryService, ImageService, CategoryChildrenService, 
-uploadImage, $q, $window, toastr, tranDate ){
+uploadImage, $q, $window, toastr, tranDate, ReleaseService){
 
   $scope.dateStart = tranDate.tranDate('2017-11-30');
   /**
@@ -22,9 +22,9 @@ uploadImage, $q, $window, toastr, tranDate ){
     if (pageNumber === undefined) {
         pageNumber = '1';
     }
-    PostService.find({page:pageNumber},function(res) {  
+    PostService.find({page:pageNumber},function(res) {   
       try {
-        if(res != undefined) {
+        if(res != undefined) { 
           $scope.posts  = res.data.data; // list posts
           $scope.total  = res.data.total; 
           $scope.currentPage  = res.data.current_page;
@@ -88,17 +88,44 @@ uploadImage, $q, $window, toastr, tranDate ){
       toastr.error(err);
     }
   };
-  
+  /**
+  ** function get list release
+  ** service ReleaseService 
+  ** api: /web_api/release/
+  ** return response list release
+  **/
+  ReleaseService.find({}, function(res){
+    try {
+      if(res != undefined) {
+        if(res.is_success) { 
+          $scope.listRelease = {
+            model: null,
+            availableOptions: res.data.data
+          };
+        } else {
+          throw res.error;
+        }
+      } else {
+        throw "undefined";
+      }
+    } catch(err) {
+      toastr.error(err);
+    }
+  });
   /**
   ** array status post 
   ** 
   **/     
-  $scope.listStatus = [ 
-    { id : 1 , name : 'Draff'},
-    { id : 2 , name : 'Chuẩn bị công khai'},
-    { id : 3 , name : ' Công khai'},
-    { id : 4 , name : ' Không công khai'},
-  ];
+  $scope.listStatus = {
+    availableOptions : [ 
+      { id : 1 , name : 'Draff'},
+      { id : 2 , name : 'Chuẩn bị công khai'},
+      { id : 3 , name : ' Công khai'},
+      { id : 4 , name : ' Không công khai'},
+    ] ,
+    selectedOption: { id: 1, name: 'Draff'} 
+  };
+    
   /**
   ** function search post
   ** service PostService 
@@ -106,7 +133,7 @@ uploadImage, $q, $window, toastr, tranDate ){
   ** param releaseNumber, categoryParent, categoryChildren, status, username
   ** return response API
   **/  
-  $scope.searchPost = function() {
+  /*$scope.searchPost = function() {
     PostService.get({
       releaseNumber : $scope.releaseNumber ,
       categoryParent : $scope.categoryParent, 
@@ -128,7 +155,7 @@ uploadImage, $q, $window, toastr, tranDate ){
         toastr.error(err);
       }
     });   
-  } ;
+  } ;*/
   /**
   ** function save images
   ** service uploadImage 
@@ -212,6 +239,25 @@ uploadImage, $q, $window, toastr, tranDate ){
     }
   };
   /**
+  ** function get status post 
+  ** param dateBegin
+  ** return status
+  **/ 
+  function getStatus(dateBegin = null){
+    var startDate = dateBegin.getTime(); 
+    var endDate = parseDate("01/01/3000").getTime(); 
+    return (startDate < endDate ) ? 1 : 4;
+  };
+  /**
+  ** function get status post 
+  ** param string
+  ** return new date
+  **/ 
+  function parseDate(str) {
+    var mdy = str.split('/');
+    return new Date(mdy[2], mdy[1], mdy[0]);
+  }
+  /**
   ** function save post
   ** service PostService 
   ** api: /web_api/post/,
@@ -219,30 +265,80 @@ uploadImage, $q, $window, toastr, tranDate ){
   ** return response API
   **/ 
   $scope.statusPreviewTop = true ;
-  $scope.creatPost =  function() {
-    //$scope.getPathImage($scope.thumbnail).then(function(data){ 
-      $scope.post = new PostService(); // create post form PostService
-      $scope.post.title =  1111;//$scope.post.title;
-      $scope.post.thumbnail_path = 111;//data.path;
-      $scope.post.id_release_number = 111;
-      $scope.post.time_begin = 1111;
-      $scope.post.time_end = 1111;
-      $scope.post.status_preview_top = 1111;//$scope.statusPreviewTop;
-      $scope.post.content = "zxczxcxzcxz";//$scope.post.content;
-      $scope.post.status = 1;//$scope.status;
-      $scope.post.$save(function(res){
-        if(res.is_success) {
-          console.log(res);
-        } else {
-
-        }
-      })  
-   /* }).catch(function(err){
-      toastr.error(err);
-    }); */  
+  $scope.creatPost =  function() {  console.log($('textarea.editor' ).val());
+    /*$scope.getPathImage($scope.thumbnail).then(function(data){ 
+      try {
+        $scope.post = new PostService(); // create post form PostService
+        $scope.post.title =  $scope.postTitle;
+        $scope.post.thumbnail_path = data.path;
+        $scope.post.id_release_number = $scope.listRelease.model;
+        $scope.post.time_begin = $scope.postBeginDate;
+        $scope.post.time_end = '3000-01-01';
+        $scope.post.status_preview_top = $scope.statusPreviewTop;
+        $scope.post.content = "zxczxcxzcxz";//$scope.post.content;
+        $scope.post.status = getStatus($scope.postBeginDate);
+        $scope.post.$save(function(res){
+          if(res.is_success) {
+            toastr.success("success");
+            console.log(res);
+          } else {
+            throw res.errors;
+          } 
+        });
+      } catch(err){
+        toastr.error(err);
+      }
+    }).catch(function(err){ toastr.error(err);});   */
   };
 
 }])
+
+
+
+var app = angular.module("CKEditorExample", ["ngCkeditor"]);
+  app.directive('ckEditor', function () {
+  return {
+    require: '?ngModel',
+    link: function (scope, elm, attr, ngModel) {
+      var ck = CKEDITOR.replace(elm[0]);
+      if (!ngModel) return;
+      ck.on('instanceReady', function () {
+        ck.setData(ngModel.$viewValue);
+      });
+      function updateModel() {
+        scope.$apply(function () {
+          ngModel.$setViewValue(ck.getData());
+        });
+      }
+      ck.on('change', updateModel);
+      ck.on('key', updateModel);
+      ck.on('dataReady', updateModel);
+
+      ngModel.$render = function (value) {
+        ck.setData(ngModel.$viewValue);
+      };
+    }
+  };
+});
+
+app.controller("MainCtrl", ["$scope", function($scope){
+  $scope.content = "<p> this is custom directive </p>";
+  $scope.content_two = "<p> this is ng-ckeditor directive </p>";
+}]);
+
+
+ <h1>Method 1</h1>
+    <textarea ng-model="content" data-ck-editor></textarea>
+    
+    {{content}}
+    
+    <hr>
+    
+    <h1>Method 2</h1>
+    <textarea ckeditor="editorOptions" ng-model="content_two"></textarea>
+    
+    {{content_two}}
+
 
 
 
