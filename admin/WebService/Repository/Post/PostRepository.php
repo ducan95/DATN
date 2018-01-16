@@ -5,7 +5,7 @@ use App\Post;
 use App\ReleaseNumbers;
 use App\PostCategory;
 use App\Category;
-
+use DB;
 
 /**
  * Created by PhpStorm.
@@ -143,6 +143,23 @@ class PostRepository extends Repository
   public function delete($id)
   { 
     
+  }
+
+  public function listOne($id){
+    try{
+      return Post::findOrFail($id);
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  //lấy ra cat
+  public function takeCatFirst($id_post){
+    try{
+      return DB::table('post_category')->where('id_post','=',$id_post)->select('id_category')->take(1)->get();
+    } catch(\Exception $e){
+      throw $e;
+    }
   }
 
 }

@@ -2,7 +2,7 @@
 namespace WebService\Repository\Category;
 use App\Category;
 use WebService\Repository\Repository;
-
+use DB;
 
 /**
  * Created by PhpStorm.
@@ -143,9 +143,7 @@ class CategoryRepository extends Repository
     }
   }
 
-  public function find($dataReq){
 
-  }
   public function saveChil($dataReq){
       try{
       $data = $dataReq->all();
@@ -167,7 +165,42 @@ class CategoryRepository extends Repository
       throw  $e;  
     }
   }
-    
+
+  //tim mot category bat ky (ke ca category cha + con)
+  public function find($id){
+    try{
+      return Category::findOrFail($id);
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  public function cat($id){
+    try{
+      $arPosts =  DB::table('post_category')->join('posts', function($join) {
+                  $join->on('posts.id_post', '=', 'post_category.id_post');  })
+                ->join('categories', function($join) {
+                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->get();
+                /*dd($arPosts);
+                die();*/
+      return $arPosts;
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+  
+  //hiển thị $row_count tin thuộc cat có id_cat  = $id, từ vị trí $offset  
+  public function loadmoreCat($offset, $row_count, $id){
+    try{
+      $arPostsLoad = DB::table('post_category')->join('posts', function($join) {
+                  $join->on('posts.id_post', '=', 'post_category.id_post');  })
+                ->join('categories', function($join) {
+                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->skip($offset)->take($row_count)->get();
+      return $arPostsLoad;
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
 
 }
     

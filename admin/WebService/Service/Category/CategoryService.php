@@ -108,10 +108,7 @@ class CategoryService extends Service
     return $res;
     }
     
-    public function find($request)
-    {
-
-    }
+    
     
     public function saveChil($request){
       $validator = Validator::make($request->all(), [
@@ -131,6 +128,50 @@ class CategoryService extends Service
       return $res;
       }
       
+    public function find($id)
+    {
+      $result=CategoryRepository::getInstance()->find($id);
+      try{
+        if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No Record');
+      }
+      }catch(\Exception $e) {
+        $res['errors'] = $e->getMessage();
+      }
+      return $res;
+    }
 
+    public function cat($id){
+      $result = CategoryRepository::getInstance()->cat($id);
+      try{
+        if(!empty($result)){
+          $res['data'] = $result;
+        }
+        else{
+          throw new \Exception('No record');
+        }
+      } catch(\Exception $e){
+        $res['errors'] = $e->getMessage();
+      }
+      return $res;
+    }
+
+    public function loadmoreCat($offset, $row_count, $id){
+      $result = CategoryRepository::getInstance()->loadmoreCat($offset, $row_count, $id);
+      try{
+        if(!empty($result)){
+          $res['data'] = $result;
+        }
+        else{
+          throw new \Exception('No record');
+        }
+      } catch(\Exception $e){
+        $res['errors'] =$e->getMessage();
+      }
+      return $res;
+    }
 }
       

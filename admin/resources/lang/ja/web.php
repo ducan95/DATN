@@ -13,6 +13,7 @@
 		'article_name' 			=> '記事名',
 		'search' 						=> '検索',
 		'confirm' 					=> '削除確認',
+		'register'					=> '登録する',
 		'the_image_list' 		=> '画像の一覧へ',
 		'list_member' 			=> 'リストメンバー',
 		'add_new_member'		=> '新しいメンバーを追加',

@@ -16,7 +16,7 @@
                 $totalPage = ceil($totalRecord/$row_count);
                 $current_page = 1;
                 $offset = ($current_page - 1) * $row_count;
-                $oItemsLoad = DB::table('release_numbers')->skip($offset)->take(6)->get();
+                /*$oItemsLoad = DB::table('release_numbers')->skip($offset)->take(6)->get();*/
                 ?>
                 <div class="loadmore-{{ $current_page }}">
                   @if(isset($oItemsLoad))

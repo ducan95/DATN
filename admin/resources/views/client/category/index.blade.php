@@ -2,17 +2,13 @@
 @section('content')
 
 <div>
-	<h4 class="customize_h4">{{ $cat->name}} </h4>
+	<h4 class="customize_h4">{{ $cat['data']->name}} </h4>
 	<?php 
-		$totalRecord = count($arPosts);
+		$totalRecord = count($arPosts['data']);
 		$row_count = 4;
 		$totalPage = ceil($totalRecord/$row_count);
 		$current_page = 1;
 		$offset = ($current_page - 1) * $row_count;
-		$arPostsLoad = DB::table('post_category')->join('posts', function($join) {
-                  $join->on('posts.id_post', '=', 'post_category.id_post');  })
-                ->join('categories', function($join) {
-                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->skip($offset)->take(4)->get();
 	?>
 	<div class="loadmore-{{ $current_page }}">
 		@foreach ($arPostsLoad as $post)
@@ -24,7 +20,6 @@
 				$date = strtotime($post->time_begin);
 				$slug = $post->slug;
 				$urlDetail = route('WebClientEndUserDetail',['slug'=>$slug,'id'=> $id_post]);
-
 			@endphp
 		<div class="media customize">
 			<div class="media-left">
