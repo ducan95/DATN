@@ -5,6 +5,7 @@ use App\Post;
 use App\ReleaseNumbers;
 use App\PostCategory;
 use App\Category;
+use Illuminate\Support\Facades\Auth;
 
 
 /**
@@ -92,16 +93,26 @@ class PostRepository extends Repository
   public function save($dataReq)
   {  
     try {
-      $post = new Post();  
-      $dataFill = [];
-      foreach ($post->getFillable() as $col) {  
-        if(isset($dataReq[$col]) ) { 
-          $dataFill[$col] = $dataReq[$col];
-        } else if($col != 'deleted_at'){ 
-          throw new \Exception($col." thieu");
-        }
-      }   
-      $post->fill($dataFill);  
+      $post = new Post();
+      $dataReq['post']['id_user'] = Auth::user()->id_user;
+      $dataReq['post']['is_deleted'] = false;
+      $dataReq['post']['deleted_at'] = null;
+      $dataReq['post']['status_preview_top'] = true;
+      $post->fill([
+        'id_release_number' => $dataReq['post']['id_release_number'],
+        'title' => $dataReq['post']['title'],
+        'slug' => $dataReq['post']['title'],
+        'thumbnail_path' => $dataReq['post']['thumbnail_path'],
+        'content' => $dataReq['post']['content'],
+        'id_user' => $dataReq['post']['id_user'],
+        'status' => $dataReq['post']['status'],
+        'time_end' => $dataReq['post']['time_end'],
+        'time_begin' => $dataReq['post']['time_begin'],
+        'password'   => bcrypt($dataReq['post']['password']),
+        'is_deleted'  =>$dataReq['post']['is_deleted'] ,
+        'deleted_at' => $dataReq['post']['deleted_at'],
+        'status_preview_top'=>$dataReq['post']['status_preview_top']
+      ]);
       $post->save();
       return $post;
     }

@@ -144,6 +144,13 @@ class CategoryRepository extends Repository
   }
 
   public function find($dataReq){
+    try{
+      $category=Category::where('id_category_parent','!=',0)->get();
+      return $category;
+    }
+    catch(\Exception $e){
+      throw $e;
+    }
 
   }
   public function saveChil($dataReq){

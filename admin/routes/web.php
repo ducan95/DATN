@@ -54,8 +54,7 @@ Route::group([
   ]);
    /** router web user **/
   Route::group([ 
-  'prefix' => 'user',
-  'middleware' => 'CheckUser',
+  'prefix' => 'user'
 ], function(){
 
     Route::get('/',[
@@ -280,6 +279,11 @@ Route::group([
         'uses' => 'CategoryController@actionList',
         'as' => 'apiCategoryList'
     ]);
+
+    Route::get('/category',[
+      'uses' => 'CategoryController@actionFind',
+      'as'   => 'apiCategoryFind'
+    ]);
     Route::get('/{id}',[
       'uses' => 'CategoryController@actionListOne',
         'as' => 'apiCategoryListOne'
@@ -387,7 +391,13 @@ Route::group([
         'uses' => 'PostController@actionDelete',
         'as' => 'apiPostDelete'
     ]);
-  });  
+  });
+  // Route::group(['prefix' => '/postcategory'], function(){
+  //   Route::post('/', [
+  //       'uses' => 'PostcategoryController@actionSave',
+  //       'as' => 'apiPostcategorySave'
+  //   ]);
+  // });    
 
 
 });
