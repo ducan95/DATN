@@ -33,7 +33,7 @@
 							    		<?php
 							    		$id_category = $arCat->id_category;
 							    		$name = $arCat->name;
-						          $slug = str_slug($name);
+						          $slug = $arCat->slug;
 						          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_category]);
 						          $checkUrl = '*'.$slug.'*';
 						          //check cat_chil 
@@ -50,7 +50,7 @@
 									        		@php
 									        			$id_chil_category = $arChilCat->id_category;
 												    		$name = $arChilCat->name;
-											          $slug = str_slug($name);
+											          $slug = $arChilCat->slug;
 											          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_chil_category]);
 											          $checkUrl = '*'.$slug.'*';
 									        		@endphp

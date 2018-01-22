@@ -94,7 +94,7 @@ li.active{
     margin-bottom: 5px;
 }
 .customize:last-child{
-    border-bottom: none;
+   /* border-bottom: none;*/
 }
 .img-cat-mize {
     width: 120px; 

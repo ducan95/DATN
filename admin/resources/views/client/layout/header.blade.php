@@ -2,7 +2,7 @@
   <nav class="navbar navbar-static-top">
     <div class="_container">
       <div class="navbar-header">
-        <a href="https://friday.kodansha.ne.jp/sn/u" class="navbar-brand">
+        <a href="{{ route('WebClientEndUserRelease') }}" class="navbar-brand">
         <img src="{{ asset('client/media/icon/logo.jpg') }}" />
         </a>
         <button type="button" class="navbar-toggle collapsed" >
@@ -15,20 +15,20 @@
             <!-- type With frefix s -->
             <!-- with frefix is s -->
             <li class="pc-element btn-login">
-              <a href="https://friday.kodansha.ne.jp/s/login?data=book-list"><img src="{{ asset('client/media/icon/pc_1026ol_03.jpg') }}""/></a>
+              <a href="{{ route('getLoginEndUser') }}"><img src="{{ asset('client/media/icon/pc_1026ol_03.jpg') }}""/></a>
             </li>
             <!-- END IMAGE LOGIN -LOGOUT -->
             <!-- IMAGE REGISTER -->
             <!-- with frefix is s -->
             <!-- type With frefix sy or sn || fy or fn-->
             <li class="pc-element btn-register">
-              <a href="https://friday.kodansha.ne.jp/s/register?data=book-list"><img src="{{ asset('client/media/icon/pc_1026ol_10.jpg') }}""/></a>
+              <a href="{{ route('webClientMemberIndex') }}"><img src="{{ asset('client/media/icon/pc_1026ol_10.jpg') }}""/></a>
             </li>
             <li class="mobile-element">
-              <a href="https://friday.kodansha.ne.jp/s/register?data=book-list"><i class="fa fa-envelope-o"></i> 会員登録</a>
+              <a href="{{ route('webClientMemberIndex') }}"><i class="fa fa-envelope-o"></i> 会員登録</a>
             </li>
             <li class="mobile-element">
-              <a href="https://friday.kodansha.ne.jp/s/login?data=book-list"><i class="fa fa-key"></i> ログイン</a>
+              <a href="{{ route('getLoginEndUser') }}"><i class="fa fa-key"></i> ログイン</a>
             </li>
           </ul>
           <div class="advertising pc-element text-center">
@@ -59,40 +59,45 @@
         <div>
           <div class="pull-right mobile-element btn-close"><i class="fa fa-close"></i></div>
           <ul class="nav navbar-nav">
-            <li>
-              <a href="sport.html"><span><b>スポーツ</b></span></a>
-            </li>
-            <li>
-              <a href="event.html"><span><b>事件</b></span></a>
-            </li>
-            <li>
-              <a href="column.html"><span><b>コラム</b></span></a>
-              <i class="mobile-element pull-right fa fa-chevron-right" data-toggle="collapse" data-target="#child-categories-16"></i>
-              <ul class="collapse mobile-element" id="child-categories-16">
-                <li><a href="harikomi.html"><span>ハリコミデスクO</span></a></li>
-                <li><a href="urafriday.html"><span>FRIDAY トピックス</span></a></li>
-                <li><a href="sports_drama.html"><span>スポーツは人間ドラマだ</span></a></li>
-                <li><a href="baseball_now.html"><span>BASEBALL NOW 仁志敏久「プロだからズバリ書く」</span></a></li>
-                <li><a href="playback.html"><span>プレイバックFRIDAY</span></a></li>
-                <li><a href="gekiuma.html"><span>激うま!お取り寄せグルメ</span></a></li>
-                <li><a href="world_soccer.html"><span>風間八宏「世界レベルのサッカーをやろう！」</span></a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="entertainment.html"><span><b>芸能</b></span></a>
-            </li>
-            <li>
-              <a href="gravure.html"><span><b>グラビア</b></span></a>
-            </li>
-            <li>
-              <a href="free.html"><span><b>無料で読める</b></span></a>
-            </li>
-            <li>
-              <a href="1000-course.html"><span><b>1000円コース専用</b></span></a>
-            </li>
-            <li>
-              <a href="book-list.html"><span><b>発売号別一覧</b></span></a>
-            </li>
+            <?php 
+            $arCats = DB::table('categories')->where('is_deleted','=',0)->where('id_category_parent',0)->get();
+            ?>
+            @if(!empty($arCats))
+              @foreach($arCats as $arCat)
+                <?php
+                $id_category = $arCat->id_category;
+                $name = $arCat->name;
+                $slug = $arCat->slug;
+                $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_category]);
+                $checkUrl = '*'.$slug.'*';
+                //check cat_chil 
+                $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
+                $count = count($arChilCats);
+                ?>
+                @if($count > 0)
+                <li>
+                  <a href="{{ $url }}"><span><b>{{ $name }}</b></span></a>
+                  <i class="mobile-element pull-right fa fa-chevron-right" data-toggle="collapse" data-target="#child-categories-16"></i>
+                  <ul class="collapse mobile-element" id="child-categories-16">
+                    @foreach($arChilCats as $arChilCat)
+                      @php
+                        $id_chil_category = $arChilCat->id_category;
+                        $name = $arChilCat->name;
+                        $slug = $arChilCat->slug;
+                        $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_chil_category]);
+                        $checkUrl = '*'.$slug.'*';
+                      @endphp
+                      <li><a href="{{$url }}"><span>{{ $name }}</span></a></li>
+                    @endforeach
+                  </ul>
+                </li>
+                @else 
+                <li>
+                  <a href="{{ $url }}"><span><b>{{ $name }}</b></span></a>
+                </li>
+                @endif
+              @endforeach
+            @endif
           </ul>
         </div>
       </div>
@@ -113,15 +118,66 @@
       <div class="navbar-collapse pull-left" id="navbar-collapse">
         <div>
           <div class="pull-right mobile-element btn-close"><i class="fa fa-close"></i></div>
-          <ul class="nav navbar-nav">
-            <li class=""><a href="https://friday.kodansha.ne.jp/sn/u"><span><b>新着</b></span></a></li>
-            <li class=""><a href="entertainment.html"><span>芸能</span></a></li>
-            <li class=""><a href="event.html"><span>事件</span></a></li>
-            <li class=""><a href="sport.html"><span>スポーツ</span></a></li>
-            <li class=""><a href="column.html"><span>コラム</span></a></li>
-            <li class=""><a href="gravure-top.html"><span>グラビア</span></a></li>
-            <li class=""><a href="proposal.html"><span>オススメ</span></a></li>
-          </ul>
+
+          
+
+          <div id="navbar">    
+            <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                  <a class="navbar-brand" href="#">Brand</a>
+                </div>
+                
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                      <?php 
+                      $arCats = DB::table('categories')->where('is_deleted','=',0)->where('id_category_parent',0)->get();
+                      ?>
+                      @if(!empty($arCats))
+                        @foreach($arCats as $arCat)
+                          <?php
+                          $id_category = $arCat->id_category;
+                          $name = $arCat->name;
+                          $slug = $arCat->slug;
+                          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_category]);
+                          $checkUrl = '*'.$slug.'*';
+                          //check cat_chil 
+                          $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
+                          $count = count($arChilCats);
+                          ?>
+                          @if($count > 0)
+                            <li class="dropdown"><a href="{{ $url }}" class="dropdown-toggle" data-toggle="dropdown">{{ $name }} <b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+                                <li class="kopie"><a href="{{ $url }}">{{ $name }}</a></li>
+                                @foreach($arChilCats as $arChilCat)
+                                  @php
+                                    $id_chil_category = $arChilCat->id_category;
+                                    $name = $arChilCat->name;
+                                    $slug = $arChilCat->slug;
+                                    $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_chil_category]);
+                                    $checkUrl = '*'.$slug.'*';
+                                  @endphp
+                                  <li><a href="{{ $url }}">{{ $name }}</a></li>
+                                @endforeach
+                              </ul>
+                            </li>
+                          @else
+                            <li class=""><a href="{{ $url }}">{{ $name }}</a></li>
+                          @endif
+                        @endforeach
+                      @endif
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ route('getLogoutEndUser')}}">{{ trans('web.webClient.logout')}}</a>
+                      </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+          </div>
         </div>
       </div>
     </div>

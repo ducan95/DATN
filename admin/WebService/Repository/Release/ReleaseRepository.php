@@ -4,7 +4,7 @@ namespace WebService\Repository\Release;
 
 use App\Release;
 use WebService\Repository\Repository;
-
+use DB;
 /**
  * Created by Quyen Luu.
  * Date: 28/12/2017
@@ -132,5 +132,45 @@ class ReleaseRepository extends Repository
     }
   }
 
+  public function list(){
+    try{
+      return DB::table('release_numbers')->get();
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
 
+  public function listOne($id){
+    try{
+      return Release::findOrFail($id);
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  public function loadmoreRelease($offset, $row_count){
+    try{
+      $oItemsLoad = DB::table('release_numbers')->skip($offset)->take($row_count)->get();
+      return $oItemsLoad;
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  public function postOfRelease($id){
+    try{
+      return DB::table('posts')->where('id_release_number','=',$id)->get();
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  public function loadmorePostOfRelease($offset, $row_count, $id){
+    try{
+      $arPostsLoad = DB::table('posts')->where('id_release_number','=',$id)->skip($offset)->take($row_count)->get();
+      return $arPostsLoad;
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
 }

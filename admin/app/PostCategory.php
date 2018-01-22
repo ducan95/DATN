@@ -15,4 +15,8 @@ class PostCategory extends Model
     public function category(){
     	return $this->belongsTo(Category::class,'id_category','id_category');
     }
+    //lấy category
+    public function getItem($id){
+    	return $this->where('id_category',$id)->get();
+    }
 }

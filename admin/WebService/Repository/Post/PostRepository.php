@@ -7,6 +7,7 @@ use App\PostCategory;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 
+use DB;
 
 /**
  * Created by PhpStorm.
@@ -155,6 +156,22 @@ class PostRepository extends Repository
   public function delete($id)
   { 
     
+  }
+
+  public function listOne($id){
+    try{
+      return Post::findOrFail($id);
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  public function takeCatFirst($id_post){
+    try{
+      return DB::table('post_category')->where('id_post','=',$id_post)->select('id_category')->take(1)->get();
+    } catch(\Exception $e){
+      throw $e;
+    }
   }
 
 }

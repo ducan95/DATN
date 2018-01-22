@@ -13,4 +13,8 @@ class Release extends Model
     public function posts(){
     	return $this->hasMany(Post::class,'id_post',$primaryKey);
     }
+
+    public function getItem($id){
+    	return $this->findOrFail($id);
+    }
 }

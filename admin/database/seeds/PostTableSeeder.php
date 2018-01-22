@@ -12,18 +12,18 @@ class PostTableSeeder extends Seeder
     public function run()
 
     {	
-	  	$title = ['thoi-su', 'kinh-doanh', 'van-hoa', 'giao-duc'];
-      $limit = 4;
+	  	/*$title = ['thoi-su', 'kinh-doanh', 'van-hoa', 'giao-duc'];*/
+      $limit = 40;
       
       for($i = 0; $i< $limit; $i++) {
-        $tit = $title[$i].$i;
         DB::table('posts')->insert([
             'id_release_number' => 1,
             'id_user' => 1,
-            'title' => $tit,
-            'slug' => $title[$i],
+            'title' => 'title',
+            'slug' => 'slug-title',
+            'content' => 'abc',
             'status' => true,
-            'thumbnail_path'=> 'thumbnail',
+            'thumbnail_path'=> 'media2018-01-05-7.jpg',
             'time_begin'=>'2016-10-24',
             'time_end'=>'2016-10-29',
             'status_preview_top'=>false,

@@ -88,7 +88,7 @@
                   <!-- /.box-body -->
 
                   <div class="box-footer text-center" style="padding-bottom: 70px">
-                    <button ng-disabled="disable == true" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.confirm') }}</button>
+                    <button ng-if="release.image_release_path && release.image_header_path" ng-disabled="disable == true" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.register') }}</button>
                     <button type="reset" class="btn btn-default" style="margin-left:5px;">{{ trans('web.cancel') }}</button>
                   </div>
                 </form>

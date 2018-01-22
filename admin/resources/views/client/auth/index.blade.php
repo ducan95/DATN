@@ -1,4 +1,4 @@
-@extends('client.templates.master')
+@extends('client.layout.master')
 @section('content')
 <div>
     @if(Session::get('status') != null)

@@ -120,7 +120,34 @@ class PostService extends Service
     
   }
 
-}
-        
 
-        
+  public function listOne($id){
+    $result= PostRepository::getInstance()->listOne($id);
+      try{
+        if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No Record');
+      }
+      }catch(\Exception $e) {
+        $res['errors'] = $e->getMessage();
+      }
+      return $res;
+  }
+
+  public function takeCatFirst($id){
+    $result= PostRepository::getInstance()->takeCatFirst($id);
+      try{
+        if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No Record');
+      }
+      }catch(\Exception $e) {
+        $res['errors'] = $e->getMessage();
+      }
+      return $res;
+  }
+}

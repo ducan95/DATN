@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="{{ asset('client/css/common/friday.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/site/common/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/site/common/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/common/mycss.css') }}">
+
+<!--     <link rel="stylesheet" href="{{ asset('client/css/mycss.css') }}"> -->
   </head>
   <body class="hold-transition skin-purple layout-top-nav">
     <div class="wrapper cus-container container">
@@ -41,7 +44,19 @@
       <!-- Full Width Column -->
 
       {{--  ###### Layout #######  --}}
-      @yield('content')
+      <div class="content-wrapper">
+        <div class="_container">
+          <div class="row">
+            <div class="col-md-9 main-content-container">
+            @yield('release')
+            @yield('content')
+            </div>
+            <div class="col-md-3 main-sidebar-container">
+            @yield('nav-bar')
+            </div>
+          </div>
+        </div>
+      </div>
       {{--  ###### Layout #######  --}}
 
       <!-- /.content-wrapper -->
@@ -53,7 +68,9 @@
     </div>
     <a href="#" class="scrollToTop"></a>
     <!-- jQuery 2.2.3 -->
-    <script src="{{ asset('client/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
+    <!-- <script src="{{ asset('client/plugins/jQuery/jquery-2.2.3.min.js') }}"></script> -->
+    <script src="{{ asset('assets/base/bower_components/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/base/bower_components/jquery.validate.min.js') }}"></script>
     <!--<script src="https://friday.kodansha.ne.jp/plugins/jQuery/jquery.mobile-1.4.5.min.js"></script>-->
     <!-- Bootstrap 3.3.6 -->
     <script src="{{ asset('client/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -64,5 +81,6 @@
     
     {{--  ###### Custom js #######  --}}
     @yield('bottom-js')
+    @yield('usersite-bottom-js')
   </body>
 </html>

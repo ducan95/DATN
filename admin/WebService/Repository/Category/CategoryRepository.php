@@ -3,6 +3,7 @@ namespace WebService\Repository\Category;
 use App\Category;
 use WebService\Repository\Repository;
 
+use DB;
 
 /**
  * Created by PhpStorm.
@@ -151,32 +152,68 @@ class CategoryRepository extends Repository
     catch(\Exception $e){
       throw $e;
     }
+    }
 
-  }
-  public function saveChil($dataReq){
+   public function saveChil($dataReq){
       try{
-      $data = $dataReq->all();
       $category = new Category();
       $global_status = ((isset($dataReq['global_status']))?1:0);
       $menu_status = ((isset($dataReq['menu_status']))?1:0);
       $category->fill([
-        'name' => $data['name'],
-        'slug' => $data['slug'],
+        'name' => $dataReq['name'],
+        'slug' => $dataReq['slug'],
         'global_status' => $global_status,
         'menu_status' => $menu_status,
         'is_deleted' => false,
-        'id_category_parent' => $data['parent_category']
+        'id_category_parent' => $dataReq['parent_category']
       ]);
-      $category->save() ;
+      $category->save();
       return $category;
     }
     catch(\Exception  $e){ 
       throw  $e;  
+      }
     }
+
+  //tim mot category bat ky (ke ca category cha + con)
+  // public function find($id){
+  //   try{
+  //     return Category::findOrFail($id);
+  //   } catch(\Exception $e){
+  //     throw $e;
+  //   }
+  // }
+
+  public function cat($id){
+    try{
+      $arPosts =  DB::table('post_category')->join('posts', function($join) {
+                  $join->on('posts.id_post', '=', 'post_category.id_post');  })
+                ->join('categories', function($join) {
+                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->get();
+                /*dd($arPosts);
+                die();*/
+      return $arPosts;
+    } catch(\Exception $e){
+      throw $e;
     }
+  }
+  
+  //hiển thị $row_count tin thuộc cat có id_cat  = $id, từ vị trí $offset  
+  public function loadmoreCat($offset, $row_count, $id){
+    try{
+      $arPostsLoad = DB::table('post_category')->join('posts', function($join) {
+                  $join->on('posts.id_post', '=', 'post_category.id_post');  })
+                ->join('categories', function($join) {
+                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->skip($offset)->take($row_count)->get();
+      return $arPostsLoad;
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
 
 }
     
     
 
        
+

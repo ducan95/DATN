@@ -22,4 +22,7 @@ class Category extends Model
     public function post(){
         return $this->hasMany(Post::class,'post_category','id_post','id_category');
     }
+    public function getItem($id){
+        return $this->findOrFail($id);
+    }
 }

@@ -108,6 +108,7 @@ class CategoryService extends Service
     return $res;
     }
     
+
     public function find($request)
     {
       try {
@@ -120,23 +121,69 @@ class CategoryService extends Service
     }
     
     public function saveChil($request){
-      $validator = Validator::make($request->all(), [
+    $validator = Validator::make($request->all(), [
       'name' => 'required|max:255 ',
       'slug' => 'required',
-      ],[]);
-      if($validator ->fails()) {
-        $res['errors']['msg'] = $validator->errors();
-        $res['errors']['status_code'] = 400;
-      } else {
-        try{
-          $res['data']= CategoryRepository::getInstance()->saveChil($request);
-        }catch(\Exception $e){
-          $res['errors']= $e ->getMessage();
-        }
-       } 
-      return $res;
+    ],[]);
+    if($validator ->fails()) {
+      $res['errors']['msg'] = $validator->errors();
+      $res['errors']['status_code'] = 400;
+    } else {
+      try{
+        $res['data']= CategoryRepository::getInstance()->saveChil($request->all());
+      }catch(\Exception $e){
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
+      }
+    }
+    return $res;
       }
       
+      
+    // public function find($id)
+    // {
+    //   $result=CategoryRepository::getInstance()->find($id);
+    //   try{
+    //     if(!empty($result)){
+    //     $res['data'] = $result;
+    //   }
+    //   else{
+    //     throw new \Exception('No Record');
+    //   }
+    //   }catch(\Exception $e) {
+    //     $res['errors'] = $e->getMessage();
+    //   }
+    //   return $res;
+    // }
 
+    public function cat($id){
+      $result = CategoryRepository::getInstance()->cat($id);
+      try{
+        if(!empty($result)){
+          $res['data'] = $result;
+        }
+        else{
+          throw new \Exception('No record');
+        }
+      } catch(\Exception $e){
+        $res['errors'] = $e->getMessage();
+      }
+      return $res;
+    }
+
+    public function loadmoreCat($offset, $row_count, $id){
+      $result = CategoryRepository::getInstance()->loadmoreCat($offset, $row_count, $id);
+      try{
+        if(!empty($result)){
+          $res['data'] = $result;
+        }
+        else{
+          throw new \Exception('No record');
+        }
+      } catch(\Exception $e){
+        $res['errors'] =$e->getMessage();
+      }
+      return $res;
+    }
 }
       

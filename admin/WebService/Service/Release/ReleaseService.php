@@ -146,5 +146,66 @@ class ReleaseService extends Service
     return $res;
   }
 
+  public function list(){
+    try{
+      $res['data'] = ReleaseRepository::getInstance()->list();
+    } catch(\Exception $e){
+      $res['errors'] = $e->getMessage();
+    }
+    return $res;
+  }
   
+  public function listOne($id){
+    try{
+      $res['data'] = ReleaseRepository::getInstance()->listOne($id);
+    } catch(\Exception $e){
+      $res['errors'] = $e->getMessage();
+    }
+    return $res;
+  }
+
+  public function loadmoreRelease($offset, $row_count){
+    $result = ReleaseRepository::getInstance()->loadmoreRelease($offset, $row_count);
+    try{
+      if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No record');
+      }
+    } catch(\Exception $e){
+      $res['errors'] =$e->getMessage();
+    }
+    return $res;
+  }
+
+  public function postOfRelease($id){
+    $result = ReleaseRepository::getInstance()->postOfRelease($id);
+    try{
+      if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No record');
+      }
+    } catch(\Exception $e){
+      $res['errors'] = $e->getMessage();
+    }
+    return $res;
+  }
+
+  public function loadmorePostOfRelease($offset, $row_count, $id){
+    $result = ReleaseRepository::getInstance()->loadmorePostOfRelease($offset, $row_count, $id);
+      try{
+        if(!empty($result)){
+          $res['data'] = $result;
+        }
+        else{
+          throw new \Exception('No record');
+        }
+      } catch(\Exception $e){
+        $res['errors'] =$e->getMessage();
+      }
+      return $res;
+  }
 }
