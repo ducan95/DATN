@@ -5,6 +5,8 @@ use App\Post;
 use App\ReleaseNumbers;
 use App\PostCategory;
 use App\Category;
+use Illuminate\Support\Facades\Auth;
+
 use DB;
 
 /**
@@ -92,16 +94,26 @@ class PostRepository extends Repository
   public function save($dataReq)
   {  
     try {
-      $post = new Post();  
-      $dataFill = [];
-      foreach ($post->getFillable() as $col) {  
-        if(isset($dataReq[$col]) ) { 
-          $dataFill[$col] = $dataReq[$col];
-        } else if($col != 'deleted_at'){ 
-          throw new \Exception($col." thieu");
-        }
-      }   
-      $post->fill($dataFill);  
+      $post = new Post();
+      $dataReq['post']['id_user'] = Auth::user()->id_user;
+      $dataReq['post']['is_deleted'] = false;
+      $dataReq['post']['deleted_at'] = null;
+      $dataReq['post']['status_preview_top'] = true;
+      $post->fill([
+        'id_release_number' => $dataReq['post']['id_release_number'],
+        'title' => $dataReq['post']['title'],
+        'slug' => $dataReq['post']['title'],
+        'thumbnail_path' => $dataReq['post']['thumbnail_path'],
+        'content' => $dataReq['post']['content'],
+        'id_user' => $dataReq['post']['id_user'],
+        'status' => $dataReq['post']['status'],
+        'time_end' => $dataReq['post']['time_end'],
+        'time_begin' => $dataReq['post']['time_begin'],
+        'password'   => bcrypt($dataReq['post']['password']),
+        'is_deleted'  =>$dataReq['post']['is_deleted'] ,
+        'deleted_at' => $dataReq['post']['deleted_at'],
+        'status_preview_top'=>$dataReq['post']['status_preview_top']
+      ]);
       $post->save();
       return $post;
     }
@@ -117,17 +129,18 @@ class PostRepository extends Repository
      	$post = Post::find($id);
      	 if(!empty($post)) {
        	$post->fill([
-          'title'    					=> $data['title'],
-          'slug'							=> $data['slug'],
-          'id_user'						=> $data['id_user'],
-          'thumbnail_path'		=> $data['thumbnail_path'],
+          'title'             => $data['title'],
+          'slug'              => $data['slug'],
+          'id_user'           => $data['id_user'],
+          'password'          => $data['password'],
+          'thumbnail_path'    => $data['thumbnail_path'],
           'status_preview_top'=> $data['status_preview_top'],
-          'deleted_at'				=> $data['deleted_at'],
+          'deleted_at'        => $data['deleted_at'],
           'id_release_number' => $data['id_release_number'],
-          'time_begin'    		=> $data['time_begin'],
-          'time_end'      		=> $data['time_end'],
-          'is_deleted' 				=> $data['is_deleted'],
-          'status'     				=> $data['status']
+          'time_begin'        => $data['time_begin'],
+          'time_end'          => $data['time_end'],
+          'is_deleted'        => $data['is_deleted'],
+          'status'            => $data['status']
         ]);  
         $post->save();
         return $post;  
@@ -153,7 +166,6 @@ class PostRepository extends Repository
     }
   }
 
-  //lấy ra cat
   public function takeCatFirst($id_post){
     try{
       return DB::table('post_category')->where('id_post','=',$id_post)->select('id_category')->take(1)->get();

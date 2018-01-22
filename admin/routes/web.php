@@ -42,7 +42,8 @@ Route::group([
  * ROUTE ADMIN WEB
  */
 Route::group([ 
-  'middleware' => 'checkAdminLogin',
+ 'middleware' => 'checkAdminLogin',
+   // 'middleware' => 'CheckUser',
   'prefix'     => config('admin.prefix.web'),
   'namespace'  => 'WebAdmin\src'
 ], function() {
@@ -52,11 +53,13 @@ Route::group([
     'as' => 'getIndex'
   ])->middleware('checkRole: admin|s_admin|user|editor');
    /** router web user **/
-  Route::group([ 'prefix' => 'user' ],function(){
+  Route::group([ 
+  'prefix' => 'user'
+], function(){
 
     Route::get('/',[
         'uses' => 'UserController@viewIndex' ,
-        'as'  => 'webUserIndex'
+        'as'  => 'webUserIndex',
     ]);
 
     Route::get('/edit',[
@@ -276,6 +279,11 @@ Route::group([
         'uses' => 'CategoryController@actionList',
         'as' => 'apiCategoryList'
     ]);
+
+    Route::get('/category',[
+      'uses' => 'CategoryController@actionFind',
+      'as'   => 'apiCategoryFind'
+    ]);
     Route::get('/{id}',[
       'uses' => 'CategoryController@actionListOne',
         'as' => 'apiCategoryListOne'
@@ -383,7 +391,13 @@ Route::group([
         'uses' => 'PostController@actionDelete',
         'as' => 'apiPostDelete'
     ]);
-  });  
+  });
+  // Route::group(['prefix' => '/postcategory'], function(){
+  //   Route::post('/', [
+  //       'uses' => 'PostcategoryController@actionSave',
+  //       'as' => 'apiPostcategorySave'
+  //   ]);
+  // });    
 
 
 });

@@ -2,6 +2,7 @@
 namespace WebService\Repository\Category;
 use App\Category;
 use WebService\Repository\Repository;
+
 use DB;
 
 /**
@@ -143,37 +144,45 @@ class CategoryRepository extends Repository
     }
   }
 
+  public function find($dataReq){
+    try{
+      $category=Category::where('id_category_parent','!=',0)->get();
+      return $category;
+    }
+    catch(\Exception $e){
+      throw $e;
+    }
+    }
 
-  public function saveChil($dataReq){
+   public function saveChil($dataReq){
       try{
-      $data = $dataReq->all();
       $category = new Category();
       $global_status = ((isset($dataReq['global_status']))?1:0);
       $menu_status = ((isset($dataReq['menu_status']))?1:0);
       $category->fill([
-        'name' => $data['name'],
-        'slug' => $data['slug'],
+        'name' => $dataReq['name'],
+        'slug' => $dataReq['slug'],
         'global_status' => $global_status,
         'menu_status' => $menu_status,
         'is_deleted' => false,
-        'id_category_parent' => $data['parent_category']
+        'id_category_parent' => $dataReq['parent_category']
       ]);
-      $category->save() ;
+      $category->save();
       return $category;
     }
     catch(\Exception  $e){ 
       throw  $e;  
+      }
     }
-  }
 
   //tim mot category bat ky (ke ca category cha + con)
-  public function find($id){
-    try{
-      return Category::findOrFail($id);
-    } catch(\Exception $e){
-      throw $e;
-    }
-  }
+  // public function find($id){
+  //   try{
+  //     return Category::findOrFail($id);
+  //   } catch(\Exception $e){
+  //     throw $e;
+  //   }
+  // }
 
   public function cat($id){
     try{
@@ -207,3 +216,4 @@ class CategoryRepository extends Repository
     
 
        
+

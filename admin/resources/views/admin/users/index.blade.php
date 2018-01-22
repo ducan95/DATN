@@ -1,3 +1,4 @@
+<?php dd($key) ?>
 @extends('admin.templates.master')
 
 @section('title')
@@ -11,11 +12,6 @@
       <h1>
         @lang('user.admin_user_list')
       </h1>
-      {{--<ol class="breadcrumb">--}}
-        {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
-        {{--<li><a href="#">Tables</a></li>--}}
-        {{--<li class="active">Simple</li>--}}
-      {{--</ol>--}}
     </section>
 
     <!-- Main content -->
