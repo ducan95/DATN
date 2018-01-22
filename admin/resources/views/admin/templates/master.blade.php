@@ -100,10 +100,10 @@
 <script src="{{ asset('assets/frontend/config/config.js') }}"></script>
 <!-- Japanese Charecter -->
 <script src="{{ asset('assets/frontend/extension/lang.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/angular-ui-switch.js') }}"></script>
 <!-- Ng-Clipboard -->
 <script src="{{ asset('assets/base/bower_components/clipboard.min.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/ngclipboard.min.js') }}"></script>
-
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 @yield('bottom-js')
 

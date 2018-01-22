@@ -23,11 +23,6 @@
 			<div class="col-md-2">
 				<label>Release Number</label>
 				<select name='releaseNumber' ng-model='releaseNumber'>
-					<!-- <option 
-						ng-repeat="post in posts" 
-						value="" 
-						ng-bind="post.release_name">	
-					</option> -->
 					<option value="1">zxcxzc</option>
 					<option value="2">zxcxzc</option>
 				</select>
@@ -54,7 +49,7 @@
           </select>
 			</div>
 			<div class="col-md-2">
-				<label>Status</label>
+				<label style="width: 110px">Status</label>
   			 <select ng-model = "status">
   			 	<option ng-repeat= "item in listStatus" value="@{{item.id}}" ng-bind = "item.name"></option>
   			 </select>
@@ -111,8 +106,12 @@
 						<div class="form-group" style="padding-top: 40px">
 							<label class="col-md-3">Release Number</label>
 							<div class="col-md-9">
-								<select class="form-control" ng-model="releasenumber">
-									<option value="abc">ABC</option>
+								<select class="form-control" ng-model="editpost.releasenumber">
+									<option ng-repeat="option in listRelease.availableOptions" 
+						      					value="@{{option.id_release_number}}"
+						      					ng-bind="option.name" 
+						      					ng-selected="@{{option.id_release_number == 2}}">
+						      		</option>
 								</select>
 							</div>
 						</div>
@@ -184,6 +183,7 @@
 <script src="{{ asset('assets/frontend/resource/PostResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/post/PostCtrl.js') }}"></script>
