@@ -23,7 +23,11 @@
                     @foreach($oItemsLoad as $oItem)
                       <?php
                         $picture = $oItem->image_release_path;
-                        $picUrl = asset('storage/imageDefault/'.$picture);
+                        if(strpos($picture, 'imageDefault')){
+                          $picUrl = asset('storage/'.$picture);
+                        } else{
+                          $picUrl = $picUrl = asset('storage/imageDefault/coverDefault.jpg');
+                        }                        
                         $id_release_number = $oItem->id_release_number;
                         $url = route('WebClientReleasePostOfRelease',['id'=>$id_release_number]);
                         $date = strtotime($oItem->created_at);

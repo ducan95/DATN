@@ -50,7 +50,7 @@ Route::group([
   Route::get('/',[
     'uses' => 'AdminController@index',
     'as' => 'getIndex'
-  ]);
+  ])->middleware('checkRole: admin|s_admin|user|editor');
    /** router web user **/
   Route::group([ 'prefix' => 'user' ],function(){
 
@@ -411,7 +411,7 @@ Route::group([
     'as'    => 'WebClientEndUserIndex',
   ]);
 
-  Route::get('/{name}-{id}',[
+  Route::get('category/{id}',[
     'uses'  => 'EndUserController@cat',
     'as'    => 'WebClientEndUserCat'
   ]);

@@ -68,8 +68,8 @@
                 $id_category = $arCat->id_category;
                 $name = $arCat->name;
                 $slug = $arCat->slug;
-                $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_category]);
-                $checkUrl = '*'.$slug.'*';
+                $url = route('WebClientEndUserCat',['id'=>$id_category]);
+                $checkUrl = '*category/'.$id_category;
                 //check cat_chil 
                 $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
                 $count = count($arChilCats);
@@ -84,8 +84,8 @@
                         $id_chil_category = $arChilCat->id_category;
                         $name = $arChilCat->name;
                         $slug = $arChilCat->slug;
-                        $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_chil_category]);
-                        $checkUrl = '*'.$slug.'*';
+                        $url = route('WebClientEndUserCat',['id'=>$id_chil_category]);
+                        $checkUrl = '*category/'.$id_category;
                       @endphp
                       <li><a href="{{$url }}"><span>{{ $name }}</span></a></li>
                     @endforeach
@@ -93,7 +93,7 @@
                 </li>
                 @else 
                 <li>
-                  <a href="{{ $url }}"><span><b>{{ $name }}</b></span></a>
+                  <a href="{{ $url }}" class="active"><span><b>{{ $name }}</b></span></a>
                 </li>
                 @endif
               @endforeach
@@ -144,30 +144,30 @@
                           $id_category = $arCat->id_category;
                           $name = $arCat->name;
                           $slug = $arCat->slug;
-                          $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_category]);
-                          $checkUrl = '*'.$slug.'*';
+                          $url = route('WebClientEndUserCat',['id'=>$id_category]);
+                          $checkUrl = '*category/'.$id_category;
                           //check cat_chil 
                           $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
                           $count = count($arChilCats);
                           ?>
                           @if($count > 0)
-                            <li class="dropdown"><a href="{{ $url }}" class="dropdown-toggle" data-toggle="dropdown">{{ $name }} <b class="caret"></b></a>
+                            <li class="dropdown {{ ((Request::is($checkUrl)) ? 'active' : '' ) }}"><!-- <a href="{{ $url }}" class="dropdown-toggle"> --><a href="{{ $url }}" data-toggle="dropdown">{{ $name }} <b class="caret"></b></a>
                               <ul class="dropdown-menu">
-                                <li class="kopie"><a href="{{ $url }}">{{ $name }}</a></li>
+                                <li class="kopie"><a href="{{ $url }}"><a href="{{ $url }}">{{ $name }}</a></li>
                                 @foreach($arChilCats as $arChilCat)
                                   @php
                                     $id_chil_category = $arChilCat->id_category;
                                     $name = $arChilCat->name;
                                     $slug = $arChilCat->slug;
-                                    $url = route('WebClientEndUserCat',['slug'=>$slug,'id'=>$id_chil_category]);
-                                    $checkUrl = '*'.$slug.'*';
+                                    $url = route('WebClientEndUserCat',['id'=>$id_chil_category]);
+                                    $checkUrl = '*category/'.$id_chil_category;
                                   @endphp
                                   <li><a href="{{ $url }}">{{ $name }}</a></li>
                                 @endforeach
                               </ul>
                             </li>
                           @else
-                            <li class=""><a href="{{ $url }}">{{ $name }}</a></li>
+                            <li class="{{ ((Request::is($checkUrl)) ? 'active' : '' ) }}"><a href="{{ $url }}">{{ $name }}</a></li>
                           @endif
                         @endforeach
                       @endif

@@ -48,7 +48,18 @@
 
 {{--  ###### Layout #######  --}}
  @include("admin.templates.header") 
- @include("admin.templates.sidebar") 
+
+@if($role_code == 'admin' || $role_code == 's_admin')
+  @include("admin.templates.AdminSideBar")
+@endif
+
+@if($role_code == 'user')
+  @include("admin.templates.UserSideBar")
+@endif
+
+@if($role_code == 'editor')
+  @include("admin.templates.EditorSideBar")
+@endif
 {{--  ###### Layout #######  --}}
 
   <!-- Content Wrapper. Contains page content -->

@@ -24,7 +24,8 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.release.index');
+        $role_code = Auth::user()->role_code;
+        return view('admin.release.index', compact('role_code'));
     }
 
 }
