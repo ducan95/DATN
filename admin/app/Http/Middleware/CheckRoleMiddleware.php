@@ -20,11 +20,7 @@ class CheckRoleMiddleware
         $pos = strpos($role,$role_code);
         if($pos === false){
             echo "Không có quyền nhé bé :D";
-            die();
-        } else{
-            if($role_code == 'admin') {
-                echo 'Phân quyền là admin';
-            }
+            return redirect('/admin');
         }
         return $next($request);
     }

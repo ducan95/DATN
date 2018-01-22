@@ -5,6 +5,7 @@
 @endsection 
 
 @section('content')
+
 <div ng-controller="ReleaseCtrl" ng-init="getRelease(1)">
    <!-- Content Header (Page header) -->
     <section class="content-header">

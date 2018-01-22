@@ -49,7 +49,7 @@
 {{--  ###### Layout #######  --}}
  @include("admin.templates.header") 
 
-@if($role_code == 'admin' || $role_code == 's_admin')
+@if(($role_code == 'admin') || ($role_code == 's_admin'))
   @include("admin.templates.AdminSideBar")
 @endif
 

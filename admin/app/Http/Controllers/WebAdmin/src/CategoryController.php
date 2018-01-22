@@ -5,13 +5,15 @@ namespace App\Http\Controllers\WebAdmin\src;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebAdmin\WebController as WebController;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends \App\Http\Controllers\WebAdmin\WebController
 {
-    
+     
     public function viewIndex()
     {
-        return view('admin.category.category');
+        $role_code = Auth::user()->role_code;
+        return view('admin.category.category',compact('role_code'));
     }
 
     public function viewPost()
@@ -21,11 +23,13 @@ class CategoryController extends \App\Http\Controllers\WebAdmin\WebController
 
     public function viewEdit()
     {
-        return view('admin.category.editcategorychildren');
+        $role_code = Auth::user()->role_code;
+        return view('admin.category.editcategorychildren',compact('role_code'));
     }
 
     public function viewEditParent(){
-        return view("admin.category.editcategory");
+        $role_code = Auth::user()->role_code;
+        return view("admin.category.editcategory",compact('role_code'));
     }
 
     public function viewDelete()
@@ -35,11 +39,13 @@ class CategoryController extends \App\Http\Controllers\WebAdmin\WebController
 
     public function viewAddChildren()
     {
-        return view('admin.category.addcategorychildern');
+        $role_code = Auth::user()->role_code;
+        return view('admin.category.addcategorychildern',compact('role_code'));
     }
     public function viewAdd()
     {
-    	return view('admin.category.addcategory');    
+        $role_code = Auth::user()->role_code;
+    	return view('admin.category.addcategory',compact('role_code'));    
     }
     
     public function viewFind()

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\WebAdmin\src;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ReleaseController extends Controller
 {
     public function viewIndex()
     {
-        return view('admin.release.index');
+        $role_code = Auth::user()->role_code;
+        return view('admin.release.index',compact('role_code'));
     }
 
     public function viewPost()
@@ -19,7 +21,8 @@ class ReleaseController extends Controller
 
     public function viewEdit()
     {
-        return view('admin.release.edit');
+        $role_code = Auth::user()->role_code;
+        return view('admin.release.edit',compact('role_code'));
     }
 
     public function viewDelete()
@@ -33,7 +36,8 @@ class ReleaseController extends Controller
     }
     public function viewAdd()
     {
-    	return view('admin.release.add');    
+        $role_code = Auth::user()->role_code;
+    	return view('admin.release.add',compact('role_code'));    
     }
 
 }

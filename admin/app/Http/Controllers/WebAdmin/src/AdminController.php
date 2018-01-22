@@ -25,7 +25,15 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $role_code = Auth::user()->role_code;
+        if($role_code == 'admin' || $role_code == 's_admin'){
         return view('admin.release.index', compact('role_code'));
+        }
+        if($role_code == 'editor'){
+        return view('admin.release.index', compact('role_code'));
+        }
+        if($role_code == 'user'){
+        return view('admin.index.index', compact('role_code'));
+        }
     }
 
 }

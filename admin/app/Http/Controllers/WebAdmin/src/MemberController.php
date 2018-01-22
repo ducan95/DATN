@@ -5,13 +5,15 @@ namespace App\Http\Controllers\WebAdmin\src;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebAdmin\WebController as WebController;
+use Illuminate\Support\Facades\Auth;
 
 class MemberController extends \App\Http\Controllers\WebAdmin\WebController
 {
     
     public function viewIndex()
     {
-        return view('admin.member.index');
+        $role_code = Auth::user()->role_code;
+        return view('admin.member.index',compact('role_code'));
     }
 
     public function viewPost()
@@ -21,7 +23,8 @@ class MemberController extends \App\Http\Controllers\WebAdmin\WebController
 
     public function viewEdit()
     {
-        return view('admin.member.edit');
+        $role_code = Auth::user()->role_code;
+        return view('admin.member.edit',compact('role_code'));
     }
 
     public function viewDelete()
@@ -35,7 +38,8 @@ class MemberController extends \App\Http\Controllers\WebAdmin\WebController
     }
     public function viewAdd()
     {   
-        return view('admin.member.add');
+        $role_code = Auth::user()->role_code;
+        return view('admin.member.add',compact('role_code'));
     }
 
    
