@@ -4,21 +4,11 @@ namespace App\Http\Controllers\WebClient;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Release;
-use App\Post;
-use App\PostCategory;
-use App\Category;
-use DB;
 use WebService\Service\Release\ReleaseService;
 
 class ReleaseController extends Controller
 {
-	public function __construct(Post $mPost, Category $mCategory, PostCategory $mPostCat, Release $mRelease){
-		$this->mPost = $mPost;
-		$this->mCategory = $mCategory;
-		$this->mPostCat = $mPostCat;
-    $this->mRelease = $mRelease;
-	}
+
   public function postOfRelease($id){
     $res = ReleaseService::getInstance()->postOfRelease($id);
     $arPosts = (!isset($res['errors'])) ? $res['data'] : '';

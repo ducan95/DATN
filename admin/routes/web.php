@@ -51,10 +51,11 @@ Route::group([
   Route::get('/',[
     'uses' => 'AdminController@index',
     'as' => 'getIndex'
-  ]);
+  ])->middleware('checkRole: admin|s_admin|user|editor');
    /** router web user **/
   Route::group([ 
-  'prefix' => 'user'
+  'prefix' => 'user',
+  'middleware' =>'checkRole: admin|s_admin',
 ], function(){
 
     Route::get('/',[
@@ -75,7 +76,7 @@ Route::group([
 
 
 
-  Route::group(['prefix' => 'member' ], function(){
+  Route::group(['prefix' => 'member','middleware' =>'checkRole: admin|s_admin' ], function(){
     Route::get('/',[
       'uses'  => 'MemberController@viewIndex',
       'as'    => 'webMemberIndex'
@@ -93,7 +94,7 @@ Route::group([
   });
 
 
-  Route::group([ 'prefix' => 'category' ],function(){
+  Route::group([ 'prefix' => 'category', 'middleware' =>'checkRole: admin|s_admin|editor' ],function(){
 
     Route::get('/',[
         'uses' => 'CategoryController@viewIndex',
@@ -121,7 +122,7 @@ Route::group([
     ]);
   });
    /** router web images **/
-  Route::group([ 'prefix' => 'images'], function(){
+  Route::group([ 'prefix' => 'images','middleware' =>'checkRole: admin|s_admin|editor|user'], function(){
     
     Route::get('/', [
       'uses' => 'ImageController@viewIndex',
@@ -139,7 +140,7 @@ Route::group([
     ]);
   });  
   /** router web release **/
-  Route::group([ 'prefix' => 'release' ],function(){
+  Route::group([ 'prefix' => 'release','middleware' =>'checkRole: admin|s_admin|editor' ],function(){
 
       Route::get('/',[
           'uses' => 'ReleaseController@viewIndex' ,
@@ -158,7 +159,7 @@ Route::group([
         ]);
   });
    /** router web post **/
-  Route::group([ 'prefix' => 'post' ],function(){
+  Route::group([ 'prefix' => 'post','middleware' =>'checkRole: admin|s_admin|editor|user' ],function(){
 
       Route::get('/',[
           'uses' => 'PostController@viewIndex' ,
@@ -425,7 +426,7 @@ Route::group([
     'as'    => 'WebClientEndUserIndex',
   ]);
 
-  Route::get('/{name}-{id}',[
+  Route::get('category/{id}',[
     'uses'  => 'EndUserController@cat',
     'as'    => 'WebClientEndUserCat'
   ]);

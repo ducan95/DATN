@@ -4,29 +4,23 @@ namespace App\Http\Controllers\WebClient;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Post;
-use App\Category;
-use App\PostCategory;
-use App\Release;
 use WebService\Service\Category\CategoryService;
 use WebService\Service\Post\PostService;
 use WebService\Service\Release\ReleaseService;
 
 class EndUserController extends Controller
 {
-	public function __construct(Post $mPost, Category $mCategory, PostCategory $mPostCat, Release $mRelease){
-		$this->mPost = $mPost;
-		$this->mCategory = $mCategory;
-		$this->mPostCat = $mPostCat;
-    $this->mRelease = $mRelease;
-	}
+
+  public function categoryInstance(){
+    return CategoryService::getInstance();
+  }
 
   public function index(){
   	return view('client.index');
   }
 
   //
-  public function cat($slug, $id){
+  public function cat($id){
     $arPosts = CategoryService::getInstance()->cat($id);
     $cat     = CategoryService::getInstance()->find($id);
     $row_count = 4;

@@ -1,3 +1,7 @@
+
+#navbar-collapse .nav>li.active_mize>a {
+    border-bottom: 2px solid #E21E1E;
+}
 .label_mize{
 	color: black !important;
 }

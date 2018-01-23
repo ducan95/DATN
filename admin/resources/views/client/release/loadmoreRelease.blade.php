@@ -3,9 +3,15 @@
     @foreach($oItemsLoad as $oItem)
     	@php
 	      $picture = $oItem->image_release_path;
-	      $picUrl = asset('storage/imageDefault/'.$picture);
+	      if(strpos($picture, 'imageDefault') === 0){
+          $picUrl = asset('storage/'.$picture);
+        } else{
+          $picUrl = $picUrl = asset('storage/imageDefault/coverDefault.jpg');
+        }  
 	      $id_release_number = $oItem->id_release_number;
 	      $url = route('WebClientReleasePostOfRelease',['id'=>$id_release_number]);
+	      $date = strtotime($oItem->created_at);
+        $dateFormat = date('j-M-y',$date);
 	    @endphp
 			<div class="col-md-4 col-sm-4 col-lg-4 col-xs-6">
 	     	<div class="custom-list-item">
@@ -13,7 +19,7 @@
 	          <div class="custom-list-item-thumbnail large" style="background-image: url('{{ $picUrl }}'); height: 261.842px;">
 	              <img src="https://s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/27/cover2017-12-27-3_s.jpg" class="hidden">
 	          </div>
-	          <span class="text-limit">Ngày tháng</span>
+	          <span class="text-limit">{{ $dateFormat }}</span>
 	        </a>
 	      </div>
 	    </div>
