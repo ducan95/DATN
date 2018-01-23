@@ -45,7 +45,7 @@ class PostService extends Service
   public function save($request)
   {	
     try{
-    $data = $request->data;
+      $data = $request->data;return $data['post'];
       $validator = Validator::make($data['post'], [
         'title'               => 'required',
         'thumbnail_path'      => 'required',
@@ -87,7 +87,6 @@ class PostService extends Service
           if(isset($dataReq['post_category'])) {
             $dataReq['post_category']=$data['post_category'];
           }
-          return $dataReq['post'];
           $res['data']= PostRepository::getInstance()->save($dataReq['post']);
           foreach ($dataReq['post_category'] as $value) {
             $dataReq['post_category']['id_post'] =  $res['data']->id_post;

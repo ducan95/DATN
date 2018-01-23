@@ -92,7 +92,16 @@ class CategoryController extends WebApiController
   }
 
   public function actionFind(Request $request){
-    //Do something
+    $res = CategoryService::getInstance()->find($request); 
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 404,
+          'errors' => $res['errors']
+        ]);
+      }
   }
 
   public function actionFindOne($id){
