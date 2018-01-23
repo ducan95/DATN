@@ -44,6 +44,8 @@ class PostService extends Service
 
   public function save($request)
   {	
+    var_dump($request);
+    die;
     try{
       $data = $request->data;return $data['post'];
       $validator = Validator::make($data['post'], [

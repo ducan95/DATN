@@ -62,6 +62,8 @@ class PostController extends WebApiController
    */ 
   public function actionSave(Request $request)
   { 
+    var_dump($request);
+    exit;
     $res = PostService::getInstance()->save($request);
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data']]);

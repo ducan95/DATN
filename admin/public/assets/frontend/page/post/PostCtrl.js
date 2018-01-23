@@ -432,7 +432,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
       }
     });
   }
-  kjdhakhdkajdkjkad
+
 }])
 
 
