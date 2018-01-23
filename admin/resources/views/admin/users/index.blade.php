@@ -1,4 +1,3 @@
-<?php dd($key) ?>
 @extends('admin.templates.master')
 
 @section('title')
