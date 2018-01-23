@@ -85,7 +85,7 @@ class PostService extends Service
         //code debug không thỏa mản điều kiện validation
         //Log::info("bi lỗi validate rồi ");
         //Log::info($validator->errors());
-        exit;
+       // exit;
         $res['errors']['msg'] = $validator->errors();
         $res['errors']['status_code'] = 400; 
       } else {
