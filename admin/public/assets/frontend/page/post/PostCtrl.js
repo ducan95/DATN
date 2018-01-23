@@ -5,9 +5,9 @@
  * */
 
 SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
-['$scope', 'PostService', 'CategoryService', 'ImageService', 'CategoryChildrenService', 
+['$scope', 'PostService','CategoryService','ListCategoryService', 'ImageService', 'CategoryChildrenService', 
 'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService',
-function($scope, PostService, CategoryService, ImageService, CategoryChildrenService, 
+function($scope, PostService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
 uploadImage, $q, $window, toastr, tranDate, ReleaseService){
 
   $scope.dateStart = tranDate.tranDate('2017-11-30');
@@ -49,21 +49,55 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
   ** api:  web_api/category/
   ** return response
   **/
-  CategoryService.find({}, function(res){  
-    try {  
-      if(typeof res != undefined) { 
-        if(res.is_success) { 
-          $scope.listCatParent = res.data  
-        } else { // can't get list categories parent
-          throw res.errors;  
-        }
-      } else {
-        throw "undefined"; 
+  // CategoryService.find({}, function(res){  
+  //   try {  
+  //     if(typeof res != undefined) { 
+  //       if(res.is_success) { 
+  //         $scope.listCatParent = res.data  
+  //       } else { // can't get list categories parent
+  //         throw res.errors;  
+  //       }
+  //     } else {
+  //       throw "undefined"; 
+  //     }
+  //   } catch(err) {
+  //     toastr.error(err);
+  //   }
+  // });
+
+
+   CategoryService.find({},function(res){
+      if(typeof res != "undefined"){
+        $scope.categories = res.data;
       }
-    } catch(err) {
-      toastr.error(err);
-    }
-  });
+    })
+
+    $scope.category =new ListCategoryService();
+      // $scope.listcategorychil=function(id_category){
+        $scope.category.$find({},function (res){
+        if (typeof res != "undefined") { 
+          $scope.categoryChildren=res.data;
+          // for(i=0;i<=res.data.length;i++){
+          //   if(res.data[i].id_category_parent === id_category){
+          //     $scope.categoryChildren.push(res.data[i]);
+          //   }
+          // }
+          // console.log($scope.categoryChildren)
+          // angular.forEach($scope.categoryChildren, function(value) {
+          //   if(value.id_category_parent == id_category){
+          //     $scope.ducan={
+          //     categoryParent:[
+          //       key=value.id_category,
+          //       data =value.name,
+          //     ]
+          //   }
+          //    console.log($scope.ducan)
+          //   }
+          // })
+        }
+        });
+      // }
+
   /**
   ** function get list categories childrent
   ** service CategoryChildrenService 
@@ -102,6 +136,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
             model: null,
             availableOptions: res.data.data
           };
+          console.log($scope.listRelease)
         } else {
           throw res.error;
         }
@@ -187,11 +222,11 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
   $scope.files = []; // list image of detail post
   $scope.$watch('file', function(){ 
     if($scope.file != undefined ) {
-      $scope.getPathImage($scope.file).then(function(data){
+      $scope.getPathImage($scope.file).then(function(data){console.log(data)
         try { 
           var img = {
             'key' :data.id_image,
-            'data':$scope.file[0],  // sua lai theo duong dan data tra ve.
+            'data':data.path,  // sua lai theo duong dan data tra ve.
           };
           if($scope.files.push(img)) {
             $scope.file = null; img = null;
@@ -264,31 +299,70 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
   ** param .....
   ** return response API
   **/ 
-  $scope.statusPreviewTop = true ;
-  $scope.creatPost =  function() {  console.log($('textarea.editor' ).val());
-    /*$scope.getPathImage($scope.thumbnail).then(function(data){ 
+  // $scope.category=[];
+  // $scope.$watch(function(){
+  //   if (true) {}
+  // })
+  $scope.category=[];
+  $scope.getcategory=function(id_category){
+    if(id_category){
+      $scope.check = 0;
+        angular.forEach($scope.category, function(value){
+          if(value == id_category) $scope.check = 1;
+        })
+        if($scope.check == 1){
+          $scope.category.pop(id_category)
+        } else {
+          $scope.category.push(id_category);
+          $scope.check = 0;
+        }
+    }
+    // console.log($scope.category)
+  }
+
+
+  $scope.statusPreviewTop = 1 ;
+  $scope.creatPost =  function() { 
+    // console.log($('textarea.editor' ).val());
+    $scope.getPathImage($scope.thumbnail).then(function(data){ 
       try {
-        $scope.post = new PostService(); // create post form PostService
-        $scope.post.title =  $scope.postTitle;
-        $scope.post.thumbnail_path = data.path;
-        $scope.post.id_release_number = $scope.listRelease.model;
-        $scope.post.time_begin = $scope.postBeginDate;
-        $scope.post.time_end = '3000-01-01';
-        $scope.post.status_preview_top = $scope.statusPreviewTop;
-        $scope.post.content = "zxczxcxzcxz";//$scope.post.content;
-        $scope.post.status = getStatus($scope.postBeginDate);
-        $scope.post.$save(function(res){
-          if(res.is_success) {
-            toastr.success("success");
-            console.log(res);
-          } else {
-            throw res.errors;
-          } 
+        var editor_data = CKEDITOR.instances['editor1'].getData();
+        $scope.listpost = new PostService(); // create post form PostService
+        $scope.status=getStatus($scope.postBeginDate);
+        $scope.listpost.data={
+          post : {
+            title :  $scope.postTitle,
+            thumbnail_path : data.path,
+            id_release_number : $scope.listRelease.model,
+            time_begin : $scope.postBeginDate,
+            time_end : '3000-01-01',
+            status_preview_top : $scope.statusPreviewTop,
+            content : editor_data,
+            status : $scope.status,
+            password :'123'
+          },
+          post_category : {
+            id_category:$scope.category,
+          }
+        }
+        // console.log($scope.data.post)
+        $scope.listpost.$save(function(res){
+          console.log(res);
+          // if(res.is_success) {
+          //   toastr.success("success");
+          //   console.log(res['post']);
+          // }
+          // if(res['post_category'].is_success){
+          //   toastr.success("success");
+          //   console.log(res['post_category']);
+          // } else {
+          //   throw res['post'].errors;
+          // } 
         });
       } catch(err){
         toastr.error(err);
       }
-    }).catch(function(err){ toastr.error(err);});   */
+    }).catch(function(err){ toastr.error(err);});   
   };
 
   $scope.ridirectquickedit=function(id_post){
@@ -300,25 +374,25 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
 
         //Get value from ng-model
         var gettitle = editpost.title;
-        var getreleasenumber = 1;
+        var getreleasenumber = editpost.releasenumber;
         var gettime_begin = editpost.time_begin;
         var gettime_end = editpost.time_end;
         var deleted_at=null;
         var is_deleted=false;
         var getstatus=editpost.status_post;
 
-        console.log(gettitle)
-        console.log(getreleasenumber)
-        console.log(gettime_begin)
-        console.log(gettime_end)
-        console.log(getstatus)
-        console.log(id_post)
-        console.log(editpost.slug)
-        console.log(editpost.thumbnail_path)
-        console.log(editpost.status_preview_top)
-        console.log(editpost.id_user)
-        console.log(deleted_at)
-        console.log(is_deleted)
+        // console.log(gettitle)
+        // console.log(getreleasenumber)
+        // console.log(gettime_begin)
+        // console.log(gettime_end)
+        // console.log(getstatus)
+        // console.log(id_post)
+        // console.log(editpost.slug)
+        // console.log(editpost.thumbnail_path)
+        // console.log(editpost.status_preview_top)
+        // console.log(editpost.id_user)
+        // console.log(deleted_at)
+        // console.log(is_deleted)
         // Update category
         PostService.update({
           id              : id_post,
@@ -358,54 +432,10 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
       }
     });
   }
-
+  kjdhakhdkajdkjkad
 }])
 
 
-
-var app = angular.module("CKEditorExample", ["ngCkeditor"]);
-  app.directive('ckEditor', function () {
-  return {
-    require: '?ngModel',
-    link: function (scope, elm, attr, ngModel) {
-      var ck = CKEDITOR.replace(elm[0]);
-      if (!ngModel) return;
-      ck.on('instanceReady', function () {
-        ck.setData(ngModel.$viewValue);
-      });
-      function updateModel() {
-        scope.$apply(function () {
-          ngModel.$setViewValue(ck.getData());
-        });
-      }
-      ck.on('change', updateModel);
-      ck.on('key', updateModel);
-      ck.on('dataReady', updateModel);
-
-      ngModel.$render = function (value) {
-        ck.setData(ngModel.$viewValue);
-      };
-    }
-  };
-});
-
-app.controller("MainCtrl", ["$scope", function($scope){
-  $scope.content = "<p> this is custom directive </p>";
-  $scope.content_two = "<p> this is ng-ckeditor directive </p>";
-}]);
-
-
- <h1>Method 1</h1>
-    <textarea ng-model="content" data-ck-editor></textarea>
-    
-    {{content}}
-    
-    <hr>
-    
-    <h1>Method 2</h1>
-    <textarea ckeditor="editorOptions" ng-model="content_two"></textarea>
-    
-    {{content_two}}
 
 
 
