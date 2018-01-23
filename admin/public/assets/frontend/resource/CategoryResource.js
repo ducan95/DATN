@@ -13,6 +13,15 @@ SOUGOU_ZYANARU_MODULE
 	}
   });
 })
+.factory('ListCategoryService',function($resource){
+  return $resource('/web_api/category/category/:id', { id: '@id'},{
+    find:{
+      url: '/web_api/category/category',
+      method:'GET',
+      isArray:false
+    }
+  });
+})
 .factory('CategoryChildrenService',function($resource){
 	return $resource('/web_api/category/categorychildren/:id', { id: '@id' }, {
     find:{

@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/Ionicons/css/ionicons.min.css') }}">
   <!-- Toast -->
   <link rel="stylesheet" href="{{ asset('assets/base/bower_components/toast/angular-toastr.css') }}" />
-
+  <!-- ckeditor -->
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/AdminLTE.min.css') }}">
   <!-- Custom style -->
@@ -88,9 +88,11 @@
 <script src="{{ asset('assets/base/bower_components/ng-file-upload-shim.min.js') }}"></script>
 <!-- Angular Paging -->
 <script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/ng-ckeditor.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/ng-ckeditor.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/base/dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
+<!-- <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script> -->
 <!-- SlimScroll -->
 <script src="{{ asset('assets/base/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
