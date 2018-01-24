@@ -124,8 +124,8 @@ class PostService extends Service
             //nếu throw ra lỗi chứng tỏ bị lỗi  trong tiến trình gì đó nên phải rollback lại ko cho lưu những dữ liệu đã lưu trước đo
             DB::rollBack();
           }
+        }
       }
-    }
     } 
     catch(\Exception $e){
         $res['errors']['msg'] = $e->getMessage();
