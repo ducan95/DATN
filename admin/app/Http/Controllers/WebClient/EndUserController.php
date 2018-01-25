@@ -19,6 +19,9 @@ class EndUserController extends Controller
   	return view('client.index');
   }
 
+  public function myPage(){
+    return view('client.myPage');
+  }
   //
   public function cat($id){
     $arPosts = CategoryService::getInstance()->cat($id);

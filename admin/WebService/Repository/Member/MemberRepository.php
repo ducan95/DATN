@@ -12,6 +12,98 @@ use WebService\Repository\Repository;
  */
 class MemberRepository extends Repository
 {
+
+  public function confirmEmail($dataReq){
+    try{
+      return $dataReq['email'];
+    }
+    catch(\Exception $e){
+      throw $e;
+    }    
+  }
+
+  public function list()
+  { 
+    try{
+      $allMembers = Member::all();
+      return $allMembers;
+    }
+    catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  public function getPass($dataReq){
+    try{
+      $res['oldPass'] = $dataReq['oldPassword'];
+      $res['newPass'] = $dataReq['password'];
+      $res['confirmPass'] = $dataReq['confirmPassword'];
+      return $res;
+    }
+    catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  /*public function changePass($dataReq, $id){
+    try{
+      $member = Member::find($id);
+      if(!empty($member)) {
+        $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
+        $password = (isset($dataReq['password']))? bcrypt($dataReq['password']) :  $member->password;
+        $email = (isset($dataReq['email']))? $dataReq['email'] :  $member->email;
+        $gender = (isset($dataReq['gender']))? $dataReq['gender'] :  $member->gender;
+        $birthday = $member->birthday;
+        $member->fill([
+          'email'             => $email,
+          'password'          => $password,
+          'birthday'          => $birthday,
+          'gender'            => $gender,
+          'is_receive_email'  => $is_receive_email,
+          'member_plan_code'  => config('admin.member.member_plan_code'),
+          'is_deleted'        => false,
+          'is_active'         => true,
+        ]);
+        $member->save();
+        return $member;  
+      } else {
+        return null;
+      }
+    } catch(\Exception  $e){
+      throw $e;
+      
+    }
+  }
+*/
+  public function changeEmailPass($dataReq,$id)
+  {
+    try{
+      $member = Member::find($id);
+      if(!empty($member)) {
+        $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
+        $password = (isset($dataReq['password']))? bcrypt($dataReq['password']) :  $member->password;
+        $email = (isset($dataReq['email']))? $dataReq['email'] :  $member->email;
+        $gender = (isset($dataReq['gender']))? $dataReq['gender'] :  $member->gender;
+        $birthday = $member->birthday;
+        $member->fill([
+          'email'             => $email,
+          'password'          => $password,
+          'birthday'          => $birthday,
+          'gender'            => $gender,
+          'is_receive_email'  => $is_receive_email,
+          'member_plan_code'  => config('admin.member.member_plan_code'),
+          'is_deleted'        => false,
+          'is_active'         => true,
+        ]);
+        $member->save();
+        return $member;  
+      } else {
+        return null;
+      }
+    } catch(\Exception  $e){
+      throw $e;
+    }
+  }
   //create new member
   public function save($dataReq)
   {
@@ -44,6 +136,7 @@ class MemberRepository extends Repository
       if(!empty($member)) {
         $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
         $password = (isset($dataReq['password']))? bcrypt($dataReq['password']) :  $member->password;
+        $gender = (isset($dataReq['gender']))? $dataReq['gender'] :  $member->gender;
         $birthday = (isset($dataReq['birthday']))? $dataReq['birthday']: new date($member->birthday);
         $member->fill([
           'email'             => $dataReq['email'],

@@ -10,11 +10,19 @@
                         <img src="{{ asset('client/images/register.jpg') }}" alt="" srcset="">
                     </a>
                 </li>
+                @if(Auth::check())
+                  <li>
+                    <a href="#" id="register">
+                        マイページ
+                    </a>
+                  </li>
+                @else
                 <li>
                     <a href="{{ route('webClientMemberIndex') }}" id="register">
                         <img src="{{ asset('client/images/email.jpg') }}" alt="" srcset="">
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
         <div class="right-nav right">
