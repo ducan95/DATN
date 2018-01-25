@@ -21,12 +21,21 @@
             <!-- IMAGE REGISTER -->
             <!-- with frefix is s -->
             <!-- type With frefix sy or sn || fy or fn-->
+            @if(Auth::guard('member')->check())
+              <li class="pc-element btn-register">
+              <a href="{{ route('WebClientEndUserMyPage') }}"><img src="{{ asset('client/media/icon/pc_1026ol_06.jpg') }}"></a>
+              </li>
+              <li class="mobile-element">
+                <a href="{{ route('WebClientEndUserMyPage') }}"><i class="fa fa-envelope-o"></i> マイページ</a>
+              </li>
+            @else
             <li class="pc-element btn-register">
-              <a href="{{ route('webClientMemberIndex') }}"><img src="{{ asset('client/media/icon/pc_1026ol_10.jpg') }}""/></a>
+              <a href="{{ route('webClientMemberIndex') }}"><img src="{{ asset('client/media/icon/pc_1026ol_10.jpg') }}"></a>
             </li>
             <li class="mobile-element">
               <a href="{{ route('webClientMemberIndex') }}"><i class="fa fa-envelope-o"></i> 会員登録</a>
             </li>
+            @endif
             <li class="mobile-element">
               <a href="{{ route('getLoginEndUser') }}"><i class="fa fa-key"></i> ログイン</a>
             </li>

@@ -467,7 +467,46 @@ Route::group([
       'as'   => 'ClientReleaseIndex'
     ]);
   });*/
-  
+  Route::get('myPage',[
+    'uses'  => 'EndUserController@myPage',
+    'as'    => 'WebClientEndUserMyPage',
+  ]);
+
+  Route::get('changeEmail',[
+    'uses'  => 'MemberController@changeEmail',
+    'as'    => 'webClientMemberChangeEmail',
+  ]);
+
+  Route::post('changeEmail',[
+    'uses'  => 'MemberController@confirmEmail',
+    'as'    => 'webClientMemberComfirmEmail',
+  ]);
+
+  Route::post('acceptEmail-{id}',[
+    'uses'  => 'MemberController@acceptChangeEmail',
+    'as'    => 'webClientMemberAcceptChangeEmail',
+  ]);
+
+  /*Route::get('acceptEmail-{id}',[
+    'uses'  => 'MemberController@getAcceptChangeEmail',
+    'as'    => 'webClientMemberAcceptChangeEmail',
+  ]);*/
+
+  Route::get('changeEmailSuccess',[
+    'uses'  => 'MemberController@changeEmailSuccess',
+    'as'    => 'webClientMemberChangeEmailSuccess',
+  ]);
+
+
+  Route::get('changePassword-{id}',[
+    'uses'  => 'MemberController@getChangePassword',
+    'as'    => 'webClientMemberChangePassword',
+  ]);
+
+  Route::post('changePassword-{id}',[
+    'uses'  => 'MemberController@postChangePassword',
+    'as'    => 'webClientMemberChangePassword',
+  ]);
 });
 
 /**

@@ -32,7 +32,7 @@ class AdminController extends Controller
         return view('admin.release.index', compact('role_code'));
         }
         if($role_code == 'user'){
-        return view('admin.index.index', compact('role_code'));
+        return view('admin.posts.index', compact('role_code'));
         }
     }
 
