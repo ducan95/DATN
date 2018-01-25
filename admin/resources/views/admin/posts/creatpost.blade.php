@@ -36,8 +36,6 @@
 						<div>
 							<textarea class="form-control ckeditor" rows="7" cols="10" id="editor1" 
 							 name="content" ng-model="postcontent"></textarea>
-							<!-- <ng-ckeditor id="editor1" ng-model="postcontent" skin="moono" remove-buttons="Image" remove-plugins="iframe,flash,smiley" msn-count="
-							Number of typed characters:"></ng-ckeditor> -->
 						</div>
 						<div class="row">
 							<div class="col-md-4"></div>

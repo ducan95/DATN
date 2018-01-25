@@ -34,17 +34,17 @@ class PostRepository extends Repository
                 ->join('users', function($join) {
                   $join->on('posts.id_user', '=', 'users.id_user')
                   ->where('users.is_deleted','=',false); });
-
+                
       $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name');    
       if(!empty($dataReq)) {
         if(isset($dataReq['releaseNumber'])) {
           $query =  $query->where('release_numbers.id_release_number', '=', $dataReq['releaseNumber']);
         }
         if(isset($dataReq['categoryParent'])) {
-          $query =  $query->where('categories.id_category_parent', '=', $dataReq['releaseNumber']);
+          $query =  $query->where('categories.id_category', '=', $dataReq['releaseNumber']);
         }
         if(isset($dataReq['categoryChildren'])) {
-          $query =  $query->where('categories.id_category_parent', '=', $dataReq['categoryChildren']);
+          $query =  $query->where('categories.id_category', '=', $dataReq['categoryChildren']);
         }
         if(isset($dataReq['time_begin'])) {
           $query =  $query->whereDate('posts.time_begin', $dataReq['categoryChildren']);
