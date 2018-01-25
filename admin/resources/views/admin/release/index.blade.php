@@ -27,16 +27,27 @@
       <div class="row">
         <div class="col-md-3 text-center">
           <div class="release-thumb">
-            {{-- <img ng-if="release.image_release_path != 'assets/img/no-image.jpg'" src="{{ storage_asset() }}/@{{ release.image_release_path }}" class="img-responsive release-img" alt="">
-            <img ng-if="release.image_release_path == 'assets/img/no-image.jpg'" src="{{ asset('assets/img/no-image.jpg') }}" class="img-responsive release-img" alt=""> --}}
-            <div ng-if="release.image_release_path != 'assets/img/no-image.jpg'" class="release-img" style="background: url('{{ storage_asset() }}/@{{ release.image_release_path }}')"></div>
-            <div ng-if="release.image_release_path == 'assets/img/no-image.jpg'" class="release-img" style="background: url('{{ asset('assets/img/no-image.jpg') }}')"></div>
+            {{-- 
+            <a data-lightbox="image-1" href="{{ storage_asset() }}/@{{ release.image_release_path }}">
+              <img ng-if="release.image_release_path != 'assets/img/no-image.jpg'" src="{{ storage_asset() }}/@{{ release.image_release_path }}" class="img-responsive release-img" alt="">
+            </a>
+            <img data-lightbox="image-1" ng-if="release.image_release_path == 'assets/img/no-image.jpg'" src="{{ asset('assets/img/no-image.jpg') }}" class="img-responsive release-img" alt=""> --}}
+            <a data-lightbox="image-1" href="{{ storage_asset() }}/@{{ release.image_release_path }}">
+              <div ng-if="release.image_release_path != 'assets/img/no-image.jpg'" class="release-img" style="background: url('{{ storage_asset() }}/@{{ release.image_release_path }}')"></div>
+            </a>
+            <a data-lightbox="image-1" href="{{ asset('assets/img/no-image.jpg') }}">
+              <div ng-if="release.image_release_path == 'assets/img/no-image.jpg'" class="release-img" style="background: url('{{ asset('assets/img/no-image.jpg') }}')"></div>
+            </a>
           </div>
         </div>
         <div class="col-md-6">
           <div class="header-thumb">
-            <div ng-if="release.image_header_path != 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ storage_asset() }}/@{{ release.image_header_path }}')"></div>
-            <div ng-if="release.image_header_path == 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ asset('assets/img/no-banner.jpg') }}')"></div>
+            <a data-lightbox="image-1" href="{{ storage_asset() }}/@{{ release.image_header_path }}">
+              <div ng-if="release.image_header_path != 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ storage_asset() }}/@{{ release.image_header_path }}')"></div>
+            </a>
+            <a data-lightbox="image-1" href="{{ asset('assets/img/no-banner.jpg') }}">
+              <div ng-if="release.image_header_path == 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ asset('assets/img/no-banner.jpg') }}')"></div>
+            </a>
           </div>
           
           <h4 ng-bind="release.name"></h4>
