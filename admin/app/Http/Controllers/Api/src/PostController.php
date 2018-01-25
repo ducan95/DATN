@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers\Api\src;
+use Illuminate\Support\Facades\Log;
 use WebService\Service\Post\PostService;
 use Illuminate\Http\Request;
 use Extention\ApiRequest;
 use Extention\Api;
-use App\Http\Controllers\Api\WebApiController as WebApiController; 
+use App\Http\Controllers\Api\WebApiController as WebApiController;
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -61,10 +62,20 @@ class PostController extends WebApiController
    * @return Response
    */ 
   public function actionSave(Request $request)
-  { 
-    var_dump($request);
-    exit;
-    $res = PostService::getInstance()->save($request);
+  {
+    //code debug xem giá trị $request
+    //Log::info($request["data"]["post"]);exit;
+    $post_data=$request["data"]["post"];
+    $post_category_data= $request["data"]["post_category"];
+    if(empty($post_data) || empty($post_category_data)){
+      return Api::response([
+        'is_success' => false,
+        'status_code' => 400,
+        'errors' => "loi empty o day"
+      ]);
+    }
+
+    $res = PostService::getInstance()->batchSave($post_data, $post_category_data);
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data']]);
     }else {

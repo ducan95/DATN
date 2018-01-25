@@ -13,9 +13,9 @@ class PostTableSeeder extends Seeder
 
     {	
 	  	/*$title = ['thoi-su', 'kinh-doanh', 'van-hoa', 'giao-duc'];*/
-      $limit = 40;
+      $limit = 4;
       
-      for($i = 0; $i< $limit; $i++) {
+      for($i = 1; $i< $limit; $i++) {
         DB::table('posts')->insert([
             'id_release_number' => 1,
             'id_user' => 1,
@@ -23,12 +23,13 @@ class PostTableSeeder extends Seeder
             'slug' => 'slug-title',
             'content' => 'abc',
             'status' => true,
-            'thumbnail_path'=> 'media2018-01-05-7.jpg',
+            'thumbnail_path'=> 'imageDefault/archive2018-01-24-552.jpg',
             'time_begin'=>'2016-10-24',
             'time_end'=>'2016-10-29',
-            'status_preview_top'=>false,
+            'status_preview_top'=>1,
             'deleted_at' => null,
-            'is_deleted'=>false
+            'is_deleted'=>false,
+            'password'  => bcrypt('123'),
           ]);   
       }        	 
     }

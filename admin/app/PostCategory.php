@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class PostCategory extends Model
 {
     protected $table = 'post_category';
+    public $incrementing = false;
+    // protected $primaryKey=['id_post','id_category'];
     protected $fillable = ['id_post','id_category','is_deleted'];
     public function post(){
     	return $this->belongsTo(Post::class,'id_post','id_post');

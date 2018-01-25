@@ -62,7 +62,7 @@ class PostRepository extends Repository
           return $query->paginate($dataReq['paginate']);
         }
       }
-      return $query->paginate(2);	
+      return $query->paginate(3);	
    	} catch(\Exception $e) {
    		throw $e;
     }  
@@ -95,24 +95,21 @@ class PostRepository extends Repository
   {  
     try {
       $post = new Post();
-      $dataReq['post']['id_user'] = Auth::user()->id_user;
-      $dataReq['post']['is_deleted'] = false;
-      $dataReq['post']['deleted_at'] = null;
-      $dataReq['post']['status_preview_top'] = true;
+      $status_preview_top=((isset($dataReq['status_preview_top']))?1:0);
       $post->fill([
-        'id_release_number' => $dataReq['post']['id_release_number'],
-        'title' => $dataReq['post']['title'],
-        'slug' => $dataReq['post']['title'],
-        'thumbnail_path' => $dataReq['post']['thumbnail_path'],
-        'content' => $dataReq['post']['content'],
-        'id_user' => $dataReq['post']['id_user'],
-        'status' => $dataReq['post']['status'],
-        'time_end' => $dataReq['post']['time_end'],
-        'time_begin' => $dataReq['post']['time_begin'],
-        'password'   => bcrypt($dataReq['post']['password']),
-        'is_deleted'  =>$dataReq['post']['is_deleted'] ,
-        'deleted_at' => $dataReq['post']['deleted_at'],
-        'status_preview_top'=>$dataReq['post']['status_preview_top']
+        'id_release_number' => $dataReq['id_release_number'],
+        'title' => $dataReq['title'],
+        'slug' => $dataReq['title'],
+        'thumbnail_path' => $dataReq['thumbnail_path'],
+        'content' => $dataReq['content'],
+        'id_user' => $dataReq['id_user'],
+        'status' => $dataReq['status'],
+        'time_end' => $dataReq['time_end'],
+        'time_begin' => $dataReq['time_begin'],
+        'password'   => bcrypt($dataReq['password']),
+        'is_deleted'  =>$dataReq['is_deleted'] ,
+        'status_preview_top'=>$status_preview_top,
+        'deleted_at' => $dataReq['deleted_at']
       ]);
       $post->save();
       return $post;
