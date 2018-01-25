@@ -319,9 +319,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
     }
     // console.log($scope.category)
   }
-
-
-  $scope.statusPreviewTop = 1 ;
   $scope.creatPost =  function() { 
     // console.log($('textarea.editor' ).val());
     $scope.getPathImage($scope.thumbnail).then(function(data){ 
@@ -345,20 +342,11 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
             id_category:$scope.category,
           }
         }
-        // console.log($scope.data.post)
-        $scope.listpost.$save(function(res){
-          console.log(res);
-          // if(res.is_success) {
-          //   toastr.success("success");
-          //   console.log(res['post']);
-          // }
-          // if(res['post_category'].is_success){
-          //   toastr.success("success");
-          //   console.log(res['post_category']);
-          // } else {
-          //   throw res['post'].errors;
-          // } 
-        });
+        console.log($scope.listpost.data);
+        $scope.listpost.$save(function() {
+          console.log($scope.listpost);
+          // $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post/';
+      });
       } catch(err){
         toastr.error(err);
       }

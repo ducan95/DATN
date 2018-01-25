@@ -23,7 +23,7 @@
 								<input type="date" name="timeBegin" class="form-control" 
 								ng-model="postBeginDate">
 							</div>
-							<label class="col-sm-2" id="status" ng-bind="status"> </label>
+							<label class="col-sm-2" id="status" ng-bind="status"></label>
 						</div>
 						<div class="form-group" id="dateend">
 							<label class="col-sm-3" >{{ trans('web.date_end_public')}}</label>
@@ -71,8 +71,7 @@
 							</div>
 							<div id="display">
 								<p>{{ trans('web.display_top')}}</p>
-								<switch id="enabled" name="enabled" ng-model="statusPreviewTop" 
-								class="green"></switch>
+								<input id="enabled" type="checkbox" name="statusPreviewTop"  ng-model="statusPreviewTop" value="1"></input>
 							</div>
 							<div id="category">
 								<p>{{trans('web.category')}}</p>
