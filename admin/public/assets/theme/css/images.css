@@ -1,4 +1,11 @@
 /*  link color code : https://www.w3schools.com/colors/colors_names.asp */
+.centerMize {
+  text-align: center;
+}
+.imgeMize {
+  width: 400px;
+  height: 400px;
+}
 .item-image {
   border: 2px solid #777;
   margin-bottom: 10px;

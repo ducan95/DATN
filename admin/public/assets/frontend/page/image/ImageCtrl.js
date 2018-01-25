@@ -3,7 +3,7 @@
  */
 
 
-  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',function($scope, trans, toastr, ImageService, $window, popupService)
+  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',['$scope', 'trans', 'toastr', 'ImageService', '$window', 'popupService', 'tranDate', function($scope, trans, toastr, ImageService, $window, popupService, tranDate)
   { 
     $scope.location = APP_CONFIGURATION.BASE_URL;
     $scope.currentPage = 1;
@@ -18,6 +18,14 @@
         }     
       }
     }); 
+
+    $scope.onSuccess = function(e) {
+      toastr.success('success !');
+    };
+
+    $scope.onError = function(e) {
+      toastr.error(res.errors, 'ERROR !!!');
+    }
     //find image of parameter
     $scope.searchImage = function() {
       ImageService.get({name:$scope.parameter}, function(res) {
@@ -39,6 +47,9 @@
         if(res.data != undefined) {
           //console.log(res.data); 
           $scope.images  = res.data.data;
+          angular.forEach($scope.images,function(value){
+            value.created_at = tranDate.tranDate(value.created_at);
+          });
           $scope.total  = res.data.total;
           $scope.currentPage  = res.data.current_page;
           $scope.lastPage  = res.data.last_page;
@@ -80,7 +91,7 @@
         }
       });
     }
-  });
+  }]);
 
 
 SOUGOU_ZYANARU_MODULE.controller('ImageAdd', ['$scope', 'uploadImage', 'toastr', function ($scope, uploadImage, toastr) {

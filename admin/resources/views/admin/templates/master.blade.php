@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> @yield('title') </title>
+  <link href="{{ asset('assets/base/bower_components/lightbox2/dist/css/lightbox.css') }}" rel="stylesheet">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/faviconf.ico') }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -27,6 +28,8 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/skins/_all-skins.min.css') }}">
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -36,7 +39,8 @@
 
   <!-- Google Font -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">     
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> 
+  
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini animated fadeIn" ng-cloak>
 <div></div>
@@ -86,9 +90,11 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="{{ asset('assets/base/bower_components/jquery/dist/jquery.min.js') }}"></script>
+
+<script src="{{ asset('assets/base/bower_components/jquery-3.2.1.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('assets/base/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
 <!-- Angular JS and resource -->
 <script src="{{ asset('assets/base/bower_components/angular.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/angular-resource.min.js') }}"></script>
@@ -118,6 +124,8 @@
 <script src="{{ asset('assets/base/bower_components/clipboard.min.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/ngclipboard.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/lightbox2/dist/js/lightbox.js') }}"></script>
+
 @yield('bottom-js')
 
 </body>

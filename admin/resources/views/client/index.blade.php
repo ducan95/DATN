@@ -1,4 +1,7 @@
 @extends('client.layout.master')
+@section('title')
+{{ trans('web.webClient.title.home') }}
+@endsection 
 @section('release')
 <div class="row top-buffer padding-mobile">
     <div class="col-md-4 hidden-sm hidden-xs">

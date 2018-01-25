@@ -22,7 +22,7 @@
               <input type="text" name="table_search" ng-model='parameter' class="form-control pull-right" placeholder="">
 
               <div class="input-group-btn">
-                <button type="submit" ng-click="searchImage()" class="btn btn-default"><i class="fa fa-search"></i></button>
+                <button type="submit" ng-click="searchImage()" class="btn btn-default"> 表示</button>
               </div>
             </div>
           </div>
@@ -42,9 +42,11 @@
                       <div class="media-img" style="background-image: url('{{storage_asset()}}/@{{image.path}}')"></div>
                     </div>
                     <p class="media-name">
-                      <a target="_blank" href="{{storage_asset()}}/@{{image.path}}">{{ storage_asset() }}/@{{ image.path }}</a>
-                      <button title="Copy URL image to clipboard" class="btn btn-copy" ngclipboard ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" data-clipboard-text="{{storage_asset()}}/@{{image.path}}">
-                        <img src="{{ asset('assets/img/icon/clippy.svg') }}" alt="Copy to clipboard">
+                      <p>
+                      <a data-lightbox="image-1" href="{{storage_asset()}}/@{{image.path}}">{{ storage_asset() }}/@{{ image.path }}</a>
+                    </p>
+                      <button title="Copy URL image to clipboard" class="btn btn-copy" ngclipboard ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" data-clipboard-text="{{storage_asset()}}/@{{image.path}}">コピー
+                        <!-- <img src="{{ asset('assets/img/icon/clippy.svg') }}" alt="Copy to clipboard"> -->
                       </button>
                       <span ng-bind="image.name"></span>
                     </p>
@@ -82,7 +84,7 @@
               <div class="content-image-bottom">
                 <div class="path"><a href="">URL Image</a></div>
                 <div class="url-image">
-                  <a href="{{storage_asset()}}/@{{image.path}}">{{storage_asset()}}/@{{image.path}}</a>
+                  <a href="{{storage_asset()}}/@{{image.path}}" rel="lightbox">{{storage_asset()}}/@{{image.path}}</a>
                 </div>
               </div>
             </div>

@@ -11,7 +11,8 @@
  	this.tranDate = function(date) {
  		try {
  			if(date != undefined) {
- 				var objArray = date.split('-');
+ 				var objDate = date.split(' ');
+ 				var objArray = objDate[0].split('-');
  				return objArray[0]+"年"+objArray[1]+"月"+objArray[2]+"日";
  			} else {
  				throw "undefined"; // 

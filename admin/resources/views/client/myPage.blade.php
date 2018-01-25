@@ -1,11 +1,14 @@
 @extends('client.layout.master')
+@section('title')
+	{{ trans('web.webClient.title.mypage') }}
+@endsection
 @section('content')
 
 <div>
 	<h4 class="customize_h4">マイページ</h4>
 	<div class="media customize">
 	  <div class="media-body">
-	    <h5 class="mt-0">登録メールアドレス (địa chỉ email đã đăng ký)</h5>
+	    <h5 class="mt-0">登録メールアドレス</h5>
 	    <span>{{ Auth::guard('member')->user()->email }}</span>
 	  </div>
 	</div>

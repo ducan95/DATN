@@ -43,6 +43,14 @@
 			'logout'					=> 'ログアウト',
 			'title' => [
 				'release' => '発売号別の記事一覧 - FRIDAYデジタル',
+				'login' 		=> 'ログイン',
+				'category' => 'カテゴリ',
+				'member'   => '会員登録', //register member
+				'mypage' 	=> '私のページ',
+				'release' => '発行番号',
+				'post'    => '記事',
+				'home'    => 'ホームページ',
+
 			],
 		]
 	]

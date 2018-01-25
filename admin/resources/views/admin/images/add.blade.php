@@ -4,6 +4,9 @@
 {{ trans('web.list_image') }}
 @endsection 
 
+@section('custom-css')
+<link rel="stylesheet" href="{{ asset('assets/theme/css/images.css') }}">
+@endsection
 @section('content')
 <div ng-controller="ImageAdd">
    <!-- Content Header (Page header) -->
@@ -33,8 +36,8 @@
       
         <div class="col-xs-12 ">
           <div class="list-img-upload" >
-            <div class="image" ng-repeat="path in pathImages">
-              <img  src="{{storage_asset()}}/@{{path}}">     
+            <div class="image centerMize" ng-repeat="path in pathImages">
+              <img class="imgeMize" src="{{storage_asset()}}/@{{path}}">     
             </div>
           </div>
         </div> 

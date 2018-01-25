@@ -1,4 +1,7 @@
 @extends('client.layout.master')
+@section('title')
+	{{ trans('web.webClient.title.login') }}
+@endsection
 @section('content')
 <div>
     @if(Session::get('status') != null)

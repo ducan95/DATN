@@ -1,4 +1,7 @@
 @extends('client.layout.master')
+@section('title')
+	{{ trans('web.webClient.title.member') }}
+@endsection
 @section('content')
 <div>
     @if(Session::get('status_fail') != null)

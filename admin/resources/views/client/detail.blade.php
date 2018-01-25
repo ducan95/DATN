@@ -1,7 +1,7 @@
 @extends('client.layout.master')
 
 @section('title')
-{{ trans('web.webClient.title.release') }}
+{{ trans('web.webClient.title.post') }}
 @endsection 
 
 @section('content')
