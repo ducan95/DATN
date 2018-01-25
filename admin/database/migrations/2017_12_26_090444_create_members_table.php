@@ -22,6 +22,7 @@ class CreateMembersTable extends Migration
             $table->boolean('is_receive_email');
             $table->string('member_plan_code');
             $table->boolean('is_deleted');
+            $table->boolean('is_active')->notnull();
             $table->timestamps();
         });
     }

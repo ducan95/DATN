@@ -26,6 +26,8 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
       try {
         if(res != undefined) { 
           $scope.posts  = res.data.data; // list posts
+          // console.log(res);
+          // return false
           $scope.total  = res.data.total; 
           $scope.currentPage  = res.data.current_page;
           $scope.lastPage  = res.data.last_page;
@@ -49,21 +51,21 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
   ** api:  web_api/category/
   ** return response
   **/
-  // CategoryService.find({}, function(res){  
-  //   try {  
-  //     if(typeof res != undefined) { 
-  //       if(res.is_success) { 
-  //         $scope.listCatParent = res.data  
-  //       } else { // can't get list categories parent
-  //         throw res.errors;  
-  //       }
-  //     } else {
-  //       throw "undefined"; 
-  //     }
-  //   } catch(err) {
-  //     toastr.error(err);
-  //   }
-  // });
+  CategoryService.find({}, function(res){  
+    try {  
+      if(typeof res != undefined) { 
+        if(res.is_success) { 
+          $scope.listCatParent = res.data  
+        } else { // can't get list categories parent
+          throw res.errors;  
+        }
+      } else {
+        throw "undefined"; 
+      }
+    } catch(err) {
+      toastr.error(err);
+    }
+  });
 
 
    CategoryService.find({},function(res){
@@ -151,15 +153,12 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
   ** array status post 
   ** 
   **/     
-  $scope.listStatus = {
-    availableOptions : [ 
+  $scope.listStatus = [ 
       { id : 1 , name : 'Draff'},
       { id : 2 , name : 'Chuẩn bị công khai'},
       { id : 3 , name : ' Công khai'},
       { id : 4 , name : ' Không công khai'},
-    ] ,
-    selectedOption: { id: 1, name: 'Draff'} 
-  };
+    ];
     
   /**
   ** function search post
@@ -342,10 +341,10 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
             id_category:$scope.category,
           }
         }
-        console.log($scope.listpost.data);
+        // console.log($scope.listpost.data);
         $scope.listpost.$save(function() {
-          console.log($scope.listpost);
-          // $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post/';
+          // console.log($scope.listpost);
+          $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post/';
       });
       } catch(err){
         toastr.error(err);

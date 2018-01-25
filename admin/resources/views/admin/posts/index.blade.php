@@ -22,10 +22,13 @@
 		<div class="row">
 			<div class="col-md-2">
 				<label>Release Number</label>
-				<select name='releaseNumber' ng-model='releaseNumber'>
-					<option value="1">zxcxzc</option>
-					<option value="2">zxcxzc</option>
-				</select>
+				<select name="release" id="release" ng-model="listRelease.model">
+		      	<option ng-repeat="option in listRelease.availableOptions" 
+    					value="@{{option.id_release_number}}"
+    					ng-bind="option.name" 
+    					ng-selected="@{{option.id_release_number == 2}}">
+		      	</option>
+		    </select>
 			</div>
 			<div class="col-md-2">
 				<label>Category Parent</label>

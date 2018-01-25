@@ -15,18 +15,18 @@ class PostcategoryRepository extends Repository
   public function save($dataReq){
     try{
     $post_category=new PostCategory();
-      $post_category->fill([
-        'id_post' => $dataReq['post_category']['id_post'],
-        'id_category' => $dataReq['post_category']['id_category'],
-        'is_deleted'  =>$dataReq['post_category']['is_deleted']
-      ]);
-      $post_category->save();
-      return $post_category;
+    $post_category->fill([
+      'id_post'     =>  $dataReq['id_post'],
+      'id_category' =>  $dataReq['id_category'],
+      'is_deleted'  =>  $dataReq['is_deleted']
+    ]);
+    $post_category->save();
+    return $post_category;
      }
-     catch(\Exception  $e) { 
+    catch(\Exception  $e) { 
       throw  $e;  
     }  
-    }
+  }
   public function update($dataReq, $id){
 
   }

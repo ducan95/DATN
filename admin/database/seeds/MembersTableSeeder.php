@@ -21,6 +21,7 @@ class MembersTableSeeder extends Seeder
                 'is_receive_email'	=> true,
                 'member_plan_code'	=> 'free',
                 'is_deleted' 		=> false,
+                'is_active'         => true
             ]
         );
         DB::table('members')->insert(
@@ -33,6 +34,7 @@ class MembersTableSeeder extends Seeder
                 'is_receive_email'	=> true,
                 'member_plan_code'	=> 'free',
                 'is_deleted' 		=> false,
+                'is_active'         => false
             ]
         );
     }
