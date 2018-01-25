@@ -3,6 +3,7 @@ namespace WebService\Service\Category;
 use WebService\Repository\Category\CategoryRepository;
 use WebService\Service\Service;
 use Validator;
+use DB;
 /**
  * Created by PhpStorm.
  * User: rikkei
@@ -55,9 +56,13 @@ class CategoryService extends Service
 
   public function delete($id)
   {
+    // khởi tạo transaction ở đây
+    DB::beginTransaction();
     try{
       $res['data'] = CategoryRepository::getInstance()->delete($id);
-    }catch(\Exception $e) {
+      DB::commit();
+    } catch(\Exception $e) {
+      DB::rollBack();
       $res['errors']['msg'] = $e->getMessage();
       $res['errors']['status_code'] = 500;
     }

@@ -136,7 +136,7 @@ class PostService extends Service
       // Log::info($res['post_category']);exit;
       return $res;
     }
-
+    
   public function update($request, $id)
   {   
     try{
