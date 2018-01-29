@@ -134,7 +134,7 @@ class ReleaseRepository extends Repository
 
   public function list(){
     try{
-      return DB::table('release_numbers')->orderBy('id_release_number','DESC')->get();
+      return DB::table('release_numbers')->where('is_deleted','=',false)->orderBy('id_release_number','DESC')->get();
     } catch(\Exception $e){
       throw $e;
     }
@@ -150,7 +150,7 @@ class ReleaseRepository extends Repository
 
   public function loadmoreRelease($offset, $row_count){
     try{
-      $oItemsLoad = DB::table('release_numbers')->orderBy('id_release_number','DESC')->skip($offset)->take($row_count)->get();
+      $oItemsLoad = DB::table('release_numbers')->where('is_deleted','=',false)->orderBy('id_release_number','DESC')->skip($offset)->take($row_count)->get();
       return $oItemsLoad;
     } catch(\Exception $e){
       throw $e;
@@ -172,5 +172,10 @@ class ReleaseRepository extends Repository
     } catch(\Exception $e){
       throw $e;
     }
+  }
+
+  public  function release($value='')
+  {
+    # code...
   }
 }

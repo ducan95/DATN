@@ -176,13 +176,13 @@ class CategoryRepository extends Repository
     }
 
   //tim mot category bat ky (ke ca category cha + con)
-  // public function find($id){
-  //   try{
-  //     return Category::findOrFail($id);
-  //   } catch(\Exception $e){
-  //     throw $e;
-  //   }
-  // }
+  public function findCat($id){
+    try{
+      return Category::findOrFail($id);
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
 
   public function cat($id){
     try{
