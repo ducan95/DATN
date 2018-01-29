@@ -1,4 +1,8 @@
 /*  link color code : https://www.w3schools.com/colors/colors_names.asp */
+body{
+  font-family: 'Open Sans', sans-serif !important;
+}
+
 label.error {
   color: #d9534f;
   font-weight: 400;

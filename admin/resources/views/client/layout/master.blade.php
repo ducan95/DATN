@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <link rel="shortcut icon" type="image/x-icon" href="https://friday.kodansha.ne.jp/media/icon/faviconf.ico">
     <title> @yield('title') </title>
     <meta name="keywords" content="FRIDAY,">
@@ -31,7 +32,6 @@
     <link rel="stylesheet" href="{{ asset('client/css/site/common/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/site/common/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/common/mycss.css') }}">
-
 <!--     <link rel="stylesheet" href="{{ asset('client/css/mycss.css') }}"> -->
   </head>
   <body class="hold-transition skin-purple layout-top-nav">

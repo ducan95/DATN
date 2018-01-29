@@ -1,6 +1,6 @@
 
 SOUGOU_ZYANARU_MODULE
-	.controller('CategoryCtrl',function($scope,CategoryService,CategoryChildrenService,popupService,$window){
+	.controller('CategoryCtrl',['$scope', 'CategoryService', 'CategoryChildrenService', 'popupService', '$window','SweetAlert', function($scope,CategoryService,CategoryChildrenService,popupService,$window,SweetAlert){
   CategoryService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.categories = res.data;
@@ -34,7 +34,7 @@ SOUGOU_ZYANARU_MODULE
     }
 
   //delete category chil
-  $scope.deleteCategoryChil = function (id_category) {
+  /*$scope.deleteCategoryChil = function (id_category) {
     if (popupService.showPopup('Really delete this?')) {
       var category = CategoryService.get({ id: id_category }, function (res) {
         if (typeof res != "undefined") {
@@ -47,10 +47,36 @@ SOUGOU_ZYANARU_MODULE
         }
       });
     }
-  }  
+  }*/  
 
+  $scope.deleteCategoryChil = function (id_category) {
+    var options = {
+      title: "削除してもよろしいですか？",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      cancelButtonText: "いいえ",
+      confirmButtonText: "はい",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+    };
+    swal(options, function(isConfirm) {
+      if (isConfirm) {
+        var category = CategoryService.get({ id: id_category }, function (res) {
+          if (typeof res != "undefined") {
+            var category = res.data;
+              CategoryService.delete({ id: category[0].id_category},function () {
+              console.log('Deleting category chil with id ' + id_category);
+              //Ridirect
+              $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
+            });
+          }
+        });
+      }
+    });
+  }
   //delete category parent
-  $scope.deleteCategory=function(id_category){
+  /*$scope.deleteCategory=function(id_category){
      if (popupService.showPopup('Really delete this?')) {
       var category = CategoryService.get({ id: id_category }, function (res) {
         if (typeof res != "undefined") {
@@ -63,8 +89,38 @@ SOUGOU_ZYANARU_MODULE
         }
       });
     }
+  }*/
+
+  $scope.deleteCategory = function(id_category){
+    var options = {
+      title: "削除してもよろしいですか？",
+      text: "サブカテゴリが削除されます",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      cancelButtonText: "いいえ",
+      confirmButtonText: "はい",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+    };
+    swal(options, function(isConfirm) {
+      if (isConfirm) {
+        var category = CategoryService.get({ id: id_category }, function (res) {
+          if (typeof res != "undefined") {
+            var category = res.data;
+              CategoryService.delete({ id: category[0].id_category},function () {
+              console.log('Deleting category parent with id ' + id_category);
+              //Ridirect
+              $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
+            });
+          }
+        });
+      }
+    });
   }
-})
+}])
+
+  //============================================================
   //Add Category Parent
 	.controller('CategoryAddCtrl', function ($scope, CategoryAddService,$window) {
   $scope.category = new CategoryAddService();  

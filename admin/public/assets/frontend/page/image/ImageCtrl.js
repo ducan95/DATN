@@ -3,7 +3,7 @@
  */
 
 
-  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',['$scope', 'trans', 'toastr', 'ImageService', '$window', 'popupService', 'tranDate', function($scope, trans, toastr, ImageService, $window, popupService, tranDate)
+  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',['$scope', 'trans', 'toastr', 'ImageService', '$window', 'popupService', 'tranDate','SweetAlert', function($scope, trans, toastr, ImageService, $window, popupService, tranDate, SweetAlert)
   { 
     $scope.location = APP_CONFIGURATION.BASE_URL;
     $scope.currentPage = 1;
@@ -63,17 +63,29 @@
         
       });  
     };
-   
+
     $scope.deleteImage = function(id, index) {
-      if(popupService.showPopup(trans.messageDelete)) {
-        ImageService.delete({ id: id }, function(res) {
-          if(res.is_success) {
-            $scope.images.splice(index, 1);
-          } else {
-            console.log(res);
-          }  
-        });
-      }
+      var options = {
+        title: trans.messageDelete,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        cancelButtonText: "いいえ",
+        confirmButtonText: "はい",
+        closeOnConfirm: true,
+        closeOnCancel: true,
+      };
+      swal(options, function(isConfirm) {
+        if (isConfirm) {
+          ImageService.delete({ id: id }, function(res) {
+            if(res.is_success) {
+              $scope.images.splice(index, 1);
+            } else {
+              console.log(res);
+            }  
+          });
+        }
+      });
     };
 
     // update name image 

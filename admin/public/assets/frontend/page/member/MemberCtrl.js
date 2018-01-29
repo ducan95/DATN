@@ -6,7 +6,7 @@ SOUGOU_ZYANARU_MODULE
 /**
  * Show and delete User
  * */
-.controller('MemberCtrl',['$scope','MemberService', '$window', 'popupService','tranDate' ,function ($scope, MemberService, $window, popupService,tranDate) {
+.controller('MemberCtrl',['$scope','MemberService', '$window', 'popupService','tranDate','SweetAlert' ,function ($scope, MemberService, $window, popupService,tranDate, SweetAlert) {
 
   $scope.location = APP_CONFIGURATION.BASE_URL;
   $scope.currentPage = 1;
@@ -18,7 +18,10 @@ SOUGOU_ZYANARU_MODULE
       $scope.members = res.data;
     }
   })*/
-  $scope.activeMember = function (id_member) {
+
+  //delete member --> chuyển từ active sang deactive
+  /*$scope.activeMember = function (id_member) {
+
     if (popupService.showPopup('Are you sure?')) {
       var member = MemberService.get({ id: id_member }, function (res) {
         if (typeof res != "undefined") {
@@ -31,6 +34,33 @@ SOUGOU_ZYANARU_MODULE
         }
       });
     }
+  }  */
+
+  $scope.activeMember = function (id_member) {
+    var options = {
+      title: '本当ですか？',
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      cancelButtonText: "いいえ",
+      confirmButtonText: "はい",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+    };
+    swal(options, function(isConfirm) {
+      if (isConfirm) {
+        var member = MemberService.get({ id: id_member }, function (res) {
+          if (typeof res != "undefined") {
+            var member = res.data;
+            MemberService.delete({ id: member.id_member }, function () {
+              console.log('Deleting member with id ' + id_member);
+              //Ridirect
+              $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
+            });  
+          }
+        });
+      }
+    });
   }  
 
   //show + paginate

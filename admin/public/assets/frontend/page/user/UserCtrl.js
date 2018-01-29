@@ -3,7 +3,7 @@
  */
 
 SOUGOU_ZYANARU_MODULE
-  .controller('UserCtrl', function ($scope, UserService, $window, popupService, RoleService, toastr) {
+  .controller('UserCtrl', function ($scope, UserService, $window, popupService, RoleService, toastr, trans, SweetAlert) {
 
   UserService.find({}, function (res) {
     if (typeof res != "undefined") {  
@@ -24,7 +24,7 @@ SOUGOU_ZYANARU_MODULE
   }
 
   // Delete users
-  $scope.deleteUser = function (id_user, index) {
+/*  $scope.deleteUser = function (id_user, index) {
     if (popupService.showPopup(TRANS.MSG_DELETE)) {
       var user = UserService.get({ id: id_user }, function (res) {
         if (typeof res != "undefined") {
@@ -47,13 +47,50 @@ SOUGOU_ZYANARU_MODULE
         }
       });
     }
+  } */
+
+  $scope.deleteUser = function (id_user, index) {
+    var options = {
+      title: '削除してもよろしいですか？',
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      cancelButtonText: "いいえ",
+      confirmButtonText: "はい",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+    };
+    swal(options, function(isConfirm) {
+      if (isConfirm) {
+        var user = UserService.get({ id: id_user }, function (res) {
+          if (typeof res != "undefined") {
+            var user = res.data;
+            // Check delete admin
+            if (user.role_code == 's_admin') {
+              alert(TRANS.DELETE_ADMIN);
+            } else {
+              $scope.user = UserService.delete({ id: user.id_user }, function () {
+                
+                if($scope.user.is_success == true) {
+                  $scope.users.splice(index, 1);
+                  toastr.success(TRANS.SUCCESS);
+                } else { 
+                  toastr.error(TRANS.SUCCESS);
+                }    
+                
+              });
+            }
+          }
+        });
+      }
+    });
   }  
 })
 
 /**
  * Creat new user
  * */
-  .controller('UserAddCtrl', function ($scope, UserService, $window, RoleService, toastr) {
+  .controller('UserAddCtrl', function ($scope, UserService, $window, RoleService, toastr, trans, SweetAlert) {
   $scope.user = new UserService();
   
   //Get role -> showview

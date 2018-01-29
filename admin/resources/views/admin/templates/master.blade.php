@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> @yield('title') </title>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
   <link href="{{ asset('assets/base/bower_components/lightbox2/dist/css/lightbox.css') }}" rel="stylesheet">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/faviconf.ico') }}">
   <!-- Tell the browser to be responsive to screen width -->
@@ -28,6 +29,10 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('assets/base/dist/css/skins/_all-skins.min.css') }}">
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('assets/base/bower_components/alertifyjs/css/alertify.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/base/bower_components/alertifyjs/css/themes/default.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/base/bower_components/sweetalert/dist/sweetalert.css') }}">
+
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -125,6 +130,11 @@
 <script src="{{ asset('assets/base/bower_components/ngclipboard.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/lightbox2/dist/js/lightbox.js') }}"></script>
+<!-- <script src="{{ asset('assets/base/bower_components/alertifyjs/alertify.min.js') }}"></script> -->
+<script src="{{ asset('assets/base/bower_components/SweetAlert.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/sweetalert/dist/sweetalert.min.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/angular-sweetalert/SweetAlert.js') }}"></script>
+<!-- <script src="{{ asset('assets/base/bower_components/SweetAlert.js') }}"></script> -->
 
 @yield('bottom-js')
 

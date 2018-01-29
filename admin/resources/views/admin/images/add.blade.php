@@ -36,7 +36,7 @@
       
         <div class="col-xs-12 ">
           <div class="list-img-upload" >
-            <div class="image centerMize" ng-repeat="path in pathImages">
+            <div class="image centerMize" ng-repeat="path in pathImages |  orderBy:'-toString()'">
               <img class="imgeMize" src="{{storage_asset()}}/@{{path}}">     
             </div>
           </div>

@@ -8,7 +8,7 @@ SOUGOU_ZYANARU_MODULE
 	 * @param  {[type]} $scope          [description]
 	 * @return {[type]}                 [description]
 	 */
-	.controller('ReleaseCtrl', function ($scope, ReleaseService, popupService, $window, toastr, $location, $anchorScroll) {
+	.controller('ReleaseCtrl',['$scope', 'ReleaseService', 'popupService', '$window', 'toastr', '$location', '$anchorScroll', 'trans', 'SweetAlert', function ($scope, ReleaseService, popupService, $window, toastr, $location, $anchorScroll, trans, SweetAlert) {
 	  // Pagination
 	  $scope.currentPage = 1;
 		$scope.lastPage    = 0;
@@ -42,7 +42,7 @@ SOUGOU_ZYANARU_MODULE
     };
 
 	  //Delete release number
-	  $scope.delete = function (id, index) {
+	  /*$scope.delete = function (id, index) {
 	  	if (popupService.showPopup(TRANS.CONFIRM_DELETE)) {
 		  	var release = ReleaseService.get({ id: id }, function (res) {
 		  		if (typeof res != 'undefined') {
@@ -58,13 +58,44 @@ SOUGOU_ZYANARU_MODULE
 		  		} 
 		  	});
 	  	}
-	  }
+	  }*/
+
+    $scope.delete = function (id, index) {
+      var options = {
+        title: '削除してもよろしいですか？',
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        cancelButtonText: "いいえ",
+        confirmButtonText: "はい",
+        closeOnConfirm: true,
+        closeOnCancel: true,
+      };
+      swal(options, function(isConfirm) {
+        if (isConfirm) {
+          var release = ReleaseService.get({ id: id }, function (res) {
+            if (typeof res != 'undefined') {
+              var release = res.data;
+              $scope.deleteRelease = ReleaseService.delete({ id: release.id_release_number }, function () {
+                if($scope.deleteRelease.is_success == true) {
+                  $scope.releases.splice(index, 1);
+                  toastr.success(TRANS.SUCCESS);
+                } else { 
+                  toastr.error(TRANS.ERROR);
+                }   
+              });
+            } 
+          });
+        }
+      });
+    }
     //Ridirect Edit page
     $scope.redirectEdit = function (id) { 
       $window.location.href = '/admin/release/edit#id='+id;
     }
-	})
+	}])
 
+  //------------------------------------------------------------------------
 	/**
    * [ Add new release number ]
    * @param  {[type]} $scope          [description]
