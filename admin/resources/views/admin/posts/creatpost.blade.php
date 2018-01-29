@@ -2,7 +2,7 @@
 
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('assets/base/bower_components/dropify/dist/css/dropify.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/base/bower_components/sweetalert2/dist/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/base/bower_components/sweetalert/dist/sweetalert.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/css/posts.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/css/angular-ui-switch.css') }}">
 @endsection
@@ -16,13 +16,16 @@
 	<section class="content">
 		<div class="row">
 				<form id="main" role="form" ng-submit="creatPost" method="post">
+
 					{{ csrf_field() }}
+
 					<div class="col-md-9">
 						<div class="form-group">
 							<label class="col-sm-2">{{ trans('web.date_start_public')}}</label>
 							<div class="col-sm-5">
 								<input type="date" name="timeBegin" class="form-control" 
-								ng-model="postBeginDate">
+								ng-model="postBeginDate" min="@{{date | date:'yyyy-MM-dd'}}">
+								<label class="error" ng-if="error.timeBegin[0] != null">@{{ error.timeBegin[0] }}</label>
 							</div>
 							<label class="col-sm-2" id="status" ng-bind="status"></label>
 						</div>
@@ -34,9 +37,11 @@
 						<div class="form-group" id="article" >
 							<input  type="text" name="title" ng-model='postTitle' style="width: 100%" >
 						</div>
+						<label class="error" ng-if="error.title[0] != null">@{{ error.title[0] }}</label>
 						<div>
 							<textarea class="form-control ckeditor" rows="7" cols="10" id="editor1" 
-							 name="content" ng-model="postcontent"></textarea>
+							 name="content" ng-model="postcontent" required></textarea>
+							 <label class="error" ng-if="error.content[0] != null">@{{ error.content[0] }}</label>
 						</div>
 						<div class="row">
 							<div class="col-md-4"></div>
@@ -76,7 +81,7 @@
 								<p>{{trans('web.category')}}</p>
 								<ul class="sidebar-menu" data-widget="tree" ng-repeat="category in categories">
 									<li class="">
-					          <input type="checkbox" value="category.id_category">
+					          <!-- <input type="checkbox" value="category.id_category"> -->
 					            <span>@{{ category.name }}</span>
 					          <ul>
 					            <li  ng-repeat="cate in categoryChildren" ng-if = "cate.id_category_parent ==  category.id_category">
@@ -156,6 +161,7 @@
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/post/PostCtrl.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 @endsection 
 
 		      
