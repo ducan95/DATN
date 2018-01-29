@@ -117,6 +117,17 @@ class CategoryService extends Service
     public function find($request)
     {
       try {
+      $res['data'] = CategoryRepository::getInstance()->find($request); 
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+    return $res;
+    }
+
+    public function findCat($request)
+    {
+      try {
       $res['data'] = CategoryRepository::getInstance()->findCat($request); 
     } catch(\Exception $e) {
       $res['errors']['msg'] = $e->getMessage();

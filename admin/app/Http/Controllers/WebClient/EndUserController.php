@@ -25,7 +25,7 @@ class EndUserController extends Controller
   //
   public function cat($id){
     $arPosts = CategoryService::getInstance()->cat($id);
-    $cat     = CategoryService::getInstance()->find($id);
+    $cat     = CategoryService::getInstance()->findCat($id);
     $row_count = 4;
     $result = CategoryService::getInstance()->loadmoreCat(0, $row_count, $id);
     $arPostsLoad = (!isset($result['errors'])) ?  $result['data'] : '';
