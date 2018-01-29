@@ -5,10 +5,10 @@
  * */
 
 SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
-['$scope', 'PostService','CategoryService','ListCategoryService', 'ImageService', 'CategoryChildrenService', 
-'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService',
+['$scope', 'PostService','CategoryService','ListCategoryService','ImageService','CategoryChildrenService', 
+'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService','popupService',
 function($scope, PostService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
-uploadImage, $q, $window, toastr, tranDate, ReleaseService){
+uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
 
   $scope.dateStart = tranDate.tranDate('2017-11-30');
   /**
@@ -26,7 +26,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
       try {
         if(res != undefined) { 
           $scope.posts  = res.data.data; // list posts
-          // console.log(res);
+           // console.log(res);
           // return false
           $scope.total  = res.data.total; 
           $scope.currentPage  = res.data.current_page;
@@ -46,11 +46,28 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
     });  
   };
   /**
-  ** function get list categories parent
-  ** service CategoryService 
-  ** api:  web_api/category/
+  ** function get list user
+  ** service UserService 
+  ** api:  web_api/user/
   ** return response
   **/
+
+  // UserService.find({}, function(res){  
+  //   try {  
+  //     if(typeof res != undefined) { 
+  //       if(res.is_success) { 
+  //         $scope.users = res.data;  
+  //       } else {
+  //         throw res.errors;  
+  //       }
+  //     } else {
+  //       throw "undefined"; 
+  //     }
+  //   } catch(err) {
+  //     toastr.error(err);
+  //   }
+  // });
+
   CategoryService.find({}, function(res){  
     try {  
       if(typeof res != undefined) { 
@@ -138,7 +155,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
             model: null,
             availableOptions: res.data.data
           };
-          console.log($scope.listRelease)
+          // console.log($scope.listRelease)
         } else {
           throw res.error;
         }
@@ -167,12 +184,18 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
   ** param releaseNumber, categoryParent, categoryChildren, status, username
   ** return response API
   **/  
-  /*$scope.searchPost = function() {
+  $scope.searchPost = function() {
+    // console.log($scope.listRelease.model);
+    // console.log($scope.categoryParent);
+    // console.log($scope.categoryChildren);
+    // console.log($scope.status);
+    // return false;
     PostService.get({
-      releaseNumber : $scope.releaseNumber ,
+      releaseNumber : $scope.listRelease.model ,
       categoryParent : $scope.categoryParent, 
-     // categoryChildren : $scope.categoryChildren,
-      status : $scope.status, 
+      // categoryChildren : $scope.categoryChildren,
+      status : $scope.status,
+
       //username : $scope.username    
     }, function(res) {
       try {
@@ -189,7 +212,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
         toastr.error(err);
       }
     });   
-  } ;*/
+  } ;
   /**
   ** function save images
   ** service uploadImage 
@@ -318,8 +341,22 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
     }
     // console.log($scope.category)
   }
+  $scope.date = new Date();
   $scope.creatPost =  function() { 
-    // console.log($('textarea.editor' ).val());
+    var constraints = {
+      timeBegin: {
+        presence: true,
+        // minimum:date
+      },
+      title: {
+        presence:true,
+      }
+
+    };
+    var form = document.querySelector("form#main");
+    validate.validators.presence.message = '空白のところで入力してください。';
+    $scope.error = validate(form, constraints);
+    if ($scope.error == undefined) {
     $scope.getPathImage($scope.thumbnail).then(function(data){ 
       try {
         var editor_data = CKEDITOR.instances['editor1'].getData();
@@ -349,8 +386,16 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
       } catch(err){
         toastr.error(err);
       }
-    }).catch(function(err){ toastr.error(err);});   
+    }).catch(function(err){ toastr.error(err);});
+    }   
   };
+
+  //  $scope.redirectPost = function (id_post) { 
+  //   $window.location.href = '/admin/post/edit#id='+id_post;
+  //   $scope.id_post = id_post;
+  // }
+
+
 
   $scope.ridirectquickedit=function(id_post){
     var editpost=PostService.get({id : id_post},function(res){
@@ -419,7 +464,140 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService){
       }
     });
   }
+  $scope.redirectPost = function (id_post) { 
+    $scope.id_post = id_post;
+    $window.location.href = '/admin/post/edit#id='+id_post;
+  }
+}])
 
+
+.controller('PostUpdateCtrl',['$scope', 'PostService', '$window', 'popupService', 'ReleaseService','CategoryService','ListCategoryService','ImageService','CategoryChildrenService', 
+'uploadImage',function ($scope,PostService,$window,popupService,ReleaseService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
+uploadImage) {
+  $scope.date = new Date();
+
+  //update post
+  var url        = new URL(window.location.href); 
+  var id         = url.hash.match(/\d/g);
+  $scope.id      = id.join('');
+
+  $scope.Updatepost = function (post) { 
+    //Validate form
+    // var constraints = {
+    //   email: {
+    //     presence: true,
+    //     email: true
+    //   },
+    //   password: {
+    //     presence: true,
+    //     length: {
+    //       minimum: 5
+    //     }
+    //   },
+    //   role_code: {
+    //     presence: true
+    //   },
+    //   username: {
+    //     presence: true,
+    //     length: {
+    //       minimum: 3,
+    //     },
+    //     format: {
+    //       pattern: "^[-a-zA-Z0-9\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF _.]*$",
+    //       // but we don't care if the username is uppercase or lowercase
+    //       flags: "i",
+    //       message: "無効"
+    //     }
+    //   },
+    // };
+    // var form = document.querySelector("form#main");
+    // validate.validators.presence.message = TRANS.REQUIRED;
+    // validate.validators.email.message = TRANS.TYPE_EMAIL;
+    // $scope.error = validate(form, constraints);
+
+    // If clean data -> Edit
+    // if ($scope.error == undefined) {
+      //Get value from ng-model
+      var getUsername = user.username;
+      var getEmail    = user.email;
+      var getPassword = user.password;
+      var getRole     = user.role_code;
+
+      // Update user
+      PostService.update({
+        id:         $scope.id,
+        username:   getUsername,
+        email:      getEmail,
+        password:   getPassword,
+        role_code:  getRole,
+        status:     true,
+        is_deleted: false
+      }, function (){
+        // Redirect
+        // $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
+      });
+    // }
+  };
+
+  $scope.loadPost = function () { 
+    PostService.get({ id: $scope.id },function(res) {
+    $scope.post = res.data[0];
+    console.log($scope.post)
+    $scope.post.time_begin = new Date($scope.post.time_begin);
+    });
+  };
+  $scope.loadPost();
+
+  ReleaseService.find({}, function(res){
+    try {
+      if(res != undefined) {
+        if(res.is_success) { 
+          $scope.listRelease = {
+            model: null,
+            availableOptions: res.data.data
+          };
+          // console.log($scope.listRelease)
+        } else {
+          throw res.error;
+        }
+      } else {
+        throw "undefined";
+      }
+    } catch(err) {
+      toastr.error(err);
+    }
+  });
+
+  CategoryService.find({},function(res){
+      if(typeof res != "undefined"){
+        $scope.categories = res.data;
+      }
+    })
+
+    $scope.category =new ListCategoryService();
+        $scope.category.$find({},function (res){
+        if (typeof res != "undefined") { 
+          $scope.categoryChildren=res.data;
+        }
+        });
+
+  $scope.getCatChildren = function(idCatParent){
+    try {
+      CategoryChildrenService.find({id: $scope.categoryParent},function (res) { 
+        if (typeof res != "undefined") { 
+          if(res.is_success) {
+            $scope.listCatChildrent = res.data;  
+          } else { // can't get list categories childrent
+            throw res.errors;
+          }
+        } else {
+          throw "undefined"; 
+        }
+      }); 
+    } catch(err) {
+      toastr.error(err);
+    }
+  };
 }])
 
 

@@ -27,7 +27,7 @@ class PostController extends \App\Http\Controllers\WebAdmin\WebController
     public function viewEdit()
     {
         $role_code = Auth::user()->role_code;
-        return view('admin.posts.edit',compact('role_code'));
+        return view('admin.posts.editpost',compact('role_code'));
     }
 
     public function viewDelete()
