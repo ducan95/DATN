@@ -23,7 +23,7 @@
                     @foreach($oItemsLoad as $oItem)
                       <?php
                         $picture = $oItem->image_release_path;
-                        if(strpos($picture, 'imageDefault')){
+                        if(strpos($picture, 'imageDefault') !== false){
                           $picUrl = asset('storage/'.$picture);
                         } else{
                           $picUrl = $picUrl = asset('storage/imageDefault/coverDefault.jpg');
