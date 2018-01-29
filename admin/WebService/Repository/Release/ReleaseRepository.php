@@ -134,7 +134,7 @@ class ReleaseRepository extends Repository
 
   public function list(){
     try{
-      return DB::table('release_numbers')->get();
+      return DB::table('release_numbers')->orderBy('id_release_number','desc')->get();
     } catch(\Exception $e){
       throw $e;
     }
