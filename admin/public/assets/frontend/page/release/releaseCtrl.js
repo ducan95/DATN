@@ -8,7 +8,7 @@ SOUGOU_ZYANARU_MODULE
 	 * @param  {[type]} $scope          [description]
 	 * @return {[type]}                 [description]
 	 */
-	.controller('ReleaseCtrl', function ($scope, ReleaseService, popupService, $window, toastr, $location, $anchorScroll) {
+	.controller('ReleaseCtrl',['$scope', 'ReleaseService', 'popupService', '$window', 'toastr', '$location', '$anchorScroll', 'trans', 'SweetAlert', function ($scope, ReleaseService, popupService, $window, toastr, $location, $anchorScroll, trans, SweetAlert) {
 	  // Pagination
 	  $scope.currentPage = 1;
 		$scope.lastPage    = 0;
@@ -42,35 +42,49 @@ SOUGOU_ZYANARU_MODULE
     };
 
 	  //Delete release number
-	  $scope.delete = function (id, index) {
-	  	if (popupService.showPopup(TRANS.CONFIRM_DELETE)) {
-		  	var release = ReleaseService.get({ id: id }, function (res) {
-		  		if (typeof res != 'undefined') {
-		  			var release = res.data;
-		  			$scope.deleteRelease = ReleaseService.delete({ id: release.id_release_number }, function () {
-              if($scope.deleteRelease.is_success == true) {
-		            $scope.releases.splice(index, 1);
-                toastr.success(TRANS.SUCCESS);
-		          } else { 
-		            toastr.error(TRANS.ERROR);
-		          }   
-            });
-		  		} 
-		  	});
-	  	}
-	  }
+
+    $scope.delete = function (id, index) {
+      var options = {
+        title: '削除してもよろしいですか？',
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        cancelButtonText: "いいえ",
+        confirmButtonText: "はい",
+        closeOnConfirm: true,
+        closeOnCancel: true,
+      };
+      swal(options, function(isConfirm) {
+        if (isConfirm) {
+          var release = ReleaseService.get({ id: id }, function (res) {
+            if (typeof res != 'undefined') {
+              var release = res.data;
+              $scope.deleteRelease = ReleaseService.delete({ id: release.id_release_number }, function () {
+                if($scope.deleteRelease.is_success == true) {
+                  $scope.releases.splice(index, 1);
+                  toastr.success(TRANS.SUCCESS);
+                } else { 
+                  toastr.error(TRANS.ERROR);
+                }   
+              });
+            } 
+          });
+        }
+      });
+    }
     //Ridirect Edit page
     $scope.redirectEdit = function (id) { 
       $window.location.href = '/admin/release/edit#id='+id;
     }
-	})
+	}])
 
+  //------------------------------------------------------------------------
 	/**
    * [ Add new release number ]
    * @param  {[type]} $scope          [description]
    * @return {[type]}                 [description]
    */
-  .controller('ReleaseAddCtrl', ['$scope', 'uploadImg', '$timeout', 'ReleaseService', 'toastr', 'popupService', '$window', '$q', function ($scope, uploadImg, $timeout, ReleaseService, toastr, popupService, $window, $q) {
+  .controller('ReleaseAddCtrl', ['$scope', 'uploadImg', '$timeout', 'ReleaseService', 'toastr', 'popupService', '$window', '$q','SweetAlert', function ($scope, uploadImg, $timeout, ReleaseService, toastr, popupService, $window, $q, SweetAlert) {
   	//Get Friday of next 2 week
   	var friday = moment().day(19).format('LL'); //Friday: 5 + 7 + 7
   	$scope.date = friday+TRANS.NUMBER;
@@ -92,7 +106,18 @@ SOUGOU_ZYANARU_MODULE
       // Check success
       if ($scope.error == undefined) {
         $scope.disable = false; 
-        if (popupService.showPopup(TRANS.MSG_DELETE)) {
+        var options = {
+          title: '本当ですか？',
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          cancelButtonText: "いいえ",
+          confirmButtonText: "はい",
+          closeOnConfirm: true,
+          closeOnCancel: true,
+        };
+        swal(options, function(isConfirm) {
+        if (isConfirm) {
           $scope.name = "cover";
           //Get image path
           function getPath(path) {
@@ -139,6 +164,7 @@ SOUGOU_ZYANARU_MODULE
             });
           });
         }
+      });
       } else {
         $scope.disable = true;
       }
@@ -150,7 +176,7 @@ SOUGOU_ZYANARU_MODULE
    * @param  {[type]} $scope     [description]
    * @return {[type]}            [description]
    */
-  .controller('ReleaseEditCtrl', ['$scope', 'uploadImg', '$timeout', 'ReleaseService', 'toastr', 'popupService', '$window', '$q', function ($scope, uploadImg, $timeout, ReleaseService, toastr, popupService, $window, $q) {
+  .controller('ReleaseEditCtrl', ['$scope', 'uploadImg', '$timeout', 'ReleaseService', 'toastr', 'popupService', '$window', '$q', 'trans', 'SweetAlert', function ($scope, uploadImg, $timeout, ReleaseService, toastr, popupService, $window, $q, trans, SweetAlert) {
 
     //Get id from url
     var url   = new URL(window.location.href); 
@@ -169,7 +195,17 @@ SOUGOU_ZYANARU_MODULE
       $scope.error = validate(form, constraints);
       // If clean data -> Edit
       if ($scope.error == undefined) {
-        if (popupService.showPopup(TRANS.MSG_DELETE)) {
+        var options = {
+          title: trans.messageDelete,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          cancelButtonText: "いいえ",
+          confirmButtonText: "はい",
+          closeOnConfirm: true,
+          closeOnCancel: true,
+        };
+        /*if (popupService.showPopup(TRANS.MSG_DELETE)) {
             $scope.name = "cover";
             //Get image path
             function getPath(path) {
@@ -228,7 +264,67 @@ SOUGOU_ZYANARU_MODULE
             });
 
           
-        }
+        }*/
+        swal(options, function(isConfirm) {
+          if (isConfirm) {
+            $scope.name = "cover";
+              //Get image path
+            function getPath(path) {
+              var def  = $q.defer();
+              var regex = new RegExp("\imageDefault(.*)$");
+              if (regex.test(path)) {
+                def.resolve(path);
+              } else if (path == 'assets/img/no-image.jpg') {
+                def.resolve('');
+              } else if (path == 'assets/img/no-banner.jpg') {
+                def.resolve('');
+              } else if (path != undefined) {
+                uploadImg.upload(path, $scope.name)
+                .then(function(res){
+                  $timeout(function () {
+                    //Get name after upload
+                    def.resolve(res.data.data.path);
+                  });
+                }, function(res){
+                  def.reject(TRANS.ERROR);
+                });
+              } else {
+                def.resolve(path);
+              }
+              return def.promise;
+            }
+            var promise1 = getPath($scope.release.image_release_path).then(function (value) {
+              return value;
+            });
+            var promise2 = getPath($scope.release.image_header_path).then(function (value) {
+              return value; 
+            });
+            var theResults = [];
+
+            $q.all([promise1, promise2]).then(function(result){
+              for (var i = 0; i < result.length; i++){
+                  theResults.push(result[i]);
+              }
+              $scope.release.image_release_path = theResults[0];
+              $scope.release.image_header_path  = theResults[1];
+
+              //Get value from ng-model
+              var getName = release.name;
+
+              ReleaseService.update({
+                id:     $scope.id,
+                name:   getName,
+                image_release_path: $scope.release.image_release_path,
+                image_header_path: $scope.release.image_header_path
+              }, function (){
+                // Redirect
+                $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/release';
+                toastr.success(TRANS.SUCCESS);
+              });
+
+            });
+          }
+        });
       }
     }
 

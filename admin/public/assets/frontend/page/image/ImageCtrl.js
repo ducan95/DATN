@@ -3,7 +3,7 @@
  */
 
 
-  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',function($scope, trans, toastr, ImageService, $window, popupService)
+  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',['$scope', 'trans', 'toastr', 'ImageService', '$window', 'popupService', 'tranDate','SweetAlert', function($scope, trans, toastr, ImageService, $window, popupService, tranDate, SweetAlert)
   { 
     $scope.location = APP_CONFIGURATION.BASE_URL;
     $scope.currentPage = 1;
@@ -18,6 +18,14 @@
         }     
       }
     }); 
+
+    $scope.onSuccess = function(e) {
+      toastr.success('success !');
+    };
+
+    $scope.onError = function(e) {
+      toastr.error(res.errors, 'ERROR !!!');
+    }
     //find image of parameter
     $scope.searchImage = function() {
       ImageService.get({name:$scope.parameter}, function(res) {
@@ -39,6 +47,9 @@
         if(res.data != undefined) {
           //console.log(res.data); 
           $scope.images  = res.data.data;
+          angular.forEach($scope.images,function(value){
+            value.created_at = tranDate.tranDate(value.created_at);
+          });
           $scope.total  = res.data.total;
           $scope.currentPage  = res.data.current_page;
           $scope.lastPage  = res.data.last_page;
@@ -52,17 +63,29 @@
         
       });  
     };
-   
+
     $scope.deleteImage = function(id, index) {
-      if(popupService.showPopup(trans.messageDelete)) {
-        ImageService.delete({ id: id }, function(res) {
-          if(res.is_success) {
-            $scope.images.splice(index, 1);
-          } else {
-            console.log(res);
-          }  
-        });
-      }
+      var options = {
+        title: trans.messageDelete,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        cancelButtonText: "いいえ",
+        confirmButtonText: "はい",
+        closeOnConfirm: true,
+        closeOnCancel: true,
+      };
+      swal(options, function(isConfirm) {
+        if (isConfirm) {
+          ImageService.delete({ id: id }, function(res) {
+            if(res.is_success) {
+              $scope.images.splice(index, 1);
+            } else {
+              console.log(res);
+            }  
+          });
+        }
+      });
     };
 
     // update name image 
@@ -80,7 +103,7 @@
         }
       });
     }
-  });
+  }]);
 
 
 SOUGOU_ZYANARU_MODULE.controller('ImageAdd', ['$scope', 'uploadImage', 'toastr', function ($scope, uploadImage, toastr) {

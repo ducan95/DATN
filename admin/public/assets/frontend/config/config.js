@@ -2,7 +2,10 @@
  * Created by rikkei on 15/12/2017.
  */
 
-var SOUGOU_ZYANARU_MODULE = angular.module("sougou_zyanaru", ['ngResource', 'ngFileUpload', 'toastr','uiSwitch','ngclipboard','ng.ckeditor']);
+// <<<<<<< HEAD
+// var SOUGOU_ZYANARU_MODULE = angular.module("sougou_zyanaru", ['ngResource', 'ngFileUpload', 'toastr','uiSwitch','ngclipboard','ng.ckeditor']);
+// =======
+var SOUGOU_ZYANARU_MODULE = angular.module("sougou_zyanaru", ['oitozero.ngSweetAlert','ngResource', 'ngFileUpload', 'toastr', 'bw.paging', 'uiSwitch','ngclipboard']);
 
 
 SOUGOU_ZYANARU_MODULE.factory('HttpInterceptor', function ($rootScope, $q) {

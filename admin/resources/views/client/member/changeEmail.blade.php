@@ -1,4 +1,8 @@
 @extends('client.layout.master')
+
+@section('title')
+	{{ trans('web.webClient.title.mypage') }}
+@endsection
 @section('content')
 
 <div>
