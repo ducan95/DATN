@@ -16,6 +16,7 @@
 	<section class="content">
 		<div class="row">
 				<form id="main" role="form" ng-submit="creatPost" method="post">
+					{{ csrf_field() }}
 					<div class="col-md-9">
 						<div class="form-group">
 							<label class="col-sm-2">{{ trans('web.date_start_public')}}</label>
