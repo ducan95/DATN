@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
+    use SoftDeletes;
+
     protected $table ='categories';
     protected $primaryKey ='id_category';
-    protected $fillable = ['name','slug','global_status','menu_status','id_category_parent','is_deleted','created_at','updated_at'];
+    protected $fillable = ['name','slug','global_status','menu_status','id_category_parent'];
     /**
      * Indicates if the model should be timestamped.
      *

@@ -18,8 +18,8 @@ class CreateReleaseNumbers extends Migration
             $table->string('name');
             $table->string('image_release_path');
             $table->string('image_header_path');
-            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

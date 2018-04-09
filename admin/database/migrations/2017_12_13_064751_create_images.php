@@ -19,8 +19,8 @@ class CreateImages extends Migration
             $table->text('description')->nullable();
             $table->string('path');
             $table->string('path_blur');
-            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
 
         

@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+
     protected $table = 'users';
     //Redifine primary key
     protected $primaryKey ='id_user';
@@ -19,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','status', 'is_deleted', 'role_code',
+        'username', 'email', 'password','status','role_code',
     ];
 
     // Redifine primary key

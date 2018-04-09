@@ -23,7 +23,6 @@ class UsersTableSeeder extends Seeder
                 'status'     => true ,
                 'role_code'  => $role->role_code,
                 'password'   => bcrypt('123456'),
-                'is_deleted' => false
             ]);
         }
     }

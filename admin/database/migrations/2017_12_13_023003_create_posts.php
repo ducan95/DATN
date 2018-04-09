@@ -26,9 +26,8 @@ class CreatePosts extends Migration
             $table->dateTime('time_begin');
             $table->dateTime('time_end');
             $table->integer('status_preview_top')->unsigned();
-            $table->dateTime('deleted_at')->nullable();
-            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

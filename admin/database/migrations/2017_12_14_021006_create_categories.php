@@ -20,8 +20,8 @@ class CreateCategories extends Migration
             $table->boolean('global_status');
             $table->boolean('menu_status');
             $table->integer('id_category_parent');
-            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

@@ -3,14 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Images extends Model
 {
+    use SoftDeletes;
     protected $table = 'images';
 
     protected $primaryKey = 'id_image';
 
-    protected $fillable = ['name', 'description', 'path', 'path_blur', 'is_deleted'];
+    protected $fillable = ['name', 'description', 'path', 'path_blur'];
     
 
    /* public function post() 

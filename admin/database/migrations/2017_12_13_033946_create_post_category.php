@@ -16,8 +16,8 @@ class CreatePostCategory extends Migration
         Schema::create('post_category', function (Blueprint $table) {
             $table->integer('id_post');
             $table->integer('id_category');
-            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

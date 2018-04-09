@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostCategory extends Model
 {
+    use SoftDeletes;
     protected $table = 'post_category';
     public $incrementing = false;
     // protected $primaryKey=['id_post','id_category'];
-    protected $fillable = ['id_post','id_category','is_deleted'];
+    protected $fillable = ['id_post','id_category'];
     public function post(){
     	return $this->belongsTo(Post::class,'id_post','id_post');
     }
