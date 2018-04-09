@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>総合ジャーナル</title>
+  <title>Sunday Amazing</title>
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/faviconf.ico') }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -32,7 +32,7 @@
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <h2 class="login-box-msg">総合ジャーナル</h2>
+    <h2 class="login-box-msg">Sunday Amazing</h2>
      
     @if (count($errors) >0)
         <div class="box-body">
@@ -72,7 +72,7 @@
                  </div>
              </div>
              <div class="col-xs-4">
-                 <button type="submit" class="btn btn-primary btn-block btn-flat">ログイン</button>
+                 <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
              </div>
          </div>
      </form>
