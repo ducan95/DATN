@@ -9,4 +9,4 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller as Controller;
 
-abstract class WebApiController extends Controller implements IWebApiController {}
+abstract class WebApiController extends Controller {}

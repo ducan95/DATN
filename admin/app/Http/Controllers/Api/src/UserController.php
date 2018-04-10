@@ -4,6 +4,8 @@ use WebService\Service\User\UserService;
 use Illuminate\Http\Request;
 use Extention\ApiRequest;
 use Extention\Api;
+use App\Http\Requests\UserActionUpdateRequest;
+use App\Http\Requests\UserActionSaveRequest;
 use App\Http\Controllers\Api\WebApiController as WebApiController; 
 
 class UserController extends WebApiController
@@ -51,10 +53,10 @@ class UserController extends WebApiController
   /**
    * create new user 
    *
-   * @param  Request $request
+   * @param  UserActionSaveRequest $request
    * @return Response
    */ 
-  public function actionSave(Request $request)
+  public function actionSave(UserActionSaveRequest $request)
   {  
     $res = UserService::getInstance()->save($request); 
     if(!isset($res['errors'])) {
@@ -71,11 +73,11 @@ class UserController extends WebApiController
   /**
    * update user 
    *
-   * @param  Request $request
+   * @param  UserActionUpdateRequest $request
    * @param  $id
    * @return Response
    */
-  public function actionUpdate(Request $request, $id)
+  public function actionUpdate(UserActionUpdateRequest $request, $id)
   {   
     $res =  UserService::getInstance()->update($request, $id); 
     if(!isset($res['errors'])) {
