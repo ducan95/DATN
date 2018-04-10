@@ -4,10 +4,10 @@
 
 SOUGOU_ZYANARU_MODULE
   .controller('UserCtrl', function ($scope, UserService, $window, popupService, RoleService, toastr, trans, SweetAlert) {
-
   UserService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.users = res.data;
+      console.log(res.data);
     }
   })
 
@@ -51,12 +51,12 @@ SOUGOU_ZYANARU_MODULE
 
   $scope.deleteUser = function (id_user, index) {
     var options = {
-      title: '削除してもよろしいですか？',
+      title: 'Xóa User không？',
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
-      cancelButtonText: "いいえ",
-      confirmButtonText: "はい",
+      cancelButtonText: "Không",
+      confirmButtonText: "Có",
       closeOnConfirm: true,
       closeOnCancel: true,
     };
@@ -72,10 +72,10 @@ SOUGOU_ZYANARU_MODULE
               $scope.user = UserService.delete({ id: user.id_user }, function () {
                 
                 if($scope.user.is_success == true) {
-                  $scope.users.splice(index, 1);
+                  $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user/';
                   toastr.success(TRANS.SUCCESS);
                 } else { 
-                  toastr.error(TRANS.SUCCESS);
+                  toastr.error(TRANS.ERROR);
                 }    
                 
               });
@@ -156,7 +156,7 @@ SOUGOU_ZYANARU_MODULE
 /**
  * Edit user
  * */
-  .controller('UserUpdateCtrl', function ($scope, UserService, $window, RoleService) {
+  .controller('UserUpdateCtrl', function ($scope, UserService, $window, RoleService, trans) {
 
   //Get id from url
   var url        = new URL(window.location.href); 

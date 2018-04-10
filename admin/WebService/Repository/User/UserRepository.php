@@ -15,7 +15,7 @@ class UserRepository extends Repository
   public function find($dataReq = '') 
   { 
     try {   
-      $query = User::where('id_user', '>', 0)->where('is_deleted', '=', false);
+      $query = User::where('id_user', '>', 0);
       $dataMol= ['username', 'email', 'status', 'role_code'];
       if(!empty($dataReq)) {
         foreach ($dataMol as $value) {
@@ -40,7 +40,7 @@ class UserRepository extends Repository
   public function findOne($id)
   { 
     try {
-      return User::where('id_user', '=',$id)->where('is_deleted', '=', false)->first();
+      return User::where('id_user', '=',$id)->first();
     } catch(\Exception $e){ 
       throw $e;
     }
@@ -54,7 +54,6 @@ class UserRepository extends Repository
         'username'   => $dataReq['username'],
         'email'      => $dataReq['email'],
         'password'   => bcrypt($dataReq['password']),
-        'is_deleted' => false,
         'status'     => true,
         'role_code'  => $dataReq['role_code'],
       ]);
@@ -75,7 +74,6 @@ class UserRepository extends Repository
           'email'       => $dataReq['email'],
           'password'    => bcrypt($dataReq['password']),
           'status'      => true,
-          'is_delected' => false,
           'role_code'     => $dataReq['role_code'],
         ]);  
         $user->save();
@@ -94,8 +92,7 @@ class UserRepository extends Repository
     try {
       if(!empty(User::find($id))) {
         $user = User::find($id);
-        $user->is_deleted = true;
-        $user->save();
+        $user->delete();
       } else {
         return ;
       }

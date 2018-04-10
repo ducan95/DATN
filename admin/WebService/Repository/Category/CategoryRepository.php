@@ -48,7 +48,7 @@ class CategoryRepository extends Repository
         'slug' => $data['slug'],
         'is_deleted' => false,
         'global_status' => $data['global_status'],
-        'menu_status' => $data['menu_status'],
+        'menu_specifyingstatus' => $data['menu_status'],
         'id_category_parent' => 0
       ]);
       $category->save();

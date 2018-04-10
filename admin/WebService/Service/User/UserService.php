@@ -54,61 +54,23 @@ class UserService extends Service
 
   public function save($request)
   {	
-    $validator = Validator::make($request->all(), [
-      'username' => 'required|max:200',
-      'email' => 'required |email',
-      'password' => 'required',
-      'role_code' =>  'required'
-    ],[
-      'username.required' => trans('validate.username_required'),
-      'username.max' => trans('validate.username_max_255_characters'),
-      'email.required' => trans('validate.email_required'),
-      'email.email' => trans('validate.email_must_be_valid_email_address'),
-      'password.required' => trans('validate.password_required'),
-      'role_code.required' => trans('validate.role_code_required')
-    ]);
-
-    if($validator ->fails()) {
-      $res['errors']['msg'] = $validator->errors();
-      $res['errors']['status_code'] = 400;
-    } else {
-      try{
+    try{
         $res['data'] = UserRepository::getInstance()->save($request->all());
       } catch(\Exception $e) {
         $res['errors']['msg'] = $e->getMessage();
         $res['errors']['status_code'] = 500;
       }  
-    }
     return $res;
 	}
 
   public function update($request, $id)
   {   
-    $validator = Validator::make($request->all(), [
-      'username' => 'required|max:255',
-      'email' => 'required |email',
-      'password' => 'required',
-      'role_code' =>  'required'
-    ],[
-      'username.required' => trans('validate.username_required'),
-      'username.max' => trans('validate.username_max_255_characters'),
-      'email.required' => trans('validate.email_required'),
-      'email.email' => trans('validate.email_must_be_valid_email_address'),
-      'password.required' => trans('validate.password_required'),
-      'role_code.required' => trans('validate.role_code_required')
-    ]);
-
-    if($validator ->fails()) {
-      $res['errors']['msg'] = $validator->errors();
-      $res['errors']['status_code'] = 400;
-    } else {
       try {
         $res['data'] = UserRepository::getInstance()->update($request->all(), $id);
       } catch(\Exception $e) {
         $res['errors']['msg'] = $e->getMessage();
         $res['errors']['status_code'] = 500;
       }  
-    }
     return $res;
 	}
 
