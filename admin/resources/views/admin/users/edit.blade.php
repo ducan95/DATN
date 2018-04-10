@@ -35,16 +35,16 @@
               <div class="box-body">
                 <table class="table table-bordered">
                   <tr>
-                    <th>@lang('user.admin_user_name')</th>
-                    <th>@lang('user.admin_user_role')</th>
                     <th>@lang('user.admin_user_email')</th>
+                    <th>@lang('user.admin_user_role')</th>
+                    <th>@lang('user.admin_user_name')</th>
                     <th>@lang('web.password')</th>
                   </tr>
                   <tr>
                     <td>
                       <div class="form-group">
-                          <input ng-model="user.username" type="text" name="username" class="form-control" id="username" value="@{{ user.username }}">
-                          <label class="error" ng-if="error.username[0] != null">@{{ error.username[0] }}</label>
+                          <input ng-model="user.email" type="email" name="email" class="form-control" id="enail" value="@{{ user.username }}">
+                          <label class="error" ng-if="error.email[0] != null">@{{ error.email[0] }}</label>
                       </div>
                     </td>
                     <td>
@@ -57,8 +57,8 @@
                     </td>
                     <td>
                     <div class="form-group">
-                          <input ng-model="user.email" type="email" name="email" class="form-control" id="email" value="@{{ user.email }}">
-                           <label class="error" ng-if="error.email[0] != null">@{{ error.email[0] }}</label>
+                          <input ng-model="user.username" type="text" name="username" class="form-control" id="username" value="@{{ user.user_name }}">
+                           <label class="error" ng-if="error.username[0] != null">@{{ error.username[0] }}</label>
                       </div>
                     </td>
                     <td>

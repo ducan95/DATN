@@ -32,7 +32,7 @@
                   <th>@lang('user.admin_user_role')</th>
                   <th>@lang('user.admin_user_email')</th>
                   <th>@lang('web.password')</th>
-                  <th></th>
+                  <th>@lang('web.action')</th>
                 </tr>
                 <tr ng-repeat="user in users | orderBy : 'id_user'">
                   <td ng-bind="$index+1"></td>
