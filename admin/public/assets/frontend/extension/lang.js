@@ -1,38 +1,38 @@
-// SOUGOU_ZYANARU_MODULE.service('trans',function(){
-//   this.messageDelete = "該当の画像の削除を行います。よろしいですか?";
-// });
+SOUGOU_ZYANARU_MODULE.service('trans',function(){
+  this.messageDelete = "Xóa hình ảnh tương ứng. Có ổn không?";
+});
 
-// /**
-//  * [TRANS description]
-//  * @type {Object}
-//  */
-// var TRANS = {
-//     ERROR_CONNECT: "システムエラーが発生します",
-//     BUTTON_YES: "はい",
-//     BUTTON_NO: "いいえ",
-//     BUTTON_CONFIRM: '確認',
+/**
+ * [TRANS description]
+ * @type {Object}
+ */
+var TRANS = {
+    ERROR_CONNECT: "Kết nối lỗi",
+    BUTTON_YES: "Có",
+    BUTTON_NO: "Không",
+    BUTTON_CONFIRM: 'Xác nhận',
 
-//     CONFIRM_DELETE: '本当に削除する',
-//     CONFIRM_PASSWORD: 'パスワード確認',
-//     CONFIRM_CREATE: "登録確認",
-//     CONFIRM_UPDATE: "変更確認",
-//     BUTTON_DELETE : " 削除",
-//     BUTTON_EDIT : "編集",
+    CONFIRM_DELETE: 'Xác nhận xóa',
+    CONFIRM_PASSWORD: 'Xác nhận mật khẩu',
+    CONFIRM_CREATE: "Xác nhận tạo mới",
+    CONFIRM_UPDATE: "Xcs nhận sửa",
+    BUTTON_DELETE : " Xóa",
+    BUTTON_EDIT : "Sửa",
 
-//     SECURITY_NUMBER_ERROR : "セキュリティコードは3桁以上4桁以内、半角数字で入力してください。",
+    SECURITY_NUMBER_ERROR : "Vui lòng nhập mã bảo vệ trong 3 chữ số và 4 chữ số, vui lòng nhập với một nửa chiều rộng số",
     
-//     TITLE_REQUIRED : 'タイトルの設定を行ってください',
-//     TITLE_EXITS : "タイトルは既に利用されています",
-//     TITLE_MAXLENGTH : 'タイトルの名称は50文字以下で入力してください',
-//     VALID_SORT : "カテゴリ表示順位の設定は不正です",
+    TITLE_REQUIRED : 'Vui lòng đặt tiêu đề',
+    TITLE_EXITS : "Tiêu đề đã được sử dụng",
+    TITLE_MAXLENGTH : 'Tên tiêu đề phải từ 50 ký tự trở xuống',
+    VALID_SORT : "Thiết lập thứ hạng hiển thị danh mục không hợp lệ",
 
-//     MSG_DELETE: '該当の画像の削除を行います。よろしいですか?',
-//     SUCCESS: '完了!',
-//     ERROR: 'エラー',
-//     REQUIRED: '空白のところで入力してください。',
-//     TYPE_EMAIL: 'メールアドレスの入力を行ってください',
-//     DELETE_ADMIN: '削除できません。',
-//     NUMBER: '号',
-//     OK: 'はい',
-//     CANCEL: 'いいえ'
-// };
+    MSG_DELETE: 'Xóa hình ảnh tương ứng. Có ổn không    ?',
+    SUCCESS: 'Hoàn thành!',
+    ERROR: 'Có lỗi',
+    REQUIRED: 'Vui lòng nhập nó vào một không gian trống.',
+    TYPE_EMAIL: 'Vui lòng nhập địa chỉ e-mail của bạn',
+    DELETE_ADMIN: 'Không thể xóa.',
+    NUMBER: 'Vấn đề',
+    OK: 'Có',
+    CANCEL: 'Không'
+};
