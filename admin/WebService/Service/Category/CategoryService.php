@@ -15,22 +15,12 @@ class CategoryService extends Service
 
   public function save($request)
   {
-    $validator = Validator::make($request->all(), [
-      'name' => 'required|max:255 ',
-      'slug' => 'required',
-      
-    ],[]);
-    if($validator ->fails()) {
-      $res['errors']['msg'] = $validator->errors();
-      $res['errors']['status_code'] = 400;
-    } else {
       try{
         $res['data']= CategoryRepository::getInstance()->save($request->all());
       }catch(\Exception $e){
         $res['errors']['msg'] = $e->getMessage();
         $res['errors']['status_code'] = 500;
       }
-    }
     return $res;
   }
 
@@ -137,21 +127,12 @@ class CategoryService extends Service
     }
     
     public function saveChil($request){
-    $validator = Validator::make($request->all(), [
-      'name' => 'required|max:255 ',
-      'slug' => 'required',
-    ],[]);
-    if($validator ->fails()) {
-      $res['errors']['msg'] = $validator->errors();
-      $res['errors']['status_code'] = 400;
-    } else {
       try{
         $res['data']= CategoryRepository::getInstance()->saveChil($request->all());
       }catch(\Exception $e){
         $res['errors']['msg'] = $e->getMessage();
         $res['errors']['status_code'] = 500;
       }
-    }
     return $res;
       }
       

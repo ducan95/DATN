@@ -5,12 +5,7 @@ use WebService\Repository\Repository;
 
 use DB;
 
-/**
- * Created by PhpStorm.
- * User: rikkei
- * Date: 13/12/2017
- * Time: 19:37
- */
+
 class CategoryRepository extends Repository
 {
 
@@ -18,14 +13,9 @@ class CategoryRepository extends Repository
   {
     try{
       $category = new Category();
-      $global_status = ((isset($dataReq['global_status']))?1:0);
-      $menu_status = ((isset($dataReq['menu_status']))?1:0);
       $category->fill([
         'name' => $dataReq['name'],
         'slug' => $dataReq['slug'],
-        'global_status' => $global_status,
-        'menu_status' => $menu_status,
-        'is_deleted' => false,
         'id_category_parent' => 0
       ]);
       $category->save() ;
@@ -40,15 +30,10 @@ class CategoryRepository extends Repository
   {
     try{
       $data=$dataReq->all();
-      // $global_status = ((isset($data['global_status']))?1:0);
-      // $menu_status = ((isset($data['menu_status']))?1:0);
       $category=Category::find($id);
       $category->fill([
         'name' => $data['name'],
         'slug' => $data['slug'],
-        'is_deleted' => false,
-        'global_status' => $data['global_status'],
-        'menu_specifyingstatus' => $data['menu_status'],
         'id_category_parent' => 0
       ]);
       $category->save();
@@ -61,15 +46,10 @@ class CategoryRepository extends Repository
   public function updatechil($dataReq,$id){
     try{
       $data=$dataReq->all();
-      // $global_status = ((isset($data['global_status']))?1:0);
-      // $menu_status = ((isset($data['menu_status']))?1:0);
       $category=Category::find($id);
       $category->fill([
         'name' => $data['name'],
         'slug' => $data['slug'],
-        'is_deleted' => false,
-        'global_status' => $data['global_status'],
-        'menu_status' => $data['menu_status'],
         'id_category_parent' => $data['id_category_parent']
       ]);
       $category->save();
@@ -84,18 +64,15 @@ class CategoryRepository extends Repository
     try {
       if(!empty(Category::find($id))){
         $category = Category::find($id);
-        $category->is_deleted=true;
         $category->save();
         if($category->id_category_parent === 0){ 
-          $categoryChildrens=Category::where('id_category_parent','=',$id)->where('is_deleted','=',false)->get();
+          $categoryChildrens=Category::where('id_category_parent','=',$id)->get();
           foreach ($categoryChildrens as $categoryChildren) {
-            $categoryChildren->is_deleted=true;
             $categoryChildren->save();
           }
           
         }
         else{
-        $category->is_deleted = true;
         $category->save();
         }
       } else {
@@ -110,7 +87,7 @@ class CategoryRepository extends Repository
   public function list()
   { 
     try{
-      $category=Category::where('id_category_parent','=',0)->orderBy('id_category', 'asc')->where('is_deleted','=',false)->get();
+      $category=Category::where('id_category_parent','=',0)->orderBy('id_category', 'asc')->get();
       return $category;
     }
     catch(\Exception $e){
@@ -120,7 +97,7 @@ class CategoryRepository extends Repository
 
   public function listOne($id){
     try {
-      return Category::where('id_category','=',$id)->where('is_deleted','=',false)->get();
+      return Category::where('id_category','=',$id)->get();
     } catch(\Exception $e){ 
       throw $e;
     }
@@ -133,7 +110,7 @@ class CategoryRepository extends Repository
     try{
       $category=Category::find($id);
       if(!empty($category)){
-          $categorychildren=Category::where('id_category_parent','=',$id)->where('is_deleted','=',false)->orderBy('id_category', 'asc')->get();
+          $categorychildren=Category::where('id_category_parent','=',$id)->orderBy('id_category', 'asc')->get();
         }
       else{
         throw new \Exception("404");
@@ -157,14 +134,9 @@ class CategoryRepository extends Repository
    public function saveChil($dataReq){
       try{
       $category = new Category();
-      $global_status = ((isset($dataReq['global_status']))?1:0);
-      $menu_status = ((isset($dataReq['menu_status']))?1:0);
       $category->fill([
         'name' => $dataReq['name'],
         'slug' => $dataReq['slug'],
-        'global_status' => $global_status,
-        'menu_status' => $menu_status,
-        'is_deleted' => false,
         'id_category_parent' => $dataReq['parent_category']
       ]);
       $category->save();
