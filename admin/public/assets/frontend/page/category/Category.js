@@ -1,6 +1,6 @@
 
 SOUGOU_ZYANARU_MODULE
-	.controller('CategoryCtrl',['$scope', 'CategoryService', 'CategoryChildrenService', 'popupService', '$window','SweetAlert', function($scope,CategoryService,CategoryChildrenService,popupService,$window,SweetAlert){
+	.controller('CategoryCtrl',['$scope', 'CategoryService', 'CategoryChildrenService', 'popupService', '$window','SweetAlert','trans', function($scope,CategoryService,CategoryChildrenService,popupService,$window,SweetAlert,trans){
   CategoryService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.categories = res.data;
@@ -51,12 +51,12 @@ SOUGOU_ZYANARU_MODULE
 
   $scope.deleteCategoryChil = function (id_category) {
     var options = {
-      title: "削除してもよろしいですか？",
+      title: "Bạn có chắc chắn xóa không？",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
-      cancelButtonText: "いいえ",
-      confirmButtonText: "はい",
+      cancelButtonText: "Không",
+      confirmButtonText: "Có",
       closeOnConfirm: true,
       closeOnCancel: true,
     };
@@ -75,31 +75,16 @@ SOUGOU_ZYANARU_MODULE
       }
     });
   }
-  //delete category parent
-  /*$scope.deleteCategory=function(id_category){
-     if (popupService.showPopup('Really delete this?')) {
-      var category = CategoryService.get({ id: id_category }, function (res) {
-        if (typeof res != "undefined") {
-          var category = res.data;
-            CategoryService.delete({ id: category[0].id_category},function () {
-            console.log('Deleting category parent with id ' + id_category);
-            //Ridirect
-            $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
-          });
-        }
-      });
-    }
-  }*/
 
   $scope.deleteCategory = function(id_category){
     var options = {
-      title: "削除してもよろしいですか？",
-      text: "サブカテゴリが削除されます",
+      title: "Bạn có chắc chắn muốn xóa nó không?",
+      text: "Danh mục con bị xóa",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
-      cancelButtonText: "いいえ",
-      confirmButtonText: "はい",
+      cancelButtonText: "Không",
+      confirmButtonText: "Có",
       closeOnConfirm: true,
       closeOnCancel: true,
     };
@@ -122,7 +107,7 @@ SOUGOU_ZYANARU_MODULE
 
   //============================================================
   //Add Category Parent
-	.controller('CategoryAddCtrl', function ($scope, CategoryAddService,$window) {
+	.controller('CategoryAddCtrl', function ($scope, CategoryAddService,$window,trans) {
   $scope.category = new CategoryAddService();  
   $scope.addCategory = function () { 
     //Validate form
@@ -135,7 +120,7 @@ SOUGOU_ZYANARU_MODULE
       },
     };
     var form = document.querySelector("form#main");
-    validate.validators.presence.message = '空白のところで入力してください。';
+    validate.validators.presence.message = TRANS.REQUIRED;
     $scope.error = validate(form, constraints);
   
     // Check success
@@ -149,7 +134,7 @@ SOUGOU_ZYANARU_MODULE
 })
 
   //Add Category Children
-  .controller('CategoryChildrenAddCtrl',function($scope,CategoryChildrenAddService,CategoryService,$window){
+  .controller('CategoryChildrenAddCtrl',function($scope,CategoryChildrenAddService,CategoryService,$window,trans){
     $scope.categorychil=new CategoryChildrenAddService();
     $scope.addCategoryChil=function(){
       //console.log($scope.categorychil)
@@ -167,7 +152,7 @@ SOUGOU_ZYANARU_MODULE
 
       };
       var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
+      validate.validators.presence.message =  TRANS.REQUIRED;
       $scope.error = validate(form, constraints);
       
       if ($scope.error == undefined) {
@@ -184,7 +169,7 @@ SOUGOU_ZYANARU_MODULE
     })
 })
 
-  .controller('Editcategoryparent',function($scope,CategoryService,$window){
+  .controller('Editcategoryparent',function($scope,CategoryService,$window,trans){
     var url        = new URL(window.location.href); 
     var id         = url.hash.match(/\d/g);
     $scope.id      = id.join('');
@@ -206,24 +191,19 @@ SOUGOU_ZYANARU_MODULE
 
       };
       var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
+      validate.validators.presence.message =  TRANS.REQUIRED;
       $scope.error = validate(form, constraints);
 
       if ($scope.error == undefined) {
         //Get value from ng-model
         var getname = categoryparent.name;
         var getslug = categoryparent.slug;
-        var getglobal_status = categoryparent.global_status;
-        var getmenu_status = categoryparent.menu_status;
 
         // Update category
         CategoryService.update({
           id: $scope.id,
           name: getname,
-          slug: getslug,
-          global_status: getglobal_status,
-          menu_status: getmenu_status,
-          is_deleted: false
+          slug: getslug
         },function (){
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';
       });
@@ -237,7 +217,7 @@ SOUGOU_ZYANARU_MODULE
   $scope.loadCategory(); 
 })
 
-  .controller('Editcategorychil',function($scope,CategoryService,$window,CategoryChildrenService){
+  .controller('Editcategorychil',function($scope,CategoryService,$window,CategoryChildrenService,trans){
     var url        = new URL(window.location.href); 
     var id         = url.hash.match(/\d/g);
     $scope.id      = id.join('');
@@ -254,14 +234,12 @@ SOUGOU_ZYANARU_MODULE
 
       };
       var form = document.querySelector("form#main");
-      validate.validators.presence.message = '空白のところで入力してください。';
+      validate.validators.presence.message =  TRANS.REQUIRED;
       $scope.error = validate(form, constraints);
 
       if ($scope.error == undefined) {
         var getname = category.name;
         var getslug    = category.slug;
-        var getglobal_status = category.global_status;
-        var getmenu_status     = category.menu_status;
         var getid_category_parent=category.parent_category;
         
         // Update category
@@ -269,9 +247,6 @@ SOUGOU_ZYANARU_MODULE
           id:         $scope.id,
           name:   getname,
           slug:      getslug,
-          global_status:   getglobal_status,
-          menu_status:    getmenu_status,
-          is_deleted: false ,
           id_category_parent: getid_category_parent
       }, function (){
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/category';

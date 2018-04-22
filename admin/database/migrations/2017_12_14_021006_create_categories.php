@@ -17,8 +17,6 @@ class CreateCategories extends Migration
             $table->increments('id_category');
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->boolean('global_status');
-            $table->boolean('menu_status');
             $table->integer('id_category_parent');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

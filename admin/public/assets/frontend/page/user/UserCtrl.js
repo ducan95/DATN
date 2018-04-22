@@ -212,8 +212,7 @@ SOUGOU_ZYANARU_MODULE
         email:      getEmail,
         password:   getPassword,
         role_code:    getRole,
-        status:     true,
-        is_deleted: false
+        status:     true
       }, function (){
         // Redirect
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
