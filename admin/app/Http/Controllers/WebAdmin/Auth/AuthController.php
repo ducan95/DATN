@@ -36,7 +36,7 @@ class AuthController extends Controller
             return redirect()->route('getIndex');
 
         } else {
-             return redirect()->back()->with('status', 'メールアドレスまたはパスワードが間違っています。');
+             return redirect()->back()->with('status', 'Địa chỉ Email hoặc Mật khẩu không đúng');
          }
      }
  

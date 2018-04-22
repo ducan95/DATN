@@ -4,6 +4,8 @@ use WebService\Service\Category\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use Extention\Api;
+use App\Http\Requests\CategoryActionSaveRequest;
+use App\Http\Requests\CategoryActionSaveChilRequest;
 use App\Http\Controllers\Api\WebApiController as WebApiController; 
 
 
@@ -35,7 +37,7 @@ class CategoryController extends WebApiController
     }
   }
 
-  public function actionSave(Request $request)
+  public function actionSave(CategoryActionSaveRequest $request)
   {
     $res = CategoryService::getInstance()->save($request);
       if(!isset($res['errors'])) {
@@ -116,7 +118,7 @@ class CategoryController extends WebApiController
         ]);
       }
   }
-  public function actionSaveChil(Request $request){
+  public function actionSaveChil(CategoryActionSaveChilRequest $request){
     $res=CategoryService::getInstance()->saveChil($request);
     if(!isset($res['errors'])) {
         return Api::response([ 'data' => $res['data']]);
