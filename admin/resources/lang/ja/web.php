@@ -5,7 +5,6 @@
 		'list_archive' 			=> 'Quản lí bài viết',
 		'category' 					=>  'Danh sách danh mục',
 		'images' 						=> 'Quản lí hình anh',
-		'sidebar_management'=> 'QUản lí sidebar',
 		'user_management' 	=> 'Quản lí quản trị viên',
 		'logout' 						=> 'Đăng xuất',
 		'list_image' 				=> 'Danh sách hình ảnh',
