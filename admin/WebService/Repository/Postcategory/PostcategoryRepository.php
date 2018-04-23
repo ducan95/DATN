@@ -18,7 +18,6 @@ class PostcategoryRepository extends Repository
     $post_category->fill([
       'id_post'     =>  $dataReq['id_post'],
       'id_category' =>  $dataReq['id_category'],
-      'is_deleted'  =>  $dataReq['is_deleted']
     ]);
     $post_category->save();
     return $post_category;
