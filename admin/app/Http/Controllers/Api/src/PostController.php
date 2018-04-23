@@ -23,7 +23,7 @@ class PostController extends WebApiController
   **/  
   public function actionFind( Request $request)
   { 
-  	$res = PostService::getInstance()->find($request);  
+    $res = PostService::getInstance()->find($request);
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data']]);
     }else {

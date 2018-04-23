@@ -12,7 +12,7 @@ class Images extends Model
 
     protected $primaryKey = 'id_image';
 
-    protected $fillable = ['name', 'description', 'path', 'path_blur'];
+    protected $fillable = ['name', 'description', 'path'];
     
 
    /* public function post() 

@@ -6,6 +6,8 @@ use Extention\Api;
 use Extention\ApiRequest;
 use Illuminate\Http\Request;
 use WebService\Service\Release\ReleaseService;
+use App\Http\Requests\ReleaseActionUpdateRequest;
+use App\Http\Requests\ReleaseActionSaveRequest;
 use App\Http\Controllers\Api\WebApiController as WebApiController; 
 
 
@@ -55,7 +57,7 @@ class ReleaseController extends WebApiController
    * @param  Request $request [description]
    * @return [Obj]           [$res data]
    */
-  public function actionSave(Request $request)
+  public function actionSave(ReleaseActionSaveRequest $request)
   {  
   	$res = ReleaseService::getInstance()->save($request); 
     if(!isset($res['errors'])) {
@@ -75,7 +77,7 @@ class ReleaseController extends WebApiController
    * @param  [type]  $id      [description]
    * @return [type]           [description]
    */
-  public function actionUpdate(Request $request, $id)
+  public function actionUpdate(\App\Http\Requests\ReleaseActionUpdateRequest $request, $id)
   {   
     $res = ReleaseService::getInstance()->update($request, $id); 
     if(!isset($res['errors'])) {
