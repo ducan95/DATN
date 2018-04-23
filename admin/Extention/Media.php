@@ -11,16 +11,10 @@ trait Media {
 
 	protected function saveImage($image, $name, $path ='')
 	{	
-		$imageBlur = Image::make($image->getRealPath()); 
-		$imageBlur->blur(15);
-		$imageBlur->encode('jpg');
-    $destinationPath = public_path('storage/'.config('admin.images.path.imageBlur'));
     $nameImage = $this->createNameImage($name); $nameImage = $nameImage['name'];
-    $imageBlur->save($destinationPath.'/'.$nameImage);
     return [
       'name' => $nameImage,
-      'path' => $image->storeAs(config('admin.images.path.imageDefault'), $nameImage, 'public'),
-      'path_blur' => config('admin.images.path.imageBlur').'/'.$nameImage,
+      'path' => $image->storeAs(config('admin.images.path.imageDefault'), $nameImage, 'public')
     ];
 	}
  
@@ -65,7 +59,7 @@ trait Media {
     try {
       $pathImage = public_path('storage/'.$path); // get url image
       $newImage = Image::make($pathImage);//create new image 
-      $newImage = ($typeImage == 'imageBlur') ?  $newImage->blur(15) : $newImage;
+      // $newImage = ($typeImage == 'imageBlur') ?  $newImage->blur(15) : $newImage;
       $destinationPath = public_path( 'storage/'.config('admin.images.path.'.$typeImage) );
       if ($newImage->save($destinationPath.'/'.$name)) {
         $this->deleteImage($path);
@@ -78,13 +72,12 @@ trait Media {
 
   protected function renameImage($image, $name) 
   {
-    $typeImage = ['imageDefault', 'imageBlur'];
+    $typeImage = 'imageDefault';
     try {
       $result = $this->createNameImage($name); 
       return [ 
         'name' => $result['name'],
-        'path' => $this->getPath($image->path, $typeImage[0], $result['name']),
-        'path_blur' => $this->getPath($image->path_blur, $typeImage[1], $result['name'])
+        'path' => $this->getPath($image->path, $typeImage, $result['name'])
       ];
     }catch(\Exception $e) {
       $res['errors'] = $e->getMessage();
