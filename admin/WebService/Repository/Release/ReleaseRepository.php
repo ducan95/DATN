@@ -5,11 +5,7 @@ namespace WebService\Repository\Release;
 use App\Release;
 use WebService\Repository\Repository;
 use DB;
-/**
- * Created by Quyen Luu.
- * Date: 28/12/2017
- * Time: 12:03
- */
+
 class ReleaseRepository extends Repository
 {
   /**
@@ -20,8 +16,8 @@ class ReleaseRepository extends Repository
 	public function find($dataReq = '') 
 	{ 
     try {
-      $query   = Release::where('id_release_number', '>', 0)->where('is_deleted', '=', false); 
-      $dataMol = ['name', 'image_release_path', 'image_header_path', 'is_deleted'];
+      $query   = Release::where('id_release_number', '>', 0); 
+      $dataMol = ['name', 'image_release_path'];
       
       if (!empty($dataReq)) {
         foreach ($dataReq as $value) {
@@ -54,7 +50,7 @@ class ReleaseRepository extends Repository
   public function findOne($id)
   {
     try {
-      return Release::where('id_release_number', '=', $id)->where('is_deleted', '=', false)->first();
+      return Release::where('id_release_number', '=', $id)->first();
     } catch(\Exception $e) {
       throw $e;
     } 
@@ -71,9 +67,7 @@ class ReleaseRepository extends Repository
       $release = new Release();
       $release->fill([
         'name'               => $dataReq['name'],
-        'is_deleted'         => false,
-        'image_release_path' => $dataReq['image_release_path'],
-        'image_header_path'  => $dataReq['image_header_path'],
+        'image_release_path' => $dataReq['image_release_path']
       ]);
       $release->save() ;
       return $release;
@@ -96,9 +90,7 @@ class ReleaseRepository extends Repository
     if (!empty($release)) {
       $release->fill([
         'name'               => $dataReq['name'],
-        'image_release_path' => $dataReq['image_release_path'],
-        'image_header_path'  => $dataReq['image_header_path'],
-        'is_deleted'         => false
+        'image_release_path' => $dataReq['image_release_path']
       ]);
 
       $release->save();
@@ -122,8 +114,7 @@ class ReleaseRepository extends Repository
   	try {
       if (!empty(Release::find($id))) {
         $release = Release::find($id);
-        $release->is_deleted = true;
-        $release->save();
+        $release->delete();
       } else {
         return null;
       }
@@ -134,7 +125,7 @@ class ReleaseRepository extends Repository
 
   public function list(){
     try{
-      return DB::table('release_numbers')->where('is_deleted','=',false)->orderBy('id_release_number','DESC')->get();
+      return DB::table('release_numbers')->orderBy('id_release_number','DESC')->get();
     } catch(\Exception $e){
       throw $e;
     }
@@ -150,7 +141,7 @@ class ReleaseRepository extends Repository
 
   public function loadmoreRelease($offset, $row_count){
     try{
-      $oItemsLoad = DB::table('release_numbers')->where('is_deleted','=',false)->orderBy('id_release_number','DESC')->skip($offset)->take($row_count)->get();
+      $oItemsLoad = DB::table('release_numbers')->orderBy('id_release_number','DESC')->skip($offset)->take($row_count)->get();
       return $oItemsLoad;
     } catch(\Exception $e){
       throw $e;
@@ -159,7 +150,7 @@ class ReleaseRepository extends Repository
 
   public function postOfRelease($id){
     try{
-      return DB::table('posts')->where('id_release_number','=',$id)->get();
+      return DB::table('posts')->get();
     } catch(\Exception $e){
       throw $e;
     }
@@ -167,7 +158,7 @@ class ReleaseRepository extends Repository
 
   public function loadmorePostOfRelease($offset, $row_count, $id){
     try{
-      $arPostsLoad = DB::table('posts')->where('id_release_number','=',$id)->skip($offset)->take($row_count)->get();
+      $arPostsLoad = DB::table('posts')->skip($offset)->take($row_count)->get();
       return $arPostsLoad;
     } catch(\Exception $e){
       throw $e;
