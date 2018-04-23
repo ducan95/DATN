@@ -18,8 +18,7 @@ class ImageRepository extends Repository
   public function find($dataReq = '') 
   { 
     try {   
-      $query = Images::where('images.id_image', '>', 0)
-              ->where('images.is_deleted','=', false);
+      $query = Images::where('images.id_image', '>', 0);
       $dataMol= ['name', 'description', 'path', 'path_blur'];
       if(!empty($dataReq)) {
         foreach ($dataMol as $value) { 
@@ -45,7 +44,6 @@ class ImageRepository extends Repository
   { 
     try{
       return Images::where('images.id_image', "=", $id)
-              ->where('images.is_deleted', '=', false)
               ->first();
     } catch(\Exception $e){
       throw $e;
@@ -60,9 +58,7 @@ class ImageRepository extends Repository
         $image->fill([
           'name'   => $dataReq['name'],
           'description' => config('admin.images.media'),
-          'path'   => $dataReq['path'],
-          'path_blur' => $dataReq['path_blur'],
-          'is_deleted' => false,
+          'path'   => $dataReq['path']
         ]);
         $image->save() ;
         return $image;  
@@ -76,10 +72,9 @@ class ImageRepository extends Repository
   { 
     try{
       if(isset($dataReq)) {
-        $image = Images::where('id_image', '=', $id)->where('is_deleted', '=', false)->first();
+        $image = Images::where('id_image', '=', $id)->first();
         $image->name = $dataReq['name'];
         $image->path = $dataReq['path'];
-        $image->path_blur = $dataReq['path_blur'];
         $image->save() ;
         return $image;  
       }
@@ -93,8 +88,7 @@ class ImageRepository extends Repository
   	try {
       if(!empty(Images::find($id)) ) {
         $image = Images::find($id);
-        $image->is_deleted = true;
-        $image->save();
+        $image->delete();
       } else {
         return ;
       }
