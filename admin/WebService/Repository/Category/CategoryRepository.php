@@ -64,16 +64,16 @@ class CategoryRepository extends Repository
     try {
       if(!empty(Category::find($id))){
         $category = Category::find($id);
-        $category->save();
+        $category->delete();
         if($category->id_category_parent === 0){ 
           $categoryChildrens=Category::where('id_category_parent','=',$id)->get();
           foreach ($categoryChildrens as $categoryChildren) {
-            $categoryChildren->save();
+            $categoryChildren->delete();
           }
           
         }
         else{
-        $category->save();
+        $category->delete();
         }
       } else {
         return  ;
