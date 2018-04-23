@@ -14,10 +14,7 @@ class CategoryTableSeeder extends Seeder
         DB::table('categories')->insert([
         	'name' => 'Sport',
         	'slug' => 'Sport',
-        	'global_status' =>true,
-        	'menu_status' => false,
-        	'id_category_parent' => 0,
-        	'is_deleted'=>false,
+        	'id_category_parent' => 0
         ]);
     }
 }

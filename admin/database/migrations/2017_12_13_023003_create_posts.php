@@ -25,7 +25,6 @@ class CreatePosts extends Migration
             $table->string('thumbnail_path')->nullable();
             $table->dateTime('time_begin');
             $table->dateTime('time_end');
-            $table->integer('status_preview_top')->unsigned();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

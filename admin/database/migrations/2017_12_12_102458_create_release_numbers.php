@@ -17,7 +17,6 @@ class CreateReleaseNumbers extends Migration
             $table->increments('id_release_number');
             $table->string('name');
             $table->string('image_release_path');
-            $table->string('image_header_path');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

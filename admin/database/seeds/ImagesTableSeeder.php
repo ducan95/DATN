@@ -15,9 +15,7 @@ class ImagesTableSeeder extends Seeder
       	DB::table('images')->insert([
             'name'  			=> 'cover'.'25-12-2017'.$i.'.jpg' ,
             'description' 		=> 'cover' ,
-            'path' 				=> 'pathDefault'.'25-12-2017'.$i.'.jpg',
-            'path_blur'   		=> 'pathBlur/cover'.'25-12-2017'.$i.'.jpg' ,
-            'is_deleted'  			=> false , 
+            'path' 				=> 'pathDefault'.'25-12-2017'.$i.'.jpg'
         ]);
     	}
 	  }

@@ -20,7 +20,6 @@ class MembersTableSeeder extends Seeder
                 'gender'  			=> false ,
                 'is_receive_email'	=> true,
                 'member_plan_code'	=> 'free',
-                'is_deleted' 		=> false,
                 'is_active'         => true
             ]
         );
@@ -33,7 +32,6 @@ class MembersTableSeeder extends Seeder
                 'gender'  			=> false ,
                 'is_receive_email'	=> true,
                 'member_plan_code'	=> 'free',
-                'is_deleted' 		=> false,
                 'is_active'         => false
             ]
         );
