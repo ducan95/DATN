@@ -11,7 +11,7 @@ class Category extends Model
 
     protected $table ='categories';
     protected $primaryKey ='id_category';
-    protected $fillable = ['name','slug','global_status','menu_status','id_category_parent'];
+    protected $fillable = ['name','slug','id_category_parent'];
     /**
      * Indicates if the model should be timestamped.
      *
