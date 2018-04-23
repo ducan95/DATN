@@ -13,7 +13,7 @@
  			if(date != undefined) {
  				var objDate = date.split(' ');
  				var objArray = objDate[0].split('-');
- 				return objArray[0]+"年"+objArray[1]+"月"+objArray[2]+"日";
+ 				return objArray[0]+"Năm"+objArray[1]+"Tháng"+objArray[2]+"Ngày";
  			} else {
  				throw "undefined"; // 
  			}

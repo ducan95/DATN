@@ -22,11 +22,10 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
     if (pageNumber === undefined) {
         pageNumber = '1';
     }
-    PostService.find({page:pageNumber},function(res) {   
+    PostService.find({page:pageNumber},function(res) {  
       try {
         if(res != undefined) { 
           $scope.posts  = res.data.data; // list posts
-           // console.log(res);
           // return false
           $scope.total  = res.data.total; 
           $scope.currentPage  = res.data.current_page;

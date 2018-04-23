@@ -45,12 +45,12 @@ SOUGOU_ZYANARU_MODULE
 
     $scope.delete = function (id, index) {
       var options = {
-        title: '削除してもよろしいですか？',
+        title: 'Bạn có chắc chắn muốn xóa nó không？',
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        cancelButtonText: "いいえ",
-        confirmButtonText: "はい",
+        cancelButtonText: "Không",
+        confirmButtonText: "Có",
         closeOnConfirm: true,
         closeOnCancel: true,
       };
@@ -107,12 +107,12 @@ SOUGOU_ZYANARU_MODULE
       if ($scope.error == undefined) {
         $scope.disable = false; 
         var options = {
-          title: '本当ですか？',
+          title: 'Có đúng không',
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          cancelButtonText: "いいえ",
-          confirmButtonText: "はい",
+          cancelButtonText: "Không",
+          confirmButtonText: "Có",
           closeOnConfirm: true,
           closeOnCancel: true,
         };
@@ -140,18 +140,14 @@ SOUGOU_ZYANARU_MODULE
          
           var promise1 = getPath($scope.release.image_release_path).then(function (value) {
             return value;
-          });
-          var promise2 = getPath($scope.release.image_header_path).then(function (value) {
-            return value; 
-          });
+          });   
           var theResults = [];
 
-          $q.all([promise1, promise2]).then(function(result){
+          $q.all([promise1]).then(function(result){
             for (var i = 0; i < result.length; i++){
                 theResults.push(result[i]);
             }
             $scope.release.image_release_path = theResults[0];
-            $scope.release.image_header_path  = theResults[1];
             //Save to release table
             console.log($scope.release);
             $scope.release.$save(function () {
@@ -196,12 +192,12 @@ SOUGOU_ZYANARU_MODULE
       // If clean data -> Edit
       if ($scope.error == undefined) {
         var options = {
-          title: trans.messageDelete,
+          title: "Sửa số phát hành tương ứng không?",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          cancelButtonText: "いいえ",
-          confirmButtonText: "はい",
+          cancelButtonText: "Không",
+          confirmButtonText: "Có",
           closeOnConfirm: true,
           closeOnCancel: true,
         };
@@ -296,17 +292,13 @@ SOUGOU_ZYANARU_MODULE
             var promise1 = getPath($scope.release.image_release_path).then(function (value) {
               return value;
             });
-            var promise2 = getPath($scope.release.image_header_path).then(function (value) {
-              return value; 
-            });
             var theResults = [];
 
-            $q.all([promise1, promise2]).then(function(result){
+            $q.all([promise1]).then(function(result){
               for (var i = 0; i < result.length; i++){
                   theResults.push(result[i]);
               }
               $scope.release.image_release_path = theResults[0];
-              $scope.release.image_header_path  = theResults[1];
 
               //Get value from ng-model
               var getName = release.name;
@@ -314,8 +306,7 @@ SOUGOU_ZYANARU_MODULE
               ReleaseService.update({
                 id:     $scope.id,
                 name:   getName,
-                image_release_path: $scope.release.image_release_path,
-                image_header_path: $scope.release.image_header_path
+                image_release_path: $scope.release.image_release_path
               }, function (){
                 // Redirect
                 $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/release';

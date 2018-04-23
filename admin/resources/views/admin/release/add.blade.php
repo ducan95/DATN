@@ -63,37 +63,16 @@
                      </div>
                      <i ng-show="myForm.release.image_release_path.$error.required">*required</i><br>
                     </div>
-
-                    <div class="form-group">
-                      <label for="input-file">{{ trans('release.headerRelease') }}</label>
-                      <div 
-                        ngf-drop ngf-select 
-                        ng-model="release.image_header_path"
-                        name="image_header_path"
-                        class="upload-box" 
-                        ngf-max-size="25MB"
-                        ngf-drag-over-class="'box-dragover'" 
-                        ngf-allow-dir="true"
-                        accept="image/*"
-                        ngf-pattern="'image/*'">
-                        <span ng-if="release.image_header_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
-                        <b ng-if="release.image_header_path == undefined">{{ trans('release.addImage') }}</b>
-                        
-                        <div ng-if="release.image_header_path != undefined" class="upload-preview">
-                          <img ng-show="release.image_header_path" ngf-thumbnail="release.image_header_path" class=""> 
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <!-- /.box-body -->
 
                   <!-- <div class="box-footer text-center" style="padding-bottom: 70px">
-                    <button ng-if="release.image_release_path && release.image_header_path" ng-disabled="disable == true" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.register') }}</button>
+                    <button ng-if="release.image_release_path" ng-disabled="disable == true" type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.register') }}</button>
                     <button type="reset" class="btn btn-default" style="margin-left:5px;">{{ trans('web.cancel') }}</button>
                   </div> -->
 
                   <div class="box-footer text-center" style="padding-bottom: 70px">
-                    <button ng-disabled="!release.image_release_path || !release.image_header_path"   type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.register') }}</button>
+                    <button ng-disabled="!release.image_release_path"   type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">{{ trans('web.register') }}</button>
                     <button type="reset" class="btn btn-default" style="margin-left:5px;">{{ trans('web.cancel') }}</button>
                   </div>
                 </form>
