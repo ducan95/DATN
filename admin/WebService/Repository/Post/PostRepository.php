@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 
-/**
- * Created by PhpStorm.
- * User: Huynh
- * Date: 13/12/2017
- * Time: 19:37
- */
 class PostRepository extends Repository
 {
   public function find($dataReq = '')
@@ -23,17 +17,17 @@ class PostRepository extends Repository
 
   	try{
       $query =  Post::join('post_category', function($join) {
-                  $join->on('posts.id_post', '=', 'post_category.id_post')
-                  ->where('post_category.is_deleted','=',false);  })
+                  $join->on('posts.id_post', '=', 'post_category.id_post');
+                   })
                 ->join('categories', function($join) {
-                  $join->on('post_category.id_category', '=', 'categories.id_category')
-                  ->where('categories.is_deleted','=',false);  })
+                  $join->on('post_category.id_category', '=', 'categories.id_category'); 
+                })
                 ->join('release_numbers', function($join) {
-                  $join->on('posts.id_release_number', '=', 'release_numbers.id_release_number')
-                  ->where('release_numbers.is_deleted','=', false);  })
+                  $join->on('posts.id_release_number', '=', 'release_numbers.id_release_number');  
+                })
                 ->join('users', function($join) {
-                  $join->on('posts.id_user', '=', 'users.id_user')
-                  ->where('users.is_deleted','=',false); });
+                  $join->on('posts.id_user', '=', 'users.id_user');
+                   });
                 
       $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name');    
       if(!empty($dataReq)) {
@@ -72,17 +66,17 @@ class PostRepository extends Repository
   { 
   	try {
 	    $query =  Post::join('post_category', function($join) {
-                  $join->on('posts.id_post', '=', 'post_category.id_post')
-                  ->where('post_category.is_deleted','=',false);  })
+                  $join->on('posts.id_post', '=', 'post_category.id_post');
+                    })
                 ->join('categories', function($join) {
-                    $join->on('post_category.id_category', '=', 'categories.id_category')
-                    ->where('categories.is_deleted','=',false);  })
+                    $join->on('post_category.id_category', '=', 'categories.id_category');
+                     })
                 ->join('release_numbers', function($join) {
-                    $join->on('posts.id_release_number', '=', 'release_numbers.id_release_number')
-                    ->where('release_numbers.is_deleted','=', false);  })
+                    $join->on('posts.id_release_number', '=', 'release_numbers.id_release_number');
+                     })
                 ->join('users', function($join) {
-                    $join->on('posts.id_user', '=', 'users.id_user')
-                    ->where('users.is_deleted','=',false); })
+                    $join->on('posts.id_user', '=', 'users.id_user');
+                     })
                 ->where('posts.id_post', '=', $id);
       $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name');
  		  return $query->get();
@@ -95,7 +89,6 @@ class PostRepository extends Repository
   {  
     try {
       $post = new Post();
-      $status_preview_top=((isset($dataReq['status_preview_top']))?1:0);
       $post->fill([
         'id_release_number' => $dataReq['id_release_number'],
         'title' => $dataReq['title'],
@@ -106,10 +99,7 @@ class PostRepository extends Repository
         'status' => $dataReq['status'],
         'time_end' => $dataReq['time_end'],
         'time_begin' => $dataReq['time_begin'],
-        'password'   => bcrypt($dataReq['password']),
-        'is_deleted'  =>$dataReq['is_deleted'] ,
-        'status_preview_top'=>$status_preview_top,
-        'deleted_at' => $dataReq['deleted_at']
+        'password'   => bcrypt($dataReq['password'])
       ]);
       $post->save();
       return $post;
@@ -131,12 +121,9 @@ class PostRepository extends Repository
           'id_user'           => $data['id_user'],
           'password'          => $data['password'],
           'thumbnail_path'    => $data['thumbnail_path'],
-          'status_preview_top'=> $data['status_preview_top'],
-          'deleted_at'        => $data['deleted_at'],
           'id_release_number' => $data['id_release_number'],
           'time_begin'        => $data['time_begin'],
           'time_end'          => $data['time_end'],
-          'is_deleted'        => $data['is_deleted'],
           'status'            => $data['status']
         ]);  
         $post->save();
