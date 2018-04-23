@@ -69,7 +69,7 @@
           <div class="pull-right mobile-element btn-close"><i class="fa fa-close"></i></div>
           <ul class="nav navbar-nav">
             <?php 
-            $arCats = DB::table('categories')->where('is_deleted','=',0)->where('id_category_parent',0)->get();
+            $arCats = DB::table('categories')->where('id_category_parent',0)->get();
             ?>
             @if(!empty($arCats))
               @foreach($arCats as $arCat)
@@ -80,7 +80,7 @@
                 $url = route('WebClientEndUserCat',['id'=>$id_category]);
                 $checkUrl = '*category/'.$id_category;
                 //check cat_chil 
-                $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
+                $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->get();
                 $count = count($arChilCats);
                 ?>
                 @if($count > 0)
@@ -145,7 +145,7 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav">
                       <?php 
-                      $arCats = DB::table('categories')->where('is_deleted','=',0)->where('id_category_parent',0)->get();
+                      $arCats = DB::table('categories')->where('id_category_parent',0)->get();
                       ?>
                       @if(!empty($arCats))
                         @foreach($arCats as $arCat)
@@ -156,7 +156,7 @@
                           $url = route('WebClientEndUserCat',['id'=>$id_category]);
                           $checkUrl = '*category/'.$id_category;
                           //check cat_chil 
-                          $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->where('is_deleted',0)->get();
+                          $arChilCats = DB::table('categories')->where('id_category_parent',$id_category)->get();
                           $count = count($arChilCats);
                           ?>
                           @if($count > 0)
