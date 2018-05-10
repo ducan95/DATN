@@ -32,8 +32,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
       return [
-          'email.required'    => 'メールアドレスの入力を行ってください',
-          'password.required' => 'パスワードの入力を行ってください'
+          'email.required'    => 'Vui lòng nhập địa chỉ email của bạn',
+          'password.required' => 'Vui lòng nhập password'
       ];
     }
 }

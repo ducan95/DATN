@@ -25,7 +25,7 @@ class AuthController extends Controller
     $email    = trim($request->email);
     $password = trim($request->password);
 
-    if(Auth::guard('member')->attempt(['email' => $email, 'password' => $password, 'is_deleted' => false])){
+    if(Auth::guard('member')->attempt(['email' => $email, 'password' => $password])){
       return redirect()->route('WebClientEndUserIndex');
     }
     else {
