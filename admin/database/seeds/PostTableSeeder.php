@@ -23,7 +23,7 @@ class PostTableSeeder extends Seeder
             'slug' => 'slug-title',
             'content' => 'abc',
             'status' => true,
-            'thumbnail_path'=> 'imageDefault/archive2018-01-24-552.jpg',
+            'thumbnail_path'=> 'imageDefault/archive2018-04-23-1.jpg',
             'time_begin'=>'2018-10-24',
             'time_end'=>'3000-01-01',
             'deleted_at' => null,

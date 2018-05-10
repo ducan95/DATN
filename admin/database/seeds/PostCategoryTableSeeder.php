@@ -16,8 +16,7 @@ class PostCategoryTableSeeder extends Seeder
       for($i = 1; $i< $limit; $i++) {
         DB::table('post_category')->insert([
             'id_post' => $i,
-            'id_category' => 1,
-            'is_deleted' =>false
+            'id_category' => 1
           ]);   
       }        	
     }
