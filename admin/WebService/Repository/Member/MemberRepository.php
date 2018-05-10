@@ -92,7 +92,6 @@ class MemberRepository extends Repository
           'gender'            => $gender,
           'is_receive_email'  => $is_receive_email,
           'member_plan_code'  => config('admin.member.member_plan_code'),
-          'is_deleted'        => false,
           'is_active'         => true,
         ]);
         $member->save();
@@ -117,7 +116,6 @@ class MemberRepository extends Repository
         'gender' 						=> $dataReq['gender'],
         'is_receive_email' 	=> $is_receive_email,
         'member_plan_code' 	=> config('admin.member.member_plan_code'),
-        'is_deleted' 				=> false,
         'is_active'         => true,
       ]);
       $member->save() ;
@@ -145,7 +143,6 @@ class MemberRepository extends Repository
           'gender'            => $dataReq['gender'],
           'is_receive_email'  => $is_receive_email,
           'member_plan_code'  => config('admin.member.member_plan_code'),
-          'is_deleted'        => false,
           'is_active'         => true,
         ]);
         $member->save();
@@ -180,8 +177,7 @@ class MemberRepository extends Repository
     try {
       if(!empty(Member::find($id))) {
         $member = Member::find($id);
-        $member->is_deleted = true;
-        $member->save();
+        $member->delete();
       } else {
         return ;
       }
