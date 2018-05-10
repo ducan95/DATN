@@ -49,11 +49,6 @@
                         ngf-allow-dir="true"
                         accept="image/*"
                         ngf-pattern="'image/*'">
-                        {{-- <span ng-if="release.image_release_path == undefined" class="fa fa-cloud-upload upload-icon"></span>
-                        <b ng-if="release.image_release_path == undefined">{{ trans('release.addImage') }}</b>
-                        <div ng-if="release.image_release_path != undefined" class="upload-preview">
-                          <img ng-show="release.image_release_path" ngf-thumbnail="release.image_release_path" class=""> 
-                        </div> --}}
 
                         <div ng-if="release.image_release_path != 'assets/img/no-image.jpg'" class="upload-preview">
                           <img src="{{ storage_asset() }}/@{{ release.image_release_path }}" class=""> 
