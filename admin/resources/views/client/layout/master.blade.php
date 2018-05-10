@@ -51,9 +51,6 @@
             @yield('release')
             @yield('content')
             </div>
-            <div class="col-md-3 main-sidebar-container">
-            @yield('nav-bar')
-            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
 
 @section('content')
         <div class="box top-buffer box-user-sidebar content-list">
-          <div class="box-header with-border">発売号別の記事一覧</div>
+          <div class="box-header with-border">Danh sách các bài viết theo số phát hành</div>
             <div class="box-body">
               <div class="support-information" data-device="sn"></div>
               <div class="row" id="ajax-container">
@@ -82,10 +82,4 @@
         </div>
 
 @endsection
-
-@section('nav-bar')
-  @include('client.layout.nav-bar')
-@endsection
-
-
    

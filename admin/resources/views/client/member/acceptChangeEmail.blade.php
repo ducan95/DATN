@@ -5,7 +5,7 @@
 @section('content')
 
 <div>
-	<h4 class="customize_h4">マイページ</h4>
+	<h4 class="customize_h4">Trang của tôi</h4>
 	@if(session('msg_change_email'))
 	<div class="media customize">
 	  <div class="media-body">

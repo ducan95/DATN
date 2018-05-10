@@ -66,9 +66,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
      sudo apt update
      sudo apt upgrade
-     echo "INSTALL PHP7.0 AND PHP7.0 MODULE"
+     echo "INSTALL PHP7.1 AND PHP7.1 MODULE"
      sudo add-apt-repository ppa:ondrej/php
-     sudo apt install -y pphp7.1 php7.1-common php7.1-cgi php7.1-curl php7.1-mysql php7.1-xml php7.1-json php7.1-mbstring php7.1-zip php7.1-gd
+     sudo apt-get update
+     sudo apt install -y php7.1 php7.1-common php7.1-cgi php7.1-curl php7.1-mysql php7.1-xml php7.1-json php7.1-mbstring php7.1-zip php7.1-gd
      echo "INSTALL APACHE2"
      sudo apt install -y apache2
      sudo apt install -y libapache2-mod-php7.1

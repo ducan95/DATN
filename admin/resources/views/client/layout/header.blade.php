@@ -3,7 +3,7 @@
     <div class="_container">
       <div class="navbar-header">
         <a href="{{ route('WebClientEndUserRelease') }}" class="navbar-brand">
-        <img src="{{ asset('client/media/icon/logo.jpg') }}" />
+        <img src="{{ asset('client/media/icon/menu-list.jpg') }}" />
         </a>
         <button type="button" class="navbar-toggle collapsed" >
           <img src="{{ asset('client/media/icon/menu-list.jpg') }}""/>
@@ -26,18 +26,18 @@
               <a href="{{ route('WebClientEndUserMyPage') }}"><img src="{{ asset('client/media/icon/pc_1026ol_06.jpg') }}"></a>
               </li>
               <li class="mobile-element">
-                <a href="{{ route('WebClientEndUserMyPage') }}"><i class="fa fa-envelope-o"></i> マイページ</a>
+                <a href="{{ route('WebClientEndUserMyPage') }}"><i class="fa fa-envelope-o"></i> Trang của tôi</a>
               </li>
             @else
             <li class="pc-element btn-register">
               <a href="{{ route('webClientMemberIndex') }}"><img src="{{ asset('client/media/icon/pc_1026ol_10.jpg') }}"></a>
             </li>
             <li class="mobile-element">
-              <a href="{{ route('webClientMemberIndex') }}"><i class="fa fa-envelope-o"></i> 会員登録</a>
+              <a href="{{ route('webClientMemberIndex') }}"><i class="fa fa-envelope-o"></i> Đăng ký thành viên</a>
             </li>
             @endif
             <li class="mobile-element">
-              <a href="{{ route('getLoginEndUser') }}"><i class="fa fa-key"></i> ログイン</a>
+              <a href="{{ route('getLoginEndUser') }}"><i class="fa fa-key"></i> Đăng nhập</a>
             </li>
           </ul>
           <div class="advertising pc-element text-center">
@@ -51,7 +51,7 @@
           <div class="search text-right">
             <form style="width: 50%" class="pull-right" method="GET" action="https://friday.kodansha.ne.jp/sn/u/search">
               <div class="input-group">
-                <input type="text" name="keyword" value="" class="form-control" placeholder="記事を検索">
+                <input type="text" name="keyword" value="" class="form-control" placeholder="Tìm kiếm bài viết">
                 <span class="input-group-btn">
                 <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-search"></i></button>
                 </span>
