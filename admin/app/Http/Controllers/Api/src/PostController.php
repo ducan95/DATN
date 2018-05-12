@@ -63,8 +63,6 @@ class PostController extends WebApiController
    */ 
   public function actionSave(Request $request)
   {
-    //code debug xem giá trị $request
-    //Log::info($request["data"]["post"]);exit;
     $post_data=$request["data"]["post"];
     $post_category_data= $request["data"]["post_category"];
     if(empty($post_data) || empty($post_category_data)){
@@ -76,6 +74,8 @@ class PostController extends WebApiController
     }
 
     $res = PostService::getInstance()->batchSave($post_data, $post_category_data);
+    // Log::info($res);
+    // exit;
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data']]);
     }else {
@@ -95,7 +95,10 @@ class PostController extends WebApiController
    * @return Response
    */
   public function actionUpdate(Request $request, $id)
-  {   
+  {  
+    
+    Log::info($request);
+    exit;
     $res=PostService::getInstance()->update($request,$id);
     if(!isset($res['errors'])){
       return Api::response(([ 'data' => $res['data'] ]));

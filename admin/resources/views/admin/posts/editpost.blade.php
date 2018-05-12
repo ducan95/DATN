@@ -11,7 +11,7 @@
 
 <div ng-controller="PostUpdateCtrl">
 	<section class="content-header">
-		<h2>Edit post</h2>
+		<h2>Sửa Bài Viết</h2>
 	</section>
 	<section class="content">
 		<div class="row">
@@ -29,7 +29,7 @@
 						</div>
 						<div class="form-group" id="dateend">
 							<label class="col-sm-3" >{{ trans('web.date_end_public')}}</label>
-							<label class="col-sm-3" ng-bind="dateStart"> </label>
+							<label class="col-sm-3">3000-01-01</label>
 							<div class="col-sm-2"></div>
 						</div>
 						<div class="form-group" id="article" >
@@ -44,8 +44,9 @@
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-4" id="creatfinish">
-								<button class="btn btn-primary" type="submit" ng-click="">{{ trans('web.creat_finish')}}</button>
-							</div>	
+							<button type="submit" name="submit" class="btn btn-primary" style="margin-right:5px;">Sửa</button>
+							<button type="reset" href="" class="btn btn-primary" style="margin-left:5px;">@lang('web.cancel')</button>
+              </div>	
 							<div class="col-md-4"></div>
 						</div>	
 					</div>
@@ -70,10 +71,6 @@
 			      					ng-selected="@{{option.id_release_number == 2}}">
 						      	</option>
 						    </select>
-							</div>
-							<div id="display">
-								<p>{{ trans('web.display_top')}}</p>
-								<input id="enabled" type="checkbox" name="statusPreviewTop"  ng-model="statusPreviewTop" value="1"></input>
 							</div>
 							<div id="category">
 								<p>{{trans('web.category')}}</p>
@@ -111,22 +108,22 @@
 									</li>
 								</ul> -->
 							</div>
-							<div id="image">
-								<p>{{ trans('web.image_for_post')}}</p>
+		          <div id="image">
+                <p>{{ trans('web.image_for_post')}}</p>
                 <div ngf-drop  ng-model="file" class="drop-box"  ngf-max-size="320MB"
-		              ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-		              accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
-		              <div class= "re-image" >  
-		              	<div class="box-image" ng-repeat="img in files"> 
-		              		<img  src="{{storage_asset()}}/@{{img.data}}" class="thumb">	
-		              		<a href="" class="btn-dele-img" ng-click="deleteImagePost($index, img.key)">
-		              		  <i class="fa fa-close"></i>
-		              		</a>
-		              	</div>
-		              	
-		              </div>
+                  ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+                  accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
+                  <div class= "re-image" >  
+                    <div class="box-image" ng-repeat="img in files"> 
+                      <img  src="{{storage_asset()}}/@{{img.data}}" class="thumb">	
+                      <a href="" class="btn-dele-img" ng-click="deleteImagePost($index, img.key)">
+                        <i class="fa fa-close"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
           			</div>
-						</div>
+						</div>  	
 					</div>
 				</form>
 		</div>

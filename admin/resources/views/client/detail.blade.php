@@ -30,35 +30,11 @@
     
     <div class="container-course">
         <div class="row">
-          <div class="col-md-6 top-buffer">
-            <span class="label-course label-course-navy large">新規で会員登録をご希望の方</span>
-            <div class="register-member text-center top-buffer">
-                <a href="https://friday.kodansha.ne.jp/s/register?data=column%2F102908" class="btn-block btn-0-336 btn-register-member link-for-click" style="height: 108.528px;"></a>
-            </div>
-          </div>
-          <div class="col-md-6 top-buffer">
-              <span class="label-course label-course-navy large">新規で会員登録をご希望の方</span>
-              <div class="register-member text-center top-buffer">
-                  <a href="https://friday.kodansha.ne.jp/s/register?data=column%2F102908" class="btn-block btn-0-336 btn-register-member link-for-click" style="height: 108.528px;"></a>
-              </div>
-          </div>
-          <div class="col-md-6 top-buffer">
-            <span class="label-course label-course-teal large">既に会員登録がお済みの方</span>
-            <div class="top-buffer">
-                <a href="https://friday.kodansha.ne.jp/s/login?data=column%2F102908" class="btn-block btn-0-336 btn-login-member" style="height: 108.528px;"></a>
-            </div>
-          </div>
-          <div class="col-md-6 top-buffer">
-            <span class="label-course label-course-teal large">既に会員登録がお済みの方</span>
-            <div class="top-buffer">
-                <a href="https://friday.kodansha.ne.jp/s/login?data=column%2F102908" class="btn-block btn-0-336 btn-login-member" style="height: 108.528px;"></a>
-            </div>
-          </div>
       </div>
 
       <div class="row top-buffer">
         <div class="col-md-6 col-md-offset-3">
-            <a class="btn btn-default btn-back btn-block" href="https://friday.kodansha.ne.jp/sn/u/column">Back</a>
+            <a class="btn btn-default btn-back btn-block" href="http://news.ducan.com/release/">Back</a>
         </div>
       </div>    
     </div>   
@@ -84,36 +60,11 @@
                         <div style="height: 140px; background-image: url('{{ $picUrl }}');">
                             <img src="{{ $picUrl }}" class="hidden">
                         </div>
-                        <span class="text-limit"><b>大特集　アニマロジーで占う「有名芸能人の運気と相性」</b></span>
+                        <span class="text-limit"><b>{{$slug}}</b></span>
                     </a>
                 </div>
               @endforeach
             @endif
-            <!-- <div class="col-md-3 col-lg-3 col-sm-6 col-xs-6 rc-box">
-                <a href="https://friday.kodansha.ne.jp/sn/u/entertainment/102924" class="link-gray">
-                    <div style="height: 140px; background-image: url(&quot;//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-55_t.jpg&quot;);">
-                        <img src="//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-55_t.jpg" class="hidden">
-                    </div>
-                    <span class="text-limit"><b>大特集　アニマロジーで占う「有名芸能人の運気と相性」</b></span>
-                </a>
-            </div>
-            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-6 rc-box">
-                <a href="https://friday.kodansha.ne.jp/sn/u/entertainment/102906" class="link-gray">
-                    <div style="height: 140px; background-image: url(&quot;//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-34_t.jpg&quot;);">
-                        <img src="//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-34_t.jpg" class="hidden">
-                    </div>
-                    <span class="text-limit"><b>不定期連載【私の失敗】第5回　氏神一番(『カブキロックス』ボーカル)</b></span>
-                </a>
-            </div>
-            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-6 rc-box">
-                <a href="https://friday.kodansha.ne.jp/sn/u/column/102907" class="link-gray">
-                    <div style="height: 140px; background-image: url(&quot;//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-35_t.jpg&quot;);">
-                        <img src="//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-35_t.jpg" class="hidden">
-                    </div>
-                    <span class="text-limit"><b>連載　あのコに会いたい　CM美女日和  vol．5　川口カノン（このCM:Any Pay『paymo』）</b></span>
-                </a>
-            </div> -->
-   
           </div>
         </div>
     </div>
@@ -146,7 +97,3 @@
 
 
 @endsection
-@section('nav-bar')
-  @include('client.layout.nav-bar')
-@endsection
-   

@@ -56,7 +56,8 @@ class PostRepository extends Repository
           return $query->paginate($dataReq['paginate']);
         }
       }
-      return $query->paginate(3);	
+      return $query->paginate(3);
+      dd($query);	
    	} catch(\Exception $e) {
    		throw $e;
     }  

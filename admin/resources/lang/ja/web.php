@@ -26,7 +26,7 @@
     'creat_new_post'    => 'Tạo bài viết mới',
     'date_start_public' => 'Ngày bắt đầu công khai',
     'date_end_public'   => 'Ngày kết thúc công khai',
-    'creat_finish'      => 'Tạo mới thành công',
+    'creat_finish'      => 'Tạo Mới',
     'thumbnail'         => 'thumbnail',
     'release_number'    => 'Số phát hành',
     'display_top'       => 'display_top',

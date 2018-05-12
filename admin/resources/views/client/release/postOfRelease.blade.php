@@ -34,7 +34,7 @@
 		    <h5 class="mt-0">{{ $title }}</h5>
 		    <span>{{ format_date($post->time_begin) }}</span>
 		    <div >
-		    	<a href="{{ $urlDetail }}" class="label-free" >無料で読める</a>
+		    	<a href="{{ $urlDetail }}" class="label-free" >Xem...</a>
 		    </div>
 		  </div>
 		</div>

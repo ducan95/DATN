@@ -40,7 +40,6 @@ class ReleaseService extends Service
       $res['errors']['msg']         = $e->getMessage();
       $res['errors']['status_code'] = 500;
     }
-
     return $res;
   }
 

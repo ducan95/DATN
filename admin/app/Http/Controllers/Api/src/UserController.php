@@ -18,7 +18,7 @@ class UserController extends WebApiController
    */
   public function actionFind(Request $request)
   { 
-    $res = UserService::getInstance()->find($request); 
+    $res = UserService::getInstance()->find($request);
     if(!isset($res['errors'])) {
       return Api::response([ 'data' => $res['data']]);
     }else {

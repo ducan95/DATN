@@ -10,6 +10,10 @@ SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
 function($scope, PostService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
 uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
 
+  $scope.redirectEdit = function (id_post) { 
+    $window.location.href = '/admin/post/edit#id='+id_post;
+    $scope.id_post = id_post;
+  }
   $scope.dateStart = tranDate.tranDate('2017-11-30');
   /**
   ** function get list posts
@@ -22,11 +26,11 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
     if (pageNumber === undefined) {
         pageNumber = '1';
     }
-    PostService.find({page:pageNumber},function(res) {  
+    PostService.find({page:pageNumber},function(res) {
+      console.log(res)
       try {
         if(res != undefined) { 
-          $scope.posts  = res.data.data; // list posts
-          // return false
+          $scope.posts  = res.data.data;
           $scope.total  = res.data.total; 
           $scope.currentPage  = res.data.current_page;
           $scope.lastPage  = res.data.last_page;
@@ -353,7 +357,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
 
     };
     var form = document.querySelector("form#main");
-    validate.validators.presence.message = '空白のところで入力してください。';
+    validate.validators.presence.message = 'Vui lòng nhập vào';
     $scope.error = validate(form, constraints);
     if ($scope.error == undefined) {
     $scope.getPathImage($scope.thumbnail).then(function(data){ 
@@ -366,9 +370,14 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
             title :  $scope.postTitle,
             thumbnail_path : data.path,
             id_release_number : $scope.listRelease.model,
-            time_begin : $scope.postBeginDate,
+            time_begin : function() {
+              day = $scope.postBeginDate .getDate() > 9 ? $scope.postBeginDate .getDate() : '0'+ $scope.postBeginDate .getDate();
+              month = $scope.postBeginDate .getMonth() > 8 ? ($scope.postBeginDate.getMonth()+1) : '0' +($scope.postBeginDate.getMonth()+1);
+              year=$scope.postBeginDate.getFullYear();
+              return year+"-"+month+"-"+day;
+            }(),
+            // time_begin:$scope.postBeginDate,
             time_end : '3000-01-01',
-            status_preview_top : $scope.statusPreviewTop,
             content : editor_data,
             status : $scope.status,
             password :'123'
@@ -377,7 +386,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
             id_category:$scope.category,
           }
         }
-        // console.log($scope.listpost.data);
         $scope.listpost.$save(function() {
           // console.log($scope.listpost);
           $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post/';
@@ -408,23 +416,8 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
         var getreleasenumber = editpost.releasenumber;
         var gettime_begin = editpost.time_begin;
         var gettime_end = editpost.time_end;
-        var deleted_at=null;
-        var is_deleted=false;
         var getstatus=editpost.status_post;
 
-        // console.log(gettitle)
-        // console.log(getreleasenumber)
-        // console.log(gettime_begin)
-        // console.log(gettime_end)
-        // console.log(getstatus)
-        // console.log(id_post)
-        // console.log(editpost.slug)
-        // console.log(editpost.thumbnail_path)
-        // console.log(editpost.status_preview_top)
-        // console.log(editpost.id_user)
-        // console.log(deleted_at)
-        // console.log(is_deleted)
-        // Update category
         PostService.update({
           id              : id_post,
           title           :gettitle,
@@ -435,10 +428,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
           time_end          : gettime_end,
           status            : getstatus,
           thumbnail_path    :editpost.thumbnail_path,
-          status_preview_top :editpost.status_preview_top,
-          password            :editpost.password,
-          deleted_at          :deleted_at,
-          is_deleted          : is_deleted
+          password            :editpost.password
         },function (){
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
           });
@@ -470,9 +460,85 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
 }])
 
 
-.controller('PostUpdateCtrl',['$scope', 'PostService', '$window', 'popupService', 'ReleaseService','CategoryService','ListCategoryService','ImageService','CategoryChildrenService', 
-'uploadImage',function ($scope,PostService,$window,popupService,ReleaseService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
-uploadImage) {
+.controller('PostUpdateCtrl',['$scope', 'PostService','CategoryService','ListCategoryService','ImageService','CategoryChildrenService', 
+'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService','popupService',
+function($scope, PostService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
+uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
+  $scope.getPathImage = function(files) { 
+    var def = $q.defer(); 
+    if(files != undefined && files.length > 0) {        
+      var res = uploadImage.upload(files, 'archive');
+      for (var i = 0; i < res.length; i++) {
+        res[i].success(function(res) { 
+          def.resolve(res.data);
+        }).error(function(res) {
+          def.reject(res.error);
+        }); 
+      }
+    } else {
+      def.reject("undefined"); // goi trans tu lang.js
+    }  
+    return def.promise;
+  };
+  /**
+  ** function get list image of detail post
+  ** function $watch
+  ** return array images key = id_image , value = image
+  **/ 
+  $scope.files = []; // list image of detail post
+  $scope.$watch('file', function(){ 
+    if($scope.file != undefined ) {
+      $scope.getPathImage($scope.file).then(function(data){console.log(data)
+        try { 
+          var img = {
+            'key' :data.id_image,
+            'data':data.path,  // sua lai theo duong dan data tra ve.
+          };
+          if($scope.files.push(img)) {
+            $scope.file = null; img = null;
+            toastr.success("success"); // goi trans tu lang.js
+          } else {
+            throw "can not "; // goi trans tu lang.js
+          }   
+        } catch(err){
+          toastr.error(err);
+        }
+      }).catch(function(err){
+        console.log(err);
+        toastr.error("loi api");
+      });
+    } 
+  });
+  /**
+  ** function detele image on list image detail post
+  ** service ImageResource 
+  ** api: /web_api/images/,
+  ** methoad delete
+  ** param $index , $idImage
+  ** return @@
+  **/ 
+  $scope.deleteImagePost = function($index, $idImage) {
+    try {
+      if($index != undefined || $idImage != undefined ) { 
+        ImageService.delete({ id: $idImage}, function(res) { 
+          if(res != undefined) {
+            if(res.is_success) {
+              $scope.files.splice($index, 1)
+              toastr.success('success')
+            } else {
+              throw "can not delete"
+            }
+          } else {
+            throw "loi api"
+          }
+        });
+      } else {
+        throw "undefined";
+      }
+    } catch(err) {
+      toastr.error(err);
+    }
+  };
   $scope.date = new Date();
 
   //update post
@@ -480,57 +546,24 @@ uploadImage) {
   var id         = url.hash.match(/\d/g);
   $scope.id      = id.join('');
 
-  $scope.Updatepost = function (post) { 
-    //Validate form
-    // var constraints = {
-    //   email: {
-    //     presence: true,
-    //     email: true
-    //   },
-    //   password: {
-    //     presence: true,
-    //     length: {
-    //       minimum: 5
-    //     }
-    //   },
-    //   role_code: {
-    //     presence: true
-    //   },
-    //   username: {
-    //     presence: true,
-    //     length: {
-    //       minimum: 3,
-    //     },
-    //     format: {
-    //       pattern: "^[-a-zA-Z0-9\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF _.]*$",
-    //       // but we don't care if the username is uppercase or lowercase
-    //       flags: "i",
-    //       message: "無効"
-    //     }
-    //   },
-    // };
-    // var form = document.querySelector("form#main");
-    // validate.validators.presence.message = TRANS.REQUIRED;
-    // validate.validators.email.message = TRANS.TYPE_EMAIL;
-    // $scope.error = validate(form, constraints);
-
-    // If clean data -> Edit
-    // if ($scope.error == undefined) {
-      //Get value from ng-model
-      var getUsername = user.username;
-      var getEmail    = user.email;
-      var getPassword = user.password;
-      var getRole     = user.role_code;
-
-      // Update user
+  $scope.Updatepost = function (post) {
+      var editor_data = CKEDITOR.instances['editor1'].getData(); 
       PostService.update({
-        id:         $scope.id,
-        username:   getUsername,
-        email:      getEmail,
-        password:   getPassword,
-        role_code:  getRole,
-        status:     true,
-        is_deleted: false
+        id              : $scope.id,
+        title           :post.title,
+        slug            :post.title,
+        id_release_number:  $scope.listRelease.model,
+        time_begin : function() {
+          day = $scope.postBeginDate .getDate() > 9 ? $scope.postBeginDate .getDate() : '0'+ $scope.postBeginDate .getDate();
+          month = $scope.postBeginDate .getMonth() > 8 ? ($scope.postBeginDate.getMonth()+1) : '0' +($scope.postBeginDate.getMonth()+1);
+          year=$scope.postBeginDate.getFullYear();
+          return year+"-"+month+"-"+day;
+        }(),
+        // time_begin:$scope.postBeginDate,
+        time_end : '3000-01-01',
+        content : editor_data,
+        status : 1,
+        password :'123'
       }, function (){
         // Redirect
         // $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';

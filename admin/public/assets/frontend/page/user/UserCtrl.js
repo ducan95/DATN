@@ -7,7 +7,6 @@ SOUGOU_ZYANARU_MODULE
   UserService.find({}, function (res) {
     if (typeof res != "undefined") {  
       $scope.users = res.data;
-      console.log(res.data);
     }
   })
 

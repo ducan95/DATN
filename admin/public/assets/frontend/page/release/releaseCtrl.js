@@ -1,7 +1,3 @@
-/**
- * Created by Quyen Luu - 27/12/2017
- */
-
 SOUGOU_ZYANARU_MODULE
 	/**
 	 * [ Show and delete release number ]
@@ -20,10 +16,10 @@ SOUGOU_ZYANARU_MODULE
         pageNumber = '1';
       }
       ReleaseService.get({ page:pageNumber },function(res) {
+        console.log(res);
         if(res.data != undefined) {
         	//Get data
         	$scope.releases = res.data.data;
-        	// Get paginate params
 					$scope.total       = res.data.total;
 					$scope.currentPage = res.data.current_page;
 					$scope.lastPage    = res.data.last_page;

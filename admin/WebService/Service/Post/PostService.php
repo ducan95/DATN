@@ -56,8 +56,6 @@ class PostService extends Service
    */
   public function batchSave($post_data, $post_category_data)
   {	
-    // Log::info($post_data);
-    // exit;
       $validator = Validator::make($post_data, [
         'title'               => 'required',
         'thumbnail_path'      => 'required',
@@ -76,7 +74,6 @@ class PostService extends Service
         'status' => trans('validate.name_exists'),
         'time_begin.required' => trans('validate.image_required'),
         'time_end.required' => trans('validate.image_required'),
-        // 'status_preview_top.required' => trans('validate.name_exists'),
         'content.required' => trans('validate.image_required'),
         'status.required' => trans('validate.image_required')
       ]);
@@ -105,8 +102,6 @@ class PostService extends Service
             if(isset($post_data->title)){
               $dataReq['post']['slug'] = str_slug($post_data->title);
             }
-            $dataReq['post']['is_deleted'] = false;
-            $dataReq['post']['deleted_at'] = null;
             $dataReq['post']['id_user'] = Auth::user()->id_user;
             // Log::info($dataReq['post']);exit;
             $res['data']= PostRepository::getInstance()->save($dataReq['post']);
@@ -115,7 +110,6 @@ class PostService extends Service
             foreach ($post_category_data['id_category'] as $value) {
               $dataReq['post_category']['id_post'] =$res['data']->id_post;
               $dataReq['post_category']['id_category'] = $value;
-              $dataReq['post_category']['is_deleted'] =false;
               // Log::info($value);exit;
               $res['post_category']=PostcategoryRepository::getInstance()->save($dataReq['post_category']); 
             }

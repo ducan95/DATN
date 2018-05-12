@@ -30,8 +30,8 @@ class UserRepository extends Repository
         if(!empty($dataReq['paginate'])) {
           return $query->paginate($dataReq['paginate']); 
         }
-      } 
-      return $query->get();    
+      }
+      return $query->get();
     } catch(\Exception $e) {
         throw $e;
     } 

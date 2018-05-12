@@ -12,11 +12,6 @@
 		    	<a href="{{ route('webPostAdd')}}"><button class="btn btn-primary" style="margin-top:20px ">Creat New Post</button></a>
 		  </div>
     </div>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Tables</a></li>
-      <li class="active">Simple</li>
-    </ol>
 	</section>
 	<section class="content">
 		<div class="row">
@@ -64,8 +59,6 @@
 		</div>
 
 		<div class="btn-group" role="group" style="margin-top: 10px">
-			<a href="#"><button type="button" class="btn btn-primary">Draff</button></a>
-			<a href="#"><button type="button" class="btn btn-primary">List Confirm</button></a>
 		</div>
 		<div class="box" style="margin-top: 10px">
       <div class="box-body">
@@ -149,9 +142,9 @@
 				</div>
 			  </div>
 			</form>
-			<a href="#"><button class="btn btn-primary">Nhan Ban</button></a>
+			<a href="#"><button class="btn btn-primary">Xóa</button></a>
 			<a href="#"><button class="btn btn-primary">View</button></a>
-			<a href="#"><button class="btn btn-primary">Edit</button></a>
+			<a href="" ng-click="redirectEdit(post.id_post)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Sửa</a>
             </td>
           </tr>
         </table>

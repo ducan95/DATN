@@ -13,8 +13,7 @@
     ImageService.get({ id: $scope.id }, function(res) {
       if(typeof res != "undefined") {
         if(res.is_success) {
-          $scope.image = res.data; 
-          console.log($scope.image);
+          $scope.image = res.data;
         }     
       }
     }); 
@@ -70,8 +69,8 @@
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        cancelButtonText: "いいえ",
-        confirmButtonText: "はい",
+        cancelButtonText: "Không",
+        confirmButtonText: "Có",
         closeOnConfirm: true,
         closeOnCancel: true,
       };
