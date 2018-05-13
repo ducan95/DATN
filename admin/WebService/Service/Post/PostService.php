@@ -145,6 +145,29 @@ class PostService extends Service
   {
     
   }
+  public function list(){
+    try{
+      $res['data'] = PostRepository::getInstance()->list();
+    } catch(\Exception $e){
+      $res['errors'] = $e->getMessage();
+    }
+    return $res;
+  }
+  public function loadmorePost($offset, $row_count){
+    $result = PostRepository::getInstance()->loadmorePost($offset, $row_count);
+    try{
+      if(!empty($result)){
+        $res['data'] = $result;
+      }
+      else{
+        throw new \Exception('No record');
+      }
+    } catch(\Exception $e){
+      $res['errors'] =$e->getMessage();
+    }
+    return $res;
+  }
+
 
 
   public function listOne($id){

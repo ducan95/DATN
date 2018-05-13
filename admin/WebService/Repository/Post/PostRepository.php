@@ -142,6 +142,22 @@ class PostRepository extends Repository
   { 
     
   }
+  public function list(){
+    try{
+      return DB::table('posts')->orderBy('id_post','DESC')->get();
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
+
+  public function loadmorePost($offset, $row_count){
+    try{
+      $oItemsLoad = DB::table('posts')->orderBy('id_post','DESC')->skip($offset)->take($row_count)->get();
+      return $oItemsLoad;
+    } catch(\Exception $e){
+      throw $e;
+    }
+  }
 
   public function listOne($id){
     try{

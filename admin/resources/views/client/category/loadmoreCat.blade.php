@@ -2,7 +2,7 @@
   @foreach ($arPostsLoad as $post)
   	@php
 	    $picture = $post->thumbnail_path;
-	    $picUrl = asset('storage/imageDefault/'.$picture);
+	    $picUrl = asset('storage/'.$picture);
 	    $title = $post->title;
 	    $date = strtotime($post->time_begin);
 	    $slug = $post->slug;
@@ -15,9 +15,9 @@
       </div>
       <div class="media-body">
         <h5 class="mt-0">{{ $title }}</h5>
-        <span>{{ format_date($post->time_begin) }}</span>
+        <span>{{ $post->time_begin }}</span>
         <div >
-          <a href="{{ $urlDetail }}" class="label-free" >無料で読める</a>
+          <a href="{{ $urlDetail }}" class="label-free" >Xem...</a>
         </div>
       </div>
     </div>

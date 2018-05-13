@@ -1,5 +1,6 @@
 <div class="loadmore-{{ $current_page }}">
-    @foreach ($arPostsLoad as $post) 
+  @if(isset($oItemsLoad))
+    @foreach ($oItemsLoad as $post) 
    		@php
 	      $picture = $post->thumbnail_path;
 	      $picUrl = asset('storage/'.$picture);
@@ -22,10 +23,10 @@
               </div>
             </div>
     @endforeach
-    </div>
-    @if($current_page < $totalPage)
-      
-    <div class="loaibo">
-    <a class="btn-loadmore" href="javascript:void(0)" onclick="loadmore({{ $current_page}},{{ $id }})"><i class="fa fa-plus"></i>もっと見る</a>
-    </div>
-    @endif
+	</div>
+	@if($current_page < $totalPage)
+	    <div class="loaibo col-md-12 col-sm-12 col-lg-12 col-xs-12">
+	      <a class="btn-loadmore" href="javascript:void(0)" onclick="loadmorePost({{ $current_page }})"><i class="fa fa-plus"></i>もっと見る</a>
+	    </div>
+	@endif
+@endif

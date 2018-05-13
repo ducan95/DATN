@@ -16,7 +16,25 @@ class EndUserController extends Controller
   }
 
   public function index(){
-  	return view('client.index');
+    $res = PostService::getInstance()->list();
+    $oItems = (!isset($res['errors'])) ? $res['data'] : '';
+    $row_count = 6;
+    $res1 = PostService::getInstance()->loadmorePost(0, $row_count);
+    $oItemsLoad = (!isset($res1['errors'])) ? $res1['data'] : '';
+    return view('client.index',compact('oItems','oItemsLoad'));
+  }
+  public function loadmorePost(Request $request){
+    $current_page = $request->current_page;
+    $res = PostService::getInstance()->list();
+    $oItems = (!isset($res['errors'])) ? $res['data'] : '';
+    $totalRecord = count($oItems);
+    $row_count = 6;
+    $totalPage = ceil($totalRecord/$row_count);
+    $current_page += 1;
+    $offset = ($current_page - 1) * $row_count;
+    $res1 = PostService::getInstance()->loadmorePost($offset, $row_count);
+    $oItemsLoad = (!isset($res1['errors'])) ? $res1['data'] : '';
+    return view('client.loadmorePost',compact('current_page','oItemsLoad','totalPage'));
   }
 
   public function myPage(){

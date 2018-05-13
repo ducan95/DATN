@@ -47,7 +47,7 @@
       <div class="content-wrapper">
         <div class="_container">
           <div class="row">
-            <div class="col-md-9 main-content-container">
+            <div class="col-md-12">
             @yield('release')
             @yield('content')
             </div>

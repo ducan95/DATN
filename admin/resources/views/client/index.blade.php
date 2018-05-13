@@ -1,44 +1,84 @@
 @extends('client.layout.master')
 @section('title')
 {{ trans('web.webClient.title.home') }}
-@endsection 
+@endsection   
 @section('release')
-<div class="row top-buffer padding-mobile">
-    <div class="col-md-4 hidden-sm hidden-xs">
-        <a href="https://friday.kodansha.ne.jp/sn/u/book-list" class="link-gray">
-            <div class="content-thumbnail group-thumbnail" style="background-image: url(&quot;//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/27/cover2017-12-27-3_l.jpg&quot;); height: 267.105px;">
-                <img class="hidden" src="//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/27/cover2017-12-27-3_l.jpg">
-            </div>
-        </a>
-        <div class="text-right"><a href="https://friday.kodansha.ne.jp/sn/u/book-list" class="link-gray"><b>24 Tháng 4 Năm 2018</b></a></div>
-    </div>
-    <div class="col-md-8">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="content-thumbnail lastest-content">
-                    <a href="https://friday.kodansha.ne.jp/sn/u/today-photo/102929" class="link-gray">
-                        <div class="custom-list-item-thumbnail small" style="background-image: url(&quot;//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-61_l.jpg&quot;); height: 224.105px;">
-                            <img class="hidden" src="//s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/28/archive2017-12-28-61_l.jpg">
-                            <span class="flag-color flag-large flag-color-other"></span>
+
+<div class="box top-buffer box-user-sidebar content-list">
+          <div class="box-header with-border">Tất cả bài viết</div>
+            <div class="box-body">
+              <div class="support-information" data-device="sn"></div>
+              <div class="row" id="ajax-container">
+                <?php 
+                $totalRecord = count($oItems);
+                $row_count = 6;
+                $totalPage = ceil($totalRecord/$row_count);
+                $current_page = 1;
+                $offset = ($current_page - 1) * $row_count;
+                /*$oItemsLoad = DB::table('release_numbers')->skip($offset)->take(6)->get();*/
+                ?>
+                <div class="loadmore-{{ $current_page }}">
+                  @if(isset($oItemsLoad))
+                    @foreach ($oItemsLoad as $post)
+                    @php
+                        $id_post = $post->id_post;
+                        $picture = $post->thumbnail_path;
+                        $picUrl = asset('storage/'.$picture);
+                        $title = $post->title;
+                        $date = strtotime($post->time_begin);
+                        $slug = $post->slug;
+                        $urlDetail = route('WebClientEndUserDetail',['slug'=>$slug,'id'=> $id_post]);
+
+                    @endphp
+
+                    <div class="media customize">
+                        <div class="media-left">
+                        <img class="media-object img-cat-mize" src="{{ $picUrl }}" alt="Generic placeholder image">
                         </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-12 top-buffer">
-                <div class="media">
-                    <div class="media-left">
-                        <div class="new-content-icon"></div>
-                    </div>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="https://friday.kodansha.ne.jp/sn/u/today-photo/102929" class="link-gray"><b>Bài hát hôm nay</b></a></h4>
-                        <span class="custom-list-item-title">2018.01.10</span>
+                        <h5 class="mt-0">{{ $title }}</h5>
+                        <span>{{ $post->time_begin }}</span>
+                        <div >
+                            <a href="{{ $urlDetail }}" class="label-free" >Xem...</a>
+                        </div>
                     </div>
+                    </div>
+                    @endforeach
+                  @endif
                 </div>
+                
+                @if($current_page < $totalPage)
+                <div class="loaibo col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                  <a class="btn-loadmore" href="javascript:void(0)" onclick="loadmorePost({{ $current_page }})"><i class="fa fa-plus"></i>Xem thêm</a>
+                  @section('usersite-bottom-js')
+                  <script type="text/javascript">
+                    function loadmorePost(current_page) {
+                      var a = '.loadmore-'+current_page;
+                    $.ajax({
+                      url: "{{route('WebClientEndUserLoadmorePost')}}", 
+                      type: 'POST',
+                      dataType: 'html',
+                      data: {
+                        current_page:current_page,
+                         _token: '{{ csrf_token() }}',
+                      },
+                      success: function(data){
+                        $('.loaibo').remove();
+                        $(a).after(data);
+                          
+                      },
+                      error: function(){
+                        alert('Sai');
+                      }
+                    });
+                  };
+                  </script>
+                  @endsection
+                </div>
+                @endif
+              </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
-{{--  @section('nav-bar')
-	@include("client.layout.nav-bar")
-@endsection  --}}
+
+
+@endsection  

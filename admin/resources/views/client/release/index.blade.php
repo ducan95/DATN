@@ -50,7 +50,7 @@
                 
                 @if($current_page < $totalPage)
                 <div class="loaibo col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                  <a class="btn-loadmore" href="javascript:void(0)" onclick="loadmoreRelease({{ $current_page }})"><i class="fa fa-plus"></i>もっと見る</a>
+                  <a class="btn-loadmore" href="javascript:void(0)" onclick="loadmoreRelease({{ $current_page }})"><i class="fa fa-plus"></i>Xem thêm</a>
                   @section('usersite-bottom-js')
                   <script type="text/javascript">
                     function loadmoreRelease(current_page) {

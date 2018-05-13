@@ -8,7 +8,7 @@
 <div class="content-container top-buffer bottom-buffer padding-mobile">
     
     <div class="title"><h1>{{ $oItem->title }}</h1></div>
-    <p class="content-date">{{ format_date($oItem->time_begin)}}</p>
+    <p class="content-date">{{ $oItem->time_begin }}</p>
 </div>
 
 <div class="content-container top-buffer bottom-buffer padding-mobile">
@@ -34,7 +34,7 @@
 
       <div class="row top-buffer">
         <div class="col-md-6 col-md-offset-3">
-            <a class="btn btn-default btn-back btn-block" href="http://news.ducan.com/release/">Back</a>
+            <a class="btn btn-default btn-back btn-block" href="http://news.ducan.com/">Back</a>
         </div>
       </div>    
     </div>   
@@ -50,7 +50,7 @@
               @foreach($arFourPostsOfCat as $post)
                 <?php
                   $picture = $post->thumbnail_path;
-                  $picUrl = asset('storage/imageDefault/'.$picture);
+                  $picUrl = asset('storage/'.$picture);
                   $id_post = $post->id_post;
                   $slug = $post->slug;
                   $urlDetail = route('WebClientEndUserDetail',['slug'=>$slug,'id'=> $id_post]);

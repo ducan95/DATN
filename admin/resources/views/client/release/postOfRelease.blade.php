@@ -19,7 +19,7 @@
 			@php
 				$id_post = $post->id_post;
 				$picture = $post->thumbnail_path;
-				$picUrl = asset('storage/imageDefault/'.$picture);
+				$picUrl = asset('storage/'.$picture);
 				$title = $post->title;
 				$date = strtotime($post->time_begin);
 				$slug = $post->slug;
@@ -32,7 +32,7 @@
 			</div>
 		  <div class="media-body">
 		    <h5 class="mt-0">{{ $title }}</h5>
-		    <span>{{ format_date($post->time_begin) }}</span>
+		    <span>{{ $post->time_begin }}</span>
 		    <div >
 		    	<a href="{{ $urlDetail }}" class="label-free" >Xem...</a>
 		    </div>
@@ -42,7 +42,7 @@
 	</div>
 	@if(isset($arPostsLoad) && $current_page < $totalPage)
 	<div class="loaibo">
-	<a class="btn-loadmore" href="javascript:void(0)" onclick="loadmore({{ $current_page}}, {{ $id }})"><i class="fa fa-plus"></i>もっと見る</a>
+	<a class="btn-loadmore" href="javascript:void(0)" onclick="loadmore({{ $current_page}}, {{ $id }})"><i class="fa fa-plus"></i>Xem thêm</a>
 	</div>
 	@endif
 	@section('usersite-bottom-js')

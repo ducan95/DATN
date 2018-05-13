@@ -162,8 +162,6 @@ class CategoryRepository extends Repository
                   $join->on('posts.id_post', '=', 'post_category.id_post');  })
                 ->join('categories', function($join) {
                   $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->get();
-                /*dd($arPosts);
-                die();*/
       return $arPosts;
     } catch(\Exception $e){
       throw $e;

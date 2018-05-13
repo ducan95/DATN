@@ -450,6 +450,10 @@ Route::group([
     'uses'  => 'EndUserController@loadmoreRelease',
     'as'    => 'WebClientEndUserLoadmoreRelease',
   ]);
+  Route::post('loadmorePost',[
+    'uses'  => 'EndUserController@loadmorePost',
+    'as'    => 'WebClientEndUserLoadmorePost',
+  ]);
 
   Route::get('release/{id}',[
     'uses' => 'ReleaseController@postOfRelease',
