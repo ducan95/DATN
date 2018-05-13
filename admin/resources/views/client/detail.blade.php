@@ -6,26 +6,30 @@
 
 @section('content')
 <div class="content-container top-buffer bottom-buffer padding-mobile">
-    
-    <div class="title"><h1>{{ $oItem->title }}</h1></div>
-    <p class="content-date">{{ $oItem->time_begin }}</p>
-</div>
-
-<div class="content-container top-buffer bottom-buffer padding-mobile">
     <div id="div-friday-content" class="bottom-buffer">        
       <p class="nbsp"><br></p>
       <div data-id="9365772" class="image-container" data-name="media/2017/12/28/media2017-12-28-102_l.jpg" data-alt="女子大生水着美女図鑑　第85回　日本赤十字看護大学　中村 彩香さん" data-src="" data-fee="true" data-viewer="false" contenteditable="false">
         <div class="text-center thumbnail" style="border: none; padding: 0">
           @if(Auth::check())
-
-          @else
-          <img alt="女子大生水着美女図鑑　第85回　日本赤十字看護大学　中村 彩香さん" data-type="unpaid" src="https://friday.kodansha.ne.jp/sn/u/102908/image?data=1514438323zU93BgZYVvrKTdLGOyo3oA" style="width: 100%">
-          @endif
+            <div class="content-container top-buffer bottom-buffer padding-mobile">
+                <div class="title"><h1>{{ $oItem->title }}</h1></div>
+                <p class="content-date">{{ $oItem->time_begin }}</p>
+                @php
+                    $picture = $oItem->thumbnail_path;
+                    $picUrl = asset('storage/'.$picture);
+                @endphp
+                <div class="media-left">
+                    <img class="media-object img-cat-mize" src="{{ $picUrl }}" alt="Generic placeholder image">
+                </div>
+            </div>
+            </div>
+            <p class="nbsp"><br></p>
+            <p class="nbsp">　{{ $oItem->content }}</p>
+            <p class="nbsp"></p>
+        @else
+          <h1>Bạn phải đăng nhập để xem bài viết</h1>
+        @endif
         </div>
-      </div>
-      <p class="nbsp"><br></p>
-      <p class="nbsp">　{{ $oItem->content }}</p>
-      <p class="nbsp"></p>
     </div>
     
     <div class="container-course">
