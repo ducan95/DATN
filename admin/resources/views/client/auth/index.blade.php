@@ -7,7 +7,7 @@
     @if(Session::get('status') != null)
     <p class="alert alert-danger">{{ Session::get('status')}}</p>
     @endif
-	<i class="fa fa-th-large" aria-hidden="true"></i><span>Đăng ký thành viên</span>
+	<i class="fa fa-th-large" aria-hidden="true"></i><span>Đăng nhập</span>
 	<form action="{{ route('getLoginEndUser') }}" method="post" id="main" class="form">
 		{{ csrf_field() }}
 	  <div class="form-group">

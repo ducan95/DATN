@@ -14,8 +14,8 @@
             <!-- IMAGE LOGIN- LOGOUT -->
             <!-- type With frefix s -->
             <!-- with frefix is s -->
-            <li class="pc-element btn-login">
-              <a href="{{ route('getLoginEndUser') }}"><img src="{{ asset('client/media/icon/pc_1026ol_03.jpg') }}""/></a>
+            <li class="pc-element btn-login" style="height: 72px;">
+              <a href="{{ route('getLoginEndUser') }}" style="margin: 31px;">Đăng Nhập</a>
             </li>
             <!-- END IMAGE LOGIN -LOGOUT -->
             <!-- IMAGE REGISTER -->
@@ -29,8 +29,8 @@
                 <a href="{{ route('WebClientEndUserMyPage') }}"><i class="fa fa-envelope-o"></i> Trang của tôi</a>
               </li>
             @else
-            <li class="pc-element btn-register">
-              <a href="{{ route('webClientMemberIndex') }}"><img src="{{ asset('client/media/icon/pc_1026ol_10.jpg') }}"></a>
+            <li class="pc-element btn-register" style="height: 72px;">
+              <a href="{{ route('webClientMemberIndex') }}" style="margin: 25px;">Đăng ký thành viên</a>
             </li>
             <li class="mobile-element">
               <a href="{{ route('webClientMemberIndex') }}"><i class="fa fa-envelope-o"></i> Đăng ký thành viên</a>
