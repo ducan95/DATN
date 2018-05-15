@@ -22,7 +22,7 @@
               <input type="text" name="table_search" ng-model='parameter' class="form-control pull-right" placeholder="">
 
               <div class="input-group-btn">
-                <button type="submit" ng-click="searchImage()" class="btn btn-default"> 表示</button>
+                <button type="submit" ng-click="searchImage()" class="btn btn-default"> Tìm kiếm</button>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
                       <p>
                       <a data-lightbox="image-1" href="{{storage_asset()}}/@{{image.path}}">{{ storage_asset() }}/@{{ image.path }}</a>
                     </p>
-                      <button title="Copy URL image to clipboard" class="btn btn-copy" ngclipboard ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" data-clipboard-text="{{storage_asset()}}/@{{image.path}}">コピー
+                      <button title="Copy URL image to clipboard" class="btn btn-copy" ngclipboard ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" data-clipboard-text="{{storage_asset()}}/@{{image.path}}">Sao chép
                         <!-- <img src="{{ asset('assets/img/icon/clippy.svg') }}" alt="Copy to clipboard"> -->
                       </button>
                       <span ng-bind="image.name"></span>

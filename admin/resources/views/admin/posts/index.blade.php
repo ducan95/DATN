@@ -46,14 +46,11 @@
             </option>
           </select>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<label style="width: 110px">Status</label>
   			 <select ng-model = "status">
   			 	<option ng-repeat= "item in listStatus" value="@{{item.id}}" ng-bind = "item.name"></option>
   			 </select>
-			</div>
-			<div class="col-md-2">
-				<label>Creator</label>
 			</div>
 			<a href="#"><button class="btn btn-primary" style="margin-left: 50px" ng-click="searchPost()">Search</button></a>
 		</div>

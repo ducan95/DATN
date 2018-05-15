@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <link rel="shortcut icon" type="image/x-icon" href="https://friday.kodansha.ne.jp/media/icon/faviconf.ico">
     <title> @yield('title') </title>
+     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/faviconf.ico') }}">
     <meta name="keywords" content="FRIDAY,">
     <meta name="description" content="">
     <!-- Tell the browser to be responsive to screen width -->

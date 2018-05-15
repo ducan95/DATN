@@ -4,7 +4,7 @@
 		'Registration_releasenumber' 	=> 'Quản lí số phát hành',
 		'list_archive' 			=> 'Quản lí bài viết',
 		'category' 					=>  'Danh sách danh mục',
-		'images' 						=> 'Quản lí hình anh',
+		'images' 						=> 'Quản lí hình ảnh',
 		'user_management' 	=> 'Quản lí quản trị viên',
 		'logout' 						=> 'Đăng xuất',
 		'list_image' 				=> 'Danh sách hình ảnh',
@@ -31,7 +31,8 @@
     'release_number'    => 'Số phát hành',
     'display_top'       => 'display_top',
     'category'          => 'Quản lí danh mục',
-    'image_for_post'    => 'Ảnh cho bài viết',
+	'image_for_post'    => 'Ảnh cho bài viết',
+	"sidebar_management"=> 'Quản lí hội viên',
 	  'webClient' => [
 			'new_arrivals' 		=> 'Số lượt truy cập mới',
 			'performing_arts' => 'Giải trí',

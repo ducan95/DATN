@@ -187,7 +187,7 @@ SOUGOU_ZYANARU_MODULE
           pattern: "^[-a-zA-Z0-9\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF _.]*$",
           // but we don't care if the username is uppercase or lowercase
           flags: "i",
-          message: "無効"
+          message: "Đã tắt"
         }
       },
     };

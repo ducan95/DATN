@@ -38,7 +38,7 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="txtName">{{ trans('release.nameRelease') }}</label>
-                      <input ng-model="release.name" name="name" type="text" class="form-control" id="txtName" ng-init="release.name=date">
+                      <input ng-model="release.name" name="name" type="text" class="form-control" id="txtName">
                       <label class="error" ng-if="error.name[0] != null">@{{ error.name[0] }}</label>
                     </div>
 

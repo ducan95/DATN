@@ -35,6 +35,3 @@
 </div>
     <!---end-wrap---->
 @stop
-@section('nav-bar')
-	@include("client.layout.nav-bar")
-@endsection

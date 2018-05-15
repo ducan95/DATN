@@ -73,10 +73,6 @@
 						      	</option>
 						    </select>
 							</div>
-							<div id="display">
-								<p>{{ trans('web.display_top')}}</p>
-								<input id="enabled" type="checkbox" name="statusPreviewTop"  ng-model="statusPreviewTop" value="1"></input>
-							</div>
 							<div id="category">
 								<p>{{trans('web.category')}}</p>
 								<ul class="sidebar-menu" data-widget="tree" ng-repeat="category in categories">
@@ -113,20 +109,20 @@
 									</li>
 								</ul> -->
 							</div>
-							<div id="image">
-								<p>{{ trans('web.image_for_post')}}</p>
+              <div id="image">
+                <p>{{ trans('web.image_for_post')}}</p>
                 <div ngf-drop  ng-model="file" class="drop-box"  ngf-max-size="320MB"
-		              ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-		              accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
-		              <div class= "re-image" >  
-		              	<div class="box-image" ng-repeat="img in files"> 
-		              		<img  src="{{storage_asset()}}/@{{img.data}}" class="thumb">	
-		              		<a href="" class="btn-dele-img" ng-click="deleteImagePost($index, img.key)">
-		              		  <i class="fa fa-close"></i>
-		              		</a>
-		              	</div>
-		              	
-		              </div>
+                  ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+                  accept="image/*"  ngf-pattern="'image/*'">{{ trans('web.add_new_image') }}
+                  <div class= "re-image" >  
+                    <div class="box-image" ng-repeat="img in files"> 
+                      <img  src="{{storage_asset()}}/@{{img.data}}" class="thumb">	
+                      <a href="" class="btn-dele-img" ng-click="deleteImagePost($index, img.key)">
+                        <i class="fa fa-close"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
           			</div>
 						</div>
 					</div>

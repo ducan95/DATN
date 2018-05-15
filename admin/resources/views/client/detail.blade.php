@@ -98,6 +98,13 @@
         &lt;h1&gt;このページを利用するために、javascriptをオンにしてください&lt;/h1&gt;
     &lt;/div&gt;
 </noscript>
+<script type="text/javascript">
+    function a(str) {
+        return str
+    }
+    
+</script>
+
 
 
 @endsection

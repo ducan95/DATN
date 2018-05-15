@@ -22,41 +22,20 @@
             <!-- with frefix is s -->
             <!-- type With frefix sy or sn || fy or fn-->
             @if(Auth::guard('member')->check())
-              <li class="pc-element btn-register">
-              <a href="{{ route('WebClientEndUserMyPage') }}"><img src="{{ asset('client/media/icon/pc_1026ol_06.jpg') }}"></a>
-              </li>
-              <li class="mobile-element">
-                <a href="{{ route('WebClientEndUserMyPage') }}"><i class="fa fa-envelope-o"></i> Trang của tôi</a>
+              <li class="pc-element btn-register" style="height: 72px;">
+              <a href="{{ route('WebClientEndUserMyPage') }}" style="margin: 25px;">Trang của tôi</a>
               </li>
             @else
             <li class="pc-element btn-register" style="height: 72px;">
               <a href="{{ route('webClientMemberIndex') }}" style="margin: 25px;">Đăng ký thành viên</a>
             </li>
-            <li class="mobile-element">
-              <a href="{{ route('webClientMemberIndex') }}"><i class="fa fa-envelope-o"></i> Đăng ký thành viên</a>
-            </li>
             @endif
-            <li class="mobile-element">
-              <a href="{{ route('getLoginEndUser') }}"><i class="fa fa-key"></i> Đăng nhập</a>
-            </li>
           </ul>
           <div class="advertising pc-element text-center">
-            <img style="cursor: pointer;" src="https://im.c.yimg.jp/res/ydnstorage-media/1001737257/3455085/51c71dca5e8145c63373ec186c0e5b93.jpg"/>
+            <img src="{{ asset('client/media/icon/ducan.jpg') }}" style="width: 100%;"/>
           </div>
-          <div class="advertising mobile-element text-center" style="background: #b3b3b3;">
-            <div style="background-image: url('media/cover2017-12-27-3_s.jpg')" data-name="lastest-book" onclick="window.location.href = 'book/contents/343.html'">
-              <img src="https://s3-ap-northeast-1.amazonaws.com/cdn.friday.kodansha.ne.jp/media/2017/12/27/cover2017-12-27-2_m.jpg" class="hidden"/>
-            </div>
-          </div>
-          <div class="search text-right">
-            <form style="width: 50%" class="pull-right" method="GET" action="https://friday.kodansha.ne.jp/sn/u/search">
-              <div class="input-group">
-                <input type="text" name="keyword" value="" class="form-control" placeholder="Tìm kiếm bài viết">
-                <span class="input-group-btn">
-                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-search"></i></button>
-                </span>
-              </div>
-            </form>
+          <div>
+            <h1 style="text-align:center;">Sunday Magazine</h1>
           </div>
         </div>
         <!-- /.navbar-custom-menu -->

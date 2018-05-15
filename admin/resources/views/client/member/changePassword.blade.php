@@ -43,7 +43,7 @@
 			  </div>
 	    	<div class="media row">
 	    		<div class="col-md-3 col-md-offset-3">
-	    			<a href="{{ route('WebClientEndUserMyPage') }}" class="btn btn-primary btn-lg" >キャンセル</a>
+	    			<a href="{{ route('WebClientEndUserMyPage') }}" class="btn btn-primary btn-lg" >Hủy bỏ</a>
 	    		</div>
   				<div class="col-md-offset-3">
   					<button type="submit" class="btn btn-primary btn-lg">Xác nhận nội dung cập nhật</button>
@@ -96,6 +96,3 @@
 </div>
     <!---end-wrap---->
 @stop
-@section('nav-bar')
-	@include("client.layout.nav-bar")
-@endsection
