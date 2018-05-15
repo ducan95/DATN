@@ -138,6 +138,14 @@ Route::group([
       'uses' => 'ImageController@viewEdit',
       'as' => 'webImageEdit'
     ]);
+  });
+  
+  Route::group([ 'prefix' => 'comment','middleware' =>'checkRole: admin|s_admin|editor|user'], function(){
+    
+    Route::get('/', [
+      'uses' => 'CommentController@viewIndex',
+      'as' => 'webCommentIndex'
+    ]);
   });  
   /** router web release **/
   Route::group([ 'prefix' => 'release','middleware' =>'checkRole: admin|s_admin|editor' ],function(){
@@ -241,6 +249,15 @@ Route::group([
         'uses' => 'UserController@actionDelete',
         'as' => 'apiUserDelete'
     ]);
+  });  
+
+  Route::group(['prefix' => '/comment'], function(){
+
+    Route::get('/', [
+        'uses' => 'CommentController@getcomment',
+        'as' => 'apiCommentFind'
+    ]);
+
   });  
   /**ROUTER MEMBER API**/
   Route::group(['prefix' => '/member'],function(){

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use WebService\Service\Category\CategoryService;
 use WebService\Service\Post\PostService;
+use WebService\Service\Comment\CommentService;
 use WebService\Service\Release\ReleaseService;
 
 class EndUserController extends Controller
@@ -66,7 +67,7 @@ class EndUserController extends Controller
     return view('client.category.loadmoreCat', compact('current_page','arPostsLoad','totalPage','id'));
   }
 
-  public function detail($slug, $id = 0){
+  public function detail($slug, $id){
     $result = PostService::getInstance()->listOne($id);
     $oItem = (!isset($result['errors'])) ? $result['data'] : '';
     $id_post =  $oItem->id_post;
@@ -79,7 +80,9 @@ class EndUserController extends Controller
     }
     $res2 = CategoryService::getInstance()->loadmoreCat(0, 4, $id_cat);
     $arFourPostsOfCat = (!isset($res2['errors'])) ?  $res2['data'] : '';
-    return view('client.detail', compact('oItem','id_cat','arFourPostsOfCat'));
+    $comment= CommentService::getInstance()->getComment($id);
+    $res3=(!isset($comment['errors'])) ? $comment['data'] : '';
+    return view('client.detail', compact('oItem','id_cat','arFourPostsOfCat','res3'));
   }
 
   public function release(){

@@ -26,12 +26,7 @@ class CategoryService extends Service
 
   public function update($request,$id)
   {
-    try{
-      $res['data']=CategoryRepository::getInstance()->update($request,$id);
-    }catch(\Exception $e){
-      $res['errors']= $e ->getMessage();
-    }
-    return $res;
+   
   }
 
   public function updatechil($request,$id)

@@ -11,7 +11,7 @@
       <div data-id="9365772" class="image-container" data-name="media/2017/12/28/media2017-12-28-102_l.jpg" data-alt="女子大生水着美女図鑑　第85回　日本赤十字看護大学　中村 彩香さん" data-src="" data-fee="true" data-viewer="false" contenteditable="false">
         <div class="text-center thumbnail" style="border: none; padding: 0">
           @if(Auth::check())
-            <div class="content-container top-buffer bottom-buffer padding-mobile">
+            <div class="content-container top-buffer bottom-buffer">
                 <div class="title"><h1>{{ $oItem->title }}</h1></div>
                 <p class="content-date">{{ $oItem->time_begin }}</p>
                 @php
@@ -33,16 +33,36 @@
     </div>
     
     <div class="container-course">
-        <div class="row">
-      </div>
-
       <div class="row top-buffer">
         <div class="col-md-6 col-md-offset-3">
             <a class="btn btn-default btn-back btn-block" href="http://news.ducan.com/">Back</a>
         </div>
-      </div>    
-    </div>   
-    
+      </div>   
+        <div class="row">
+         <div>
+                <h1>***Bình Luận</h1>
+            </div>
+            @if(1 == 0)
+                <h1>Chưa có bình luận nào</h1>
+            @if(is_array($res3) || is_object($res3))
+            <form>
+            </form>
+                @foreach ($res3 as $res)
+                    @php
+                    $a=1;
+                    $email = $res->email;
+                    $content = $res->content;
+                @endphp
+                <div>
+                    <h1>{{ $email }}</h1>
+                    <h1>{{ $content }}</h1>
+                </div>
+                @endforeach
+            @endif    
+        @endif    
+    </div>
+ 
+    </div>  
   </div>
 
   <div class="box top-buffer box-user-sidebar">

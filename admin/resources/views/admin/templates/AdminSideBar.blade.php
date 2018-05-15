@@ -42,6 +42,12 @@
             <span>{{trans('web.sidebar_management')}}</span>
           </a>
         </li>
+          <li class="">
+          <a href="{{ route('webCommentIndex') }}">
+            <i class="fa fa-users"></i>
+            <span>{{"Quản lí comment"}}</span>
+          </a>
+        </li>
         <li class="">
           <a href="{{ route('webUserIndex') }}">
             <i class="fa fa-user-o"></i>
