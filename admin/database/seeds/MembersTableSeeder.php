@@ -18,8 +18,6 @@ class MembersTableSeeder extends Seeder
                 'password' 			=> bcrypt('123'),
                 'birthday'   		=> '1996-10-24' ,
                 'gender'  			=> false ,
-                'is_receive_email'	=> true,
-                'member_plan_code'	=> 'free',
                 'is_active'         => true
             ]
         );
@@ -30,8 +28,6 @@ class MembersTableSeeder extends Seeder
                 'password' 			=> bcrypt('123'),
                 'birthday'   		=> '1996-10-24' ,
                 'gender'  			=> false ,
-                'is_receive_email'	=> true,
-                'member_plan_code'	=> 'free',
                 'is_active'         => false
             ]
         );

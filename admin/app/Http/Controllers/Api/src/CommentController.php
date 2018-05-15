@@ -35,5 +35,19 @@ class CommentController extends WebApiController
         ]);
         }
     }
+    public function addcomment(Request $request){
+        dd($request);die();
+        $res =  CommentService::getInstance()->save($request);
+        if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data'], 'status_code' => 204]);
+        }else {
+        return Api::response([ 
+            'is_success' => false,
+            'status_code' => $res['errors']['status_code'],
+            'errors' => $res['errors']['msg']
+        ]);
+        }
+
+    }
 
 }

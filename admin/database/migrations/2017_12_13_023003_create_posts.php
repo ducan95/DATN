@@ -18,7 +18,6 @@ class CreatePosts extends Migration
             $table->integer('id_release_number');
             $table->integer('id_user');
             $table->string('title');
-            $table->string('password');
             $table->string('slug');
             $table->longText('content');
             $table->integer('status')->unsigned();

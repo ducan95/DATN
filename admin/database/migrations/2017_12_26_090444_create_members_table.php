@@ -19,8 +19,6 @@ class CreateMembersTable extends Migration
             $table->string('password');
             $table->date('birthday');
             $table->boolean('gender');
-            $table->boolean('is_receive_email');
-            $table->string('member_plan_code');
             $table->boolean('is_active')->notnull();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

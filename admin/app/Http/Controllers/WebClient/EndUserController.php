@@ -82,7 +82,7 @@ class EndUserController extends Controller
     $arFourPostsOfCat = (!isset($res2['errors'])) ?  $res2['data'] : '';
     $comment= CommentService::getInstance()->getComment($id);
     $res3=(!isset($comment['errors'])) ? $comment['data'] : '';
-    return view('client.detail', compact('oItem','id_cat','arFourPostsOfCat','res3'));
+       return view('client.detail', compact('oItem','id_cat','arFourPostsOfCat','res3'));
   }
 
   public function release(){

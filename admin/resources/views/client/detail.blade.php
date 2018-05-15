@@ -10,55 +10,56 @@
       <p class="nbsp"><br></p>
       <div data-id="9365772" class="image-container" data-name="media/2017/12/28/media2017-12-28-102_l.jpg" data-alt="女子大生水着美女図鑑　第85回　日本赤十字看護大学　中村 彩香さん" data-src="" data-fee="true" data-viewer="false" contenteditable="false">
         <div class="text-center thumbnail" style="border: none; padding: 0">
-          @if(Auth::check())
             <div class="content-container top-buffer bottom-buffer">
                 <div class="title"><h1>{{ $oItem->title }}</h1></div>
-                <p class="content-date">{{ $oItem->time_begin }}</p>
+                <p class="content-date" style="float:left">{{ $oItem->time_begin }}</p>
                 @php
                     $picture = $oItem->thumbnail_path;
                     $picUrl = asset('storage/'.$picture);
                 @endphp
-                <div class="media-left">
+                {{--  <div class="media-left">
                     <img class="media-object img-cat-mize" src="{{ $picUrl }}" alt="Generic placeholder image">
-                </div>
+                </div>  --}}
             </div>
             </div>
             <p class="nbsp"><br></p>
             <p class="nbsp">　{{ $oItem->content }}</p>
             <p class="nbsp"></p>
-        @else
-          <h1>Bạn phải đăng nhập để xem bài viết</h1>
-        @endif
         </div>
     </div>
     
     <div class="container-course">
       <div class="row top-buffer">
-        <div class="col-md-6 col-md-offset-3">
-            <a class="btn btn-default btn-back btn-block" href="http://news.ducan.com/">Back</a>
-        </div>
       </div>   
         <div class="row">
-         <div>
-                <h1>***Bình Luận</h1>
+         <div class="txt-cmt">
+            <div>
+                <textarea id="content" placeholder="Vui lòng nhập tiếng Việt có dấu" class="txt-content" style="width: 353px;margin-left: 60px; margin-top: 62px;"></textarea>
             </div>
-            @if(1 == 0)
+            @if(Auth::check())
+            <div>
+                <a class="button" href="javascript:;" onclick="submitcontent({{ $oItem->id_post }})" style="width: 353px;margin-left: 60px;">Gửi bình luận</a>
+            </div>
+            @else
+                <p>Bạn phải đăng nhập để  bình luận</p>
+            @endif 
+        </div>
+            @if(empty($res3))
                 <h1>Chưa có bình luận nào</h1>
-            @if(is_array($res3) || is_object($res3))
-            <form>
-            </form>
+            @else    
+            {{--  <form>
+            </form>  --}}
                 @foreach ($res3 as $res)
                     @php
-                    $a=1;
                     $email = $res->email;
-                    $content = $res->content;
-                @endphp
+                    $content = $res->comment_content;
+                    @endphp
                 <div>
-                    <h1>{{ $email }}</h1>
-                    <h1>{{ $content }}</h1>
+                    <p style="margin-left: 60px;margin-top: 30px;">{{ $email }}</p>
+                    <p style="margin-left: 120px">{{ $content }}</p>
+                    <p style="margin-left: 60px">----------------------------------------------------------------------------</p>
                 </div>
-                @endforeach
-            @endif    
+                @endforeach       
         @endif    
     </div>
  
@@ -119,8 +120,25 @@
     &lt;/div&gt;
 </noscript>
 <script type="text/javascript">
-    function a(str) {
-        return str
+    function submitcontent(post_id) {
+       var content=window.document.getElementById("content").value;
+       $.ajax({
+        url: "{{route('apiCommentAdd')}}", 
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id_post: post_id,
+            comment_content:content,
+            id_member: 1,
+            _token: '{{ csrf_token() }}',
+        },
+        success: function(data){
+            
+        },
+        error: function(){
+            alert('Sai');
+        } 
+       });
     }
     
 </script>

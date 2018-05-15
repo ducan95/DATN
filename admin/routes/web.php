@@ -257,6 +257,10 @@ Route::group([
         'uses' => 'CommentController@getcomment',
         'as' => 'apiCommentFind'
     ]);
+    Route::post('/',[
+        'uses'=> 'CommentController@addcomment',
+        'as'  => 'apiCommentAdd'
+    ]);
 
   });  
   /**ROUTER MEMBER API**/

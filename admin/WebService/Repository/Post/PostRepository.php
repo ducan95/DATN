@@ -100,7 +100,6 @@ class PostRepository extends Repository
         'status' => $dataReq['status'],
         'time_end' => $dataReq['time_end'],
         'time_begin' => $dataReq['time_begin'],
-        'password'   => bcrypt($dataReq['password'])
       ]);
       $post->save();
       return $post;
@@ -120,7 +119,6 @@ class PostRepository extends Repository
           'title'             => $data['title'],
           'slug'              => $data['slug'],
           'id_user'           => $data['id_user'],
-          'password'          => $data['password'],
           'thumbnail_path'    => $data['thumbnail_path'],
           'id_release_number' => $data['id_release_number'],
           'time_begin'        => $data['time_begin'],
