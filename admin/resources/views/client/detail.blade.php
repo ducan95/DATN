@@ -23,7 +23,7 @@
             </div>
             </div>
             <p class="nbsp"><br></p>
-            <p class="nbsp">　{{ $row->content }}</p>
+            <div class="nbsp">　{{ html_entity_decode($row->content) }}</div>
             <p class="nbsp" style="margin-top: 30px;text-align: right;margin-right: 62px;font-style: oblique;font-size: 20px;">  {{ $row->username }}</p>
         </div>
     </div>

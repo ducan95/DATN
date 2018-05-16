@@ -32,10 +32,7 @@
             @endif
           </ul>
           <div class="advertising pc-element text-center">
-            <img src="{{ asset('client/media/icon/ducan.jpg') }}" style="width: 100%;"/>
-          </div>
-          <div>
-            <h1 style="text-align:center;">Sunday Magazine</h1>
+            <img src="{{ asset('client/media/icon/thoitrang.png') }}" style="max-height: 176px;"/>
           </div>
         </div>
         <!-- /.navbar-custom-menu -->
@@ -146,7 +143,7 @@
                       @endif
                       @if(isset(Auth::guard('member')->user()->email))
                       <li class="nav-item">
-                        <a class="nav-link" href="{{ route('getLogoutEndUser')}}">{{ trans('web.webClient.logout')}}</a>
+                        <a class="nav-link" href="{{ route('getLogoutEndUser')}}">{{ "ĐĂNG XUẤT"}}</a>
                       </li>
                       @else
                       <p></p>
