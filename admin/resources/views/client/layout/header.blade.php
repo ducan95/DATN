@@ -90,26 +90,11 @@
         </div>
       </div>
     </div>
-    <!-- HTML for menu in Mobile -->
-    <div class="mobile-element">
-      <div class="navbar-collapse pull-left" id="mobile-navbar-after-logo">
-        <ul class="nav navbar-nav">
-          <li class=""><a href="https://friday.kodansha.ne.jp/sn/u"><span>新着</span></a></li>
-          <li class=""><a href="entertainment.html"><span>芸能</span></a></li>
-          <li class=""><a href="gravure-top.html"><span>グラビア</span></a></li>
-          <li class=""><a href="ranking.html"><span>ランキング</span></a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- HTML for menu in PC -->
     <div class="_container pc-element">
       <div class="navbar-collapse pull-left" id="navbar-collapse">
         <div>
           <div class="pull-right mobile-element btn-close"><i class="fa fa-close"></i></div>
-
-          
-
-          <div id="navbar">    
+            <div id="navbar">    
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -159,9 +144,13 @@
                           @endif
                         @endforeach
                       @endif
+                      @if(isset(Auth::guard('member')->user()->email))
                       <li class="nav-item">
                         <a class="nav-link" href="{{ route('getLogoutEndUser')}}">{{ trans('web.webClient.logout')}}</a>
                       </li>
+                      @else
+                      <p></p>
+                      @endif
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </nav>

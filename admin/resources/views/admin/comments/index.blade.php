@@ -28,12 +28,16 @@
                   <th>Tên Hội Viên</th>
                   <th>Nội Dung</th>
                   <th>Tên Bài Viết</th>
+                  <th>Xóa</th>
                 </tr>
                 <tr ng-repeat="comment in comments | orderBy : 'id_comment'">
                   <td ng-bind="$index+1"></td>
                   <td ng-bind="comment.email"></td>
                   <td ng-bind="comment.comment_content"></td>
                   <td ng-bind="comment.title"></td>
+                  <td>
+                   <a href="javascript:void(0)" class="btn btn-sm btn-danger" ng-click="deleteComment(comment.id_comment, $index)"><i class="fa fa-trash-o"></i> @lang('web.delete')</a>
+                  <td>
                 </tr>
               </table>
             </div>

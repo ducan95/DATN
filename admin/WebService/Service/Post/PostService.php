@@ -103,14 +103,10 @@ class PostService extends Service
               $dataReq['post']['slug'] = str_slug($post_data->title);
             }
             $dataReq['post']['id_user'] = Auth::user()->id_user;
-            // Log::info($dataReq['post']);exit;
             $res['data']= PostRepository::getInstance()->save($dataReq['post']);
-            // Log::info($res['data']);exit;
-            // Log::info($post_category_data);exit;
             foreach ($post_category_data['id_category'] as $value) {
               $dataReq['post_category']['id_post'] =$res['data']->id_post;
               $dataReq['post_category']['id_category'] = $value;
-              // Log::info($value);exit;
               $res['post_category']=PostcategoryRepository::getInstance()->save($dataReq['post_category']); 
             }
             //chạy đến đây nếu ko gặp lỗi thì tiến hành commit transaction, chứng tỏ api đã hoạt động ok ko lỗi lầm gì

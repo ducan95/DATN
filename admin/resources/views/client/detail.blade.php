@@ -11,10 +11,10 @@
       <div data-id="9365772" class="image-container" data-name="media/2017/12/28/media2017-12-28-102_l.jpg" data-alt="女子大生水着美女図鑑　第85回　日本赤十字看護大学　中村 彩香さん" data-src="" data-fee="true" data-viewer="false" contenteditable="false">
         <div class="text-center thumbnail" style="border: none; padding: 0">
             <div class="content-container top-buffer bottom-buffer">
-                <div class="title"><h1>{{ $oItem->title }}</h1></div>
-                <p class="content-date" style="float:left">{{ $oItem->time_begin }}</p>
+                <div class="title" style="font-size: 20px;text-align: left;color: #5ca038;">{{ $row->title }}</div>
+                <p class="content-date" style="float:left">{{ $row->time_begin }}</p>
                 @php
-                    $picture = $oItem->thumbnail_path;
+                    $picture = $row->thumbnail_path;
                     $picUrl = asset('storage/'.$picture);
                 @endphp
                 {{--  <div class="media-left">
@@ -23,8 +23,8 @@
             </div>
             </div>
             <p class="nbsp"><br></p>
-            <p class="nbsp">　{{ $oItem->content }}</p>
-            <p class="nbsp"></p>
+            <p class="nbsp">　{{ $row->content }}</p>
+            <p class="nbsp" style="margin-top: 30px;text-align: right;margin-right: 62px;font-style: oblique;font-size: 20px;">  {{ $row->username }}</p>
         </div>
     </div>
     
@@ -36,12 +36,12 @@
             <div>
                 <textarea id="content" placeholder="Vui lòng nhập tiếng Việt có dấu" class="txt-content" style="width: 353px;margin-left: 60px; margin-top: 62px;"></textarea>
             </div>
-            @if(Auth::check())
+            @if(isset(Auth::guard('member')->user()->email))
             <div>
-                <a class="button" href="javascript:;" onclick="submitcontent({{ $oItem->id_post }})" style="width: 353px;margin-left: 60px;">Gửi bình luận</a>
+                <a class="button" href="javascript:;" onclick="submitcontent({{ $row->id_post }},{{Auth::guard('member')->user()->id_member}})" style="width: 353px;margin-left: 60px;">Gửi bình luận</a>
             </div>
             @else
-                <p>Bạn phải đăng nhập để  bình luận</p>
+                <p style="color:red;padding-left: 58px;">Bạn phải đăng nhập để  bình luận</p>
             @endif 
         </div>
             @if(empty($res3))
@@ -120,24 +120,21 @@
     &lt;/div&gt;
 </noscript>
 <script type="text/javascript">
-    function submitcontent(post_id) {
+    function submitcontent(post_id,member_id) {
        var content=window.document.getElementById("content").value;
        $.ajax({
         url: "{{route('apiCommentAdd')}}", 
         type: 'POST',
-        dataType: 'json',
+        dataType: 'html',
         data: {
             id_post: post_id,
             comment_content:content,
-            id_member: 1,
+            id_member: member_id,
             _token: '{{ csrf_token() }}',
         },
         success: function(data){
-            
-        },
-        error: function(){
-            alert('Sai');
-        } 
+            window.location.reload();
+        }
        });
     }
     

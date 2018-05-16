@@ -35,7 +35,13 @@ class CommentService extends Service
 
     public function delete($id)
     {
-       
+      try{
+        $res['data'] = CommentRepository::getInstance()->delete($id);
+      }catch(\Exception $e) {
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
+      }
+      return $res;  
     }
     public function getComment($id){
         try{

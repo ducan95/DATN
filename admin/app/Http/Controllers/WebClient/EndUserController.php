@@ -70,7 +70,9 @@ class EndUserController extends Controller
   public function detail($slug, $id){
     $result = PostService::getInstance()->listOne($id);
     $oItem = (!isset($result['errors'])) ? $result['data'] : '';
-    $id_post =  $oItem->id_post;
+    foreach($oItem as $row){
+      $id_post=$row->id_post;
+    }
     $res1 = PostService::getInstance()->takeCatFirst($id_post);
     $arCatFirst = (!isset($result['errors'])) ? $res1['data'] : '';
     $id_cat =0;
@@ -82,7 +84,7 @@ class EndUserController extends Controller
     $arFourPostsOfCat = (!isset($res2['errors'])) ?  $res2['data'] : '';
     $comment= CommentService::getInstance()->getComment($id);
     $res3=(!isset($comment['errors'])) ? $comment['data'] : '';
-       return view('client.detail', compact('oItem','id_cat','arFourPostsOfCat','res3'));
+       return view('client.detail', compact('row','id_cat','arFourPostsOfCat','res3'));
   }
 
   public function release(){

@@ -22,9 +22,11 @@ class AuthController extends Controller
 
  	public function postLogin(LoginRequest $request)
  	{
+    session_start();
     $email    = trim($request->email);
     $password = trim($request->password);
-
+    // $id_member='select id_member from members where email=$email';
+    // dd($id_member);die();
     if(Auth::guard('member')->attempt(['email' => $email, 'password' => $password])){
       return redirect()->route('WebClientEndUserIndex');
     }

@@ -159,7 +159,9 @@ class PostRepository extends Repository
 
   public function listOne($id){
     try{
-      return Post::findOrFail($id);
+      $post= DB::table('posts')->join('users', function($join) {
+        $join->on('posts.id_user', '=', 'users.id_user');  })->where('posts.id_post','=',$id)->select('posts.*','users.username')->get();
+      return $post;
     } catch(\Exception $e){
       throw $e;
     }

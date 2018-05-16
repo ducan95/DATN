@@ -261,7 +261,10 @@ Route::group([
         'uses'=> 'CommentController@addcomment',
         'as'  => 'apiCommentAdd'
     ]);
-
+    Route::delete('/{id}', [
+      'uses' => 'CommentController@actionDelete',
+      'as' => 'apiCommentDelete'
+    ]);
   });  
   /**ROUTER MEMBER API**/
   Route::group(['prefix' => '/member'],function(){
