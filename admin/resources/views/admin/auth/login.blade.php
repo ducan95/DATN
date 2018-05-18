@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sunday Amazing</title>
+  <title>Tạp chí thời trang</title>
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/faviconf.ico') }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -28,11 +28,11 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page" >
+<body class="hold-transition login-page" style="background: url('http://news.ducan.com/storage/imageDefault/media2018-05-17-2.jpg');">
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <h2 class="login-box-msg">Sunday Amazing</h2>
+    <h2 class="login-box-msg">TẠP CHÍ THỜI TRANG</h2>
      
     @if (count($errors) >0)
         <div class="box-body">

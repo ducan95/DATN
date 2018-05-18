@@ -390,7 +390,7 @@ Route::group([
         'as'   => 'apiReleaseDelete'
     ]);
   });
-  /** router images post **/
+  /** router post **/
   Route::group(['prefix' => '/post'], function(){
 
     Route::get('/', [

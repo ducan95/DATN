@@ -63,7 +63,7 @@
       });  
     };
 
-    $scope.deleteImage = function(id, index) {
+    $scope.deleteComment = function(id, index) {
       var options = {
         title: trans.messageDelete,
         type: "warning",

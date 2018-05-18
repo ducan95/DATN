@@ -92,7 +92,9 @@ hr{
     background-color: #fff !important;
 }
 .content-wrapper{
-    background: none
+    background: none;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .navbar-brand{
@@ -446,7 +448,6 @@ CSS for foooter
     #navbar-collapse{
         width: 100%;
         border-bottom: 1px solid #ddd;
-        padding-bottom: 8px;
     }
     #navbar-collapse .nav{
         width: 100%;

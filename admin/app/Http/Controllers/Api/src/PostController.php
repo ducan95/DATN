@@ -97,8 +97,7 @@ class PostController extends WebApiController
   public function actionUpdate(Request $request, $id)
   {  
     
-    Log::info($request);
-    exit;
+    Log::info($id);exit;
     $res=PostService::getInstance()->update($request,$id);
     if(!isset($res['errors'])){
       return Api::response(([ 'data' => $res['data'] ]));

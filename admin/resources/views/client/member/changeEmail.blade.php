@@ -8,7 +8,7 @@
 <div>
 	<h4 class="customize_h4">Trang của tôi</h4>
 	<div class="media customize">
-	  <div class="media-body">
+	  <div class="media-body"  style="padding-bottom: 20px;">
 	    <h5 class="mt-0">Địa chỉ email đã đăng ký</h5>
 	    <span>{{ Auth::guard('member')->user()->email }}</span>
 	  </div>
@@ -23,10 +23,10 @@
 				@endif
 	    	<div class="media row">
 	    		<div class="col-md-3 col-md-offset-3">
-	    			<a href="{{ route('WebClientEndUserMyPage') }}" class="btn btn-primary btn-lg" >Hủy</a>
+	    			<a href="{{ route('WebClientEndUserMyPage') }}" class="btn btn-primary btn-lg"  style="margin-left: 70px;">Hủy</a>
 	    		</div>
-  				<div class="col-md-offset-3">
-  					<button type="submit" class="btn btn-primary btn-lg">Xác nhận nội dung cập nhật</button>
+  				<div class="col-md-offset-2">
+  					<button type="submit" class="btn btn-primary btn-lg">Xác nhận</button>
   				</div>
 	    	</div>
 	    </form>

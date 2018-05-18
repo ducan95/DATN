@@ -11,7 +11,7 @@
       <div data-id="9365772" class="image-container" data-name="media/2017/12/28/media2017-12-28-102_l.jpg" data-alt="女子大生水着美女図鑑　第85回　日本赤十字看護大学　中村 彩香さん" data-src="" data-fee="true" data-viewer="false" contenteditable="false">
         <div class="text-center thumbnail" style="border: none; padding: 0">
             <div class="content-container top-buffer bottom-buffer">
-                <div class="title" style="font-size: 20px;text-align: left;color: #5ca038;">{{ $row->title }}</div>
+                <div class="title" style="font-size: 30px;text-align: left;color: #5ca038;">{{ $row->title }}</div>
                 <p class="content-date" style="float:left">{{ $row->time_begin }}</p>
                 @php
                     $picture = $row->thumbnail_path;
@@ -23,8 +23,9 @@
             </div>
             </div>
             <p class="nbsp"><br></p>
-            <div class="nbsp">　{{ html_entity_decode($row->content) }}</div>
+            <div class="nbsp">　{!! $row->content !!}</div>
             <p class="nbsp" style="margin-top: 30px;text-align: right;margin-right: 62px;font-style: oblique;font-size: 20px;">  {{ $row->username }}</p>
+            {{--  <hr  width="100%" size="5px" align="center" color="red" />   --}}
         </div>
     </div>
     

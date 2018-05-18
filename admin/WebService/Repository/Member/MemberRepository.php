@@ -160,7 +160,7 @@ class MemberRepository extends Repository
   public function active($id){
     try {
       if(!empty(Member::find($id))) {
-        $member = Member::find($id);
+        $member = Member::find($id)->where('deleted_at','=',null);
         $member->is_active = ($member->is_active)?'false':'true';
         $member->save();
       } else {
@@ -190,7 +190,7 @@ class MemberRepository extends Repository
   public function findOne($id)
   {
     try {
-      return Member::where('id_member', '=',$id)->first();
+      return Member::where('id_member', '=',$id)->where('deleted_at','=',null)->first();
     } catch(\Exception $e){ 
       throw $e;
     }
@@ -199,7 +199,7 @@ class MemberRepository extends Repository
   //display list member
   public function find($dataReq = ''){
     try {   
-      $query = Member::where('id_member', '>', 0)->orderBy('id_member','ASC');
+      $query = Member::where('id_member', '>', 0)->where('deleted_at','=',null)->orderBy('id_member','ASC');
       //that's fields what i want to show in index
       $dataMol= ['email', 'password', 'birthday', 'gender'];
       //check to show

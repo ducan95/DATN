@@ -40,7 +40,7 @@
 						<label class="error" ng-if="error.title[0] != null">@{{ error.title[0] }}</label>
 						<div>
 							<textarea class="form-control ckeditor" rows="7" cols="10" id="editor1" 
-							 name="content" ng-model="postcontent" required></textarea>
+							 name="content" ng-model="post.content" required></textarea>
 							 <label class="error" ng-if="error.content[0] != null">@{{ error.content[0] }}</label>
 						</div>
 						<div class="row">

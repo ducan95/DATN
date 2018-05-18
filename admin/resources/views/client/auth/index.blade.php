@@ -3,22 +3,22 @@
 	{{ trans('web.webClient.title.login') }}
 @endsection
 @section('content')
-<div>
+<div style="padding-top: 10px;">
     @if(Session::get('status') != null)
     <p class="alert alert-danger">{{ Session::get('status')}}</p>
     @endif
 	<i class="fa fa-th-large" aria-hidden="true"></i><span>Đăng nhập</span>
 	<form action="{{ route('getLoginEndUser') }}" method="post" id="main" class="form">
 		{{ csrf_field() }}
-	  <div class="form-group">
-	    <label class="label" for="exampleInputEmail1">Địa chỉ e-mail</label>
+	  <div class="form-group" style="padding-top: 20px;">
+	    <label class="label label_mize" for="exampleInputEmail1" >Địa chỉ e-mail</label>
 	    <input type="email" class="form-control" placeholder="Email" name="email" required>
 	  </div>
-	  <div class="form-group">
-	    <label class="label" for="exampleInputPassword1">Mật khẩu</label>
+	  <div class="form-group" style="padding-top: 20px;">
+	    <label class="label label_mize" for="exampleInputPassword1">Mật khẩu</label>
 	    <input type="password" class="form-control" placeholder="Password" name="password" required>
 	  </div>
-	  <button type="submit" class="btn btn-default">Submit</button>
+	  <button type="submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
 	</form>
 </div>
 @section('usersite-bottom-js')

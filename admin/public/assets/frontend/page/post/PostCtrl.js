@@ -378,9 +378,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
             }(),
             // time_begin:$scope.postBeginDate,
             time_end : '3000-01-01',
-            content : editor_data,
-            status : $scope.status,
-            password :'123'
+            content : editor_data
           },
           post_category : {
             id_category:$scope.category,
@@ -426,21 +424,12 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
           id_release_number: getreleasenumber,
           time_begin        : gettime_begin,
           time_end          : gettime_end,
-          status            : getstatus,
           thumbnail_path    :editpost.thumbnail_path,
           password            :editpost.password
         },function (){
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
           });
         } 
- 
-        $scope.status=[
-        { id : 1 , name : 'Draff'},
-        { id : 2 , name : 'Chuẩn bị công khai'},
-        { id : 3 , name : ' Công khai'},
-        { id : 4 , name : ' Không công khai'},
-        ];
-        console.log($scope.status)
 
 
         $scope.loadPost = function () { 
@@ -548,22 +537,27 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
 
   $scope.Updatepost = function (post) {
       var editor_data = CKEDITOR.instances['editor1'].getData(); 
-      PostService.update({
+      PostService.update(
+        {
+        post:{
         id              : $scope.id,
+        thumbnail_path : post.thumbnail,
         title           :post.title,
         slug            :post.title,
         id_release_number:  $scope.listRelease.model,
         time_begin : function() {
-          day = $scope.postBeginDate .getDate() > 9 ? $scope.postBeginDate .getDate() : '0'+ $scope.postBeginDate .getDate();
-          month = $scope.postBeginDate .getMonth() > 8 ? ($scope.postBeginDate.getMonth()+1) : '0' +($scope.postBeginDate.getMonth()+1);
-          year=$scope.postBeginDate.getFullYear();
+          day = post.time_begin.getDate() > 9 ? post.time_begin.getDate() : '0'+ post.time_begin.getDate();
+          month = post.time_begin.getMonth() > 8 ? (post.time_begin.getMonth()+1) : '0' +(post.time_begin.getMonth()+1);
+          year=post.time_begin.getFullYear();
           return year+"-"+month+"-"+day;
         }(),
         // time_begin:$scope.postBeginDate,
         time_end : '3000-01-01',
-        content : editor_data,
-        status : 1,
-        password :'123'
+        content : editor_data
+      },
+      post_category:{
+        id_category:post.category,
+      }
       }, function (){
         // Redirect
         // $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';

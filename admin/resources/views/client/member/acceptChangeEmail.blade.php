@@ -21,9 +21,9 @@
 		  </div>
 	</div>
 	@endif
-	<div class="media ">	  
-	  <div class="row">
-  		<div class="col-md-3 col-md-offset-5">
+	<div class="media " style="padding-bottom: 100px;">	  
+	  <div class="row" >
+  		<div class="col-md-3 col-md-offset-5" style="padding-top: 100px;">
   			<a href="{{ route('WebClientEndUserMyPage') }}" class="btn btn-primary btn-lg" >My page</a>
   		</div>
   	</div>

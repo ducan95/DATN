@@ -62,20 +62,16 @@ class PostService extends Service
         'id_release_number'   => 'required',
         'time_begin'          => 'required',
         'time_end'            => 'required',
-        'content'             => 'required',
-        'status'              => 'required'
+        'content'             => 'required'
       ],[
         'title.required'=> trans('validate.image_required'),
         'thumbnail_path.required'=> trans('validate.image_required'),
         'id_release_number.image'=> trans('validate.image_must_be_valid_image_address'),
         'thumbnail_path.max'=> trans('validate.maximum_image_size_is_320MB'),
-        'status_preview_top' => trans('validate.name_exists'),
         'content' => trans('validate.name_exists'),
-        'status' => trans('validate.name_exists'),
         'time_begin.required' => trans('validate.image_required'),
         'time_end.required' => trans('validate.image_required'),
-        'content.required' => trans('validate.image_required'),
-        'status.required' => trans('validate.image_required')
+        'content.required' => trans('validate.image_required')
       ]);
 
       if($validator ->fails()) {

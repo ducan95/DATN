@@ -10,7 +10,7 @@ class Post extends Model
   use SoftDeletes;
   protected $table='posts';
   protected $primaryKey='id_post';
-  protected $fillable = ['title', 'slug', 'status','thumbnail_path', 'id_release_number', 'content', 'time_begin', 'time_end','id_user'];
+  protected $fillable = ['title', 'slug','thumbnail_path', 'id_release_number', 'content', 'time_begin', 'time_end','id_user'];
   
   public function release_number()
   {

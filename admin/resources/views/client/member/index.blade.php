@@ -3,7 +3,7 @@
 	{{ trans('web.webClient.title.member') }}
 @endsection
 @section('content')
-<div>
+<div style="padding-top: 10px;">
     @if(Session::get('status_fail') != null)
     <p class="alert alert-danger">{{ Session::get('status_fail')}}</p>
     @endif
@@ -13,8 +13,8 @@
 	<i class="fa fa-th-large" aria-hidden="true"></i><span>Đăng ký thành viên</span>
 	<form action="{{ route('webClientMemberSave') }}" method="post" id="main" class="form">
 		{{ csrf_field() }}
-	  <div class="form-group">
-	    <label class="label label_mize" for="exampleInputEmail1">Địa chỉ e-mail</label>
+	  <div class="form-group" style="padding-top: 10px;">
+	    <label class="label label_mize" for="exampleInputEmail1" >Địa chỉ e-mail</label>
 	    <input type="email" class="form-control" placeholder="Email" name="email">
 	  </div>
 	  <div class="form-group">

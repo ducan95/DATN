@@ -13,7 +13,7 @@ class PostRepository extends Repository
 {
   public function find($dataReq = '')
   {  
-    $dataQueries = ['title', 'releaseNumber', 'categoryParent', 'categoryChildren', 'status', 'username', 'time_begin', 'paginate' ];
+    $dataQueries = ['title', 'releaseNumber', 'categoryParent', 'categoryChildren','username', 'time_begin', 'paginate' ];
 
   	try{
       $query =  Post::join('post_category', function($join) {
@@ -45,9 +45,6 @@ class PostRepository extends Repository
         }
         if(isset($dataReq['title'])) {
           $query =  $query->where('posts.title', 'LIKE', '%'.$dataReq['title'].'%');
-        }
-        if(isset($dataReq['status'])) {
-          $query =  $query->where('posts.status', '=', $dataReq['status']);
         }
         if(isset($dataReq['username'])) {
           $query =  $query->where('users.username', 'LIKE', '%'.$dataReq['username'].'%');
@@ -97,7 +94,6 @@ class PostRepository extends Repository
         'thumbnail_path' => $dataReq['thumbnail_path'],
         'content' => $dataReq['content'],
         'id_user' => $dataReq['id_user'],
-        'status' => $dataReq['status'],
         'time_end' => $dataReq['time_end'],
         'time_begin' => $dataReq['time_begin'],
       ]);
@@ -122,8 +118,7 @@ class PostRepository extends Repository
           'thumbnail_path'    => $data['thumbnail_path'],
           'id_release_number' => $data['id_release_number'],
           'time_begin'        => $data['time_begin'],
-          'time_end'          => $data['time_end'],
-          'status'            => $data['status']
+          'time_end'          => $data['time_end']
         ]);  
         $post->save();
         return $post;  

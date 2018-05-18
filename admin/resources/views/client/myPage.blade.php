@@ -7,13 +7,13 @@
 <div>
 	<h4 class="customize_h4">Trang của tôi</h4>
 	<div class="media customize">
-	  <div class="media-body">
+	  <div class="media-body" style="padding-top: 20px;">
 	    <h5 class="mt-0">Địa chỉ email đã đăng ký</h5>
-	    <span>{{ Auth::guard('member')->user()->email }}</span>
+	    <span >{{ Auth::guard('member')->user()->email }}</span>
 	  </div>
 	</div>
 	<div class="media">	  
-	  <div >
+	  <div  style="padding-top: 20px;">
 	    <a href="{{ route('webClientMemberChangeEmail') }}" class="btn btn-primary btn-lg">Thay đổi địa chỉ email đã đăng ký</a>
 	  </div>
 	</div>

@@ -3,19 +3,19 @@
 <div ng-controller="PostCtrl" ng-init="getPosts(1)">
 	<section class="content-header">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-4">
 				<h1>
-		      List Post
+		      Danh sách bài viết
 		    </h1>
 		  </div>
 		  <div class="col-md-2">
-		    	<a href="{{ route('webPostAdd')}}"><button class="btn btn-primary" style="margin-top:20px ">Creat New Post</button></a>
+		    	<a href="{{ route('webPostAdd')}}"><button class="btn btn-primary" style="margin-top:20px ">Tạo mới bài viết</button></a>
 		  </div>
     </div>
 	</section>
 	<section class="content">
 		<div class="row">
-			<div class="col-md-2">
+			{{--  <div class="col-md-2">
 				<label>Release Number</label>
 				<select name="release" id="release" ng-model="listRelease.model">
 		      	<option ng-repeat="option in listRelease.availableOptions" 
@@ -46,14 +46,8 @@
             </option>
           </select>
 			</div>
-			<div class="col-md-3">
-				<label style="width: 110px">Status</label>
-  			 <select ng-model = "status">
-  			 	<option ng-repeat= "item in listStatus" value="@{{item.id}}" ng-bind = "item.name"></option>
-  			 </select>
-			</div>
 			<a href="#"><button class="btn btn-primary" style="margin-left: 50px" ng-click="searchPost()">Search</button></a>
-		</div>
+		</div>  --}}
 
 		<div class="btn-group" role="group" style="margin-top: 10px">
 		</div>
@@ -67,7 +61,9 @@
             <th>Category</th>
             <th>Release Number</th>
             <th>Date Public</th>
-            <th>status</th>
+            <th>Sửa nhanh</th>
+						<th>Xóa</th>
+						<th>Sửa</th>
           </tr>
           <tr ng-repeat="post in posts">
             <td>
@@ -121,7 +117,7 @@
 							</div>
 						</div>
 						<div class="form-group" style="padding-top: 40px">
-							<label class="col-md-3">Status</label>
+							{{--  <label class="col-md-3">Status</label>
 							<div class="col-md-9">
 								<select ng-model="editpost.status_post">
 									<!-- <option ng-value="Draff" selected="selected"></option>
@@ -129,7 +125,7 @@
 									<option ng-value="EFK"></option> -->
 									<option ng-repeat= "st in status" value="@{{st.id}}" ng-bind = "st.name"></option>
 								</select>
-							</div>
+							</div>  --}}
 						</div>
 					</div>
 				  </div>
@@ -139,11 +135,14 @@
 				</div>
 			  </div>
 			</form>
-			<a href="#"><button class="btn btn-primary">Xóa</button></a>
-			<a href="#"><button class="btn btn-primary">View</button></a>
-			<a href="" ng-click="redirectEdit(post.id_post)" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Sửa</a>
-            </td>
-          </tr>
+			</td>
+			<td>
+				<a href="#"><button class="btn btn-primary">Xóa</button></a>
+			</td>
+			<td>	
+				<a href="" ng-click="redirectEdit(post.id_post)" class="btn btn-sm btn-primary">Sửa</a>
+      </td>    
+					</tr>
         </table>
       </div>
       <div class="box-footer clearfix">
