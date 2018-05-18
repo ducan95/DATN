@@ -31,15 +31,16 @@
     
     <div class="container-course">
       <div class="row top-buffer">
-      </div>   
+      </div> 
         <div class="row">
          <div class="txt-cmt">
             <div>
+                {{--  <img src="{{ asset('client/media/icon/person.png') }}">  --}}
                 <textarea id="content" placeholder="Vui lòng nhập tiếng Việt có dấu" class="txt-content" style="width: 353px;margin-left: 60px; margin-top: 62px;"></textarea>
             </div>
             @if(isset(Auth::guard('member')->user()->email))
             <div>
-                <a class="button" href="javascript:;" onclick="submitcontent({{ $row->id_post }},{{Auth::guard('member')->user()->id_member}})" style="width: 353px;margin-left: 60px;">Gửi bình luận</a>
+                <button class="btn btn-default " style="margin-top: 10px;margin-left: 60px;"><a class="button" href="javascript:;" onclick="submitcontent({{ $row->id_post }},{{Auth::guard('member')->user()->id_member}})" >Gửi bình luận</a></button>
             </div>
             @else
                 <p style="color:red;padding-left: 58px;">Bạn phải đăng nhập để  bình luận</p>
@@ -66,6 +67,7 @@
  
     </div>  
   </div>
+  
 
   <div class="box top-buffer box-user-sidebar">
     <div class="box-header with-border">Tin cùng danh mục</div>
