@@ -21,7 +21,7 @@
 
 					<div class="col-md-9">
 						<div class="form-group">
-							<label class="col-sm-2">{{ trans('web.date_start_public')}}</label>
+							<label class="col-sm-2" style="padding-top: 10px;">{{ "Ngày viết bài"}}</label>
 							<div class="col-sm-5">
 								<input type="date" name="timeBegin" class="form-control" 
 								ng-model="postBeginDate" min="@{{date | date:'yyyy-MM-dd'}}">
@@ -29,12 +29,13 @@
 							</div>
 							<label class="col-sm-2" id="status" ng-bind="status"></label>
 						</div>
-						<div class="form-group" id="dateend">
+						{{--  <div class="form-group" id="dateend">
 							<label class="col-sm-3" >{{ trans('web.date_end_public')}}</label>
 							<label class="col-sm-3" ng-bind="dateStart"> </label>
 							<div class="col-sm-2"></div>
-						</div>
+						</div>  --}}
 						<div class="form-group" id="article" >
+							<label>@{{ 'Tiêu đề bài viết' }}</label>
 							<input  type="text" name="title" ng-model='postTitle' style="width: 100%" >
 						</div>
 						<label class="error" ng-if="error.title[0] != null">@{{ error.title[0] }}</label>
