@@ -4,12 +4,7 @@ use App\Member;
 use WebService\Repository\Repository;
 
 
-/**
- * Created by PhpStorm.
- *  : rikkei
- * Date: 13/12/2017
- * Time: 19:37
- */
+
 class MemberRepository extends Repository
 {
 

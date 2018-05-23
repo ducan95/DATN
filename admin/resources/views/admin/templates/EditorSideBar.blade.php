@@ -5,23 +5,17 @@
     <section class="sidebar">
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="menu-open">
+        {{--  <li class="menu-open">
           <a href="{{ route('webReleaseIndex') }}">
             <i class="fa fa-barcode"></i> <span>{{trans('web.Registration_releasenumber')}}
-</span>
-            {{--  <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>  --}}
+          </span>
           </a>
-        </li>
+        </li>  --}}
         <li class="">
           <a href="{{ route('webPostIndex')}}">
             <i class="fa fa-pencil"></i>
             <span>{{trans('web.list_archive')}}
             </span></span>
-            {{--  <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>  --}}
           </a>
         </li>
         <li class="">
@@ -34,6 +28,13 @@
           <a href="{{route('webImageIndex')}}">
             <i class="fa fa-picture-o"></i>
             <span>{{trans('web.images')}}</span>
+          </a>
+        </li>
+          </li>
+          <li class="">
+          <a href="{{ route('webCommentIndex') }}">
+            <i class="fa fa-users"></i>
+            <span>{{"Quản lí comment"}}</span>
           </a>
         </li>
 

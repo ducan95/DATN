@@ -3,13 +3,6 @@ namespace WebService\Repository\User;
 use WebService\Repository\Repository;
 use App\User;
 
-
-/**
- * Created by PhpStorm.
- * User: Huynh
- * Date: 13/12/2017
- * Time: 19:37
- */
 class UserRepository extends Repository
 {
   public function find($dataReq = '') 

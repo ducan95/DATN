@@ -4,9 +4,7 @@ use WebService\Repository\Roles\RolesRepository;
 use WebService\Service\Service;
 use Validator;
 
-/**
-*
- */
+
 class RolesService extends Service
 {
   public function list() 

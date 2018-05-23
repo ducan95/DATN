@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rikkei
- * Date: 14/12/2017
- * Time: 10:35
- */
+
 
 namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;

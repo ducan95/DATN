@@ -5,12 +5,7 @@ use Illuminate\Http\Request;
 use Extention\Media;
 use Extention\Api;
 use App\Http\Controllers\Api\WebApiController as WebApiController;
-/**
- * ImageController.
- * User: Huynh
- * Date: 18/12/2017
- * Time: 15:00
- */
+
 class ImageController extends WebApiController
 {  
    /**

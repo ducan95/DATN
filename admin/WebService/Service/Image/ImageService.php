@@ -4,12 +4,7 @@ use WebService\Repository\Image\ImageRepository;
 use WebService\Service\Service;
 use Validator;
 use Extention\Media;
-/**
- * Created by PHPTEAM
- * User: Huynh
- * Date: 18/12/2017
- * Time: 15:00
- */
+
 class ImageService extends Service
 { 
   /* trait Media contains image processing functions */

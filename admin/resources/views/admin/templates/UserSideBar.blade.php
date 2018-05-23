@@ -23,7 +23,13 @@
             <span>{{trans('web.images')}}</span>
           </a>
         </li>
-
+          </li>
+          <li class="">
+          <a href="{{ route('webCommentIndex') }}">
+            <i class="fa fa-users"></i>
+            <span>{{"Quản lí comment"}}</span>
+          </a>
+        </li>
         <li><a href="{{ route('getLogout') }}"><i class="fa fa-circle-o text-red"></i> <span>{{trans('web.logout')}}</span></a></li>
 
       </ul>

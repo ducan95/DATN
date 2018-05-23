@@ -5,12 +5,7 @@ use App\Images;
 use App\PostImage;
 use App\Post;
 use Extention\Media;
-/**
- * Created by SublimeText.
- * User: Huynh
- * Date: 18/12/2017
- * Time: 15:00
- */
+
 class ImageRepository extends Repository
 {
   

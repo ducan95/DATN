@@ -4,12 +4,7 @@ use WebService\Repository\User\UserRepository;
 use WebService\Service\Service;
 use Validator;
 use Illuminate\Support\Facades\Auth;
-/**
- * Created by PhpStorm.
- * User: rikkei
- * Date: 13/12/2017
- * Time: 19:37
- */
+
 class UserService extends Service
 {
 

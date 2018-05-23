@@ -7,12 +7,7 @@ use WebService\Service\Service;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-/**
- * Created by PhpStorm.
- * User: rikkei
- * Date: 13/12/2017
- * Time: 19:37
- */
+
 class PostService extends Service
 {
 

@@ -6,12 +6,7 @@ use Illuminate\Http\Request;
 use Extention\ApiRequest;
 use Extention\Api;
 use App\Http\Controllers\Api\WebApiController as WebApiController;
-/**
- * Created by PhpStorm.
- * User: rikkei
- * Date: 14/12/2017
- * Time: 10:30
- */
+
 class PostController extends WebApiController
 { 
   /**

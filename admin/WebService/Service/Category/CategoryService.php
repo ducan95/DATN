@@ -4,12 +4,7 @@ use WebService\Repository\Category\CategoryRepository;
 use WebService\Service\Service;
 use Validator;
 use DB;
-/**
- * Created by PhpStorm.
- * User: rikkei
- * Date: 13/12/2017
- * Time: 19:37
- */
+
 class CategoryService extends Service
 {
 

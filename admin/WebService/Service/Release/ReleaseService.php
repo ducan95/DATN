@@ -7,10 +7,7 @@ use WebService\Service\Service;
 use Illuminate\Support\Facades\Auth;
 use WebService\Repository\Release\ReleaseRepository;
 
-/**
-* Create by Quyen Luu
-* Date: 28/12/2017  
-*/
+
 class ReleaseService extends Service
 {
 

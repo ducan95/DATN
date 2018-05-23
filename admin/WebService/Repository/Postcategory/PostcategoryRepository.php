@@ -4,12 +4,7 @@ use App\PostCategory;
 use WebService\Repository\Repository;
 
 
-/**
- * Created by PhpStorm.
- * User: rikkei
- * Date: 13/12/2017
- * Time: 19:37
- */
+
 class PostcategoryRepository extends Repository
 {
   public function save($dataReq){

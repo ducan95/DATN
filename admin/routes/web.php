@@ -148,7 +148,7 @@ Route::group([
     ]);
   });  
   /** router web release **/
-  Route::group([ 'prefix' => 'release','middleware' =>'checkRole: admin|s_admin|editor' ],function(){
+  Route::group([ 'prefix' => 'release','middleware' =>'checkRole: admin|s_admin' ],function(){
 
       Route::get('/',[
           'uses' => 'ReleaseController@viewIndex' ,
@@ -167,7 +167,7 @@ Route::group([
         ]);
   });
    /** router web post **/
-  Route::group([ 'prefix' => 'post','middleware' =>'checkRole: admin|s_admin|editor|user' ],function(){
+  Route::group([ 'prefix' => 'post','middleware' =>'checkRole: admin|s_admin|editor' ],function(){
 
       Route::get('/',[
           'uses' => 'PostController@viewIndex' ,
@@ -430,7 +430,8 @@ Route::group([
 /**
  * ROUTE END USER
  */ 
-    
+
+
 Route::group([
   'prefix'    => '', 
   'namespace' => 'WebClient'
