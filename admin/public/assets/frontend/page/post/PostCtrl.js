@@ -475,9 +475,9 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
   ** return array images key = id_image , value = image
   **/ 
   $scope.files = []; // list image of detail post
-  $scope.$watch('file', function(){ 
+  $scope.$watch('post.file', function(){ 
     if($scope.file != undefined ) {
-      $scope.getPathImage($scope.file).then(function(data){console.log(data)
+      $scope.getPathImage($scope.file).then(function(data){
         try { 
           var img = {
             'key' :data.id_image,
@@ -529,46 +529,65 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
     }
   };
   $scope.date = new Date();
+  //check category
+  $scope.catego=[];
+    $scope.getcategory=function(id_category){
+      if(id_category){
+        $scope.check = 0;
+          angular.forEach($scope.catego, function(value){
+            if(value == id_category) $scope.check = 1;
+          })
+          if($scope.check == 1){
+            $scope.catego.pop(id_category);
+          } else {
+            $scope.catego.push(id_category);
+            $scope.check = 0;
+          }
+      }
+      // console.log($scope.category)
+    }
 
-  //update post
   var url        = new URL(window.location.href); 
   var id         = url.hash.match(/\d/g);
   $scope.id      = id.join('');
-
-  $scope.Updatepost = function (post) {
-      var editor_data = CKEDITOR.instances['editor1'].getData(); 
-      PostService.update(
-        {
-        post:{
-        id              : $scope.id,
-        thumbnail_path : post.thumbnail,
-        title           :post.title,
-        slug            :post.title,
-        id_release_number:  $scope.listRelease.model,
-        time_begin : function() {
-          day = post.time_begin.getDate() > 9 ? post.time_begin.getDate() : '0'+ post.time_begin.getDate();
-          month = post.time_begin.getMonth() > 8 ? (post.time_begin.getMonth()+1) : '0' +(post.time_begin.getMonth()+1);
-          year=post.time_begin.getFullYear();
-          return year+"-"+month+"-"+day;
-        }(),
-        // time_begin:$scope.postBeginDate,
-        time_end : '3000-01-01',
-        content : editor_data
-      },
-      post_category:{
-        id_category:post.category,
+    
+  $scope.Updatepost = function(post){
+    $scope.getPathImage($scope.thumbnail).then(function(data){
+      try { 
+      var editor_data = CKEDITOR.instances['editor1'].getData();
+      var request_post={
+          post:{
+            id              : $scope.id,
+            thumbnail_path  : data.path,
+            content         : editor_data,
+            title           : post.title,
+            slug            : post.title,
+            id_release_number:  $scope.listRelease.model,
+            time_begin : function() {
+              day = post.time_begin.getDate() > 9 ? post.time_begin.getDate() : '0'+ post.time_begin.getDate();
+              month = post.time_begin.getMonth() > 8 ? (post.time_begin.getMonth()+1) : '0' +(post.time_begin.getMonth()+1);
+              year=post.time_begin.getFullYear();
+              return year+"-"+month+"-"+day;
+              }(),
+            time_end : '3000-01-01'
+            },
+          post_category:{
+            id_category:$scope.catego,
+            id_category_before:$scope.post.id_release_number
+            }
+          }
+        PostService.update(request_post,function(){
+          $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
+         });
+      }catch(err){
+        toastr.error(err);
       }
-      }, function (){
-        // Redirect
-        // $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
-      });
-    // }
-  };
+    })
+  }
 
   $scope.loadPost = function () { 
     PostService.get({ id: $scope.id },function(res) {
     $scope.post = res.data[0];
-    console.log($scope.post)
     $scope.post.time_begin = new Date($scope.post.time_begin);
     });
   };

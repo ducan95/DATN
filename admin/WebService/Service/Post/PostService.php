@@ -117,16 +117,52 @@ class PostService extends Service
       // Log::info($res['post_category']);exit;
       return $res;
     }
+  public function update($request,$id){
     
-  public function update($request, $id)
-  {   
+  }
+    
+  public function batchupdate($post_data,$post_category_data, $id)
+  {	
     try{
-      $res['data']=PostRepository::getInstance()->update($request,$id);
-    }catch(\Exception $e){
-      $res['errors']= $e ->getMessage();
-    }
+      //code debug thỏa mản điều kiện validation
+      //Log::info("có vào đây không");exit;
+      // khi tiến hành lưu dữ liệu mình sẽ sử dụng transaction để đảm bảo dữ liệu sẽ không lưu dư thừa hoặc update sai, xóa, ...
+
+      // khởi tạo transaction ở đây
+      DB::beginTransaction();
+      // if(is_array($post_data) || is_object($post_data)){
+        //sử dụng try catch ở đây nếu chạy hết thì commit transaction, throw ra lỗi thì rollback transaction
+        try{
+          foreach ($post_data as $key => $value) {
+            $dataReq['post'][$key] = $value;
+          }
+          if(isset($post_data->title)){
+            $dataReq['post']['slug'] = str_slug($post_data->title);
+          }
+          $dataReq['post']['id_user'] = Auth::user()->id_user;
+          $res['data']= PostRepository::getInstance()->update($dataReq['post'],$id);
+          foreach ($post_category_data['id_category'] as $value) {
+            // $dataReq['post_category']['id_post'] =$id;
+            $dataReq['post_category']['id_category'] = $value;
+            $dataReq['post_category']['id_category_before']=$post_category_data['id_category_before'];
+            $res['post_category']=PostcategoryRepository::getInstance()->update($dataReq['post_category'],$id); 
+          }
+          //chạy đến đây nếu ko gặp lỗi thì tiến hành commit transaction, chứng tỏ api đã hoạt động ok ko lỗi lầm gì
+          DB::commit();
+        }
+        catch(\Exception $e){
+          //nếu throw ra lỗi chứng tỏ bị lỗi  trong tiến trình gì đó nên phải rollback lại ko cho lưu những dữ liệu đã lưu trước đo
+          DB::rollBack();
+          throw $e;
+        }
+    }  
+    catch(\Exception $e){
+        $res['errors']['msg'] = $e->getMessage();
+        $res['errors']['status_code'] = 500;
+    } 
+    // Log::info($res['post_category']);exit;
     return $res;
-	}
+  }
 
   public function delete($id)
   {

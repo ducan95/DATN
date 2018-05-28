@@ -26,6 +26,6 @@
     @if($current_page < $totalPage)
       
     <div class="loaibo">
-    <a class="btn-loadmore" href="javascript:void(0)" onclick="loadmore({{ $current_page}},{{ $id }})"><i class="fa fa-plus"></i>もっと見る</a>
+    <a class="btn-loadmore" href="javascript:void(0)" onclick="loadmore({{ $current_page}},{{ $id }})"><i class="fa fa-plus"></i>Xem</a>
     </div>
     @endif

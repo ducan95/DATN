@@ -406,12 +406,10 @@ Route::group([
         'uses' => 'PostController@actionSave',
         'as' => 'apiPostSave'
     ]);
-
     Route::put('/{id}', [
         'uses' => 'PostController@actionUpdate',
         'as' => 'apiPostUpdate'
     ]);
-    
     Route::delete('/{id}', [
         'uses' => 'PostController@actionDelete',
         'as' => 'apiPostDelete'

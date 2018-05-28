@@ -29,7 +29,7 @@ class PostRepository extends Repository
                   $join->on('posts.id_user', '=', 'users.id_user');
                    });
                 
-      $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name');    
+      $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name','post_category.id_category');    
       if(!empty($dataReq)) {
         if(isset($dataReq['releaseNumber'])) {
           $query =  $query->where('release_numbers.id_release_number', '=', $dataReq['releaseNumber']);
@@ -76,7 +76,7 @@ class PostRepository extends Repository
                     $join->on('posts.id_user', '=', 'users.id_user');
                      })
                 ->where('posts.id_post', '=', $id);
-      $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name');
+      $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name','categories.id_category');
  		  return $query->get();
     } catch (\Exception $e) {
     	throw $e;
@@ -115,6 +115,7 @@ class PostRepository extends Repository
           'title'             => $data['title'],
           'slug'              => $data['slug'],
           'id_user'           => $data['id_user'],
+          'content'           => $dataReq['content'],
           'thumbnail_path'    => $data['thumbnail_path'],
           'id_release_number' => $data['id_release_number'],
           'time_begin'        => $data['time_begin'],

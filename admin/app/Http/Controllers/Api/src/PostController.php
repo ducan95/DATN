@@ -66,7 +66,7 @@ class PostController extends WebApiController
         'status_code' => 400,
         'errors' => "loi empty o day"
       ]);
-    }
+      }
 
     $res = PostService::getInstance()->batchSave($post_data, $post_category_data);
     // Log::info($res);
@@ -91,29 +91,44 @@ class PostController extends WebApiController
    */
   public function actionUpdate(Request $request, $id)
   {  
-    
-    Log::info($id);exit;
-    $res=PostService::getInstance()->update($request,$id);
-    if(!isset($res['errors'])){
-      return Api::response(([ 'data' => $res['data'] ]));
-    }else{
-      return Api::response(([
+    // Log::info($request);
+    // exit;
+    $post_data=$request["data"]["post"];
+    $post_category_data= $request["data"]["post_category"];
+    if(empty($post_data) || empty($post_category_data)){
+      return Api::response([
         'is_success' => false,
-        'status_code' =>500,
-        'errors' =>$res['errors']
-      ]));
-    } 
+        'status_code' => 400,
+        'errors' => "loi empty o day"
+      ]);
+      }
+      $res = PostService::getInstance()->batchupdate($post_data, $post_category_data,$id);
+      // Log::info($res);
+      // exit;
+      if(!isset($res['errors'])) {
+        return Api::response([ 'data' => $res['data']]);
+      }else {
+        return Api::response([ 
+          'is_success' => false,
+          'status_code' => 500,
+          'errors' => $res['errors']
+        ]);
+      } 
   }
 
-  /**
-   * delete user 
-   *
-   * @param  $id
-   * @return Response
-   */
+  
 
   public function actionDelete($id)
   {   
-    
+    $res =  PostService::getInstance()->delete($id);
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data'], 'status_code' => 204]);
+    }else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg']
+      ]);
+    } 
   }
 }

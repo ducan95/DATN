@@ -22,7 +22,23 @@ class PostcategoryRepository extends Repository
     }  
   }
   public function update($dataReq, $id){
-
+    try{
+      $data=$dataReq->all();
+      $post_category = DB::table('post_category')->where('id_post','=',$id)->where('id_category','=',$data['id_category_before'])->select('post_category.*')->get();
+       if(!empty($post_category)) {
+        $post_category->fill([
+          'id_post'   => $id,
+          'id_category'=> $data['id_category']
+       ]);  
+       $post_category->save();
+       return $post_category;  
+     } else {
+       return null;
+     }
+   } catch(\Exception  $e){
+     throw $e;
+     
+   }
   }
   public function delete($id){
 

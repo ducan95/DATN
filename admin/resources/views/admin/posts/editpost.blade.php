@@ -54,7 +54,7 @@
 						<div class=" box-solid">
 							<div id="thumbnail">
 								<p>{{ trans('web.thumbnail')}}</p>
-                <div ngf-drop ngf-select  ng-model="post.thumbnail" class="drop-box"  ngf-max-size="320MB"
+                <div ngf-drop ngf-select  ng-model="thumbnail" class="drop-box"  ngf-max-size="320MB"
               ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
               accept="image/*"  ngf-pattern="'image/*'" >{{ trans('web.add_new_image') }}
 	              	<div class="re-thumbnail">
@@ -64,7 +64,7 @@
 							</div>
 							<div id="release">
 								<span>{{ trans('web.release_number')}}</span>
-      					<select name="release" id="release" ng-model="post.release">
+      					<select name="release" id="release" ng-model="listRelease.model">
 						      	<option ng-repeat="option in listRelease.availableOptions" 
 			      					value="@{{option.id_release_number}}"
 			      					ng-bind="option.name" 
@@ -82,20 +82,16 @@
 					            	<input type="checkbox" ng-click="getcategory(cate.id_category)" ng-model="category">
 					            	<span ng-bind="cate.name"></span>
 					            </li>
-					          </ul>			
-								</ul>
-									<ul class="sidebar-menu" data-widget="tree">
-									<li ng-repeat="category in categoryParent">
-										<input type="checkbox" value="category.id_category">
-											<span ng-click="listcategorychil(id_category)">@{{category.name}}</span>
-											<span class="pull-right-container"></span>
-										<ul>
-											<li ng-if="category.id_category_parent != 0">
-												<input type="checkbox" value="category.id_category" ng-model="post.category">
-												<span ng-bind="category.name"></span>
-											</li>
-										</ul>	
-									</li>
+					          </ul>
+					          <!-- <ul>
+					          	<li ng-repeat="cate in categoryChildren">
+					          		<div ng-if="cate.id_category_parent == category.id_category ">
+						          		<input type="checkbox" ng-model="cate.id_category">
+						          		<span ng-bind="cate.name"></span>
+					          		</div>
+					          	</li>
+					          </ul>
+					        </li>			 -->				
 								</ul>
 							</div>
 		          <div id="image">
