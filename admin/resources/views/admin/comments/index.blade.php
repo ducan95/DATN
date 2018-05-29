@@ -47,6 +47,28 @@
         </div>
       </div>
     </section>
+
+    <section class="invoice pg-section">
+      <div class="row text-center" ng-if="lastPage > 1">
+        <ul class="pagination no-margin text-center">
+          <li ng-click="pageChanged()" ng-if="currentPage == 1" class="disabled">
+            <a href="javascript:void(0)">«</a>
+          </li>
+          <li ng-click="pageChanged()" ng-if="currentPage != 1">
+            <a href="javascript:void(0)" ng-click=getComment(prePage)>«</a>
+          </li>
+          <li ng-click="pageChanged()" ng-repeat="i in totalPages" ng-class="{ active: currentPage == i }">
+            <a href="javascript:void(0)" ng-bind="i" ng-click=getComment(i)></a>
+          </li>
+          <li ng-click="pageChanged()" ng-show="currentPage != lastPage" >
+            <a href="javascript:void(0)" ng-click=getComment(nextPage)>»</a>
+          </li>
+          <li ng-click="pageChanged()" ng-if="currentPage == lastPage" class="disabled">
+            <a href="javascript:void(0)">»</a>
+          </li>
+        </ul>
+      </div>
+    </section>
     <!-- /.content -->
 </div>
 @endsection  
@@ -57,4 +79,5 @@
 <script src="{{ asset('assets/theme/js/edit-table.js') }}"></script>  --}}
 <script src="{{ asset('assets/frontend/page/comment/CommentCtrl.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CommentResource.js') }}"></script>
+<script src="{{ asset('assets/base/bower_components/paging.js') }}"></script>
 @endsection 

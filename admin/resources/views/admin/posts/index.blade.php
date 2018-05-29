@@ -1,4 +1,5 @@
 @extends('admin.templates.master')
+<link rel="stylesheet" href="{{ asset('assets/theme/css/posts.css') }}">
 @section('content')
 <div ng-controller="PostCtrl" ng-init="getPosts(1)">
 	<section class="content-header">
@@ -61,7 +62,7 @@
             <th>Category</th>
             <th>Release Number</th>
             <th>Date Public</th>
-            <th>Sửa nhanh</th>
+            <th>Xem</th>
 						<th>Xóa</th>
 						<th>Sửa</th>
           </tr>
@@ -75,67 +76,28 @@
             <td ng-bind="post.release_name"></td>
             <td ng-bind="post.time_begin"></td>
             <td>
-			<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="ridirectquickedit(post.id_post)">Quick Edit</button>
-			<form id="myModal" class="modal fade" role="form" ng-submit="quickedit(editpost)">
-				<div class="modal-dialog">
-				<!-- Modal content-->
-				<div class="modal-content">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Quick Edit</h4>
-				  </div>
-				  <div class="modal-body">
-					<div class="row">
-						<div class="form-group">
-							<label class="col-md-3">Post Title</label>
-							<div class="col-md-9">
-								<input type="text" name="title" class="form-control" ng-model="editpost.title">
-							</div>
-						</div>
-						<div class="form-group" style="padding-top: 40px">
-							<label class="col-md-3">Release Number</label>
-							<div class="col-md-9">
-								<select class="form-control" ng-model="editpost.releasenumber">
-									<option ng-repeat="option in listRelease.availableOptions" 
-						      					value="@{{option.id_release_number}}"
-						      					ng-bind="option.name" 
-						      					ng-selected="@{{option.id_release_number == 2}}">
-						      		</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" style="padding-top: 40px">
-							<label class="col-md-3">Date Start</label>
-							<div class="col-md-9">
-								<input type="datetime" name="time_begin" class="form-control" ng-model="editpost.time_begin">
-							</div>
-						</div>
-						<div class="form-group" style="padding-top: 40px">
-							<label class="col-md-3">Date End</label>
-							<div class="col-md-9">
-								<input type="datetime" name="time_end" class="form-control" ng-model="editpost.time_end">
-							</div>
-						</div>
-						<div class="form-group" style="padding-top: 40px">
-							{{--  <label class="col-md-3">Status</label>
-							<div class="col-md-9">
-								<select ng-model="editpost.status_post">
-									<!-- <option ng-value="Draff" selected="selected"></option>
-									<option ng-value="ABC"></option>
-									<option ng-value="EFK"></option> -->
-									<option ng-repeat= "st in status" value="@{{st.id}}" ng-bind = "st.name"></option>
-								</select>
-							</div>  --}}
-						</div>
-					</div>
-				  </div>
-				<div class="modal-footer">
-					<button type="submit" ng-click="quickedit(editpost)" data-dismiss="modal" class="btn btn-primary">Update</button>
-				  </div>
-				</div>
-			  </div>
-			</form>
-			</td>
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" ng-click="review(post.id_post)">Xem</button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">@{{ editpost1 }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div ng-bind-html="editpost" class="editpost"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </td>
 			<td>
 				<a href="#"><button class="btn btn-primary">Xóa</button></a>
 			</td>

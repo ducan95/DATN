@@ -57,18 +57,17 @@
 
 {{--  ###### Layout #######  --}}
  @include("admin.templates.header") 
-
-@if(($role_code == 'admin') || ($role_code == 's_admin'))
+{{--  @if(($role_code == 'admin') || ($role_code == 's_admin'))  --}}
   @include("admin.templates.AdminSideBar")
-@endif
+{{--  @endif  --}}
 
-@if($role_code == 'user')
+{{--  @if($role_code == 'user')
   @include("admin.templates.UserSideBar")
 @endif
 
 @if($role_code == 'editor')
   @include("admin.templates.EditorSideBar")
-@endif
+@endif  --}}
 {{--  ###### Layout #######  --}}
 
   <!-- Content Wrapper. Contains page content -->

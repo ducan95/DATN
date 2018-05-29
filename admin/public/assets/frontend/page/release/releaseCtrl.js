@@ -9,7 +9,6 @@ SOUGOU_ZYANARU_MODULE
 	  $scope.currentPage = 1;
 		$scope.lastPage    = 0;
 		$scope.totalPages  = 0;
-
 		//Get Paginate and show data
 		$scope.getRelease = function(pageNumber) { 
       if (pageNumber === undefined) {

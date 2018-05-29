@@ -92,9 +92,15 @@ Route::group([
       'as'    => 'webMemberEdit'
     ]);
   });
+  Route::group(['prefix' => 'dasboard'], function(){
+    Route::get('/',[
+      'uses'  => 'DefaultController@viewIndex',
+      'as'    => 'webDefaultIndex'
+    ]);
+  });
 
 
-  Route::group([ 'prefix' => 'category', 'middleware' =>'checkRole: admin|s_admin|editor' ],function(){
+  Route::group([ 'prefix' => 'category', 'middleware' =>'checkRole: admin|s_admin' ],function(){
 
     Route::get('/',[
         'uses' => 'CategoryController@viewIndex',

@@ -19,7 +19,7 @@ class CheckRoleMiddleware
         $role_code = Auth::user()->role_code;
         $pos = strpos($role,$role_code);
         if($pos === false){
-            return redirect('/admin');
+            return redirect('/admin/dasboard');
         }
         return $next($request);
     }

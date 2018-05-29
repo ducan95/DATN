@@ -6,9 +6,9 @@
 
 SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
 ['$scope', 'PostService','CategoryService','ListCategoryService','ImageService','CategoryChildrenService', 
-'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService','popupService',
+'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService','popupService','$sce',
 function($scope, PostService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
-uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
+uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
 
   $scope.redirectEdit = function (id_post) { 
     $window.location.href = '/admin/post/edit#id='+id_post;
@@ -395,6 +395,16 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
     }   
   };
 
+  $scope.review=function(id_post){
+    $scope.editpost=PostService.get({id :id_post},function(res){
+      if(typeof res != "undefined"){
+        $scope.editpost1=res.data[0].title;
+        var edit=res.data[0].content;
+        $scope.editpost=$sce.trustAsHtml(edit);
+      }
+    })
+  }
+
   //  $scope.redirectPost = function (id_post) { 
   //   $window.location.href = '/admin/post/edit#id='+id_post;
   //   $scope.id_post = id_post;
@@ -402,46 +412,45 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
 
 
 
-  $scope.ridirectquickedit=function(id_post){
-    var editpost=PostService.get({id : id_post},function(res){
-      if (typeof res != "undefined") {
-        var editpost= res.data;
-        $scope.quickedit = function (editpost){
-        var form = document.querySelector("form#myModal");
+  // $scope.ridirectquickedit=function(id_post){
+  //   var editpost=PostService.get({id : id_post},function(res){
+  //     if (typeof res != "undefined") {
+  //       var editpost= res.data;
+  //       $scope.quickedit = function (editpost){
+  //       var form = document.querySelector("form#myModal");
 
-        //Get value from ng-model
-        var gettitle = editpost.title;
-        var getreleasenumber = editpost.releasenumber;
-        var gettime_begin = editpost.time_begin;
-        var gettime_end = editpost.time_end;
-        var getstatus=editpost.status_post;
+  //       //Get value from ng-model
+  //       var gettitle = editpost.title;
+  //       var getreleasenumber = editpost.releasenumber;
+  //       var gettime_begin = editpost.time_begin;
+  //       var gettime_end = editpost.time_end;
 
-        PostService.update({
-          id              : id_post,
-          title           :gettitle,
-          slug            :editpost.slug,
-          id_user         :editpost.id_user,
-          id_release_number: getreleasenumber,
-          time_begin        : gettime_begin,
-          time_end          : gettime_end,
-          thumbnail_path    :editpost.thumbnail_path,
-          password            :editpost.password
-        },function (){
-        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
-          });
-        } 
+  //       PostService.update({
+  //         id              : id_post,
+  //         title           :gettitle,
+  //         slug            :editpost.slug,
+  //         id_user         :editpost.id_user,
+  //         id_release_number: getreleasenumber,
+  //         time_begin        : gettime_begin,
+  //         time_end          : gettime_end,
+  //         thumbnail_path    :editpost.thumbnail_path,
+  //         password            :editpost.password
+  //       },function (){
+  //       $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
+  //         });
+  //       } 
 
 
-        $scope.loadPost = function () { 
-          PostService.get({ id: id_post },function(res) {
-          $scope.editpost = res.data[0];
-          // console.log($scope.editpost)
-          });
-        };
-        $scope.loadPost();
-      }
-    });
-  }
+  //       $scope.loadPost = function () { 
+  //         PostService.get({ id: id_post },function(res) {
+  //         $scope.editpost = res.data[0];
+  //         // console.log($scope.editpost)
+  //         });
+  //       };
+  //       $scope.loadPost();
+  //     }
+  //   });
+  // }
   $scope.redirectPost = function (id_post) { 
     $scope.id_post = id_post;
     $window.location.href = '/admin/post/edit#id='+id_post;

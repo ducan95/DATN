@@ -36,7 +36,7 @@
          <div class="txt-cmt">
             <div>
                 {{--  <img src="{{ asset('client/media/icon/person.png') }}">  --}}
-                <textarea id="content" placeholder="Vui lòng nhập tiếng Việt có dấu" class="txt-content" style="width: 353px;margin-left: 60px; margin-top: 62px;"></textarea>
+                <textarea id="content" placeholder="Vui lòng nhập tiếng Việt có dấu" class="txt-content" style="border-radius: 5px;border: 5px solid #95bf32aa; borde-radius: 9px;width: 531px;margin-left: 60px;margin-top: 62px;"></textarea>
             </div>
             @if(isset(Auth::guard('member')->user()->email))
             <div>

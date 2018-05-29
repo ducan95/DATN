@@ -162,4 +162,11 @@ label.error{
   #navbar {
     text-align: center;
   }
-}  
+}
+p img{
+    display: block;
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 17px;
+    margin-bottom: 14px;
+}

@@ -38,7 +38,7 @@
         </li>
         <li class="">
           <a href="{{ route('webMemberIndex') }}">
-            <i class="fa fa-users"></i>
+            <i class="fa fa-address-book-o"></i>
             <span>{{trans('web.sidebar_management')}}</span>
           </a>
         </li>
