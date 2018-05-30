@@ -59,7 +59,6 @@ trait Media {
     try {
       $pathImage = public_path('storage/'.$path); // get url image
       $newImage = Image::make($pathImage);//create new image 
-      // $newImage = ($typeImage == 'imageBlur') ?  $newImage->blur(15) : $newImage;
       $destinationPath = public_path( 'storage/'.config('admin.images.path.'.$typeImage) );
       if ($newImage->save($destinationPath.'/'.$name)) {
         $this->deleteImage($path);
