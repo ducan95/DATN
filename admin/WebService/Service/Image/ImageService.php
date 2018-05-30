@@ -18,13 +18,10 @@ class ImageService extends Service
         $dataReq['name'] = $request->query('name');
       }
       if(!empty($request->query('description')) ) {
-        $dataReq['description'] = $description;
+        $dataReq['description'] =$request->query('description');
       }
       if(!empty($request->query('path')) ) {
         $dataReq['path'] = $request->query('path');
-      }
-      if(!empty($request->query('path_paint')) ) {
-        $dataReq['path_paint'] = $request->query('path_paint');
       }
       if(!empty($request->query('paginate')) ) {
         $dataReq['paginate'] = $request->query('paginate');

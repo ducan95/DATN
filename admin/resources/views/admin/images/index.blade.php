@@ -20,7 +20,6 @@
           <div class="box-tools">
             <div class="input-group input-group-sm" >
               <input type="text" name="table_search" ng-model='parameter' class="form-control pull-right" placeholder="">
-
               <div class="input-group-btn">
                 <button type="submit" ng-click="searchImage()" class="btn btn-default"> Tìm kiếm</button>
               </div>
@@ -57,39 +56,6 @@
               </table>
             </div>
           </div>
-          {{-- <div class="item-image" ng-repeat="image in images">
-            <div class="content-image-left ">
-              <a href="javascript:void(0)"  ng-click="deleteImage(image.id_image, $index)">
-                <i class="fa  fa-trash"></i></a>
-            </div>
-            
-            <div class="content-image-right">
-              <div class="content-image-top">
-                <div class="image">
-                  <a href="{{storage_asset()}}/@{{image.path}}">
-                    <img style="width: 50px; height: 50px;" src="{{storage_asset()}}/@{{image.path}}">
-                  </a>
-                </div>
-                <div class="name">
-                    <div class="name-image">
-                      <a href="" ng-bind = "image.name"></a>
-                    </div>  
-                    <div class="name-archive">
-                      <span ng-bind = "image.namePost"></span>
-                    </div> 
-                </div>
-                <div class="create" ng-bind = "image.created_at"></div>
-                <div class="clear"></div>
-              </div>
-              <div class="content-image-bottom">
-                <div class="path"><a href="">URL Image</a></div>
-                <div class="url-image">
-                  <a href="{{storage_asset()}}/@{{image.path}}" rel="lightbox">{{storage_asset()}}/@{{image.path}}</a>
-                </div>
-              </div>
-            </div>
-            <div class="clear"></div>
-          </div> --}}
         </div>
       </div>
     </section>

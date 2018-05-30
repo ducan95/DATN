@@ -30,7 +30,7 @@
       ImageService.get({name:$scope.parameter}, function(res) {
         if(typeof res != "undefined") {
           if(res.is_success ){
-            $scope.images = res.data; 
+            $scope.images = res.data.data; 
           } else {
             console.log(res);
           }

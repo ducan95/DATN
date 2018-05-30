@@ -1,6 +1,4 @@
-/**
- * Created by rikkei on 15/12/2017.
- */
+
 
 
 
@@ -14,7 +12,7 @@ SOUGOU_ZYANARU_MODULE.factory('ImageService', ['$resource', function($resource){
 	    }
 		},
 		{
-		  	stripTrailingSlashes: true
+		  	stripTrailingSlashes: false
 		});
 }]).service('popupService',function($window){
     this.showPopup = function(message){

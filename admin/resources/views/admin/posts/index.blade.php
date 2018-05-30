@@ -12,44 +12,16 @@
 		  <div class="col-md-2">
 		    	<a href="{{ route('webPostAdd')}}"><button class="btn btn-primary" style="margin-top:20px ">Tạo mới bài viết</button></a>
 		  </div>
-    </div>
+			<div class="input-group input-group-sm" style="margin-top: 22px;margin-right: 27px;">
+				<input type="text" name="table_search" ng-model='parameter' class="form-control pull-right" placeholder="" style="width: 40%;">
+					<div class="input-group-btn">
+						<button type="submit" class="btn btn-default"> Tìm kiếm</button>
+					</div>
+				</div>
+    	</div>
 	</section>
 	<section class="content">
 		<div class="row">
-			{{--  <div class="col-md-2">
-				<label>Release Number</label>
-				<select name="release" id="release" ng-model="listRelease.model">
-		      	<option ng-repeat="option in listRelease.availableOptions" 
-    					value="@{{option.id_release_number}}"
-    					ng-bind="option.name" 
-    					ng-selected="@{{option.id_release_number == 2}}">
-		      	</option>
-		    </select>
-			</div>
-			<div class="col-md-2">
-				<label>Category Parent</label>
-          <select name='categoryParent' ng-model='categoryParent' ng-change='getCatChildren()'>
-            <option 
-            	ng-repeat="cat in listCatParent" 
-            	value="@{{cat.id_category }}"
-              ng-bind="cat.name"
-              ng-selected = "cat.id_category == 1 ">
-            </option>
-          </select>
-			</div>
-			<div class="col-md-2">
-				<label>Category Children</label>
-          <select name='categoryChildren' ng-model='categoryChildren' style="width: 115px">
-            <option 
-            	ng-repeat="catChildrent in listCatChildrent"
-              value="@{{catChildrent.id_category }}"
-              ng-bind="catChildrent.name" >
-            </option>
-          </select>
-			</div>
-			<a href="#"><button class="btn btn-primary" style="margin-left: 50px" ng-click="searchPost()">Search</button></a>
-		</div>  --}}
-
 		<div class="btn-group" role="group" style="margin-top: 10px">
 		</div>
 		<div class="box" style="margin-top: 10px">
@@ -66,7 +38,7 @@
 						<th>Xóa</th>
 						<th>Sửa</th>
           </tr>
-          <tr ng-repeat="post in posts">
+          <tr ng-repeat="post in posts | filter:parameter">
             <td>
               <img  style="width: 60px; height: 60px;" src="{{storage_asset()}}/@{{post.thumbnail_path}}">
             </td>

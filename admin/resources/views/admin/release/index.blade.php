@@ -42,15 +42,15 @@
         </div>
         <div class="col-md-6">
           <div class="header-thumb">
-            <a data-lightbox="image-1" href="{{ storage_asset() }}/@{{ release.image_header_path }}">
-              <div ng-if="release.image_header_path != 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ storage_asset() }}/@{{ release.image_header_path }}')"></div>
-            </a>
-            <a data-lightbox="image-1" href="{{ asset('assets/img/no-banner.jpg') }}">
-              <div ng-if="release.image_header_path == 'assets/img/no-banner.jpg'" class="header-img" style="background: url('{{ asset('assets/img/no-banner.jpg') }}')"></div>
-            </a>
+            <div>
+              <label for="" style=" padding-top: 11px;">Ngày phát hành:</label>
+              <h4 ng-bind='release.created_at' style="float: right;"></h4>
+            </div>
+            <div>
+              <label for="" style=" padding-top: 11px;padding-left: 0px;" class='col-md-5'>Số phát hành:</label>
+              <h4 ng-bind="release.name" style="float: right;" class="col-md-5"></h4>
+            </div>  
           </div>
-          
-          <h4 ng-bind="release.name"></h4>
         </div>
         <div class="col-md-3 text-left">
           <a href="" ng-click="redirectEdit(release.id_release_number)" style="margin-right: 2px" class="btn btn-primary">{{ trans('web.edit') }}</a>

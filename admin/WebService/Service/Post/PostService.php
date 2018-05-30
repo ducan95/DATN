@@ -14,7 +14,7 @@ class PostService extends Service
 	public function find($request){
 		try {
       $dataReq = [];
-      $dataQueries = ['releaseNumber', 'categoryParent', 'categoryChildren', 'status', 'username' ];
+      $dataQueries = ['release_name','username','title','categories_name' ];
       foreach ($dataQueries as $dataQuery) {
         if(!empty($request->query($dataQuery)) ) {
           $dataReq[$dataQuery] = $request->query($dataQuery);

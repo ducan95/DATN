@@ -22,15 +22,25 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
   ** param pageNumber
   ** return response API 
   **/
+  $scope.searchPost = function() {
+      PostService.find({release_name:$scope.parameter,title:$scope.parameter},function(res) {
+      if(typeof res != "undefined") {
+        if(res.is_success ){
+          $scope.posts = res.data.data; 
+        } else {
+        }
+      }
+    });   
+  }
   $scope.getPosts = function(pageNumber) { 
     if (pageNumber === undefined) {
         pageNumber = '1';
     }
     PostService.find({page:pageNumber},function(res) {
-      console.log(res)
       try {
         if(res != undefined) { 
           $scope.posts  = res.data.data;
+          console.log($scope.posts)
           $scope.total  = res.data.total; 
           $scope.currentPage  = res.data.current_page;
           $scope.lastPage  = res.data.last_page;
@@ -187,35 +197,27 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
   ** param releaseNumber, categoryParent, categoryChildren, status, username
   ** return response API
   **/  
-  $scope.searchPost = function() {
-    // console.log($scope.listRelease.model);
-    // console.log($scope.categoryParent);
-    // console.log($scope.categoryChildren);
-    // console.log($scope.status);
-    // return false;
-    PostService.get({
-      releaseNumber : $scope.listRelease.model ,
-      categoryParent : $scope.categoryParent, 
-      // categoryChildren : $scope.categoryChildren,
-      status : $scope.status,
-
-      //username : $scope.username    
-    }, function(res) {
-      try {
-        if(typeof res != undefined) { 
-          if (res.is_success) { console.log(res);
-            $scope.posts = res.data.data; 
-          } else {
-            throw res.errors;  
-          }  
-        } else {
-          throw "undefined";
-        } 
-      } catch(err) {
-        toastr.error(err);
-      }
-    });   
-  } ;
+  // $scope.searchPost = function() {
+  //   PostService.get({
+  //     releaseNumber : $scope.listRelease.model ,
+  //     categoryParent : $scope.categoryParent, 
+  //     status : $scope.status,  
+  //   }, function(res) {
+  //     try {
+  //       if(typeof res != undefined) { 
+  //         if (res.is_success) {
+  //           $scope.posts = res.data.data; 
+  //         } else {
+  //           throw res.errors;  
+  //         }  
+  //       } else {
+  //         throw "undefined";
+  //       } 
+  //     } catch(err) {
+  //       toastr.error(err);
+  //     }
+  //   });   
+  // } ;
   /**
   ** function save images
   ** service uploadImage 

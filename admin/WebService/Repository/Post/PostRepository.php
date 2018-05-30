@@ -13,35 +13,27 @@ class PostRepository extends Repository
 {
   public function find($dataReq = '')
   {  
-    $dataQueries = ['title', 'releaseNumber', 'categoryParent', 'categoryChildren','username', 'time_begin', 'paginate' ];
-
-  	try{
-      $query =  Post::join('post_category', function($join) {
-                  $join->on('posts.id_post', '=', 'post_category.id_post');
-                   })
-                ->join('categories', function($join) {
-                  $join->on('post_category.id_category', '=', 'categories.id_category'); 
-                })
-                ->join('release_numbers', function($join) {
-                  $join->on('posts.id_release_number', '=', 'release_numbers.id_release_number');  
-                })
-                ->join('users', function($join) {
-                  $join->on('posts.id_user', '=', 'users.id_user');
-                   });
+    try{
+    $query =  Post::join('post_category', function($join) {
+                $join->on('posts.id_post', '=', 'post_category.id_post');
+                  })
+              ->join('categories', function($join) {
+                $join->on('post_category.id_category', '=', 'categories.id_category'); 
+              })
+              ->join('release_numbers', function($join) {
+                $join->on('posts.id_release_number', '=', 'release_numbers.id_release_number');  
+              })
+              ->join('users', function($join) {
+                $join->on('posts.id_user', '=', 'users.id_user');
+                  });
                 
       $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name','post_category.id_category');    
       if(!empty($dataReq)) {
-        if(isset($dataReq['releaseNumber'])) {
-          $query =  $query->where('release_numbers.id_release_number', '=', $dataReq['releaseNumber']);
+        if(isset($dataReq['release_name'])) {
+          $query =  $query->where('release_numbers.name','LIKE', '%'.$dataReq['release_name'].'%');
         }
-        if(isset($dataReq['categoryParent'])) {
-          $query =  $query->where('categories.id_category', '=', $dataReq['releaseNumber']);
-        }
-        if(isset($dataReq['categoryChildren'])) {
-          $query =  $query->where('categories.id_category', '=', $dataReq['categoryChildren']);
-        }
-        if(isset($dataReq['time_begin'])) {
-          $query =  $query->whereDate('posts.time_begin', $dataReq['categoryChildren']);
+        if(isset($dataReq['categories_name'])) {
+          $query =  $query->where('categories.name','LIKE','%'.$dataReq['categories_name'].'%');
         }
         if(isset($dataReq['title'])) {
           $query =  $query->where('posts.title', 'LIKE', '%'.$dataReq['title'].'%');
@@ -53,8 +45,7 @@ class PostRepository extends Repository
           return $query->paginate($dataReq['paginate']);
         }
       }
-      return $query->paginate(3);
-      dd($query);	
+      return $query->paginate(20);	
    	} catch(\Exception $e) {
    		throw $e;
     }  

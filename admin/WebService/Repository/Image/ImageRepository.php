@@ -14,7 +14,7 @@ class ImageRepository extends Repository
   { 
     try {   
       $query = Images::where('images.id_image', '>', 0);
-      $dataMol= ['name', 'description', 'path', 'path_blur'];
+      $dataMol= ['name', 'description', 'path'];
       if(!empty($dataReq)) {
         foreach ($dataMol as $value) { 
           if(isset($dataReq[$value]) ) {
