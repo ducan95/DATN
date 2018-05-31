@@ -82,6 +82,26 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
   /**
    * function get user
    */
+  $scope.deletepost = function (id_post) {
+    var options = {
+      title: "Bạn có chắc chắn xóa không？",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      cancelButtonText: "Không",
+      confirmButtonText: "Có",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+    };
+    swal(options, function(isConfirm) {
+      if (isConfirm) {
+              PostService.delete({ id: id_post},function () {
+              //Ridirect
+              $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
+            });
+      }
+    });
+  }
   
    $scope.doacept=function(post){
     $scope.id=post.id_post;
@@ -561,16 +581,16 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
     }
 
   var url        = new URL(window.location.href); 
-  var id         = url.hash.match(/\d/g);
-  $scope.id      = id.join('');
-    
+  var id        = url.hash.match(/\d/g);
+  $scope.id2     = id.join('');
+
   $scope.Updatepost = function(post){
     $scope.getPathImage($scope.thumbnail).then(function(data){
       try { 
       var editor_data = CKEDITOR.instances['editor1'].getData();
       var request_post={
           post:{
-            id              : $scope.id,
+            id              : $scope.id2,
             thumbnail_path  : data.path,
             content         : editor_data,
             title           : post.title,
@@ -582,7 +602,8 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
               year=post.time_begin.getFullYear();
               return year+"-"+month+"-"+day;
               }(),
-            time_end : '3000-01-01'
+            time_end : '3000-01-01',
+            is_acept :false
             },
           post_category:{
             id_category:$scope.catego,
@@ -599,7 +620,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
   }
 
   $scope.loadPost = function () { 
-    PostService.get({ id: $scope.id },function(res) {
+    PostService.get({ id: $scope.id2 },function(res) {
     $scope.post = res.data[0];
     $scope.post.time_begin = new Date($scope.post.time_begin);
     });

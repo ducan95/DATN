@@ -149,7 +149,7 @@ class PostService extends Service
             $dataReq['post']['slug'] = str_slug($post_data->title);
           }
           $dataReq['post']['id_user'] = Auth::user()->id_user;
-          $res['data']= PostRepository::getInstance()->update($dataReq['post'],$id);
+          $res['data']= PostRepository::getInstance()->update1($dataReq['post'],$id);
           foreach ($post_category_data['id_category'] as $value) {
             // $dataReq['post_category']['id_post'] =$id;
             $dataReq['post_category']['id_category'] = $value;
@@ -175,7 +175,14 @@ class PostService extends Service
 
   public function delete($id)
   {
-    
+    try {
+      $res['data'] = PostRepository::getInstance()->delete($id);
+    } catch(\Exception $e) {
+      $res['errors']['msg']         = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }
+
+    return $res;
   }
   public function list(){
     try{

@@ -80,7 +80,7 @@
                 </div>
             </td>
 			<td>
-				<a href="#"><button class="btn btn-primary">Xóa</button></a>
+				<a href="javascript:void(0)"><button ng-click="deletepost(post.id_post)" class="btn btn-primary">Xóa</button></a>
 			</td>
 			<td>	
 				<a href="" ng-click="redirectEdit(post.id_post)" class="btn btn-sm btn-primary">Sửa</a>

@@ -103,8 +103,6 @@ class PostController extends WebApiController
    */
   public function actionUpdate(Request $request, $id)
   {  
-    // Log::info($request);
-    // exit;
     $post_data=$request["data"]["post"];
     $post_category_data= $request["data"]["post_category"];
     if(empty($post_data) || empty($post_category_data)){

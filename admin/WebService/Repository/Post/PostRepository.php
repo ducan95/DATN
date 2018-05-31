@@ -49,7 +49,7 @@ class PostRepository extends Repository
           return $query->paginate($dataReq['paginate']);
         }
       }
-      return $query->paginate(20);	
+      return $query->paginate(10);	
    	} catch(\Exception $e) {
    		throw $e;
     }  
@@ -147,7 +147,16 @@ class PostRepository extends Repository
 
   public function delete($id)
   { 
-    
+    try {
+      if (!empty(Post::find($id))) {
+        $release = Post::find($id);
+        $release->delete();
+      } else {
+        return null;
+      }
+    } catch(\Exception $e) {
+      throw $e;
+    }
   }
   public function list(){
     try{

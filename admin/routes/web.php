@@ -419,7 +419,11 @@ Route::group([
     Route::put('/{id1}', [
       'uses' => 'PostController@actionUpdate1',
       'as' => 'apiPostUpdate'
-  ]);
+    ]);
+    Route::put('/{id2}', [
+      'uses' => 'PostController@actionUpdate',
+      'as' => 'apiPostUpdate'
+    ]);
     Route::delete('/{id}', [
         'uses' => 'PostController@actionDelete',
         'as' => 'apiPostDelete'
