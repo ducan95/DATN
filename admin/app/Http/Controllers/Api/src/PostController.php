@@ -81,6 +81,18 @@ class PostController extends WebApiController
       ]);
     } 
   }
+  public function actionUpdate1(Request $request,$id){
+    $res = PostService::getInstance()->update1($request,$id); 
+    if(!isset($res['errors'])) {
+      return Api::response([ 'data' => $res['data']]);
+    } else {
+      return Api::response([ 
+        'is_success' => false,
+        'status_code' => $res['errors']['status_code'],
+        'errors' => $res['errors']['msg']
+      ]);
+    } 
+  }
 
   /**
    * update user 

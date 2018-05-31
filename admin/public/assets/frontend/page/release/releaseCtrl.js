@@ -196,66 +196,6 @@ SOUGOU_ZYANARU_MODULE
           closeOnConfirm: true,
           closeOnCancel: true,
         };
-        /*if (popupService.showPopup(TRANS.MSG_DELETE)) {
-            $scope.name = "cover";
-            //Get image path
-            function getPath(path) {
-              var def  = $q.defer();
-              var regex = new RegExp("\imageDefault(.*)$");
-              if (regex.test(path)) {
-                def.resolve(path);
-              } else if (path == 'assets/img/no-image.jpg') {
-                def.resolve('');
-              } else if (path == 'assets/img/no-banner.jpg') {
-                def.resolve('');
-              } else if (path != undefined) {
-                uploadImg.upload(path, $scope.name)
-                .then(function(res){
-                  $timeout(function () {
-                    //Get name after upload
-                    def.resolve(res.data.data.path);
-                  });
-                }, function(res){
-                  def.reject(TRANS.ERROR);
-                });
-              } else {
-                def.resolve(path);
-              }
-              return def.promise;
-            }
-            var promise1 = getPath($scope.release.image_release_path).then(function (value) {
-              return value;
-            });
-            var promise2 = getPath($scope.release.image_header_path).then(function (value) {
-              return value; 
-            });
-            var theResults = [];
-
-            $q.all([promise1, promise2]).then(function(result){
-              for (var i = 0; i < result.length; i++){
-                  theResults.push(result[i]);
-              }
-              $scope.release.image_release_path = theResults[0];
-              $scope.release.image_header_path  = theResults[1];
-
-              //Get value from ng-model
-              var getName = release.name;
-
-              ReleaseService.update({
-                id:     $scope.id,
-                name:   getName,
-                image_release_path: $scope.release.image_release_path,
-                image_header_path: $scope.release.image_header_path
-              }, function (){
-                // Redirect
-                $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/release';
-                toastr.success(TRANS.SUCCESS);
-              });
-
-            });
-
-          
-        }*/
         swal(options, function(isConfirm) {
           if (isConfirm) {
             $scope.name = "cover";

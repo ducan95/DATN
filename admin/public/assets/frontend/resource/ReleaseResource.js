@@ -1,6 +1,3 @@
-/**
- * Created by Quyen Luu on 27/12/2017.
- */
 
 SOUGOU_ZYANARU_MODULE
 .factory('ReleaseService', function ($resource) {

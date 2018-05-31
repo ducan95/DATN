@@ -84,8 +84,9 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
    */
   
    $scope.doacept=function(post){
+    $scope.id=post.id_post;
      PostService.update({
-        id               :  post.id,
+        id               :  $scope.id,
         title            :  post.title,
         slug             :  post.title,
         id_user          :  post.id_user,
@@ -102,8 +103,9 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
    }
 
    $scope.unacept=function(post){
+    $scope.id1=post.id_post;
     PostService.update({
-       id               :  post.id,
+       id              :   $scope.id1,
        title            :  post.title,
        slug             :  post.title,
        id_user          :  post.id_user,

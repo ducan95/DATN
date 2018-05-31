@@ -118,7 +118,16 @@ class PostService extends Service
       return $res;
     }
   public function update($request,$id){
-    
+
+    }
+  public function update1($request,$id){
+    try {
+      $res['data'] = PostRepository::getInstance()->update1($request->all(),$id);
+    } catch(\Exception $e) {
+      $res['errors']['msg'] = $e->getMessage();
+      $res['errors']['status_code'] = 500;
+    }  
+  return $res;
   }
     
   public function batchupdate($post_data,$post_category_data, $id)

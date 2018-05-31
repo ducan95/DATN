@@ -115,26 +115,27 @@ class PostRepository extends Repository
       throw  $e;  
     }
   }
+  public function update($dataReq, $id){
 
-  public function update($dataReq, $id)
+  }
+  public function update1($dataReq,$id)
   { 
     try{
-   		$data=$dataReq->all();
-       $post = Post::find($id);
+      $post = Post::find($id);
      	 if(!empty($post)) {
        	$post->fill([
-          'title'             => $data['title'],
-          'slug'              => $data['slug'],
-          'id_user'           => $data['id_user'],
+          'title'             => $dataReq['title'],
+          'slug'              => $dataReq['title'],
+          'id_user'           => $dataReq['id_user'],
           'content'           => $dataReq['content'],
-          'thumbnail_path'    => $data['thumbnail_path'],
-          'id_release_number' => $data['id_release_number'],
-          'time_begin'        => $data['time_begin'],
-          'time_end'          => $data['time_end'],
-          'is_acept'          => $data['is_acept']
+          'thumbnail_path'    => $dataReq['thumbnail_path'],
+          'id_release_number' => $dataReq['id_release_number'],
+          'time_begin'        => $dataReq['time_begin'],
+          'time_end'          => $dataReq['time_end'],
+          'is_acept'          => $dataReq['is_acept']
         ]);  
         $post->save();
-        return $post;  
+        return $post;
       } else {
         return null;
       }
