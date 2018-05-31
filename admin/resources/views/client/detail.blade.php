@@ -12,7 +12,7 @@
         <div class="text-center thumbnail" style="border: none; padding: 0">
             <div class="content-container top-buffer bottom-buffer">
                 <div class="title" style="font-size: 30px;text-align: left;color: #5ca038;">{{ $row->title }}</div>
-                <p class="content-date" style="float:left">{{ $row->time_begin }}</p>
+                <p class="content-date" style="float:left">{{ $row->created_at }}</p>
                 @php
                     $picture = $row->thumbnail_path;
                     $picUrl = asset('storage/'.$picture);

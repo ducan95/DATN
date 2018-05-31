@@ -57,31 +57,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
       }
     });  
   };
-  /**
-  ** function get list user
-  ** service UserService 
-  ** api:  web_api/user/
-  ** return response
-  **/
-
-  // UserService.find({}, function(res){  
-  //   try {  
-  //     if(typeof res != undefined) { 
-  //       if(res.is_success) { 
-  //         $scope.users = res.data;  
-  //       } else {
-  //         throw res.errors;  
-  //       }
-  //     } else {
-  //       throw "undefined"; 
-  //     }
-  //   } catch(err) {
-  //     toastr.error(err);
-  //   }
-  // });
-  /**
-   * function get user
-   */
+  
   $scope.deletepost = function (id_post) {
     var options = {
       title: "Bạn có chắc chắn xóa không？",
@@ -113,8 +89,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
         content          :  post.content,
         thumbnail_path   :  post.thumbnail_path,
         id_release_number:  post.id_release_number,
-        time_begin       :  post.time_begin,
-        time_end         :  post.time_end,
         is_acept         :  true
       }, function (){
         // Redirect
@@ -132,8 +106,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
        content          :  post.content,
        thumbnail_path   :  post.thumbnail_path,
        id_release_number:  post.id_release_number,
-       time_begin       :  post.time_begin,
-       time_end         :  post.time_end,
        is_acept         :  false
      }, function (){
        // Redirect
@@ -165,30 +137,11 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
     })
 
     $scope.category =new ListCategoryService();
-      // $scope.listcategorychil=function(id_category){
         $scope.category.$find({},function (res){
         if (typeof res != "undefined") { 
           $scope.categoryChildren=res.data;
-          // for(i=0;i<=res.data.length;i++){
-          //   if(res.data[i].id_category_parent === id_category){
-          //     $scope.categoryChildren.push(res.data[i]);
-          //   }
-          // }
-          // console.log($scope.categoryChildren)
-          // angular.forEach($scope.categoryChildren, function(value) {
-          //   if(value.id_category_parent == id_category){
-          //     $scope.ducan={
-          //     categoryParent:[
-          //       key=value.id_category,
-          //       data =value.name,
-          //     ]
-          //   }
-          //    console.log($scope.ducan)
-          //   }
-          // })
         }
         });
-      // }
 
   /**
   ** function get list categories childrent
@@ -322,16 +275,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
       toastr.error(err);
     }
   };
-  /**
-  ** function get status post 
-  ** param dateBegin
-  ** return status
-  **/ 
-  function getStatus(dateBegin = null){
-    var startDate = dateBegin.getTime(); 
-    var endDate = parseDate("01/01/3000").getTime(); 
-    return (startDate < endDate ) ? 1 : 4;
-  };
+
   /**
   ** function get status post 
   ** param string
@@ -371,10 +315,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
   $scope.date = new Date();
   $scope.creatPost =  function() { 
     var constraints = {
-      timeBegin: {
-        presence: true,
-        // minimum:date
-      },
       title: {
         presence:true,
       }
@@ -388,20 +328,11 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
       try {
         var editor_data = CKEDITOR.instances['editor1'].getData();
         $scope.listpost = new PostService(); // create post form PostService
-        $scope.status=getStatus($scope.postBeginDate);
         $scope.listpost.data={
           post : {
             title :  $scope.postTitle,
             thumbnail_path : data.path,
             id_release_number : $scope.listRelease.model,
-            time_begin : function() {
-              day = $scope.postBeginDate .getDate() > 9 ? $scope.postBeginDate .getDate() : '0'+ $scope.postBeginDate .getDate();
-              month = $scope.postBeginDate .getMonth() > 8 ? ($scope.postBeginDate.getMonth()+1) : '0' +($scope.postBeginDate.getMonth()+1);
-              year=$scope.postBeginDate.getFullYear();
-              return year+"-"+month+"-"+day;
-            }(),
-            // time_begin:$scope.postBeginDate,
-            time_end : '3000-01-01',
             content : editor_data
           },
           post_category : {
@@ -429,52 +360,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
     })
   }
 
-  //  $scope.redirectPost = function (id_post) { 
-  //   $window.location.href = '/admin/post/edit#id='+id_post;
-  //   $scope.id_post = id_post;
-  // }
-
-
-
-  // $scope.ridirectquickedit=function(id_post){
-  //   var editpost=PostService.get({id : id_post},function(res){
-  //     if (typeof res != "undefined") {
-  //       var editpost= res.data;
-  //       $scope.quickedit = function (editpost){
-  //       var form = document.querySelector("form#myModal");
-
-  //       //Get value from ng-model
-  //       var gettitle = editpost.title;
-  //       var getreleasenumber = editpost.releasenumber;
-  //       var gettime_begin = editpost.time_begin;
-  //       var gettime_end = editpost.time_end;
-
-  //       PostService.update({
-  //         id              : id_post,
-  //         title           :gettitle,
-  //         slug            :editpost.slug,
-  //         id_user         :editpost.id_user,
-  //         id_release_number: getreleasenumber,
-  //         time_begin        : gettime_begin,
-  //         time_end          : gettime_end,
-  //         thumbnail_path    :editpost.thumbnail_path,
-  //         password            :editpost.password
-  //       },function (){
-  //       $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
-  //         });
-  //       } 
-
-
-  //       $scope.loadPost = function () { 
-  //         PostService.get({ id: id_post },function(res) {
-  //         $scope.editpost = res.data[0];
-  //         // console.log($scope.editpost)
-  //         });
-  //       };
-  //       $scope.loadPost();
-  //     }
-  //   });
-  // }
+  
   $scope.redirectPost = function (id_post) { 
     $scope.id_post = id_post;
     $window.location.href = '/admin/post/edit#id='+id_post;
@@ -596,13 +482,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
             title           : post.title,
             slug            : post.title,
             id_release_number:  $scope.listRelease.model,
-            time_begin : function() {
-              day = post.time_begin.getDate() > 9 ? post.time_begin.getDate() : '0'+ post.time_begin.getDate();
-              month = post.time_begin.getMonth() > 8 ? (post.time_begin.getMonth()+1) : '0' +(post.time_begin.getMonth()+1);
-              year=post.time_begin.getFullYear();
-              return year+"-"+month+"-"+day;
-              }(),
-            time_end : '3000-01-01',
             is_acept :false
             },
           post_category:{

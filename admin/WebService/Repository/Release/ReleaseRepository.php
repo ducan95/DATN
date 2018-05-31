@@ -150,7 +150,7 @@ class ReleaseRepository extends Repository
 
   public function postOfRelease($id){
     try{
-      $a=DB::table('posts')->where('id_release_number','=',$id)->where('is_acept','=',1)->get();
+      $a=DB::table('posts')->where('id_release_number','=',$id)->where('is_acept','=',1)->where('deleted_at','=',null)->get();
       return $a;
     } catch(\Exception $e){
       throw $e;
@@ -159,7 +159,7 @@ class ReleaseRepository extends Repository
 
   public function loadmorePostOfRelease($offset, $row_count, $id){
     try{
-      $arPostsLoad = DB::table('posts')->skip($offset)->take($row_count)->where('is_acept','=',1)->where('id_release_number','=',$id)->get();
+      $arPostsLoad = DB::table('posts')->skip($offset)->take($row_count)->where('is_acept','=',1)->where('deleted_at','=',null)->where('id_release_number','=',$id)->get();
       return $arPostsLoad;
     } catch(\Exception $e){
       throw $e;

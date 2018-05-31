@@ -90,8 +90,6 @@ class PostRepository extends Repository
           'thumbnail_path'      => $dataReq['thumbnail_path'],
           'content'             => $dataReq['content'],
           'id_user'             => $dataReq['id_user'],
-          'time_end'            => $dataReq['time_end'],
-          'time_begin'          => $dataReq['time_begin'],
           'is_acept'            => true,
         ]);
         }
@@ -103,8 +101,6 @@ class PostRepository extends Repository
           'thumbnail_path'      => $dataReq['thumbnail_path'],
           'content'             => $dataReq['content'],
           'id_user'             => $dataReq['id_user'],
-          'time_end'            => $dataReq['time_end'],
-          'time_begin'          => $dataReq['time_begin'],
           'is_acept'            => false,
         ]);
       }  
@@ -130,8 +126,6 @@ class PostRepository extends Repository
           'content'           => $dataReq['content'],
           'thumbnail_path'    => $dataReq['thumbnail_path'],
           'id_release_number' => $dataReq['id_release_number'],
-          'time_begin'        => $dataReq['time_begin'],
-          'time_end'          => $dataReq['time_end'],
           'is_acept'          => $dataReq['is_acept']
         ]);  
         $post->save();
@@ -160,7 +154,7 @@ class PostRepository extends Repository
   }
   public function list(){
     try{
-      return DB::table('posts')->where('is_acept','=',1)->orderBy('id_post','DESC')->get();
+      return DB::table('posts')->where('is_acept','=',1)->where('deleted_at','=',null)->orderBy('id_post','DESC')->get();
     } catch(\Exception $e){
       throw $e;
     }
@@ -168,7 +162,7 @@ class PostRepository extends Repository
 
   public function loadmorePost($offset, $row_count){
     try{
-      $oItemsLoad = DB::table('posts')->where('is_acept','=',1)->orderBy('id_post','DESC')->skip($offset)->take($row_count)->get();
+      $oItemsLoad = DB::table('posts')->where('is_acept','=',1)->where('deleted_at','=',null)->orderBy('id_post','DESC')->skip($offset)->take($row_count)->get();
       return $oItemsLoad;
     } catch(\Exception $e){
       throw $e;

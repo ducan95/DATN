@@ -161,7 +161,7 @@ class CategoryRepository extends Repository
       $arPosts =  DB::table('post_category')->join('posts', function($join) {
                   $join->on('posts.id_post', '=', 'post_category.id_post');  })
                 ->join('categories', function($join) {
-                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->where('posts.is_acept','=',1)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->get();
+                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->where('posts.is_acept','=',1)->where('posts.deleted_at','=',null)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','posts.created_at','posts.slug')->get();
       return $arPosts;
     } catch(\Exception $e){
       throw $e;
@@ -174,7 +174,7 @@ class CategoryRepository extends Repository
       $arPostsLoad = DB::table('post_category')->join('posts', function($join) {
                   $join->on('posts.id_post', '=', 'post_category.id_post');  })
                 ->join('categories', function($join) {
-                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->where('posts.is_acept','=',1)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','title','time_begin','posts.slug')->skip($offset)->take($row_count)->get();
+                  $join->on('post_category.id_category', '=', 'categories.id_category');  })->where('post_category.id_category','=',$id)->where('posts.is_acept','=',1)->where('posts.deleted_at','=',null)->select('categories.id_category', 'posts.id_post','content','thumbnail_path','posts.created_at','title','posts.slug')->skip($offset)->take($row_count)->get();
       return $arPostsLoad;
     } catch(\Exception $e){
       throw $e;

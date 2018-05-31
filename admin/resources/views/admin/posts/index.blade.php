@@ -36,7 +36,7 @@
 						@if(Auth::user()->role_code == 's_admin' || Auth::user()->role_code == 'admin')
 						<th>Acept</th>
 						@endif
-            <th>Date Public</th>
+            <th>Ngày viết</th>
             <th>Xem</th>
 						<th>Xóa</th>
 						<th>Sửa</th>
@@ -55,7 +55,7 @@
 							<input ng-if="post.is_acept == 0" type="checkbox" ng-click="doacept(post)">
 						</td>
 						@endif
-            <td ng-bind="post.time_begin"></td>
+            <td ng-bind="post.created_at"></td>
             <td>
                 <!-- Trigger the modal with a button -->
                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" ng-click="review(post.id_post)">Xem</button>
