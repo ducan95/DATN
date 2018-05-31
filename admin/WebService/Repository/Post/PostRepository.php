@@ -26,8 +26,12 @@ class PostRepository extends Repository
               ->join('users', function($join) {
                 $join->on('posts.id_user', '=', 'users.id_user');
                   });
-                
-      $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name','post_category.id_category');    
+      if(Auth::user()->role_code == 's_admin' || Auth::user()->role_code == 'admin'){
+        $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name','post_category.id_category');
+      }
+      else{        
+        $query =  $query ->select('posts.*', 'users.username as creator', 'categories.name as categories_name', 'release_numbers.name as release_name','post_category.id_category')->where('users.username','=',Auth::user()->username);
+      }    
       if(!empty($dataReq)) {
         if(isset($dataReq['release_name'])) {
           $query =  $query->where('release_numbers.name','LIKE', '%'.$dataReq['release_name'].'%');
@@ -78,16 +82,32 @@ class PostRepository extends Repository
   {  
     try {
       $post = new Post();
-      $post->fill([
-        'id_release_number' => $dataReq['id_release_number'],
-        'title' => $dataReq['title'],
-        'slug' => $dataReq['title'],
-        'thumbnail_path' => $dataReq['thumbnail_path'],
-        'content' => $dataReq['content'],
-        'id_user' => $dataReq['id_user'],
-        'time_end' => $dataReq['time_end'],
-        'time_begin' => $dataReq['time_begin'],
-      ]);
+      if(Auth::user()->role_code == 's_admin' || Auth::user()->role_code == 'admin'){
+        $post->fill([
+          'id_release_number'   => $dataReq['id_release_number'],
+          'title'               => $dataReq['title'],
+          'slug'                => $dataReq['title'],
+          'thumbnail_path'      => $dataReq['thumbnail_path'],
+          'content'             => $dataReq['content'],
+          'id_user'             => $dataReq['id_user'],
+          'time_end'            => $dataReq['time_end'],
+          'time_begin'          => $dataReq['time_begin'],
+          'is_acept'            => true,
+        ]);
+        }
+      else{
+        $post->fill([
+          'id_release_number'   => $dataReq['id_release_number'],
+          'title'               => $dataReq['title'],
+          'slug'                => $dataReq['title'],
+          'thumbnail_path'      => $dataReq['thumbnail_path'],
+          'content'             => $dataReq['content'],
+          'id_user'             => $dataReq['id_user'],
+          'time_end'            => $dataReq['time_end'],
+          'time_begin'          => $dataReq['time_begin'],
+          'is_acept'            => false,
+        ]);
+      }  
       $post->save();
       return $post;
     }
@@ -100,7 +120,7 @@ class PostRepository extends Repository
   { 
     try{
    		$data=$dataReq->all();
-     	$post = Post::find($id);
+       $post = Post::find($id);
      	 if(!empty($post)) {
        	$post->fill([
           'title'             => $data['title'],
@@ -110,7 +130,8 @@ class PostRepository extends Repository
           'thumbnail_path'    => $data['thumbnail_path'],
           'id_release_number' => $data['id_release_number'],
           'time_begin'        => $data['time_begin'],
-          'time_end'          => $data['time_end']
+          'time_end'          => $data['time_end'],
+          'is_acept'          => $data['is_acept']
         ]);  
         $post->save();
         return $post;  
@@ -129,7 +150,7 @@ class PostRepository extends Repository
   }
   public function list(){
     try{
-      return DB::table('posts')->orderBy('id_post','DESC')->get();
+      return DB::table('posts')->where('is_acept','=',1)->orderBy('id_post','DESC')->get();
     } catch(\Exception $e){
       throw $e;
     }
@@ -137,7 +158,7 @@ class PostRepository extends Repository
 
   public function loadmorePost($offset, $row_count){
     try{
-      $oItemsLoad = DB::table('posts')->orderBy('id_post','DESC')->skip($offset)->take($row_count)->get();
+      $oItemsLoad = DB::table('posts')->where('is_acept','=',1)->orderBy('id_post','DESC')->skip($offset)->take($row_count)->get();
       return $oItemsLoad;
     } catch(\Exception $e){
       throw $e;

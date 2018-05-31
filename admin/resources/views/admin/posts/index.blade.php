@@ -33,6 +33,9 @@
             <th>Creator</th>
             <th>Category</th>
             <th>Release Number</th>
+						@if(Auth::user()->role_code == 's_admin' || Auth::user()->role_code == 'admin')
+						<th>Acept</th>
+						@endif
             <th>Date Public</th>
             <th>Xem</th>
 						<th>Xóa</th>
@@ -46,6 +49,12 @@
             <td ng-bind="post.creator"></td>
             <td ng-bind="post.categories_name"></td>
             <td ng-bind="post.release_name"></td>
+						@if(Auth::user()->role_code == 's_admin' || Auth::user()->role_code == 'admin')
+						<td>
+							<input ng-if="post.is_acept == 1" type="checkbox" value="true" ng-click="unacept(post)" checked>
+							<input ng-if="post.is_acept == 0" type="checkbox" ng-click="doacept(post)">
+						</td>
+						@endif
             <td ng-bind="post.time_begin"></td>
             <td>
                 <!-- Trigger the modal with a button -->
@@ -109,6 +118,7 @@
 <script src="{{ asset('assets/frontend/resource/PostResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/CategoryResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ImageResource.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>

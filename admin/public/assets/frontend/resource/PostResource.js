@@ -8,8 +8,7 @@ SOUGOU_ZYANARU_MODULE
       },
       update: {
         method: 'PUT'
-      },
-      stripTrailingSlashes: true
+      }
     });
   })
   .service('popupService',function($window){

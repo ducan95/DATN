@@ -12,10 +12,9 @@
 		$totalPage = ceil($totalRecord/$row_count);
 		$current_page = 1;
 		$offset = ($current_page - 1) * $row_count;
-		$arPostsLoad = DB::table('posts')->where('id_release_number','=',$id)->skip($offset)->take(4)->get();
 	?>
 	<div class="loadmore-{{ $current_page }}">
-		@foreach ($arPostsLoad as $post)
+		@foreach ($arPosts as $post)
 			@php
 				$id_post = $post->id_post;
 				$picture = $post->thumbnail_path;

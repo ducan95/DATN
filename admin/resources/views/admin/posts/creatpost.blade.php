@@ -157,6 +157,7 @@
 <script src="{{ asset('assets/frontend/resource/ReleaseResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/uploadImage.js') }}"></script>
 <script src="{{ asset('assets/frontend/extension/tranDate.js') }}"></script>
+<script src="{{ asset('assets/frontend/resource/UserResource.js') }}"></script>
 <script src="{{ asset('assets/frontend/page/post/PostCtrl.js') }}"></script>
 <script src="{{ asset('assets/base/bower_components/validate.min.js') }}"></script>
 @endsection 

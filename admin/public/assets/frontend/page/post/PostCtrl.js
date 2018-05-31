@@ -5,9 +5,9 @@
  * */
 
 SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
-['$scope', 'PostService','CategoryService','ListCategoryService','ImageService','CategoryChildrenService', 
+['$scope', 'PostService','CategoryService','UserService','ListCategoryService','ImageService','CategoryChildrenService', 
 'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService','popupService','$sce',
-function($scope, PostService,CategoryService,ListCategoryService, ImageService, CategoryChildrenService, 
+function($scope, PostService,CategoryService,UserService,ListCategoryService, ImageService, CategoryChildrenService, 
 uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
 
   $scope.redirectEdit = function (id_post) { 
@@ -40,7 +40,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
       try {
         if(res != undefined) { 
           $scope.posts  = res.data.data;
-          console.log($scope.posts)
           $scope.total  = res.data.total; 
           $scope.currentPage  = res.data.current_page;
           $scope.lastPage  = res.data.last_page;
@@ -80,6 +79,45 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
   //     toastr.error(err);
   //   }
   // });
+  /**
+   * function get user
+   */
+  
+   $scope.doacept=function(post){
+     PostService.update({
+        id               :  post.id,
+        title            :  post.title,
+        slug             :  post.title,
+        id_user          :  post.id_user,
+        content          :  post.content,
+        thumbnail_path   :  post.thumbnail_path,
+        id_release_number:  post.id_release_number,
+        time_begin       :  post.time_begin,
+        time_end         :  post.time_end,
+        is_acept         :  true
+      }, function (){
+        // Redirect
+        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
+      });
+   }
+
+   $scope.unacept=function(post){
+    PostService.update({
+       id               :  post.id,
+       title            :  post.title,
+       slug             :  post.title,
+       id_user          :  post.id_user,
+       content          :  post.content,
+       thumbnail_path   :  post.thumbnail_path,
+       id_release_number:  post.id_release_number,
+       time_begin       :  post.time_begin,
+       time_end         :  post.time_end,
+       is_acept         :  false
+     }, function (){
+       // Redirect
+       $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
+     });
+  }
 
   CategoryService.find({}, function(res){  
     try {  
@@ -179,45 +217,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService,$sce){
       toastr.error(err);
     }
   });
-  /**
-  ** array status post 
-  ** 
-  **/     
-  $scope.listStatus = [ 
-      { id : 1 , name : 'Draff'},
-      { id : 2 , name : 'Chuẩn bị công khai'},
-      { id : 3 , name : ' Công khai'},
-      { id : 4 , name : ' Không công khai'},
-    ];
     
-  /**
-  ** function search post
-  ** service PostService 
-  ** api: /web_api/post/,
-  ** param releaseNumber, categoryParent, categoryChildren, status, username
-  ** return response API
-  **/  
-  // $scope.searchPost = function() {
-  //   PostService.get({
-  //     releaseNumber : $scope.listRelease.model ,
-  //     categoryParent : $scope.categoryParent, 
-  //     status : $scope.status,  
-  //   }, function(res) {
-  //     try {
-  //       if(typeof res != undefined) { 
-  //         if (res.is_success) {
-  //           $scope.posts = res.data.data; 
-  //         } else {
-  //           throw res.errors;  
-  //         }  
-  //       } else {
-  //         throw "undefined";
-  //       } 
-  //     } catch(err) {
-  //       toastr.error(err);
-  //     }
-  //   });   
-  // } ;
   /**
   ** function save images
   ** service uploadImage 
