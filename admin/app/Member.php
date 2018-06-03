@@ -12,7 +12,7 @@ class Member extends /*Model*/ Authenticatable
     protected $table ='members';
     protected $primaryKey ='id_member';
 
-    protected $fillable = ['email','password','birthday','gender','is_active'];
+    protected $fillable = ['email','password','birthday','gender'];
    
     public $timestamps = true;
 

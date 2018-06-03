@@ -36,29 +36,23 @@ SOUGOU_ZYANARU_MODULE
     }
   }  */
 
-  $scope.activeMember = function (id_member) {
+  $scope.deleteMember = function (id_member) {
     var options = {
-      title: '本当ですか？',
+      title: 'Bạn có muốn xóa không?',
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
-      cancelButtonText: "いいえ",
-      confirmButtonText: "はい",
+      cancelButtonText: "Không",
+      confirmButtonText: "Có",
       closeOnConfirm: true,
       closeOnCancel: true,
     };
     swal(options, function(isConfirm) {
       if (isConfirm) {
-        var member = MemberService.get({ id: id_member }, function (res) {
-          if (typeof res != "undefined") {
-            var member = res.data;
-            MemberService.delete({ id: member.id_member }, function () {
-              console.log('Deleting member with id ' + id_member);
-              //Ridirect
-              $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
-            });  
-          }
-        });
+        MemberService.delete({ id: id_member},function () {
+        //Ridirect
+        $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member';
+      });
       }
     });
   }  

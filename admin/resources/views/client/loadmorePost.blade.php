@@ -5,7 +5,7 @@
 	      $picture = $post->thumbnail_path;
 	      $picUrl = asset('storage/'.$picture);
 	      $title = $post->title;
-	      $date = strtotime($post->time_begin);
+	      $date = strtotime($post->created_at);
 	      $slug = $post->slug;
 	      $id_post = $post->id_post;
 	      $urlDetail = route('WebClientEndUserDetail',['slug'=>$slug,'id'=> $id_post]);
@@ -16,7 +16,7 @@
               </div>
               <div class="media-body">
                 <h5 class="mt-0">{{ $title }}</h5>
-                <span>{{ $post->time_begin }}</span>
+                <span>{{ $post->created_at }}</span>
                 <div >
                   <a href="{{ $urlDetail }}" class="label-free" >Xem...</a>
                 </div>

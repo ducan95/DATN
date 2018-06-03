@@ -75,7 +75,6 @@ class MemberRepository extends Repository
     try{
       $member = Member::find($id);
       if(!empty($member)) {
-        $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
         $password = (isset($dataReq['password']))? bcrypt($dataReq['password']) :  $member->password;
         $email = (isset($dataReq['email']))? $dataReq['email'] :  $member->email;
         $gender = (isset($dataReq['gender']))? $dataReq['gender'] :  $member->gender;
@@ -85,9 +84,6 @@ class MemberRepository extends Repository
           'password'          => $password,
           'birthday'          => $birthday,
           'gender'            => $gender,
-          'is_receive_email'  => $is_receive_email,
-          'member_plan_code'  => config('admin.member.member_plan_code'),
-          'is_active'         => true,
         ]);
         $member->save();
         return $member;  
@@ -103,15 +99,11 @@ class MemberRepository extends Repository
   {
     try{
       $member = new Member();
-      $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
       $member->fill([
         'email' 						=> $dataReq['email'],
         'password' 					=> bcrypt($dataReq['password']),
         'birthday'					=> $dataReq['birthday'],
         'gender' 						=> $dataReq['gender'],
-        'is_receive_email' 	=> $is_receive_email,
-        'member_plan_code' 	=> config('admin.member.member_plan_code'),
-        'is_active'         => true,
       ]);
       $member->save() ;
       return $member;
@@ -127,7 +119,6 @@ class MemberRepository extends Repository
     try{
       $member = Member::find($id);
       if(!empty($member)) {
-        $is_receive_email = ((isset($dataReq['is_receive_email']))?1:0);
         $password = (isset($dataReq['password']))? bcrypt($dataReq['password']) :  $member->password;
         $gender = (isset($dataReq['gender']))? $dataReq['gender'] :  $member->gender;
         $birthday = (isset($dataReq['birthday']))? $dataReq['birthday']: new date($member->birthday);
@@ -136,9 +127,6 @@ class MemberRepository extends Repository
           'password'          => $password,
           'birthday'          => $dataReq['birthday'],
           'gender'            => $dataReq['gender'],
-          'is_receive_email'  => $is_receive_email,
-          'member_plan_code'  => config('admin.member.member_plan_code'),
-          'is_active'         => true,
         ]);
         $member->save();
         return $member;  

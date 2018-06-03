@@ -51,7 +51,7 @@ Route::group([
   Route::get('/',[
     'uses' => 'AdminController@index',
     'as' => 'getIndex'
-  ])->middleware('checkRole: admin|s_admin|user|editor');
+  ])->middleware('checkRole: admin|s_admin|editor');
    /** router web user **/
   Route::group([ 
   'prefix' => 'user',
@@ -128,7 +128,7 @@ Route::group([
     ]);
   });
    /** router web images **/
-  Route::group([ 'prefix' => 'images','middleware' =>'checkRole: admin|s_admin|editor|user'], function(){
+  Route::group([ 'prefix' => 'images','middleware' =>'checkRole: admin|s_admin|editor'], function(){
     
     Route::get('/', [
       'uses' => 'ImageController@viewIndex',
@@ -146,7 +146,7 @@ Route::group([
     ]);
   });
   
-  Route::group([ 'prefix' => 'comment','middleware' =>'checkRole: admin|s_admin|editor|user'], function(){
+  Route::group([ 'prefix' => 'comment','middleware' =>'checkRole: admin|s_admin'], function(){
     
     Route::get('/', [
       'uses' => 'CommentController@viewIndex',
@@ -293,7 +293,7 @@ Route::group([
     ]);
 
 		Route::delete('/{id}',[
-			'uses'  => 'MemberController@actionActive',
+			'uses'  => 'MemberController@actionDelete',
 			'as'    => 'apiMemberActive'
 		]);
 

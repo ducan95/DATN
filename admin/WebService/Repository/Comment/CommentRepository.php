@@ -63,7 +63,7 @@ class CommentRepository extends Repository
             $comment = DB::table('comments')->join('posts', function($join) {
                 $join->on('comments.id_post', '=', 'posts.id_post');  })
                 ->join('members', function($join) {
-                $join->on('comments.id_member', '=', 'members.id_member');  })->where('comments.id_post','=',$id)->where('comments.deleted_at','=',null)->select('comments.id_comment','members.email','comments.comment_content')->get();
+                $join->on('comments.id_member', '=', 'members.id_member');  })->where('comments.id_post','=',$id)->where('comments.deleted_at','=',null)->where('members.deleted_at','=',null)->select('comments.id_comment','members.email','comments.comment_content')->get();
             return $comment;
           } catch(\Exception $e){
             throw $e;
@@ -75,7 +75,7 @@ class CommentRepository extends Repository
             $comment = DB::table('comments')->join('posts', function($join) {
                 $join->on('comments.id_post', '=', 'posts.id_post');  })
               ->join('members', function($join) {
-                $join->on('comments.id_member', '=', 'members.id_member');  })->where('comments.deleted_at','=',null)->select('comments.id_comment','members.email', 'posts.title','comments.comment_content')->get();
+                $join->on('comments.id_member', '=', 'members.id_member');  })->where('comments.deleted_at','=',null)->where('members.deleted_at','=',null)->select('comments.id_comment','members.email', 'posts.title','comments.comment_content')->get();
             return $comment;
         }catch(\Exception $e){
             throw $e;
