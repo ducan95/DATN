@@ -137,8 +137,6 @@ SOUGOU_ZYANARU_MODULE
 
       // Check success
       if ($scope.error == undefined) {
-
-        console.log($scope.user);
         $scope.user.$save(function () {
           // Redirect & show notification
             $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user'; 

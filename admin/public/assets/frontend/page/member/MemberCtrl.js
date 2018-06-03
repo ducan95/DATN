@@ -117,16 +117,14 @@ SOUGOU_ZYANARU_MODULE
 
     };
     var form = document.querySelector("form#main");
-    validate.validators.presence.message = '空白のところで入力してください。';
-    validate.validators.email.message = 'メールアドレスの入力を行ってください';
+    validate.validators.presence.message = 'Vui lòng nhập vào chỗ khoảng trống.';
+    validate.validators.email.message = 'Vui lòng nhập đúng định dạng email';
     $scope.error = validate(form, constraints);
-    console.log($scope.error);
-    var date = $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";
+    var date= $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";
+    // console.log(date);return false
     if ($scope.error == undefined) {
       $scope.member.birthday = date;
-      console.log($scope.member);
       $scope.member.$save(function () {
-      console.log($scope.member);
         $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/member/';
       });
     }
@@ -161,8 +159,8 @@ SOUGOU_ZYANARU_MODULE
 
     };
     var form = document.querySelector("form#main");
-    validate.validators.presence.message = '空白のところで入力してください。';
-    validate.validators.email.message = 'メールアドレスの入力を行ってください';
+    validate.validators.presence.message = 'Vui lòng nhập vào chỗ khoảng trống.';
+    validate.validators.email.message = 'Vui lòng nhập đúng định dạng email';
     $scope.error = validate(form, constraints);
     //Edit member
     var date= $scope.member.birthday.getFullYear()+"-"+($scope.member.birthday.getMonth()+1)+"-"+$scope.member.birthday.getDate()+" 00:00:00";

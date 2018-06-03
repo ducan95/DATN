@@ -31,9 +31,6 @@
 	      <input type="radio" value="1" name="gender"> Nam
       </label>
 	  </div>
-		{{--  <div class="form-group" >
-			<input type="checkbox" name="is_receive_email" value="1" checked>Tôi muốn nhận e-mail từ tạp chí về việc xử lý thông tin cá nhân
-		</div>  --}}
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
 	
