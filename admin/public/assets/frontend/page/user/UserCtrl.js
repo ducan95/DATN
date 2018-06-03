@@ -141,12 +141,7 @@ SOUGOU_ZYANARU_MODULE
         console.log($scope.user);
         $scope.user.$save(function () {
           // Redirect & show notification
-          if($scope.user.is_success == true) {
-            $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user';
-            toastr.success(TRANS.SUCCESS);
-          } else { 
-            toastr.error(TRANS.ERROR);
-          }    
+            $window.location.href = APP_CONFIGURATION.BASE_URL +'/admin/user'; 
         });
       }
   };

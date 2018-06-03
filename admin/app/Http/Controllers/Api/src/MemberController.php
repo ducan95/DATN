@@ -90,19 +90,6 @@ class MemberController extends WebApiController
     }
   }
 
-  public function actionActive($id){
-    $res =  MemberService::getInstance()->active($id); 
-    if(!isset($res['errors'])) {
-      return Api::response([ 'data' => $res['data'], 'status_code' => 204]);
-    }else {
-      return Api::response([ 
-        'is_success'  => false,
-        'status_code' => $res['errors']['status_code'],
-        'errors'      => $res['errors']['msg']
-      ]);
-    } 
-  }
-
   public function actionDelete($id)
   {    
     $res =  MemberService::getInstance()->delete($id); 

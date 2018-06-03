@@ -31,9 +31,6 @@ class AdminController extends Controller
         if($role_code == 'editor'){
         return view('admin.posts.index', compact('role_code'));
         }
-        if($role_code == 'user'){
-        return view('admin.comments.index', compact('role_code'));
-        }
     }
 
 }
