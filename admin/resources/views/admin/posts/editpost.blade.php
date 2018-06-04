@@ -18,20 +18,6 @@
 				<form id="main" role="form" ng-submit="Updatepost(post)" method="post">
 					 {{ csrf_field() }}
 					<div class="col-md-9">
-						<div class="form-group">
-							<label class="col-sm-3">{{ trans('web.date_start_public')}}</label>
-							<div class="col-sm-5">
-								<input type="date" name="timeBegin" class="form-control" 
-								ng-model="post.time_begin" min="@{{date | date:'yyyy-MM-dd'}}" value="post.time_begin">
-								<label class="error" ng-if="error.timeBegin[0] != null">@{{ error.timeBegin[0] }}</label>
-							</div>
-							<label class="col-sm-2" id="status" ng-bind="status"></label>
-						</div>
-						<div class="form-group" id="dateend">
-							<label class="col-sm-3" >{{ trans('web.date_end_public')}}</label>
-							<label class="col-sm-3">3000-01-01</label>
-							<div class="col-sm-2"></div>
-						</div>
 						<div class="form-group" id="article" >
 							<input  type="text" name="title" ng-model='post.title' style="width: 100%" value="@{{ post.title }}">
 						</div>

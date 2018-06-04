@@ -1,9 +1,4 @@
-/**
- * Created by Huynh on 20/12/2017.
- */
-
-
-  SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',['$scope', 'trans', 'toastr', 'ImageService', '$window', 'popupService', 'tranDate','SweetAlert', function($scope, trans, toastr, ImageService, $window, popupService, tranDate, SweetAlert)
+ SOUGOU_ZYANARU_MODULE.controller('ImageCtrl',['$scope', 'trans', 'toastr', 'ImageService', '$window', 'popupService', 'tranDate','SweetAlert', function($scope, trans, toastr, ImageService, $window, popupService, tranDate, SweetAlert)
   { 
     $scope.location = APP_CONFIGURATION.BASE_URL;
     $scope.currentPage = 1;

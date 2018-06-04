@@ -1,7 +1,3 @@
-/**
- * Created by Rikkei Intern Pro Team on 15/12/2017.
- */
-
 SOUGOU_ZYANARU_MODULE
   .controller('UserCtrl', function ($scope, UserService, $window, popupService, RoleService, toastr, trans, SweetAlert) {
   UserService.find({}, function (res) {

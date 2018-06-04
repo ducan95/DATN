@@ -1,12 +1,4 @@
-/**
- * Created by Huynh on 1/1/2018
-	* function tran data
- * @param array file, name
- * @return data ja
- */
-
-
- SOUGOU_ZYANARU_MODULE.service('tranDate', function(){ 
+SOUGOU_ZYANARU_MODULE.service('tranDate', function(){ 
 
  	this.tranDate = function(date) {
  		try {

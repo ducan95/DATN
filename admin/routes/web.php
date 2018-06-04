@@ -286,7 +286,6 @@ Route::group([
       'as'    => 'apiUserShow'
     ]);
 
-    //edit member
     Route::post('/',[
       'uses'  => 'MemberController@actionSave',
       'as'    => 'apiMemberSave',

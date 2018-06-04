@@ -1,9 +1,3 @@
-
-
-/**
- * Show and delete User
- * */
-
 SOUGOU_ZYANARU_MODULE.controller('PostCtrl',
 ['$scope', 'PostService','CategoryService','UserService','ListCategoryService','ImageService','CategoryChildrenService', 
 'uploadImage', '$q', '$window', 'toastr', 'tranDate', 'ReleaseService','popupService','$sce',
@@ -475,12 +469,13 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
       try { 
       var editor_data = CKEDITOR.instances['editor1'].getData();
       var request_post={
+          id                : $scope.id2,
           post:{
-            id              : $scope.id2,
             thumbnail_path  : data.path,
             content         : editor_data,
             title           : post.title,
             slug            : post.title,
+            id_user         :post.id_user,
             id_release_number:  $scope.listRelease.model,
             is_acept :false
             },
@@ -490,7 +485,7 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
             }
           }
         PostService.update(request_post,function(){
-          $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/user';
+          $window.location.href = APP_CONFIGURATION.BASE_URL + '/admin/post';
          });
       }catch(err){
         toastr.error(err);
@@ -501,7 +496,6 @@ uploadImage, $q, $window, toastr, tranDate, ReleaseService,popupService){
   $scope.loadPost = function () { 
     PostService.get({ id: $scope.id2 },function(res) {
     $scope.post = res.data[0];
-    $scope.post.time_begin = new Date($scope.post.time_begin);
     });
   };
   $scope.loadPost();

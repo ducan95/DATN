@@ -1,7 +1,3 @@
-/**
- * Created by rikkei on 15/12/2017.
- */
-
 SOUGOU_ZYANARU_MODULE
 /**
  * Show and delete User

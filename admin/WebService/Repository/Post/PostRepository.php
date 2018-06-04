@@ -120,13 +120,13 @@ class PostRepository extends Repository
       $post = Post::find($id);
      	 if(!empty($post)) {
        	$post->fill([
-          'title'             => $dataReq['title'],
-          'slug'              => $dataReq['title'],
-          'id_user'           => $dataReq['id_user'],
-          'content'           => $dataReq['content'],
-          'thumbnail_path'    => $dataReq['thumbnail_path'],
-          'id_release_number' => $dataReq['id_release_number'],
-          'is_acept'          => $dataReq['is_acept']
+          'title'             => $dataReq['post']['title'],
+          'slug'              => $dataReq['post']['title'],
+          'content'           => $dataReq['post']['content'],
+          'thumbnail_path'    => $dataReq['post']['thumbnail_path'],
+          'id_release_number' => $dataReq['post']['id_release_number'],
+          'is_acept'          => $dataReq['post']['is_acept'],
+          'id_user'           => $dataReq['post']['id_user']
         ]);  
         $post->save();
         return $post;

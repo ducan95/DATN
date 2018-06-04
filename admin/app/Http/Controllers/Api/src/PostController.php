@@ -112,9 +112,7 @@ class PostController extends WebApiController
         'errors' => "loi empty o day"
       ]);
       }
-      $res = PostService::getInstance()->batchupdate($post_data, $post_category_data,$id);
-      // Log::info($res);
-      // exit;
+      $res = PostService::getInstance()->batchupdate($post_data,$post_category_data,$id);
       if(!isset($res['errors'])) {
         return Api::response([ 'data' => $res['data']]);
       }else {
